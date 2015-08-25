@@ -1,4 +1,4 @@
-
+#'
 #' zoocat Class
 #' 
 #' A class designed for \code{zoo} with column attributes.
@@ -12,9 +12,7 @@
 #' \code{cattr} must be the same with the number of columns of the data matrix,
 #' and each row of \code{cattr} is correspondent to each column of the data
 #' matrix. \code{cattr} must have column names, and each column of \code{cattr}
-#' means an attribute field of the columns.\cr \code{isvalid} can be used to
-#' determine whether the object is a legal object. If it is not legal, some
-#' information will be showed.\cr When printing object, column names will be
+#' means an attribute field of the columns.\cr When printing object, column names will be
 #' added automatically.\cr \code{coredata} can be used to extract the core data
 #' matrix or data frame from the object.\cr \code{as.matrix} returns a matrix
 #' with column and row names. The row names is the index of the \code{zoocat}
@@ -22,8 +20,7 @@
 #' 
 #' @param x For \code{zoocat} function, x is a matrix or a data frame.
 #' Otherwise, x is a \code{zoocat} object.
-#' @return \code{zoocat} returns a \code{zoocat} object. \code{isvalid} returns
-#' a logical variable. \code{coredata} and \code{as.matrix} returns a matrix or
+#' @return \code{zoocat} returns a \code{zoocat} object. \code{coredata} and \code{as.matrix} returns a matrix or
 #' a data frame.
 #' @examples
 #' 
@@ -80,7 +77,7 @@ print.zoocat <- function (x) {
         for (i in 1 : length(attrName)) {
             cat(attrName[i])
             if (i < length(attrName)) {
-                cat('/ ')
+                cat('_')
             }
         }
         cat('\n\n')

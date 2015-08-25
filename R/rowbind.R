@@ -3,7 +3,7 @@
 #' Combine Data Frames by Rows
 #' 
 #' Combine data frames by rows. The data frames can have different number of
-#' columns or different column names.
+#' columns or different column names, which is different with \code{rbind}
 #' 
 #' The columns of data frame should not be class "factor".
 #' 
