@@ -1,0 +1,11 @@
+Package: zoocat 
+Type: Package
+Title: zoo with Column Attributes
+Version: 1.0
+Date: 2015-04-09
+Author: He Ran
+Maintainer: He Ran<heran198311@163.com>
+Depends: R (>= 3.0.0), zoo, reshape2
+Suggests: None
+Description: None
+License: None

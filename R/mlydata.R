@@ -1,0 +1,155 @@
+
+#' mlydata Class
+#' 
+#' A class designed for monthly data.
+#' 
+#' \code{mlydata} class is dependent on \code{zoo} class. An attribute
+#' "month" is added for storing the month information.\cr For \code{print}
+#' method, each column name is set as month abbreviation + month number. For
+#' example, the column name corresponding to Feb of current year is "Feb.2".
+#' For a negative month number, "neg" is added to instead of "-". For example,
+#' the column name corresponding to Feb of last year is Feb.neg10. When all
+#' month numbers are between 1 and 12, only the abbreviations of months is
+#' printed.\cr Using \code{yr} and \code{mon} to get and set the year and the
+#' month of the object.\cr Method \code{window} return a \code{mlydata}
+#' object of the given year and month. NULL value of year or month means
+#' all.\cr
+#' 
+#' @param x For \code{mlydata} function, it is a matrix or a vector. If x is
+#' a matrix, each row will be treated as a year. If x is a vector, it will be
+#' treated as a matrix with only one column. For other methods, x is a
+#' \code{mlydata} object.
+#' @param year A numeric vector representing years.
+#' @param month A numeric vector in which numbers are used to represent months.
+#' The elements of \code{month} can be smaller than 1 or larger than 12, which
+#' means the months of past years or future years. For example, the months of
+#' last year is (1 : 12) - 12.
+#' @return \code{mlydata} returns a mlydata object.\cr Using methods
+#' \code{yr} and \code{mon} to get and set the year and month vector.\cr
+#' \code{window} returns a new mlydata object.\cr \code{coredata} return the
+#' core matrix in the object.\cr \code{as.matrix} return the matrix with dim
+#' names.\cr \code{cbind} will return a \code{zoo} object.
+#' @examples
+#' 
+#' x <- matrix(1 : 20, nrow = 5)
+#' md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+#' coredata(md)
+#' mon(md)
+#' mon(md) <- mon(md) + 1
+#' yr(md)
+#' yr(md) <- yr(md) + 1
+#' md[3, 4]
+#' 
+#' x <-  matrix(1 : 36, nrow = 3)
+#' md <- mlydata(x, year = 1991 : 1993)
+#' @name mlydata
+#' @rdname mlydata
+#' @export
+mlydata <- function(x, year, month = 1 : 12) {
+    if(!(is.vector(x) | is.matrix(x))) {
+        stop('x must be a vector or a matrix.')
+    }
+    if(is.vector(x)) {
+        x <- matrix(x, nrow = length(x))
+    }
+    if(length(year) != nrow(x)) {
+        stop('The length of year must be equal with nrow of x.')
+    }
+    if(length(month) != ncol(x)) {
+        stop('The length of month must be equal with ncol of x.')
+    }
+    year <- as.integer(year)
+    month <- as.integer(month)
+    colnames(x) <- NULL
+    md <- zoo(x, order.by = year)
+    attr(md, 'month') <- month
+    class(md) <- c('mlydata', 'zoo')
+    return(md)
+}
+
+#' @export
+#' @rdname mlydata
+print.mlydata <- function(x) {
+    month <- attr(x, 'month')
+    z <- x
+    class(z) <- 'zoo'
+    attr(z, 'month') <- NULL
+    colnames(z) <- month2Str(month)
+    print(z)
+}
+
+#' @export
+mon <- function(x, ...) { UseMethod('mon') }
+
+#' @export
+'mon<-' <- function(x, ...) { UseMethod('mon<-') }
+
+#' @export
+yr <- function(x, ...) { UseMethod('yr') }
+
+#' @export
+'yr<-' <- function(x, ...) { UseMethod('yr<-') }
+
+#' @export
+#' @rdname mlydata
+mon.mlydata <- function(x) {
+    return(attr(x, 'month'))
+}
+
+#' @export
+#' @rdname mlydata
+yr.mlydata <- function(x) {
+    return(index(x))
+}
+
+#' @export
+#' @rdname mlydata
+'mon<-.mlydata' <- function (x, value) {
+    stopifnot(length(value) == ncol(x))
+    value <- as.integer(value)
+    attr(x, 'month') <- value
+    return(x)
+}
+
+#' @export
+#' @rdname mlydata
+'yr<-.mlydata' <- function (x, value) {
+    stopifnot(length(value) == nrow(x))
+    index(x) <- as.integer(value)
+    return(x)
+}
+
+#' @export
+#' @rdname mlydata
+coredata.mlydata <- function(x) {
+    class(x) <- 'zoo'
+    cdata <- coredata(x)
+    attr(cdata, 'month') <- NULL
+    return(cdata)
+}
+
+#' @export
+#' @rdname mlydata
+as.matrix.mlydata <- function(x) {
+    x <- as.zoo(x)
+    x <- as.matrix(x)
+    return(x)
+}
+
+#' @export
+#' @rdname mlydata
+'[.mlydata' <- function(x, i, j, ...) {
+    monthAll <- attr(x, 'month')
+    class(x) <- 'zoo'
+    ret <- x[i, j, drop = FALSE]
+    attr(ret, 'month') <- monthAll[j]
+    class(ret) <- c('mlydata', 'zoo')
+    return(ret)
+}
+
+
+
+
+
+
+
