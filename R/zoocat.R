@@ -80,7 +80,7 @@ print.zoocat <- function (x) {
         for (i in 1 : length(attrName)) {
             cat(attrName[i])
             if (i < length(attrName)) {
-                cat('/')
+                cat('/ ')
             }
         }
         cat('\n\n')
