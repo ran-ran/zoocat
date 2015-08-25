@@ -39,7 +39,10 @@ matrix, keeps the attribute informations of columns. The row number of
 \code{cattr} must be the same with the number of columns of the data matrix,
 and each row of \code{cattr} is correspondent to each column of the data
 matrix. \code{cattr} must have column names, and each column of \code{cattr}
-means an attribute field of the columns.\cr When printing object, column names will be
+means an attribute field of the columns.\cr
+In summary, zoocat class can manage the informations of each column more
+conveniently than only using column names.
+\cr When printing object, column names will be
 added automatically.\cr \code{coredata} can be used to extract the core data
 matrix or data frame from the object.\cr \code{as.matrix} returns a matrix
 with column and row names. The row names is the index of the \code{zoocat}
