@@ -17,7 +17,8 @@
 A data frame.
 }
 \description{
-Melt a \code{zoocat} object, which is similar as in package \code{reshape2}.
+Melt a \code{zoocat} object to a data frame of the long table style,
+which is similar as in package \code{reshape2}.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)

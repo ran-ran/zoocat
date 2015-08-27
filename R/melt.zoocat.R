@@ -1,7 +1,8 @@
 
 #' Melt a \code{zoocat} Object
 #' 
-#' Melt a \code{zoocat} object, which is similar as in package \code{reshape2}.
+#' Melt a \code{zoocat} object to a data frame of the long table style,
+#' which is similar as in package \code{reshape2}.
 #' 
 #' @param x A \code{zoocat} object.
 #' @param value.name Name of variable used to store values.
@@ -30,6 +31,7 @@ melt.zoocat <- function (x, value.name = 'value', index.name = 'index') {
                     factorAsStrings = FALSE)
     df.melt$index <- as.character(df.melt$index)
     class(df.melt$index) <- ind.class
+    df.melt <- df.melt[, c(index.name, idvars, value.name)]
     return(df.melt)
     
 }
