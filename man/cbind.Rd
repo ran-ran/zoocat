@@ -24,14 +24,14 @@ Combine \code{zoocat} or \code{mlydata} objects by columns.
 \details{
 cbind.zoocat is similar with cbind.zoo, and the column attributes are also
 combined. For the combination of cattr, some NA will be filled in if it is
-necessary. cbind.mlydata will return a \code{object}.
+necessary. cbind.mlydata will return a \code{zoo} object.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
-colAttr <- data.frame(month = c(2, 3, 5, 6), name = 'sst')
+colAttr <- data.frame(month = c(2, 3, 5, 6), name = 'xxx')
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 x2 <- x + 100
-colAttr2 <- data.frame(level = 500, month = c(4, 6, 7, 9))
+colAttr2 <- data.frame(modified = TRUE, month = c(4, 6, 7, 9))
 zc2 <- zoocat(x2, order.by = 1991 : 1995, colattr = colAttr2)
 zc3 <- cbind(zc, zc2)
 cattr(zc3)

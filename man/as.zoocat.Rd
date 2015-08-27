@@ -14,6 +14,9 @@ as.zoocat(x, ...)
 }
 \arguments{
 \item{x}{An object.}
+
+\item{varname}{The value for the name field in the \code{cattr} of
+the output \code{zoocat} object.}
 }
 \value{
 A zoocat object.

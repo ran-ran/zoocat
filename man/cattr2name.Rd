@@ -17,9 +17,9 @@ Transforming data frame of column attributes to column names vector, which
 is useful for zoocat class.
 }
 \details{
-If a column' name of colattr is "lat", style of "N/S" will be used. If a
-column's name is "month", negative value will be transformed as "neg" +
-abs(month).
+If a column's name of colattr is "lat", style of "N/S" will be used.
+If a column's value is numeric, negative value will be transformed as "neg" +
+abs(value).
 }
 \examples{
 colAttr <- data.frame(month = c(-2, -3, 5, 6), lat = c(-20, -10, 0, 10))

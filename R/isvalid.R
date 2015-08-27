@@ -41,12 +41,6 @@ isvalid.zoocat <- function (x) {
             cat('The cattr has no colnames.\n')
             isV <- 0
         }
-        for (i in 1 : ncol(cAttr)) {
-            if (!is.numeric(cAttr[, i]) & !is.character(cAttr[, i])) {
-                cat('The class of column ', i, ' of cattr is incorrect.\n', sep = '')
-                isV <- 0
-            }
-        }
     }
     return(isV)
 }
