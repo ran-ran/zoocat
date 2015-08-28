@@ -22,15 +22,16 @@ cbind.mlydata(...)
 \item{...}{\code{zoocat} or \code{mlydata} objects.}
 }
 \value{
-\code{merge.zoocat} will return a \code{zoocat} object. \code{merge.mlydata} will return a \code{zoo} object.
+\code{merge.zoocat} will return a \code{zoocat} object.
+ \code{merge.mlydata} will return a \code{mlydata} object.
 }
 \description{
 Combine \code{zoocat} or \code{mlydata} objects by columns.
 }
 \details{
-merge.zoocat is similar with merge.zoo, and the column attributes are also
-combined. For the combination of cattr, some NA will be filled in if it is
-necessary. merge.mlydata will return a \code{zoo} object.
+merge.zoocat and merge.mlydata are similar with merge.zoo.
+For merge.zoocat, when combining cattr, some NA will be filled in if it is
+necessary.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
