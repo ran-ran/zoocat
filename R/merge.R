@@ -3,15 +3,15 @@
 #' 
 #' Combine \code{zoocat} or \code{mlydata} objects by columns.
 #' 
-#' cbind.zoocat is similar with cbind.zoo, and the column attributes are also
+#' merge.zoocat is similar with merge.zoo, and the column attributes are also
 #' combined. For the combination of cattr, some NA will be filled in if it is
-#' necessary. cbind.mlydata will return a \code{zoo} object.
+#' necessary. merge.mlydata will return a \code{zoo} object.
 #'
 #' @usage
 #' ## S3 method for class "zoocat"
-#' cbind(...)
+#' merge(...)
 #' @param ...  \code{zoocat} or \code{mlydata} objects.
-#' @return \code{cbind.zoocat} will return a \code{zoocat} object. \code{cbind.mlydata} will return a \code{zoo} object.
+#' @return \code{merge.zoocat} will return a \code{zoocat} object. \code{merge.mlydata} will return a \code{zoo} object.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
@@ -20,18 +20,20 @@
 #' x2 <- x + 100
 #' colAttr2 <- data.frame(modified = TRUE, month = c(4, 6, 7, 9))
 #' zc2 <- zoocat(x2, order.by = 1991 : 1995, colattr = colAttr2)
-#' zc3 <- cbind(zc, zc2)
+#' zc3 <- merge(zc, zc2)
+#' zc4 <- cbind(zc, zc2)
 #' cattr(zc3)
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
 #' md1 <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' md2 <- md1 + 1
-#' cbind(md1, md2)
+#' md2 <- adjust_ym(md1, k = 1)
+#' merge(md2, md1)
+#' cbind(md2, md1)
 #'
 #' @export
-#' @rdname cbind
-#' @name cbind
-cbind.zoocat <- function (...) {
+#' @rdname merge
+#' @name merge
+merge.zoocat <- function (...) {
     listin <- list(...)
     numZoo <- length(listin)
     idEmpty <- c()
@@ -57,7 +59,7 @@ cbind.zoocat <- function (...) {
     for (i in 1 : numZoo) {
         zooNow <- listin[[i]]
         class(zooNow) <- 'zoo'
-        zooTotal <- cbind(zooTotal, zooNow)
+        zooTotal <- merge(zooTotal, zooNow)
     }
     attr(zooTotal, 'cattr') <- cattrTotal
     class(zooTotal) <- c('zoocat', 'zoo')
@@ -67,19 +69,38 @@ cbind.zoocat <- function (...) {
 
 
 #' @export
-#' @rdname cbind
+#' @rdname merge
 #' @usage 
 #' ## S3 method for class "mlydata"
-#' cbind(...)
-cbind.mlydata <- function (...) {
+#' merge(...)
+merge.mlydata <- function (...) {
     listin <- list(...)
+    for (i in 1 : length(listin)) {
+        stopifnot(class(listin[[i]])[1] == 'mlydata')
+    }
     stopifnot(length(listin) >= 2)
-    ret <- as.zoo(listin[[1]])
+    zooobj <- as.zoo(listin[[1]])
+    month <- attr(listin[[1]], 'month')
     for (i in 2 : length(listin)) {
         objNew <- as.zoo(listin[[i]])
-        namevec <- c(colnames(ret), colnames(objNew))
-        ret <- cbind(ret, objNew)
-        colnames(ret) <- namevec
+        zooobj <- merge(zooobj, objNew)
+        month <- c(month, attr(listin[[i]], 'month'))
     }
+    ret <- as.mlydata(zooobj, month = month)
     return(ret)
+}
+
+
+
+#' @export
+#' @rdname merge
+cbind.zoocat <- function (...) {
+    return(merge(...))
+}
+
+
+#' @export
+#' @rdname merge
+cbind.mlydata <- function (...) {
+    return(merge(...))
 }
