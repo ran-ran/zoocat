@@ -5,10 +5,6 @@
 #' Transforming data frame of column attributes to column names vector, which
 #' is useful for zoocat class.
 #' 
-#' If a column's name of colattr is "lat", style of "N/S" will be used.
-#' If a column's value is numeric, negative value will be transformed as "neg" +
-#' abs(value).
-#' 
 #' @usage cattr2name(colattr)
 #' @param colattr A data frame of column attributes in zoocat object.
 #' @return A character vector.
@@ -21,20 +17,6 @@
 cattr2name <- function (colattr) {
     attrName <- colnames(colattr)
     nAttr <- length(attrName)
-    if ('lat' %in% attrName) {
-        latVec <- colattr[, 'lat']
-        latVecChar <- latVec
-        latVecChar[latVec > 0] <- paste(latVec[latVec > 0], 'N', sep = '')
-        latVecChar[latVec < 0] <- paste(-1 * latVec[latVec < 0], 'S', sep = '')
-        colattr[, 'lat'] <- latVecChar
-    }
-    for (i in 1 : nAttr) {
-        if (is.numeric(colattr[, i])) {
-            vec <- colattr[, i]
-            vec[vec < 0] <- paste('neg', -1 * vec[vec < 0], sep = '')
-            colattr[, i] <- vec
-        }
-    }
     cNameVec <- NULL
     for (i in 1 : nAttr) {
         if (i < nAttr) {

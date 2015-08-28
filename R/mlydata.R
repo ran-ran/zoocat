@@ -7,9 +7,7 @@
 #' "month" is added for storing the month information.\cr For \code{print}
 #' method, each column name is set as month abbreviation + month number. For
 #' example, the column name corresponding to Feb of current year is "Feb.2".
-#' For a negative month number, "neg" is added to instead of "-". For example,
-#' the column name corresponding to Feb of last year is Feb.neg10. When all
-#' month numbers are between 1 and 12, only the abbreviations of months is
+#' When all month numbers are between 1 and 12, only the abbreviations of months is
 #' printed.\cr Using \code{yr} and \code{mon} to get and set the year and the
 #' month of the object.\cr Method \code{window} return a \code{mlydata}
 #' object of the given year and month. NULL value of year or month means

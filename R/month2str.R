@@ -7,9 +7,7 @@ month2Str <- function(month) {
         month1_12 <- month %% 12
         month1_12[month1_12 == 0] <- 12
         monthAbb <- month.abb[month1_12]
-        monthStr <- rep('', length(month))
-        monthStr[!nega] <- paste(monthAbb[!nega], '.', month[!nega], sep = '')
-        monthStr[nega] <- paste(monthAbb[nega], '.neg', abs(month[nega]), sep = '')
+        monthStr <- paste(monthAbb, '.', month, sep = '')
     }
     return(monthStr)
 }
