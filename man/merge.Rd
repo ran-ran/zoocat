@@ -29,7 +29,7 @@ cbind.mlydata(...)
 Combine \code{zoocat} or \code{mlydata} objects by columns.
 }
 \details{
-merge.zoocat and merge.mlydata are similar with merge.zoo.
+merge.zoocat and merge.mlydata are the extensions of merge.zoo.
 For merge.zoocat, when combining cattr, some NA will be filled in if it is
 necessary.
 }
