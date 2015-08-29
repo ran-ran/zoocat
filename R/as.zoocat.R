@@ -44,11 +44,11 @@ as.zoocat.mlydata <- function (x, varname = NULL) {
 #' @rdname as.zoocat
 as.zoocat.mlydataList <- function (x) {
     varname <- names(x)
-    zc <- zoocat()
     for (i in 1 : length(x)) {
-        zcNow <- as.zoocat(x[[i]], varname[i])
-        zc <- cbind(zc, zcNow)
+        x[[i]] <- as.zoocat(x[[i]], varname[i])
     }
+    x <- unclass(x)
+    zc <- do.call(merge, args = x)
     return(zc)
 }
 

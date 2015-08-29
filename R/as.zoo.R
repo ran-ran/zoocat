@@ -34,10 +34,14 @@ as.zoo.mlydata <- function(x) {
 #' @rdname as.zoo
 #' @export
 as.zoo.zoocat <- function (x) {
-    colnames(x) <- cattr2name(attr(x, 'cattr'))
-    attr(x, 'cattr') <- NULL
-    class(x) <- 'zoo'
-    return(x)
+    if (length(x) == 0){
+        return(zoo())
+    } else {
+        colnames(x) <- cattr2name(attr(x, 'cattr'))
+        attr(x, 'cattr') <- NULL
+        class(x) <- 'zoo'
+        return(x)
+    }
 }
 
 

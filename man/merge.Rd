@@ -20,6 +20,8 @@ cbind.mlydata(...)
 }
 \arguments{
 \item{...}{\code{zoocat} or \code{mlydata} objects.}
+
+\item{all,fill,suffixes,check.names,retclass,drop}{See details.}
 }
 \value{
 \code{merge.zoocat} will return a \code{zoocat} object.
@@ -29,20 +31,24 @@ cbind.mlydata(...)
 Combine \code{zoocat} or \code{mlydata} objects by columns.
 }
 \details{
-merge.zoocat and merge.mlydata are the extensions of merge.zoo.
-For merge.zoocat, when combining cattr, some NA will be filled in if it is
-necessary.
+\code{merge.zoocat} and \code{merge.mlydata} are the extensions of \code{merge.zoo}.
+For \code{merge.zoocat}, when combining \code{cattr}, some NA will be filled in if it is
+necessary. \cr
+The arguments \code{all} and \code{fill} are used same as in \code{merge.zoo}.
+The arguments \code{suffixes}, \code{check.names}, \code{retclass}
+and \code{drop} are not used.
 }
 \examples{
-x <- matrix(1 : 20, nrow = 5)
+x1 <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(month = c(2, 3, 5, 6), name = 'xxx')
-zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
-x2 <- x + 100
+zc1 <- zoocat(x1, order.by = 1991 : 1995, colattr = colAttr)
+x2 <- x1 + 100
 colAttr2 <- data.frame(modified = TRUE, month = c(4, 6, 7, 9))
 zc2 <- zoocat(x2, order.by = 1991 : 1995, colattr = colAttr2)
-zc3 <- merge(zc, zc2)
-zc4 <- cbind(zc, zc2)
-cattr(zc3)
+merge(zc1, zc2)
+merge(zc1, lag(zc2), fill = -999)
+merge(zc1, lag(zc2), all = FALSE)
+cbind(zc1, zc2)
 
 x <- matrix(1 : 20, nrow = 5)
 md1 <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
