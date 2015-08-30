@@ -3,9 +3,11 @@ Type: Package
 Title: zoo with Column Attributes
 Version: 1.0
 Date: 2015-04-09
-Author: He Ran
-Maintainer: He Ran<heran198311@163.com>
+Author: Ran-ran He
+Maintainer: Ran-ran He <heran198311@163.com>
 Depends: R (>= 3.0.0), zoo, reshape2
 Suggests: None
-Description: None
-License: None
+Description: Provide extended functions for managing
+    informations of each column of the zoo object.
+License: GPL
+URL: https://github.com/vivihe/zoocat
