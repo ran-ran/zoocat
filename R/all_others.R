@@ -1,7 +1,7 @@
 
 #' @export cummax.zoocat
 'cummax.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'cummax'(x, ...)
     colnames(ret) <- NULL
@@ -25,7 +25,7 @@
 
 #' @export cummin.zoocat
 'cummin.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'cummin'(x, ...)
     colnames(ret) <- NULL
@@ -49,7 +49,7 @@
 
 #' @export cumprod.zoocat
 'cumprod.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'cumprod'(x, ...)
     colnames(ret) <- NULL
@@ -73,7 +73,7 @@
 
 #' @export cumsum.zoocat
 'cumsum.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'cumsum'(x, ...)
     colnames(ret) <- NULL
@@ -97,7 +97,7 @@
 
 #' @export diff.zoocat
 'diff.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'diff'(x, ...)
     colnames(ret) <- NULL
@@ -121,7 +121,7 @@
 
 #' @export head.zoocat
 'head.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'head'(x, ...)
     colnames(ret) <- NULL
@@ -145,7 +145,7 @@
 
 #' @export lag.zoocat
 'lag.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'lag'(x, ...)
     colnames(ret) <- NULL
@@ -169,7 +169,7 @@
 
 #' @export na.aggregate.zoocat
 'na.aggregate.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'na.aggregate'(x, ...)
     colnames(ret) <- NULL
@@ -193,7 +193,7 @@
 
 #' @export na.approx.zoocat
 'na.approx.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'na.approx'(x, ...)
     colnames(ret) <- NULL
@@ -217,7 +217,7 @@
 
 #' @export na.contiguous.zoocat
 'na.contiguous.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'na.contiguous'(x, ...)
     colnames(ret) <- NULL
@@ -241,7 +241,7 @@
 
 #' @export na.fill.zoocat
 'na.fill.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'na.fill'(x, ...)
     colnames(ret) <- NULL
@@ -265,7 +265,7 @@
 
 #' @export na.spline.zoocat
 'na.spline.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'na.spline'(x, ...)
     colnames(ret) <- NULL
@@ -289,7 +289,7 @@
 
 #' @export na.trim.zoocat
 'na.trim.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'na.trim'(x, ...)
     colnames(ret) <- NULL
@@ -313,7 +313,7 @@
 
 #' @export rollapply.zoocat
 'rollapply.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'rollapply'(x, ...)
     colnames(ret) <- NULL
@@ -337,7 +337,7 @@
 
 #' @export rollmax.zoocat
 'rollmax.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'rollmax'(x, ...)
     colnames(ret) <- NULL
@@ -361,7 +361,7 @@
 
 #' @export rollmean.zoocat
 'rollmean.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'rollmean'(x, ...)
     colnames(ret) <- NULL
@@ -385,7 +385,7 @@
 
 #' @export rollmedian.zoocat
 'rollmedian.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'rollmedian'(x, ...)
     colnames(ret) <- NULL
@@ -409,7 +409,7 @@
 
 #' @export rollsum.zoocat
 'rollsum.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'rollsum'(x, ...)
     colnames(ret) <- NULL
@@ -433,7 +433,7 @@
 
 #' @export tail.zoocat
 'tail.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'tail'(x, ...)
     colnames(ret) <- NULL
@@ -457,7 +457,7 @@
 
 #' @export coredata<-.zoocat
 'coredata<-.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'coredata<-'(x, ...)
     colnames(ret) <- NULL
@@ -481,7 +481,7 @@
 
 #' @export index<-.zoocat
 'index<-.zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- 'index<-'(x, ...)
     colnames(ret) <- NULL

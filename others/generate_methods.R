@@ -34,7 +34,7 @@ for (mtd in methodNames) {
 "
 #' @export ", mtd, ".zoocat
 '", mtd, ".zoocat' <- function (x, ...) {
-    tcolAttr <- cattr(x)
+    colAttr <- cattr(x)
     x <- as.zoo(x)
     ret <- '",
     mtd, "'(x, ...)

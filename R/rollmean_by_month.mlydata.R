@@ -34,8 +34,8 @@ rollmean_by_month.mlydata <- function (x, k, onlyUsePrev = TRUE) {
     }
     xp <- x
     xf <- x
-    index(xp) <- as.integer(index(x) + 1)
-    index(xf) <- as.integer(index(x) - 1)
+    index(xp) <- index(x) + 1
+    index(xf) <- index(x) - 1
     xAll <- cbind(as.zoo(xp), as.zoo(x), as.zoo(xf))
     idCol <- 13 : 24
     xroll <- mlydata(matrix(0, nrow = nrow(xAll), ncol = 12),
