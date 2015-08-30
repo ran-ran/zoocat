@@ -59,15 +59,16 @@ mlydata <- function(x, year, month = 1 : 12) {
     year <- as.integer(year)
     month <- as.integer(month)
     colnames(x) <- NULL
-    md <- zoo(x, order.by = year)
+    md <- zoo(x, order.by = year, frequency = 1)
     attr(md, 'month') <- month
-    class(md) <- c('mlydata', 'zoo')
+    class(md) <- c('mlydata', class(md))
     return(md)
 }
 
 #' @export
 #' @rdname mlydata
 print.mlydata <- function(x) {
+    cat('A mlydata object: \n\n')
     month <- attr(x, 'month')
     z <- x
     class(z) <- 'zoo'

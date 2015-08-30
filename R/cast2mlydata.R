@@ -19,6 +19,6 @@
 cast2mlydata <- function (x, index.var, value.var, month.var, fun.aggr = NULL) {
     zcat <- cast2zoocat(x, index.var = index.var, value.var, attr.var = month.var,
                         fun.aggr = fun.aggr)
-    md <- as.mlydata(zcat)
+    md <- mlydata(coredata(zcat), year = index(zcat), month = cattr(zcat)[, 1])
     return(md)
 }

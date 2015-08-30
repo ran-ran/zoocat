@@ -13,7 +13,7 @@
 #' @rdname as.series
 as.series <- function(x, ...) { UseMethod('as.series') }
 
-#' @export
+#' @export as.series.mlydata
 #' @rdname as.series
 #' @examples
 #' 

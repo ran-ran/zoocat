@@ -11,6 +11,7 @@ methodNames <- c('cummax',
                  'cumprod',
                  'cumsum',
                  'diff',
+                 'head',
                  'lag',
                  'na.aggregate', 
                  'na.approx',
@@ -23,13 +24,15 @@ methodNames <- c('cummax',
                  'rollmean',
                  'rollmedian',
                  'rollsum',
-                 'coredata<-'
+                 'tail',
+                 'coredata<-',
+                 'index<-'
                  )
 
 for (mtd in methodNames) {
     cat(
 "
-#' @export
+#' @export ", mtd, ".zoocat
 '", mtd, ".zoocat' <- function (x, ...) {
     tcolAttr <- cattr(x)
     x <- as.zoo(x)
@@ -37,14 +40,14 @@ for (mtd in methodNames) {
     mtd, "'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', 'zoo')
+    class(ret) <- c('zoocat', class(ret))
     return(ret)
 }
         
 ",
 
 "
-#' @export
+#' @export ", mtd, ".mlydata
 '", mtd, ".mlydata' <- function (x, ...) {
     month <- attr(x, 'month')
     x <- as.zoo(x)
@@ -52,7 +55,7 @@ for (mtd in methodNames) {
     mtd, "'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'month') <- month 
-    class(ret) <- c('mlydata', 'zoo')
+    class(ret) <- c('mlydata', class(ret))
     return(ret)
 }
         

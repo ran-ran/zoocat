@@ -1,7 +1,7 @@
 
-#' The Rolling Means of a mlydata Object
+#' The Rolling Means of a mlydata Object by Month
 #' 
-#' The rolling means of a mlydata object.
+#' The rolling means of a mlydata object by month.
 #' 
 #' 
 #' @usage rollmean_by_month(x, k, onlyUsePrev = TRUE)
@@ -16,12 +16,16 @@
 #' md <- mlydata(x, year = 1991 : 1995)
 #' rollmean_by_month(md, k = 2)
 #' rollmean_by_month(md, k = 3, onlyUsePrev = FALSE)
+#' rollmean(md, k = 3)
 #' 
 #' 
 #' @export 
+#' @name rollmean_by_month
+#' @rdname rollmean_by_month
 rollmean_by_month <- function (x,...) {UseMethod('rollmean_by_month')}
 
-#' @export
+#' @export rollmean_by_month.mlydata
+#' @rdname rollmean_by_month
 rollmean_by_month.mlydata <- function (x, k, onlyUsePrev = TRUE) {
     stopifnot(all(attr(x, 'month') == 1 : 12))
     stopifnot(k <= 12)
@@ -34,7 +38,8 @@ rollmean_by_month.mlydata <- function (x, k, onlyUsePrev = TRUE) {
     index(xf) <- as.integer(index(x) - 1)
     xAll <- cbind(as.zoo(xp), as.zoo(x), as.zoo(xf))
     idCol <- 13 : 24
-    xroll <- mlydata(matrix(0, nrow = nrow(xAll), ncol = 12), year = index(xAll))
+    xroll <- mlydata(matrix(0, nrow = nrow(xAll), ncol = 12),
+                     year = index(xAll))
     for (i in 1 : length(idCol)) {
         colNow <- idCol[i]
         if (onlyUsePrev == TRUE) {

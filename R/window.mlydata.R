@@ -20,6 +20,7 @@
 #' 
 #' @export window.mlydata
 window.mlydata <- function(x, year = NULL, month = NULL, ...) {
+    class0 <- class(x)
     mon0 <- attr(x, 'month')
     class(x) <- 'zoo'
     if (!is.null(year)) {
@@ -47,7 +48,7 @@ window.mlydata <- function(x, year = NULL, month = NULL, ...) {
     x <- x[, idCol, drop = FALSE]
     if(!is.null(year))  index(x) <- as.integer(year)
     if(!is.null(month))  attr(x, 'month') <- as.integer(month)
-    class(x) <- c('mlydata', 'zoo')
+    class(x) <- c('mlydata', class0)
     return(x)
 }
 

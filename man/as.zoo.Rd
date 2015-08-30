@@ -4,11 +4,17 @@
 \alias{as.zoo}
 \alias{as.zoo.mlydata}
 \alias{as.zoo.zoocat}
+\alias{as.zooreg.mlydata}
+\alias{as.zooreg.zoocat}
 \title{Coercion Objects to Class \code{zoo}}
 \usage{
 \method{as.zoo}{mlydata}(x)
 
+\method{as.zooreg}{mlydata}(x)
+
 \method{as.zoo}{zoocat}(x)
+
+\method{as.zooreg}{zoocat}(x)
 }
 \arguments{
 \item{x}{An object.}
@@ -21,7 +27,9 @@ Coercing objects to class {zoo}.
 }
 \details{
 For methods as.zoo.mlydata and as.zoo.zoocat, the returned zoo object will
-be added column names automatically.
+be added column names automatically. \cr
+Note that the result of \code{as.zoo} will be a \code{zooreg} object if
+the input is inherited from \code{zooreg}.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)

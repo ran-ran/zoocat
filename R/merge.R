@@ -59,7 +59,7 @@ merge.zoocat <- function (..., all = TRUE, fill = NA, suffixes = NULL,
                                             drop = TRUE))) 
     colnames(zooTotal) <- NULL
     attr(zooTotal, 'cattr') <- cattrTotal
-    class(zooTotal) <- c('zoocat', 'zoo')
+    class(zooTotal) <- c('zoocat', class(listin[[1]]))
     return(zooTotal)
 }
 

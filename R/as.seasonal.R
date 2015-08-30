@@ -23,7 +23,7 @@ as.seasonal <- function (x, ...) {
 
 
 #' @rdname as.seasonal
-#' @export
+#' @export as.seasonal.mlydata
 as.seasonal.mlydata <- function (x, DJF.first = TRUE) {
     stopifnot(all(attr(x, 'month') == 1 : 12))
     if (DJF.first == TRUE) {

@@ -23,28 +23,16 @@
 as.mlydata <- function(x, ...) { UseMethod('as.mlydata') }
 
 #'
-#' @export
+#' @export as.mlydata.zoo
 #' @rdname as.mlydata
 as.mlydata.zoo <- function(x, month = 1 : 12) {
     year <- index(x)
     x <- coredata(x)
-    md <- mlydata(x, year = year, month = month)
+    md <- mlydata(x, year = as.integer(year), month = month)
     return(md)
 }
 
 
-#'
-#' @export
-#' @rdname as.mlydata
-as.mlydata.zoocat <- function (x) {
-    if (ncol(cattr(x)) != 1) {
-        stop('x must only have one column attribute.')
-    }
-    year <- index(x)
-    month <- as.vector(cattr(x)[, 1])
-    md <- mlydata(coredata(x), year = year, month = month)
-    return(md)
-}
 
 
 

@@ -23,6 +23,8 @@
 #' 
 #' @param x For \code{zoocat} function, x is a matrix or a data frame.
 #' Otherwise, x is a \code{zoocat} object.
+#' @param colattr The column attributes. Must be a data frame with column names.
+#' @param ... Other arguments for \code{zoo}.
 #' @return \code{zoocat} returns a \code{zoocat} object. \code{coredata} and \code{as.matrix} returns a matrix or
 #' a data frame.
 #' @examples
@@ -36,25 +38,29 @@
 #' coredata(zc)
 #' as.matrix(zc)
 #' 
+#' x <- matrix(1 : 20, nrow = 5)
+#' colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
+#' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr, frequency = 1)
+#' 
 #' @name zoocat
 #' @export
 #' @rdname zoocat
-zoocat <- function (x = NULL, order.by = NULL, colattr = NULL) {
-    if (is.null(x) & is.null(order.by) & is.null(colattr)) {
-        z <- rep(0, 0)
-        class(z) <- c('zoocat', 'zoo')
+zoocat <- function (x = NULL, colattr = NULL, ...) {
+    if (is.null(x)) {
+        z <- zoo(x, ...)
+        class(z) <- c('zoocat', class(z))
         return(z)
     }
-    stopifnot(class(x) == 'matrix' | class(x) == 'data.frame')
-    stopifnot(class(colattr) == 'data.frame' | class(colattr) == 'matrix')
+    stopifnot(is.matrix(x) | is.data.frame(x))
+    stopifnot(class(colattr) == 'data.frame')
     stopifnot(nrow(colattr) == ncol(x))
     stopifnot(!is.null(colnames(colattr)))
     colnames(x) <- NULL
     rownames(x) <- NULL
-    z <- zoo(x, order.by = order.by)
+    z <- zoo(x, ...)
     rownames(colattr) <- NULL
     attr(z, 'cattr') <- colattr
-    class(z) <- c('zoocat', 'zoo')
+    class(z) <- c('zoocat', class(z))
     return(z)
 }
 

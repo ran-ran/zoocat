@@ -30,7 +30,7 @@
 #' @rdname adjust_ym
 adjust_ym <- function (x, ...) { UseMethod('adjust_ym') }
 
-#' @export
+#' @export adjust_ym.mlydata
 #' @rdname adjust_ym
 adjust_ym.mlydata <- function (x, k = 1) {
     ynew <- index(x) + k

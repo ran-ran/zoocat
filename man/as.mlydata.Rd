@@ -3,14 +3,11 @@
 \name{as.mlydata}
 \alias{as.mlydata}
 \alias{as.mlydata.zoo}
-\alias{as.mlydata.zoocat}
 \title{Coercion Objects to Class \code{mlydata}}
 \usage{
 as.mlydata(x, ...)
 
 \method{as.mlydata}{zoo}(x, month = 1:12)
-
-\method{as.mlydata}{zoocat}(x)
 }
 \arguments{
 \item{x}{A zoo object.}
@@ -22,8 +19,6 @@ A mlydata object.
 }
 \description{
 Coercion objects to class \code{mlydata}.
-
-
 
 
 }

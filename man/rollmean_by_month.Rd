@@ -2,9 +2,12 @@
 % Please edit documentation in R/rollmean_by_month.mlydata.R
 \name{rollmean_by_month}
 \alias{rollmean_by_month}
-\title{The Rolling Means of a mlydata Object}
+\alias{rollmean_by_month.mlydata}
+\title{The Rolling Means of a mlydata Object by Month}
 \usage{
 rollmean_by_month(x, k, onlyUsePrev = TRUE)
+
+\method{rollmean_by_month}{mlydata}(x, k, onlyUsePrev = TRUE)
 }
 \arguments{
 \item{x}{A \code{mlydata} object.}
@@ -18,12 +21,13 @@ previous and current data is in the rolling window.}
 A mlydata object.\cr
 }
 \description{
-The rolling means of a mlydata object.
+The rolling means of a mlydata object by month.
 }
 \examples{
 x <- matrix(1 : 60, nrow = 5)
 md <- mlydata(x, year = 1991 : 1995)
 rollmean_by_month(md, k = 2)
 rollmean_by_month(md, k = 3, onlyUsePrev = FALSE)
+rollmean(md, k = 3)
 }
 
