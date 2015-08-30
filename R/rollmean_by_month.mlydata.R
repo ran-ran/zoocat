@@ -4,7 +4,7 @@
 #' The rolling means of a mlydata object.
 #' 
 #' 
-#' @usage rollmean(x, k, onlyUsePrev = TRUE)
+#' @usage rollmean_by_month(x, k, onlyUsePrev = TRUE)
 #' @param x A \code{mlydata} object.
 #' @param k The width of the rolling window.
 #' @param onlyUsePrev If TRUE, the rolling window is asymmetric, and only
@@ -14,12 +14,15 @@
 #' 
 #' x <- matrix(1 : 60, nrow = 5)
 #' md <- mlydata(x, year = 1991 : 1995)
-#' rollmean(md, k = 2)
-#' rollmean(md, k = 3, onlyUsePrev = FALSE)
+#' rollmean_by_month(md, k = 2)
+#' rollmean_by_month(md, k = 3, onlyUsePrev = FALSE)
 #' 
 #' 
+#' @export 
+rollmean_by_month <- function (x,...) {UseMethod('rollmean_by_month')}
+
 #' @export
-rollmean.mlydata <- function (x, k, onlyUsePrev = TRUE) {
+rollmean_by_month.mlydata <- function (x, k, onlyUsePrev = TRUE) {
     stopifnot(all(attr(x, 'month') == 1 : 12))
     stopifnot(k <= 12)
     if (onlyUsePrev == FALSE & (k%%2 != 1)) {
