@@ -18,9 +18,9 @@ mlydataList class.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
-md1 <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-md2 <- md1 + 1
-mdList <- mlydataList(list(md1 = md1, md2 = md2))
+x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+y <- x + 1
+mdList <- mlydataList(list(x = x, y = y))
 as.zoocat(mdList)
 }
 

@@ -10,9 +10,6 @@
 #' The arguments \code{suffixes}, \code{check.names}, \code{retclass} 
 #' and \code{drop} are not used.
 #'
-#' @usage
-#' ## S3 method for class "zoocat"
-#' merge(...)
 #' @param ...  \code{zoocat} or \code{mlydata} objects.
 #' @param all,fill,suffixes,check.names,retclass,drop See details.
 #' @return \code{merge.zoocat} will return a \code{zoocat} object.
@@ -66,9 +63,6 @@ merge.zoocat <- function (..., all = TRUE, fill = NA, suffixes = NULL,
 
 #' @export
 #' @rdname merge
-#' @usage 
-#' ## S3 method for class "mlydata"
-#' merge(...)
 merge.mlydata <- function (..., all = TRUE, fill = NA, suffixes = NULL,
                            check.names = FALSE, retclass = 'mlydata',
                            drop = TRUE) {

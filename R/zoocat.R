@@ -114,33 +114,3 @@ print.zoocat <- function (x) {
 
 
 
-#' @export
-#' @rdname zoocat
-as.matrix.zoocat <- function (x) {
-    if (length(x) == 0) {
-        return(c())
-    }
-    class(x) <- NULL
-    rownames(x) <- attr(x, 'index')
-    colnames(x) <- cattr2name(attr(x, 'cattr'))
-    attr(x, 'cattr') <- NULL
-    attr(x, 'index') <- NULL
-    return(x)
-}
-
-
-
-#' @export
-#' @rdname zoocat
-coredata.zoocat <- function (x) {
-    if (length(x) == 0) {
-        return(c())
-    }
-    attr(x, 'cattr') <- NULL
-    attr(x, 'index') <- NULL
-    colnames(x) <- NULL
-    rownames(x) <- NULL
-    class(x) <- NULL
-    return(x)
-}
-

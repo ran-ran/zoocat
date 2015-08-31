@@ -1,24 +1,25 @@
 
-#' Get Subset of a mlydata Object
+#' Get Subset of a \code{mlydata} Object
 #' 
-#' Get a subset of a mlydata object.
+#' Get a subset of a \code{mlydata} object.
 #' 
 #' @aliases window.mlydata
-#' @usage window(x, year = NULL, month = NULL)
 #' @param x A \code{mlydata} object.
 #' @param year A numeric vector representing years.
 #' @param month A numeric vector in which numbers are used to represent months.
 #' The elements of \code{month} can be smaller than 1 or larger than 12, which
 #' means the months of past years or future years. For example, the months of
 #' last year is (1 : 12) - 12.
-#' @return A mlydata object.
+#' @param ... Other arguments for \code{window.zoo}.
+#' @return A \code{mlydata} object.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
 #' md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 #' window(md, year = 1992 : 1993, month = c(3, 6))
+#' window(md, start = 1993)
 #' 
-#' @export window.mlydata
+#' @export
 window.mlydata <- function(x, year = NULL, month = NULL, ...) {
     class0 <- class(x)
     mon0 <- attr(x, 'month')

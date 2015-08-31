@@ -6,7 +6,7 @@
 \alias{rollcor.zoo}
 \title{Calculate the Rolling Window Correlation}
 \usage{
-rollcor(x, y, width, show = TRUE, ...)
+rollcor(x, y, ...)
 
 \method{rollcor}{default}(x, y, width, show = TRUE, ...)
 

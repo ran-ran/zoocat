@@ -6,22 +6,20 @@
 \alias{corr.zoocat}
 \title{Correlation Computing for \code{zoo} or \code{zoocat} Objects}
 \usage{
-corr(x, y, ...)
+corr(x, y = NULL, ...)
 
-\method{corr}{zoo}(x, y, ...)
+\method{corr}{zoo}(x, y = NULL, ...)
 
-\method{corr}{zoocat}(x, y, ...)
+\method{corr}{zoocat}(x, y = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{zoo} or \code{zoocat} object.}
 
-\item{...}{Other arguments for function \code{cor}.}
+\item{y}{NULL or a \code{zoo} or \code{zoocat} object. If NULL, x will be used.}
 
-\item{y}{A \code{zoo} object with the same index as \code{x}.}
-}
-\value{
-For \code{corr.zoo}, the same as in function \code{cor}. For
-\code{corr.zoocat}, a data frame will be returned.
+\item{...}{Additional arguments to be passed to or from methods.}
+
+\item{...}{Other arguments for function \code{cor}.}
 }
 \description{
 Compute correlations for \code{zoo} or \code{zoocat} objects.
@@ -32,9 +30,15 @@ y <- zoo(c(12, 30, 2, 46, 5))
 corr(x, y)
 
 x <- matrix(1 : 20, nrow = 5)
-colAttr <- data.frame(month = c(2, 3, 5, 6), name = 'sst')
+md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+corr(md, md)
+corr(md)
+
+x <- matrix(1 : 20, nrow = 5)
+colAttr <- data.frame(month = c(2, 3, 5, 6), name = 'x')
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 y <- zoo(c(3, 5, 4, 6, 3), order.by = 1991 : 1995)
 corr(zc, y)
+corr(zc)
 }
 

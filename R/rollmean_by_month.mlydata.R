@@ -24,7 +24,8 @@
 #' @rdname rollmean_by_month
 rollmean_by_month <- function (x,...) {UseMethod('rollmean_by_month')}
 
-#' @export rollmean_by_month.mlydata
+
+#' @export 
 #' @rdname rollmean_by_month
 rollmean_by_month.mlydata <- function (x, k, onlyUsePrev = TRUE) {
     stopifnot(all(attr(x, 'month') == 1 : 12))

@@ -13,15 +13,6 @@
 #' object of the given year and month. NULL value of year or month means
 #' all.\cr
 #' 
-#' @param x For \code{mlydata} function, it is a matrix or a vector. If x is
-#' a matrix, each row will be treated as a year. If x is a vector, it will be
-#' treated as a matrix with only one column. For other methods, x is a
-#' \code{mlydata} object.
-#' @param year A numeric vector representing years.
-#' @param month A numeric vector in which numbers are used to represent months.
-#' The elements of \code{month} can be smaller than 1 or larger than 12, which
-#' means the months of past years or future years. For example, the months of
-#' last year is (1 : 12) - 12.
 #' @return \code{mlydata} returns a mlydata object.\cr Using methods
 #' \code{yr} and \code{mon} to get and set the year and month vector.\cr
 #' \code{window} returns a new mlydata object.\cr \code{coredata} return the
@@ -43,6 +34,16 @@
 #' @name mlydata
 #' @rdname mlydata
 #' @export
+#' @param x For \code{mlydata} function, it is a matrix or a vector. If x is
+#' a matrix, each row will be treated as a year. If x is a vector, it will be
+#' treated as a matrix with only one column. For other methods, x is a
+#' \code{mlydata} object.
+#' @param year A numeric vector representing years.
+#' @param month A numeric vector in which numbers are used to represent months.
+#' The elements of \code{month} can be smaller than 1 or larger than 12, which
+#' means the months of past years or future years. For example, the months of
+#' last year is (1 : 12) - 12.
+#' @param ... Additional arguments to be passed to or from methods.
 mlydata <- function(x, year, month = 1 : 12) {
     if(!(is.vector(x) | is.matrix(x))) {
         stop('x must be a vector or a matrix.')
@@ -78,15 +79,19 @@ print.mlydata <- function(x) {
 }
 
 #' @export
+#' @rdname mlydata
 mon <- function(x, ...) { UseMethod('mon') }
 
 #' @export
+#' @rdname mlydata
 'mon<-' <- function(x, ...) { UseMethod('mon<-') }
 
 #' @export
+#' @rdname mlydata
 yr <- function(x, ...) { UseMethod('yr') }
 
 #' @export
+#' @rdname mlydata
 'yr<-' <- function(x, ...) { UseMethod('yr<-') }
 
 #' @export
@@ -103,6 +108,7 @@ yr.mlydata <- function(x) {
 
 #' @export
 #' @rdname mlydata
+#' @param value The new setting value.
 'mon<-.mlydata' <- function (x, value) {
     stopifnot(length(value) == ncol(x))
     value <- as.integer(value)
@@ -118,29 +124,13 @@ yr.mlydata <- function(x) {
     return(x)
 }
 
-#' @export
-#' @rdname mlydata
-coredata.mlydata <- function(x) {
-    class(x) <- 'zoo'
-    cdata <- coredata(x)
-    attr(cdata, 'month') <- NULL
-    return(cdata)
-}
+
 
 #' @export
-#' @rdname mlydata
-as.matrix.mlydata <- function(x) {
-    x <- as.zoo(x)
-    x <- as.matrix(x)
-    return(x)
-}
-
-#' @export
-#' @rdname mlydata
-'[.mlydata' <- function(x, i, j, ...) {
+'[.mlydata' <- function(x, i, j, drop = FALSE, ...) {
     monthAll <- attr(x, 'month')
     class(x) <- 'zoo'
-    ret <- x[i, j, drop = FALSE]
+    ret <- x[i, j, drop = drop]
     attr(ret, 'month') <- monthAll[j]
     class(ret) <- c('mlydata', 'zoo')
     return(ret)

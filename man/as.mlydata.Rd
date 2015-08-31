@@ -7,10 +7,12 @@
 \usage{
 as.mlydata(x, ...)
 
-\method{as.mlydata}{zoo}(x, month = 1:12)
+\method{as.mlydata}{zoo}(x, month)
 }
 \arguments{
 \item{x}{A zoo object.}
+
+\item{...}{Additional arguments to be passed to or from methods.}
 
 \item{month}{A vector of month, must have same length as ncol of x.}
 }
@@ -25,10 +27,6 @@ Coercion objects to class \code{mlydata}.
 \examples{
 x <-  matrix(1 : 36, nrow = 3)
 zobj <- zoo(x, order.by = 1991 : 1993)
-md <- as.mlydata(zobj, month = 1:12)
-
-x <-  matrix(1 : 36, nrow = 3)
-zcat <- zoocat(x, order.by = 1991 : 1993, colattr = data.frame(month = 1 : 12))
-md <- as.mlydata(zcat)
+as.mlydata(zobj, month = 1 : 12)
 }
 

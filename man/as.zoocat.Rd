@@ -5,7 +5,7 @@
 \alias{as.zoocat.mlydata}
 \alias{as.zoocat.mlydataList}
 \alias{as.zoocat.zoo}
-\title{Coercing Objects to Class "zoocat"}
+\title{Coercing Objects to Class \code{zoocat}}
 \usage{
 as.zoocat(x, ...)
 
@@ -18,14 +18,16 @@ as.zoocat(x, ...)
 \arguments{
 \item{x}{An object.}
 
+\item{...}{Additional arguments to be passed to or from methods.}
+
 \item{varname}{The value for the name field in the \code{cattr} of
 the output \code{zoocat} object.}
 }
 \value{
-A zoocat object.
+A \code{zoocat} object.
 }
 \description{
-Coercing objects to class "zoocat".
+Coercing objects to class \code{zoocat}.
 
 
 
@@ -34,13 +36,13 @@ Coercing objects to class "zoocat".
 \examples{
 x <- matrix(1 : 20, nrow = 5)
 md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-zc <- as.zoocat(md)
+as.zoocat(md)
 
-x <- matrix(1 : 20, nrow = 5)
-md1 <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-md2 <- md1 + 1
-mdList <- mlydataList(list(md1 = md1, md2 = md2))
-zc <- as.zoocat(mdList)
+mat <- matrix(1 : 20, nrow = 5)
+x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+y <- x + 100
+mdList <- mlydataList(list(x = x, y = y))
+as.zoocat(mdList)
 
 zobj <- zoo(matrix(1:10, nrow = 5), order.by = 11:15)
 colnames(zobj) <- c('a', 'b')

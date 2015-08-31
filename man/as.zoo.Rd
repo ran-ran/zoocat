@@ -20,16 +20,16 @@
 \item{x}{An object.}
 }
 \value{
-A zoo object.
+A \code{zoo} object.
 }
 \description{
-Coercing objects to class {zoo}.
+Coercing objects to class \code{zoo}.
 }
 \details{
-For methods as.zoo.mlydata and as.zoo.zoocat, the returned zoo object will
+For \code{mlydata} and \code{zoocat}, the returned \code{zoo} object will
 be added column names automatically. \cr
 Note that the result of \code{as.zoo} will be a \code{zooreg} object if
-the input is inherited from \code{zooreg}.
+the input \code{x} is inherited from \code{zooreg}.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)

@@ -6,7 +6,7 @@
 \alias{adjust_ym.zoocat}
 \title{Adjust Values of Year and Month of a \code{zoocat} or \code{mlydata} Object}
 \usage{
-adjust_ym(x, k = 1)
+adjust_ym(x, ...)
 
 \method{adjust_ym}{mlydata}(x, k = 1)
 
@@ -15,7 +15,9 @@ adjust_ym(x, k = 1)
 \arguments{
 \item{x}{A \code{zoocat} or \code{mlydata} object.}
 
-\item{k}{The number of lag. See details.}
+\item{...}{Additional arguments to be passed to or from methods.}
+
+\item{k}{The number of the lag. See details.}
 }
 \description{
 Adjust the values of the year and month of a \code{zoocat} or \code{mlydata} object.
@@ -26,17 +28,19 @@ named "month".
 \details{
 For \code{zoocat}, the index year of the object will be added k, and the
 \code{month} column of \code{cattr} will minus k * 12. The negative month
-values mean month of past years with regard to the index year. For
+values mean month of previous years with regard to the index year. For
 \code{mlydata} it is similar.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(month = c(2, 3, 5, 6), name = 'sst')
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
-zcp <- adjust_ym(zc, k = 1)
+adjust_ym(zc, k = 1)
+adjust_ym(zc, k = 2)
 
 x <- matrix(1 : 20, nrow = 5)
 md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-mdp <- adjust_ym(md, k = 1)
+adjust_ym(md, k = 1)
+adjust_ym(md, k = 2)
 }
 

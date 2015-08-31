@@ -3,14 +3,16 @@
 \name{as.seasonal}
 \alias{as.seasonal}
 \alias{as.seasonal.mlydata}
-\title{Transforming a mlydata Object to be Seasonal Data}
+\title{Transforming a \code{mlydata} Object to be Seasonal Data}
 \usage{
-as.seasonal(x, DJF.first = TRUE)
+as.seasonal(x, ...)
 
 \method{as.seasonal}{mlydata}(x, DJF.first = TRUE)
 }
 \arguments{
 \item{x}{A \code{mlydata} object.}
+
+\item{...}{Additional arguments to be passed to or from methods.}
 
 \item{DJF.first}{If TRUE, the winter season will be in the first column.}
 }
@@ -18,11 +20,12 @@ as.seasonal(x, DJF.first = TRUE)
 A \code{zoo} object.
 }
 \description{
-Transforming a mlydata object to be seasonal data.
+Transforming a \code{mlydata} object to be seasonal data.
 }
 \examples{
-x <- matrix(1 : 36, nrow = 3)
+x <- matrix(1 : 36, nrow = 3, byrow = TRUE)
 md <- mlydata(x, year = 1991 : 1993, month = 1 : 12)
-print(as.seasonal(md))
+as.seasonal(md)
+as.seasonal(md, DJF.first = FALSE)
 }
 

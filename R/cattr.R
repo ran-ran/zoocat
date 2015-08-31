@@ -1,16 +1,15 @@
 
 
-#' Getting or Setting the Column Attributes of a zoocat Object.
+#' Getting or Setting the Column Attributes of a \code{zoocat} Object.
 #' 
-#' Getting or setting the column attributes of a zoocat object.
+#' Getting or setting the column attributes of a \code{zoocat} object.
 #' 
-#' Use attr(x, 'cattr') to get or set cattr more flexibly.
+#' \code{cattr} is just attr(x, 'cattr').
 #' 
-#' @usage cattr(x)
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
-#' colAttr <- data.frame(month = c(2, 3, 5, 6), name = 'sst')
+#' colAttr <- data.frame(month = c(2, 3, 5, 6), name = 'x')
 #' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 #' colatt <- cattr(zc)
 #' colatt[, 1] <- colatt[, 1] + 1
@@ -19,6 +18,8 @@
 #' @name cattr
 #' @rdname cattr
 #' @export
+#' @param x The \code{zoocat} object.
+#' @param value The new value.
 'cattr<-' <- function (x, value) {
     stopifnot(is.data.frame(value) | is.matrix(value))
     stopifnot(nrow(value) == ncol(x))

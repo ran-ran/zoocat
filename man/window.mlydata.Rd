@@ -2,9 +2,9 @@
 % Please edit documentation in R/window.mlydata.R
 \name{window.mlydata}
 \alias{window.mlydata}
-\title{Get Subset of a mlydata Object}
+\title{Get Subset of a \code{mlydata} Object}
 \usage{
-window(x, year = NULL, month = NULL)
+\method{window}{mlydata}(x, year = NULL, month = NULL, ...)
 }
 \arguments{
 \item{x}{A \code{mlydata} object.}
@@ -15,16 +15,19 @@ window(x, year = NULL, month = NULL)
 The elements of \code{month} can be smaller than 1 or larger than 12, which
 means the months of past years or future years. For example, the months of
 last year is (1 : 12) - 12.}
+
+\item{...}{Other arguments for \code{window.zoo}.}
 }
 \value{
-A mlydata object.
+A \code{mlydata} object.
 }
 \description{
-Get a subset of a mlydata object.
+Get a subset of a \code{mlydata} object.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
 md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 window(md, year = 1992 : 1993, month = c(3, 6))
+window(md, start = 1993)
 }
 

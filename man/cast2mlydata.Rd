@@ -2,7 +2,7 @@
 % Please edit documentation in R/cast2mlydata.R
 \name{cast2mlydata}
 \alias{cast2mlydata}
-\title{Cast a Data Frame as a mlydata Object}
+\title{Cast a Data Frame as a \code{mlydata} Object}
 \usage{
 cast2mlydata(x, index.var, value.var, month.var, fun.aggr = NULL)
 }
@@ -19,10 +19,10 @@ cast2mlydata(x, index.var, value.var, month.var, fun.aggr = NULL)
 for each output cell. Defaults to length (with a message) if needed but not specified.}
 }
 \value{
-A mlydata object.
+A \code{mlydata} object.
 }
 \description{
-Cast a data frame as a mlydata object.
+Cast a data frame as a \code{mlydata} object.
 }
 \examples{
 x <- data.frame(year = rep(1991 : 1993, each = 3), month = rep(3 : 1, 3), value = 1 : 9)

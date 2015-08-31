@@ -8,11 +8,11 @@
 \alias{merge.zoocat}
 \title{Combine \code{zoocat} or \code{mlydata} Objects by Columns}
 \usage{
-## S3 method for class "zoocat"
-merge(...)
+\method{merge}{zoocat}(..., all = TRUE, fill = NA, suffixes = NULL,
+  check.names = FALSE, retclass = "zoocat", drop = TRUE)
 
-## S3 method for class "mlydata"
-merge(...)
+\method{merge}{mlydata}(..., all = TRUE, fill = NA, suffixes = NULL,
+  check.names = FALSE, retclass = "mlydata", drop = TRUE)
 
 cbind.zoocat(...)
 

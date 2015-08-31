@@ -5,7 +5,6 @@
 #' Transforming data frame of column attributes to column names vector, which
 #' is useful for zoocat class.
 #' 
-#' @usage cattr2name(colattr)
 #' @param colattr A data frame of column attributes in zoocat object.
 #' @return A character vector.
 #' @examples

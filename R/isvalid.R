@@ -15,7 +15,7 @@
 #' @export
 #' @name isvalid
 #' @rdname isvalid
-isvalid <- function (x, ...) {
+isvalid <- function (x) {
     UseMethod('isvalid')
 }
 

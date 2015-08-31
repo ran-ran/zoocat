@@ -2,8 +2,6 @@
 % Please edit documentation in R/zoocat.R
 \name{zoocat}
 \alias{[.zoocat}
-\alias{as.matrix.zoocat}
-\alias{coredata.zoocat}
 \alias{print.zoocat}
 \alias{zoocat}
 \title{zoocat Class}
@@ -13,10 +11,6 @@ zoocat(x = NULL, colattr = NULL, ...)
 \method{print}{zoocat}(x)
 
 \method{[}{zoocat}(x, i = NULL, j = NULL, ...)
-
-\method{as.matrix}{zoocat}(x)
-
-\method{coredata}{zoocat}(x)
 }
 \arguments{
 \item{x}{For \code{zoocat} function, x is a matrix or a data frame.

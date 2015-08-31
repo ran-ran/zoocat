@@ -6,7 +6,7 @@
 \alias{normalize.zoo}
 \title{Normalize Data}
 \usage{
-normalize(x, mode = c('anomaly', 'perc', 'sd1'), base.period = NULL)
+normalize(x, ...)
 
 \method{normalize}{default}(x, mode = "anomaly", ...)
 
@@ -15,11 +15,12 @@ normalize(x, mode = c('anomaly', 'perc', 'sd1'), base.period = NULL)
 \arguments{
 \item{x}{A vector, matrix, data frame or zoo object.}
 
+\item{...}{Additional arguments to be passed to or from methods.}
+
 \item{mode}{\code{perc} means percentage of anomaly. \code{sd1} means
 normalized anomaly.}
 
-\item{base.period}{If NULL, base period is the all index range. Only valid
-when x is a zoo object.}
+\item{base.period}{If NULL, base period is the all index range.}
 }
 \description{
 Normalize Data

@@ -6,7 +6,7 @@ if (file.exists(fout)) {
 
 fcon <- file(fout, 'w')
 
-methodNames <- c('cummax',
+methodNames_1 <- c('cummax',
                  'cummin',
                  'cumprod',
                  'cumsum',
@@ -24,15 +24,22 @@ methodNames <- c('cummax',
                  'rollmean',
                  'rollmedian',
                  'rollsum',
+                 'scale',
                  'tail',
                  'coredata<-',
                  'index<-'
                  )
 
-for (mtd in methodNames) {
+methodNames_2 <- c('as.data.frame',
+                   'as.matrix',
+                   'coredata',
+                   'barplot'
+                   )
+
+for (mtd in methodNames_1) {
     cat(
 "
-#' @export ", mtd, ".zoocat
+#' @export 
 '", mtd, ".zoocat' <- function (x, ...) {
     colAttr <- cattr(x)
     x <- as.zoo(x)
@@ -47,7 +54,7 @@ for (mtd in methodNames) {
 ",
 
 "
-#' @export ", mtd, ".mlydata
+#' @export
 '", mtd, ".mlydata' <- function (x, ...) {
     month <- attr(x, 'month')
     x <- as.zoo(x)
@@ -63,6 +70,39 @@ for (mtd in methodNames) {
         sep = '',
         file = fcon)
 }
+
+
+
+
+for (mtd in methodNames_2) {
+    cat(
+"
+#' @export 
+'", mtd, ".zoocat' <- function (x, ...) {
+    x <- as.zoo(x)
+    ret <- '",
+    mtd, "'(x, ...)
+    return(ret)
+}
+        
+",
+
+"
+#' @export
+'", mtd, ".mlydata' <- function (x, ...) {
+    x <- as.zoo(x)
+    ret <- '",
+    mtd, "'(x, ...)
+    return(ret)
+}
+        
+",
+        sep = '',
+        file = fcon)
+}
+
+
+
 close(fcon)
     
         

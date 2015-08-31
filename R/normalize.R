@@ -1,14 +1,5 @@
 #' Normalize Data
 #' 
-#' 
-#' 
-#' @aliases normalize normalize.default normalize.zoo
-#' @usage normalize(x, mode = c('anomaly', 'perc', 'sd1'), base.period = NULL)
-#' @param x A vector, matrix, data frame or zoo object.
-#' @param mode \code{perc} means percentage of anomaly. \code{sd1} means
-#' normalized anomaly.
-#' @param base.period If NULL, base period is the all index range. Only valid
-#' when x is a zoo object.
 #' @examples
 #' 
 #' x <- matrix(rnorm(36, 10, 4), nrow = 3)
@@ -26,12 +17,16 @@
 #' @name normalize
 #' @rdname normalize
 #' @export
+#' @param x A vector, matrix, data frame or zoo object.
+#' @param ... Additional arguments to be passed to or from methods.
 normalize <- function (x, ...) {
     UseMethod('normalize')
 }
 
 #' @rdname normalize
 #' @export
+#' @param mode \code{perc} means percentage of anomaly. \code{sd1} means
+#' normalized anomaly.
 normalize.default <- function(x, mode = 'anomaly', ...) {
     stopifnot(length(mode) == 1)
     stopifnot(any(mode == c('anomaly', 'perc', 'sd1')))
@@ -68,6 +63,7 @@ normalize.default <- function(x, mode = 'anomaly', ...) {
 
 #' @rdname normalize
 #' @export
+#' @param base.period If NULL, base period is the all index range.
 normalize.zoo <- function(x, mode = 'anomaly', base.period = NULL) {
     if (is.null(base.period)) {
         base.period <- index(x)

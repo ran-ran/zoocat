@@ -16,6 +16,8 @@ margin(x, ...)
 \arguments{
 \item{x}{A data frame or \code{zoocat} object.}
 
+\item{...}{Additional arguments to be passed to or from methods.}
+
 \item{mar.for}{One or more variables to compute margin for.
 For data frame, it means column names. For \code{zoocat} object,
 it means names of column attributes.}

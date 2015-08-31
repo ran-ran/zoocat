@@ -3,7 +3,6 @@
 #' Computing margins for given ID variables of a data frame
 #'  or given column attributes of a \code{zoocat} object. 
 #'
-#' @param x A data frame or \code{zoocat} object.
 #' @export
 #' @name margin
 #' @rdname margin
@@ -27,6 +26,8 @@
 #' zc.mar <- margin(zc, mar.for = 'month')
 #' 
 #' 
+#' @param x A data frame or \code{zoocat} object.
+#' @param ... Additional arguments to be passed to or from methods.
 margin <- function (x, ...) {
     UseMethod('margin')
 }

@@ -1,13 +1,5 @@
 #' Calculate the Rolling Window Correlation
 #' 
-#' 
-#' 
-#' @usage rollcor(x, y, width, show = TRUE, ...)
-#' @param x,y Two vectors or two zoo objects. For zoo objects, if their time
-#' ranges is different, intersection will be used.
-#' @param width The width of the sliding window, which must be odd number.
-#' @param show If TRUE, the result will be plotted.
-#' @param ...  Other arguments for function cor.
 #' @examples
 #' 
 #' x <- 1 : 100
@@ -29,7 +21,10 @@
 #' @export
 #' @name rollcor
 #' @rdname rollcor
-rollcor <- function (x, ...) {
+#' @param x,y Two vectors or two zoo objects. For zoo objects, if their time
+#' ranges is different, intersection will be used.
+#' @param ...  Other arguments for function cor.
+rollcor <- function (x, y, ...) {
     UseMethod('rollcor')
 }
 
@@ -37,6 +32,8 @@ rollcor <- function (x, ...) {
 
 #' @export
 #' @rdname rollcor
+#' @param width The width of the sliding window, which must be odd number.
+#' @param show If TRUE, the result will be plotted.
 rollcor.default <- function (x, y, width, show = TRUE, ...) {
     x <- as.vector(x)
     y <- as.vector(y)

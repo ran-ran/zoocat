@@ -1,21 +1,20 @@
 
-#' Coercing Objects to Class "zoocat"
+#' Coercing Objects to Class \code{zoocat}
 #' 
-#' Coercing objects to class "zoocat".
+#' Coercing objects to class \code{zoocat}.
 #' 
-#' @param x An object.
-#' @return A zoocat object.
+#' @return A \code{zoocat} object.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
 #' md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' zc <- as.zoocat(md)
+#' as.zoocat(md)
 #' 
-#' x <- matrix(1 : 20, nrow = 5)
-#' md1 <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' md2 <- md1 + 1
-#' mdList <- mlydataList(list(md1 = md1, md2 = md2))
-#' zc <- as.zoocat(mdList)
+#' mat <- matrix(1 : 20, nrow = 5)
+#' x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+#' y <- x + 100
+#' mdList <- mlydataList(list(x = x, y = y))
+#' as.zoocat(mdList)
 #' 
 #' zobj <- zoo(matrix(1:10, nrow = 5), order.by = 11:15)
 #' colnames(zobj) <- c('a', 'b')
@@ -24,10 +23,12 @@
 #' @name as.zoocat
 #' @rdname as.zoocat
 #' @export
+#' @param x An object.
+#' @param ... Additional arguments to be passed to or from methods.
 as.zoocat <- function (x, ...) { UseMethod('as.zoocat') }
 
 #'
-#' @export as.zoocat.mlydata
+#' @export
 #' @rdname as.zoocat
 #' @param varname The value for the name field in the \code{cattr} of 
 #' the output \code{zoocat} object.
@@ -46,7 +47,7 @@ as.zoocat.mlydata <- function (x, varname = NULL) {
 
 
 #'
-#' @export as.zoocat.mlydataList
+#' @export
 #' @rdname as.zoocat
 as.zoocat.mlydataList <- function (x) {
     varname <- names(x)
@@ -59,7 +60,7 @@ as.zoocat.mlydataList <- function (x) {
 }
 
 
-#' @export as.zoocat.zoo
+#' @export
 #' @rdname as.zoocat
 as.zoocat.zoo <- function (x, colattr = NULL) {
     stopifnot(length(dim(x))== 2)
