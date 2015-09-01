@@ -4,14 +4,14 @@
 #' The rolling means of a mlydata object by month.
 #' 
 #' 
-#' previous and current data is in the rolling window.
 #' @return A mlydata object.\cr
 #' @examples
 #' 
-#' x <- matrix(1 : 60, nrow = 5)
+#' x <- matrix(1 : 60, nrow = 5, byrow = T)
 #' md <- mlydata(x, year = 1991 : 1995)
-#' rollmean_by_month(md, k = 2)
-#' rollmean_by_month(md, k = 3, onlyUsePrev = FALSE)
+#' rollmean_by_month(md, k = 3, align = 'left')
+#' rollmean_by_month(md, k = 3, align = 'right')
+#' rollmean_by_month(md, k = 3)
 #' rollmean(md, k = 3)
 #' 
 #' 
@@ -26,29 +26,19 @@ rollmean_by_month <- function (x,...) {UseMethod('rollmean_by_month')}
 #' @export 
 #' @rdname rollmean_by_month
 #' @param k The width of the rolling window.
-#' @param onlyUsePrev If TRUE, the rolling window is asymmetric, and only
-rollmean_by_month.mlydata <- function (x, k, onlyUsePrev = TRUE) {
+#' @param align Character specifying whether the index of the result 
+#' should be left- or right-aligned or centered (default) compared to
+#' the rolling window of observations.
+rollmean_by_month.mlydata <- function (x, k, align = 'center') {
     stopifnot(all(attr(x, 'month') == 1 : 12))
-    stopifnot(k <= 12)
-    if (onlyUsePrev == FALSE & (k%%2 != 1)) {
-        stop('K must be odd number when onlyUsePrev is FALSE.')
-    }
-    xp <- x
-    xf <- x
-    index(xp) <- index(x) + 1
-    index(xf) <- index(x) - 1
-    xAll <- cbind(as.zoo(xp), as.zoo(x), as.zoo(xf))
-    idCol <- 13 : 24
-    xroll <- mlydata(matrix(0, nrow = nrow(xAll), ncol = 12),
-                     year = index(xAll))
-    for (i in 1 : length(idCol)) {
-        colNow <- idCol[i]
-        if (onlyUsePrev == TRUE) {
-            xroll[, i] <- rowMeans(xAll[, (colNow - k + 1) : colNow, drop = FALSE])
-        } else {
-            xroll[, i] <- rowMeans(xAll[, (colNow - floor(k/2)) : (colNow + floor(k/2)), drop = FALSE])
-        }
-    }
+    zobj <- melt(x, ret = 'zoo')
+    zobj <- rollmean(zobj, k = k, align = align)
+    dt <- index(zobj)
+    dfobj <- data.frame(year = as.numeric(format(dt, "%Y")),
+                        month = as.numeric(format(dt, "%m")),
+                        value = coredata(zobj))
+    xroll <- cast2mlydata(dfobj, index.var = 'year', value.var = 'value',
+                        month.var = 'month')
     xroll <- na.trim(xroll, sides = 'both', is.na = 'all')
     return(xroll) 
 }

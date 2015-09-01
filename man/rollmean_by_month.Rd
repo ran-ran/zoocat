@@ -7,7 +7,7 @@
 \usage{
 rollmean_by_month(x, ...)
 
-\method{rollmean_by_month}{mlydata}(x, k, onlyUsePrev = TRUE)
+\method{rollmean_by_month}{mlydata}(x, k, align = "center")
 }
 \arguments{
 \item{x}{A \code{mlydata} object.}
@@ -16,7 +16,9 @@ rollmean_by_month(x, ...)
 
 \item{k}{The width of the rolling window.}
 
-\item{onlyUsePrev}{If TRUE, the rolling window is asymmetric, and only}
+\item{align}{Character specifying whether the index of the result
+should be left- or right-aligned or centered (default) compared to
+the rolling window of observations.}
 }
 \value{
 A mlydata object.\cr
@@ -24,14 +26,12 @@ A mlydata object.\cr
 \description{
 The rolling means of a mlydata object by month.
 }
-\details{
-previous and current data is in the rolling window.
-}
 \examples{
-x <- matrix(1 : 60, nrow = 5)
+x <- matrix(1 : 60, nrow = 5, byrow = T)
 md <- mlydata(x, year = 1991 : 1995)
-rollmean_by_month(md, k = 2)
-rollmean_by_month(md, k = 3, onlyUsePrev = FALSE)
+rollmean_by_month(md, k = 3, align = 'left')
+rollmean_by_month(md, k = 3, align = 'right')
+rollmean_by_month(md, k = 3)
 rollmean(md, k = 3)
 }
 
