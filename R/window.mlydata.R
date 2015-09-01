@@ -33,7 +33,7 @@ window.mlydata <- function(x, year = NULL, month = NULL, ...) {
         x <- zoo(matrix(coredata(x), ncol = 1), order.by = index(x))
     }
     attr(x, 'month') <- mon0
-    class(x) <- c('mlydata', 'zoo')
+    class(x) <- class0
     nMonth <- length(month)
     if(!is.null(month)) {
         idCol <- rep(0, nMonth)
@@ -47,9 +47,6 @@ window.mlydata <- function(x, year = NULL, month = NULL, ...) {
         idCol <- 1 : ncol(x)
     }
     x <- x[, idCol, drop = FALSE]
-    if(!is.null(year))  index(x) <- as.integer(year)
-    if(!is.null(month))  attr(x, 'month') <- as.integer(month)
-    class(x) <- c('mlydata', class0)
     return(x)
 }
 

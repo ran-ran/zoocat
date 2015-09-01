@@ -31,12 +31,14 @@ x <- matrix(1 : 20, nrow = 5)
 md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 corr(md, md)
 corr(md)
+corr(md, method = 'kendall')
 
 x <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(month = c(2, 3, 5, 6), name = 'x')
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 y <- zoo(c(3, 5, 4, 6, 3), order.by = 1991 : 1995)
-corr(zc, y)
-corr(zc)
+corr(zc, y, method = 'kendall')
+corr(zc, md)
+corr(zc, method = 'kendall')
 }
 
