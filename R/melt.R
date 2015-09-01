@@ -70,7 +70,7 @@ melt.mlydata <- function(x, value.name = 'value', ret = 'data.frame') {
         colnames(x) <- c('year', month) 
         ret <- melt(x, id.vars = 'year', variable.name = 'month',
                     value.name = value.name)
-        class(ret$month) <- 'numeric'
+        ret$month <- as.numeric(as.character(ret$month))
     }
     return(ret)
 }
