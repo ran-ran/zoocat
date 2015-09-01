@@ -32,6 +32,7 @@ rollmean_by_month <- function (x,...) {UseMethod('rollmean_by_month')}
 rollmean_by_month.mlydata <- function (x, k, align = 'center') {
     stopifnot(all(attr(x, 'month') == 1 : 12))
     zobj <- melt(x, ret = 'zoo')
+    zobj <- na.trim(zobj)
     zobj <- rollmean(zobj, k = k, align = align)
     dt <- index(zobj)
     dfobj <- data.frame(year = as.numeric(format(dt, "%Y")),
