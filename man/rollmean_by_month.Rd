@@ -5,23 +5,27 @@
 \alias{rollmean_by_month.mlydata}
 \title{The Rolling Means of a mlydata Object by Month}
 \usage{
-rollmean_by_month(x, k, onlyUsePrev = TRUE)
+rollmean_by_month(x, ...)
 
 \method{rollmean_by_month}{mlydata}(x, k, onlyUsePrev = TRUE)
 }
 \arguments{
 \item{x}{A \code{mlydata} object.}
 
+\item{...}{Additional arguments to be passed to or from methods.}
+
 \item{k}{The width of the rolling window.}
 
-\item{onlyUsePrev}{If TRUE, the rolling window is asymmetric, and only
-previous and current data is in the rolling window.}
+\item{onlyUsePrev}{If TRUE, the rolling window is asymmetric, and only}
 }
 \value{
 A mlydata object.\cr
 }
 \description{
 The rolling means of a mlydata object by month.
+}
+\details{
+previous and current data is in the rolling window.
 }
 \examples{
 x <- matrix(1 : 60, nrow = 5)

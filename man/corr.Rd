@@ -17,8 +17,6 @@ corr(x, y = NULL, ...)
 
 \item{y}{NULL or a \code{zoo} or \code{zoocat} object. If NULL, x will be used.}
 
-\item{...}{Additional arguments to be passed to or from methods.}
-
 \item{...}{Other arguments for function \code{cor}.}
 }
 \description{

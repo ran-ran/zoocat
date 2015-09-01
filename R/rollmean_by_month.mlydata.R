@@ -4,10 +4,6 @@
 #' The rolling means of a mlydata object by month.
 #' 
 #' 
-#' @usage rollmean_by_month(x, k, onlyUsePrev = TRUE)
-#' @param x A \code{mlydata} object.
-#' @param k The width of the rolling window.
-#' @param onlyUsePrev If TRUE, the rolling window is asymmetric, and only
 #' previous and current data is in the rolling window.
 #' @return A mlydata object.\cr
 #' @examples
@@ -22,11 +18,15 @@
 #' @export 
 #' @name rollmean_by_month
 #' @rdname rollmean_by_month
+#' @param x A \code{mlydata} object.
+#' @param ... Additional arguments to be passed to or from methods.
 rollmean_by_month <- function (x,...) {UseMethod('rollmean_by_month')}
 
 
 #' @export 
 #' @rdname rollmean_by_month
+#' @param k The width of the rolling window.
+#' @param onlyUsePrev If TRUE, the rolling window is asymmetric, and only
 rollmean_by_month.mlydata <- function (x, k, onlyUsePrev = TRUE) {
     stopifnot(all(attr(x, 'month') == 1 : 12))
     stopifnot(k <= 12)

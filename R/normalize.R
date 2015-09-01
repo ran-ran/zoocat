@@ -27,7 +27,7 @@ normalize <- function (x, ...) {
 #' @export
 #' @param mode \code{perc} means percentage of anomaly. \code{sd1} means
 #' normalized anomaly.
-normalize.default <- function(x, mode = 'anomaly', ...) {
+normalize.default <- function(x, mode = 'anomaly') {
     stopifnot(length(mode) == 1)
     stopifnot(any(mode == c('anomaly', 'perc', 'sd1')))
 

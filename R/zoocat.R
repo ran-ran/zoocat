@@ -34,7 +34,12 @@
 #' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 #' unclass(zc)
 #' zc[1, 3]
+#' zc[1, 3, drop = T]
 #' zc[2, ]
+#' zc[2, , drop = T]
+#' zc[c(T, F, F, T, T), ]
+#' zc[, c(T, F, F, T)]
+#' zc[, '2_xxx']
 #' coredata(zc)
 #' as.matrix(zc)
 #' 
@@ -73,7 +78,7 @@ print.zoocat <- function (x) {
     } else {
         attrName <- colnames(cattr(x))
         class(x) <- 'zoo'
-        colnames(x) <- cattr2name(attr(x, 'cattr'))
+        colnames(x) <- cattr2str(attr(x, 'cattr'))
         attr(x, 'cattr') <- NULL
         cat('A zoocat object with column attributes: ')
         for (i in 1 : length(attrName)) {
@@ -90,7 +95,7 @@ print.zoocat <- function (x) {
 
 #' @export
 #' @rdname zoocat
-'[.zoocat' <- function(x, i = NULL, j = NULL, ...) {
+'[.zoocat' <- function(x, i = NULL, j = NULL, drop = FALSE) {
     if (length(x) == 0) {
         return(zoocat())
     }
@@ -100,14 +105,29 @@ print.zoocat <- function (x) {
     if (is.null(j)) {
         j <- 1 : ncol(x)
     }
-    if (is.character(i) | is.character(j)) {
-        stop('i and j must be numeric or integer.')
-    }
     colAttr <- attr(x, 'cattr')
-    class(x) <- 'zoo'
+    x <- as.zoo(x)
     x <- x[i, j, drop = FALSE]
+    
+    if (is.character(j)) {
+        j <- which(j %in% cattr2str(colAttr))
+    }
     attr(x, 'cattr') <- colAttr[j, , drop = FALSE]
-    class(x) <- c('zoocat', 'zoo')
+    class(x) <- c('zoocat', class(x))
+    
+    if (drop == TRUE) {
+        if (nrow(x) == 1) {
+            cname <- colnames(x)
+            x <- as.vector(x)
+            names(x) <- cname
+        } else if (ncol(x) == 1) {
+            rname <- index(x)
+            x <- as.vector(x)    
+            names(x) <- rname
+        }
+    }
+    
+    colnames(x) <- NULL
     return(x)
 }
 

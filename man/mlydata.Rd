@@ -80,6 +80,10 @@ mon(md) <- mon(md) + 1
 yr(md)
 yr(md) <- yr(md) + 1
 md[3, 4]
+md[3, , drop = TRUE]
+md[, 2, drop = TRUE]
+md['1994', , drop = TRUE]
+md[, 'Apr', drop = TRUE]
 
 x <-  matrix(1 : 36, nrow = 3)
 md <- mlydata(x, year = 1991 : 1993)

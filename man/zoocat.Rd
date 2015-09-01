@@ -10,7 +10,7 @@ zoocat(x = NULL, colattr = NULL, ...)
 
 \method{print}{zoocat}(x)
 
-\method{[}{zoocat}(x, i = NULL, j = NULL, ...)
+\method{[}{zoocat}(x, i = NULL, j = NULL, drop = FALSE)
 }
 \arguments{
 \item{x}{For \code{zoocat} function, x is a matrix or a data frame.
@@ -52,7 +52,12 @@ colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 unclass(zc)
 zc[1, 3]
+zc[1, 3, drop = T]
 zc[2, ]
+zc[2, , drop = T]
+zc[c(T, F, F, T, T), ]
+zc[, c(T, F, F, T)]
+zc[, '2_xxx']
 coredata(zc)
 as.matrix(zc)
 

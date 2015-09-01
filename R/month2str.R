@@ -1,5 +1,5 @@
 
-month2Str <- function(month) {
+month2str <- function(month) {
     if (all(month %in% 1 : 12)) {
         monthStr <- month.abb[month]
     } else {

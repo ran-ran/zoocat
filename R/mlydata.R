@@ -28,6 +28,10 @@
 #' yr(md)
 #' yr(md) <- yr(md) + 1
 #' md[3, 4]
+#' md[3, , drop = TRUE]
+#' md[, 2, drop = TRUE]
+#' md['1994', , drop = TRUE]
+#' md[, 'Apr', drop = TRUE]
 #' 
 #' x <-  matrix(1 : 36, nrow = 3)
 #' md <- mlydata(x, year = 1991 : 1993)
@@ -74,7 +78,7 @@ print.mlydata <- function(x) {
     z <- x
     class(z) <- 'zoo'
     attr(z, 'month') <- NULL
-    colnames(z) <- month2Str(month)
+    colnames(z) <- month2str(month)
     print(z)
 }
 
@@ -127,13 +131,37 @@ yr.mlydata <- function(x) {
 
 
 #' @export
-'[.mlydata' <- function(x, i, j, drop = FALSE, ...) {
-    monthAll <- attr(x, 'month')
-    class(x) <- 'zoo'
-    ret <- x[i, j, drop = drop]
-    attr(ret, 'month') <- monthAll[j]
-    class(ret) <- c('mlydata', 'zoo')
-    return(ret)
+'[.mlydata' <- function(x, i = NULL, j = NULL, drop = FALSE) {
+    if (is.null(i)) {
+        i <- 1 : nrow(x)
+    }
+    if (is.null(j)) {
+        j <- 1 : ncol(x)
+    }
+    month <- attr(x, 'month')
+    x <- as.zoo(x)
+    x <- x[i, j, drop = FALSE]    
+    
+    if (is.character(j)) {
+        j <- which(j %in% month2str(month))
+    }
+    attr(x, 'month') <- month[j]
+    class(x) <- c('mlydata', class(x))
+    
+    if (drop == TRUE) {
+        if (nrow(x) == 1) {
+            cname <- colnames(x)
+            x <- as.vector(x)
+            names(x) <- cname
+        } else if (ncol(x) == 1) {
+            rname <- index(x)
+            x <- as.vector(x)    
+            names(x) <- rname
+        }
+    }
+    
+    colnames(x) <- NULL
+    return(x)
 }
 
 

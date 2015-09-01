@@ -25,7 +25,6 @@
 #' @export
 #' @rdname corr
 #' @name corr
-#' @param ... Additional arguments to be passed to or from methods.
 #' @param x A \code{zoo} or \code{zoocat} object.
 #' @param y NULL or a \code{zoo} or \code{zoocat} object. If NULL, x will be used.
 #' @param ... Other arguments for function \code{cor}.
