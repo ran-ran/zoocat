@@ -6,8 +6,9 @@ Date: 2015-04-09
 Author: Ran-ran He
 Maintainer: Ran-ran He <heran198311@163.com>
 Depends: R (>= 3.0.0),zoo,reshape2
-Suggests: 
+Suggests: knitr,lattice
 Description: Provide extended functions for managing
     informations of each column of the zoo object.
 License: GPL
 URL: https://github.com/vivihe/zoocat
+VignetteBuilder: knitr
