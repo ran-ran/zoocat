@@ -43,7 +43,7 @@ melt.zoocat <- function (x, value.name = 'value', index.name = 'index') {
 #' @rdname melt
 #' @examples
 #' 
-#' x <- matrix(1 : 36, nrow = 3)
+#' x <- matrix(1 : 36, nrow = 3, byrow = T)
 #' md <- mlydata(x, year = 1991 : 1993, month = 1 : 12)
 #' melt(md)
 #' melt(md, ret = 'zoo')
@@ -71,6 +71,7 @@ melt.mlydata <- function(x, value.name = 'value', ret = 'data.frame') {
         ret <- melt(x, id.vars = 'year', variable.name = 'month',
                     value.name = value.name)
         ret$month <- as.numeric(as.character(ret$month))
+        ret <- plyr::arrange(ret, year, month)
     }
     return(ret)
 }
