@@ -33,6 +33,7 @@ methodNames_1 <- c('cummax',
 methodNames_2 <- c('as.data.frame',
                    'as.matrix',
                    'coredata',
+                   'plot',
                    'barplot'
                    )
 

@@ -9,7 +9,7 @@
 \usage{
 as.zoocat(x, ...)
 
-\method{as.zoocat}{mlydata}(x, varname = NULL)
+\method{as.zoocat}{mlydata}(x, addname = TRUE, varname = NULL)
 
 \method{as.zoocat}{mlydataList}(x)
 
@@ -20,8 +20,13 @@ as.zoocat(x, ...)
 
 \item{...}{Additional arguments to be passed to or from methods.}
 
+\item{addname}{Logical. If TRUE, a field of \code{cattr} "name" will be add.}
+
 \item{varname}{The value for the name field in the \code{cattr} of
-the output \code{zoocat} object.}
+the output \code{zoocat} object. Only valid when \code{addname} is TRUE.
+If NULL, the variable name will be used.}
+
+\item{colattr}{The column attribute table for x.}
 }
 \value{
 A \code{zoocat} object.
@@ -37,6 +42,8 @@ Coercing objects to class \code{zoocat}.
 x <- matrix(1 : 20, nrow = 5)
 md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 as.zoocat(md)
+as.zoocat(md, addname = F)
+as.zoocat(md, varname = 'x')
 
 mat <- matrix(1 : 20, nrow = 5)
 x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))

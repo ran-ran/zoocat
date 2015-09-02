@@ -8,10 +8,10 @@
 \alias{merge.zoocat}
 \title{Combine \code{zoocat} or \code{mlydata} Objects by Columns}
 \usage{
-\method{merge}{zoocat}(..., all = TRUE, fill = NA, suffixes = NULL,
+merge.zoocat(..., all = TRUE, fill = NA, suffixes = NULL,
   check.names = FALSE, retclass = "zoocat", drop = TRUE)
 
-\method{merge}{mlydata}(..., all = TRUE, fill = NA, suffixes = NULL,
+merge.mlydata(..., all = TRUE, fill = NA, suffixes = NULL,
   check.names = FALSE, retclass = "mlydata", drop = TRUE)
 
 cbind.zoocat(...)

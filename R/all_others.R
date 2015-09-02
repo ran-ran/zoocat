@@ -576,6 +576,22 @@
         
 
 #' @export 
+'plot.zoocat' <- function (x, ...) {
+    x <- as.zoo(x)
+    ret <- 'plot'(x, ...)
+    return(ret)
+}
+        
+
+#' @export
+'plot.mlydata' <- function (x, ...) {
+    x <- as.zoo(x)
+    ret <- 'plot'(x, ...)
+    return(ret)
+}
+        
+
+#' @export 
 'barplot.zoocat' <- function (x, ...) {
     x <- as.zoo(x)
     ret <- 'barplot'(x, ...)

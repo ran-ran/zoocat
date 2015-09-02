@@ -9,22 +9,25 @@
 #' @examples 
 #'
 #' ## The example of data frame 
-#' lat <- 1:5
-#' lon <- 101:105
-#' time <- 1991:2000
-#' data <- data.frame(lat = rep(lat, 50), lon = rep(rep(lon, each = 5), 10),
-#'                    time = rep(time, each = 25), value = 1 : 250)
-#' agg1 <- margin(data, mar.for = c('lat'))
-#' agg2 <- margin(data, mar.for = c('lon', 'lat'))
-#' agg3 <- margin(data, mar.for = c('lon', 'lat'), fun.aggr = sum)
-#' agg4 <- margin(data, mar.for = c('lon'), fun.aggr = sum)
+#' data(sst)
+#' margin(sst, mar.for = c('year'), value.var = 'nino12')
+#' margin(sst, mar.for = c('year'), value.var = 'nino3', fun.aggr = length)
+#' 
+#' library(lattice)
+#' sstmon <- margin(sst, mar.for = c('month'), value.var = 'nino3')
+#' xyplot(nino3 ~ month, data = sstmon, type = 'o')
+#' sstyr <- margin(sst, mar.for = c('year'), value.var = 'nino3')
+#' xyplot(nino3 ~ year, data = sstyr, type = 'o')
+#' 
+#' sstmelt <- melt(sst, id.var = c('year', 'month'))
+#' sstMonVar <- margin(sstmelt, mar.for = c('month', 'variable'), value.var = 'value')
+#' xyplot(value~month, data = sstMonVar, groups = variable, type = 'o')
 #' 
 #' ## The example of zoocat 
-#' x <- matrix(1 : 20, nrow = 5)
-#' colAttr <- data.frame(month = c(2, 3, 5, 6), name = c('a', 'b'))
-#' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
-#' zc.mar <- margin(zc, mar.for = 'month')
-#' 
+#' zc <- cast2zoocat(sstmelt, index.var = 'year', value.var = 'value') 
+#' zcmar1 <- margin(zc, mar.for = 'month')
+#' zcmar2 <- margin(zc, mar.for = 'variable')
+#' plot(zcmar2)
 #' 
 #' @param x A data frame or \code{zoocat} object.
 #' @param ... Additional arguments to be passed to or from methods.
