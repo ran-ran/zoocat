@@ -61,13 +61,22 @@ cast2zoocat <- function (x, index.var, value.var, attr.var = NULL, fun.aggr = NU
         }
     }
     
+    index.class <- class(x[,  index.var])
+    if (is.factor(x[, index.var])) {
+        index.levels <- levels(x[, index.var])
+    }
+    
     left <- paste(attr.var, collapse = "+")
     right <- paste(index.var, collapse = "+")
     fm <- paste(left, right, sep = "~")
     data.cast <- dcast(x, fm, fun.aggregate = fun.aggr, value.var = value.var)
 
     mat <- as.matrix(data.cast[, (nattr + 1) : ncol(data.cast), drop = FALSE])
-    ord <- as(colnames(mat), class(x[, index.var]))
+    if (index.class != 'factor') {
+        ord <- as(colnames(mat), index.class)
+    } else {
+        ord <- factor(colnames(mat), levels = index.levels)
+    }
     col.attr <- data.cast[, 1 : nattr, drop = FALSE]
     
     if (del.unique.cattr == TRUE) {

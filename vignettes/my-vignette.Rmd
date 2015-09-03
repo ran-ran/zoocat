@@ -1,6 +1,6 @@
 ---
-title: "Vignette Title"
-author: "Vignette Author"
+title: "Introduction to zoocat package"
+author: "Ran-ran He"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -19,7 +19,8 @@ library(zoocat)
 ```{r,echo=TRUE}
 x <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(site = c('a', 'b', 'c', 'd'),
-                      month = c(3, 4, 5, 6))
+                      month = factor(c('Apr','May', 'Jun', 'Jul'),
+                                     levels = c('Apr', 'May', 'Jun', 'Jul')))
 print(colAttr)
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 print(zc)
@@ -50,6 +51,7 @@ window(zc, start = 1993)
 Like what can be done in reshapes package, you can melt the zoocat object:
 ```{r,echo=TRUE}
 dfm <- melt(zc)
+head(dfm)
 ```
 
 You can also cast the melt data frame to be a zoocat object:
