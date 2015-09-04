@@ -2,12 +2,15 @@
 % Please edit documentation in R/colapply.R
 \name{colapply}
 \alias{colapply}
+\alias{colapply.mlydata}
 \alias{colapply.zoocat}
 \title{Apply Functions Over Each Column}
 \usage{
 colapply(x, ...)
 
 \method{colapply}{zoocat}(x, fun, col.as = "vector")
+
+\method{colapply}{mlydata}(x, fun, col.as = "vector")
 }
 \arguments{
 \item{x}{A object.}
@@ -46,5 +49,14 @@ fuse <- function (x) {
 }
 retdf <- colapply(zc, fun = fuse, col.as = 'zoo')
 xyplot(sd~month|variable, data = retdf, type = 'o')
+
+
+md <- cast2mlydata(sst, index.var = 'year', value.var = 'nino12',
+                   month.var = 'month')
+fuse <- function(x) {
+    xwd <- window(x, start = 1980, end = 2010)
+    c(mean = mean(xwd), max = max(xwd), min = min(xwd))
+}
+colapply(md, fun = fuse, col.as = 'zoo')
 }
 

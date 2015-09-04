@@ -30,8 +30,8 @@ melt.zoocat <- function (x, value.name = 'value', index.name = 'index') {
     colnames(dframe) <- c(idvars, ind)
     df.melt <- melt(dframe, id.vars = idvars, variable.name = index.name, value.name = value.name,
                     factorAsStrings = FALSE)
-    df.melt$index <- as.character(df.melt$index)
-    class(df.melt$index) <- ind.class
+    df.melt[, index.name] <- as.character(df.melt[, index.name])
+    class(df.melt[, index.name]) <- ind.class
     df.melt <- df.melt[, c(index.name, idvars, value.name)]
     return(df.melt)
     

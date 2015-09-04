@@ -12,9 +12,11 @@ vignette: >
 The zoocat package is a extension of the zoo package. The aim of the zoocat package is to provide a better manament of multidimensional time series. In zoo package, you can create a 2-dimension zoo object, in which each column stores a time series. You can use column names to store the information of each column.
 The zoocat package give a another method to store the attributes of each column. For a zoocat object, a column attributes table is added to the object:
 
-```{r}
+```{r,echo=FALSE}
 library(zoocat)
 ```
+
+# A simple case
 
 ```{r,echo=TRUE}
 x <- matrix(1 : 20, nrow = 5)
@@ -50,21 +52,36 @@ window(zc, start = 1993)
 
 Like what can be done in reshapes package, you can melt the zoocat object:
 ```{r,echo=TRUE}
-dfm <- melt(zc)
+dfm <- melt(zc, index.name = 'year')
 head(dfm)
 ```
 
 You can also cast the melt data frame to be a zoocat object:
 ```{r,echo=TRUE}
-zc.cast <- cast2zoocat(dfm, index.var = 'index', value.var = 'value')
+zc.cast <- cast2zoocat(dfm, index.var = 'year', value.var = 'value')
 print(zc.cast)
 ```
 
 You can see that the zc.cast is the same with zc. If you want to get a time series whose index is month, you can cast dfm to another zoocat object:
+
+
+# A example of SST data
+ 
 ```{r,echo=TRUE}
-zc.cast2 <- cast2zoocat(dfm, index.var = 'month', value.var = 'value')
-print(zc.cast2)
+data(sst)
+sstmelt <- melt(sst, id.var = c('year', 'month'))
+zc <- cast2zoocat(sstmelt, index.var = 'year', value.var = 'value')
+head(zc)
+fuse <- function (x) {
+    x <- window(x, start = 1980, end = 2014)
+    ret <- c(max(x), min(x), mean(x), median(x), sd(x))
+    names(ret) <- c('max', 'min', 'mean', 'median', 'sd')
+    return(ret)
+}
+retdf <- colapply(zc, fun = fuse, col.as = 'zoo')
+head(retdf)
 ```
+
 
 
 
