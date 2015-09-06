@@ -2,13 +2,17 @@ Package: zoocat
 Type: Package
 Title: zoo with Column Attributes
 Version: 1.0
-Date: 2015-04-09
-Author: Ran-ran He
-Maintainer: Ran-ran He <heran198311@163.com>
-Depends: R (>= 3.0.0),zoo,reshape2
-Suggests: knitr,lattice
-Description: Provide extended functions for managing
-    informations of each column of the zoo object.
+Date: 2015-09-06
+Author: Ranran He
+Maintainer: Ranran He <heran198311@163.com>
+Description: Provide extended functions for managing informations of each column of the zoo object.
+Depends:
+    R (>= 3.1.1),
+    zoo,
+    reshape2
+Suggests: 
+    knitr,
+    lattice
 License: GPL
 URL: https://github.com/vivihe/zoocat
 VignetteBuilder: knitr
