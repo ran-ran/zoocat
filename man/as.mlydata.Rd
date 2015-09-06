@@ -7,7 +7,7 @@
 \usage{
 as.mlydata(x, ...)
 
-\method{as.mlydata}{zoo}(x, month)
+\method{as.mlydata}{zoo}(x, month, ...)
 }
 \arguments{
 \item{x}{A zoo object.}

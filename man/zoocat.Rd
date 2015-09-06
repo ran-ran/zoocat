@@ -8,7 +8,7 @@
 \usage{
 zoocat(x = NULL, colattr = NULL, ...)
 
-\method{print}{zoocat}(x)
+\method{print}{zoocat}(x, ...)
 
 \method{[}{zoocat}(x, i = NULL, j = NULL, drop = FALSE)
 }
@@ -19,6 +19,8 @@ Otherwise, x is a \code{zoocat} object.}
 \item{colattr}{The column attributes. Must be a data frame with column names.}
 
 \item{...}{Other arguments for \code{zoo}.}
+
+\item{i,j,drop}{The same as in method for /code{matrix}.}
 }
 \value{
 \code{zoocat} returns a \code{zoocat} object. \code{coredata} and \code{as.matrix} returns a matrix or
@@ -52,11 +54,7 @@ colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 unclass(zc)
 zc[1, 3]
-zc[1, 3, drop = T]
 zc[2, ]
-zc[2, , drop = T]
-zc[c(T, F, F, T, T), ]
-zc[, c(T, F, F, T)]
 zc[, '2_xxx']
 coredata(zc)
 as.matrix(zc)

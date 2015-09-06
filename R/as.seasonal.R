@@ -25,10 +25,10 @@ as.seasonal <- function (x, ...) {
 #' @rdname as.seasonal
 #' @export 
 #' @param DJF.first If TRUE, the winter season will be in the first column.
-as.seasonal.mlydata <- function (x, DJF.first = TRUE) {
+as.seasonal.mlydata <- function (x, DJF.first = TRUE, ...) {
     stopifnot(all(attr(x, 'month') == 1 : 12))
     if (DJF.first == TRUE) {
-        xDec <- x[, 12]
+        xDec <- x[, 12, drop = FALSE]
         index(xDec) <- index(xDec) + 1
         xBind <- cbind(xDec, x[, 1 : 11])
         for (i in 1 : 4) {

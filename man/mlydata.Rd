@@ -6,24 +6,21 @@
 \alias{mon.mlydata}
 \alias{mon<-}
 \alias{mon<-.mlydata}
-\alias{print.mlydata}
 \alias{yr}
 \alias{yr.mlydata}
 \alias{yr<-}
 \alias{yr<-.mlydata}
-\title{mlydata Class}
+\title{\code{mlydata} Class}
 \usage{
 mlydata(x, year, month = 1:12)
 
-\method{print}{mlydata}(x)
+mon(x)
 
-mon(x, ...)
+mon(x) <- value
 
-mon(x, ...) <- value
+yr(x)
 
-yr(x, ...)
-
-yr(x, ...) <- value
+yr(x) <- value
 
 \method{mon}{mlydata}(x)
 
@@ -46,16 +43,10 @@ The elements of \code{month} can be smaller than 1 or larger than 12, which
 means the months of past years or future years. For example, the months of
 last year is (1 : 12) - 12.}
 
-\item{...}{Additional arguments to be passed to or from methods.}
-
-\item{value}{The new setting value.}
+\item{value}{The new value for month and year of the object.}
 }
 \value{
-\code{mlydata} returns a mlydata object.\cr Using methods
-\code{yr} and \code{mon} to get and set the year and month vector.\cr
-\code{window} returns a new mlydata object.\cr \code{coredata} return the
-core matrix in the object.\cr \code{as.matrix} return the matrix with dim
-names.\cr \code{cbind} will return a \code{zoo} object.
+\code{mlydata} returns a \code{mlydata} object.
 }
 \description{
 A class designed for monthly data.
@@ -67,9 +58,7 @@ method, each column name is set as month abbreviation + month number. For
 example, the column name corresponding to Feb of current year is "Feb.2".
 When all month numbers are between 1 and 12, only the abbreviations of months is
 printed.\cr Using \code{yr} and \code{mon} to get and set the year and the
-month of the object.\cr Method \code{window} return a \code{mlydata}
-object of the given year and month. NULL value of year or month means
-all.\cr
+month of the object.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
@@ -80,10 +69,10 @@ mon(md) <- mon(md) + 1
 yr(md)
 yr(md) <- yr(md) + 1
 md[3, 4]
-md[3, , drop = TRUE]
-md[, 2, drop = TRUE]
-md['1994', , drop = TRUE]
-md[, 'Apr', drop = TRUE]
+md[3, , drop = FALSE]
+md[, 2]
+md['1994', ]
+md[, 'Apr']
 
 x <-  matrix(1 : 36, nrow = 3)
 md <- mlydata(x, year = 1991 : 1993)

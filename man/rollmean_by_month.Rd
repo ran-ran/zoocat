@@ -7,7 +7,7 @@
 \usage{
 rollmean_by_month(x, ...)
 
-\method{rollmean_by_month}{mlydata}(x, k, align = "center")
+\method{rollmean_by_month}{mlydata}(x, k, align = "center", ...)
 }
 \arguments{
 \item{x}{A \code{mlydata} object.}
@@ -27,7 +27,7 @@ A mlydata object.\cr
 The rolling means of a mlydata object by month.
 }
 \examples{
-x <- matrix(1 : 60, nrow = 5, byrow = T)
+x <- matrix(1 : 60, nrow = 5, byrow = TRUE)
 md <- mlydata(x, year = 1991 : 1995)
 rollmean_by_month(md, k = 3, align = 'left')
 rollmean_by_month(md, k = 3, align = 'right')

@@ -10,6 +10,11 @@ Depends:
     R (>= 3.1.1),
     zoo,
     reshape2
+Imports:
+    graphics,
+    utils,
+    stats,
+    plyr
 Suggests: 
     knitr,
     lattice

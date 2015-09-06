@@ -43,13 +43,13 @@ melt.zoocat <- function (x, value.name = 'value', index.name = 'index') {
 #' @rdname melt
 #' @examples
 #' 
-#' x <- matrix(1 : 36, nrow = 3, byrow = T)
+#' x <- matrix(1 : 36, nrow = 3, byrow = TRUE)
 #' md <- mlydata(x, year = 1991 : 1993, month = 1 : 12)
 #' melt(md)
 #' melt(md, ret = 'zoo')
 #' 
 #' @param ret Can be \code{data.frame} or \code{zoo}
-melt.mlydata <- function(x, value.name = 'value', ret = 'data.frame') {
+melt.mlydata <- function(x, value.name = 'value', ret = 'data.frame', ...) {
     stopifnot(ret %in% c('data.frame', 'zoo'))
     if (ret == 'zoo') {
         if(!all(attr(x, 'month') == 1 : 12)) {

@@ -7,7 +7,7 @@
 #' @return A mlydata object.\cr
 #' @examples
 #' 
-#' x <- matrix(1 : 60, nrow = 5, byrow = T)
+#' x <- matrix(1 : 60, nrow = 5, byrow = TRUE)
 #' md <- mlydata(x, year = 1991 : 1995)
 #' rollmean_by_month(md, k = 3, align = 'left')
 #' rollmean_by_month(md, k = 3, align = 'right')
@@ -29,7 +29,7 @@ rollmean_by_month <- function (x,...) {UseMethod('rollmean_by_month')}
 #' @param align Character specifying whether the index of the result 
 #' should be left- or right-aligned or centered (default) compared to
 #' the rolling window of observations.
-rollmean_by_month.mlydata <- function (x, k, align = 'center') {
+rollmean_by_month.mlydata <- function (x, k, align = 'center', ...) {
     stopifnot(all(attr(x, 'month') == 1 : 12))
     zobj <- melt(x, ret = 'zoo')
     zobj <- na.trim(zobj)

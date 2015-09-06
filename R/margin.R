@@ -45,7 +45,7 @@ margin <- function (x, ...) {
 #' 
 #' @export
 #' @rdname margin
-margin.data.frame <- function (x, mar.for, value.var = 'value', fun.aggr = mean) {
+margin.data.frame <- function (x, mar.for, value.var = 'value', fun.aggr = mean, ...) {
     stopifnot(is.data.frame(x))
     nvar <- ncol(x)
     cnames <- colnames(x)
@@ -75,7 +75,7 @@ margin.data.frame <- function (x, mar.for, value.var = 'value', fun.aggr = mean)
 #' 
 #' @export
 #' @rdname margin
-margin.zoocat <- function (x, mar.for, fun.aggr = mean) {
+margin.zoocat <- function (x, mar.for, fun.aggr = mean, ...) {
     df.melt <- melt(x, value.name = 'value', index.name = 'index')
     mar.for <- cbind(mar.for, 'index')
     df.mar <- margin(df.melt, mar.for = mar.for, value.var = 'value', fun.aggr = fun.aggr)

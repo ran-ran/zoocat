@@ -34,11 +34,7 @@
 #' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 #' unclass(zc)
 #' zc[1, 3]
-#' zc[1, 3, drop = T]
 #' zc[2, ]
-#' zc[2, , drop = T]
-#' zc[c(T, F, F, T, T), ]
-#' zc[, c(T, F, F, T)]
 #' zc[, '2_xxx']
 #' coredata(zc)
 #' as.matrix(zc)
@@ -72,7 +68,7 @@ zoocat <- function (x = NULL, colattr = NULL, ...) {
 
 #' @export
 #' @rdname zoocat
-print.zoocat <- function (x) {
+print.zoocat <- function (x, ...) {
     if (length(x) == 0) {
         cat('empty zoocat\n')
     } else {
@@ -95,6 +91,7 @@ print.zoocat <- function (x) {
 
 #' @export
 #' @rdname zoocat
+#' @param i,j,drop The same as in method for /code{matrix}.
 '[.zoocat' <- function(x, i = NULL, j = NULL, drop = FALSE) {
     if (length(x) == 0) {
         return(zoocat())

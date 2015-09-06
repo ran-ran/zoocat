@@ -9,7 +9,7 @@
 #' x <- matrix(1 : 20, nrow = 5)
 #' md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 #' as.zoocat(md)
-#' as.zoocat(md, addname = F)
+#' as.zoocat(md, addname = FALSE)
 #' as.zoocat(md, varname = 'x')
 #' 
 #' mat <- matrix(1 : 20, nrow = 5)
@@ -36,7 +36,7 @@ as.zoocat <- function (x, ...) { UseMethod('as.zoocat') }
 #' @param varname The value for the name field in the \code{cattr} of 
 #' the output \code{zoocat} object. Only valid when \code{addname} is TRUE.
 #' If NULL, the variable name will be used.
-as.zoocat.mlydata <- function (x, addname = TRUE, varname = NULL) {
+as.zoocat.mlydata <- function (x, addname = TRUE, varname = NULL, ...) {
     if (addname == TRUE) {
         if (is.null(varname)) {
             sysN <- sys.nframe()
@@ -57,7 +57,7 @@ as.zoocat.mlydata <- function (x, addname = TRUE, varname = NULL) {
 #'
 #' @export
 #' @rdname as.zoocat
-as.zoocat.mlydataList <- function (x) {
+as.zoocat.mlydataList <- function (x, ...) {
     varname <- names(x)
     for (i in 1 : length(x)) {
         x[[i]] <- as.zoocat(x[[i]], varname[i])
@@ -71,7 +71,7 @@ as.zoocat.mlydataList <- function (x) {
 #' @export
 #' @rdname as.zoocat
 #' @param colattr The column attribute table for x.
-as.zoocat.zoo <- function (x, colattr = NULL) {
+as.zoocat.zoo <- function (x, colattr = NULL, ...) {
     stopifnot(length(dim(x))== 2)
     if (is.null(colattr)) {
         stopifnot(!is.null(colnames(x)))

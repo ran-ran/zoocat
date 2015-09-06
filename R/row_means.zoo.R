@@ -22,7 +22,7 @@ row_means <- function (x, ...) {
 
 #' @export
 #' @rdname row_means
-row_means.zoo <- function (x) {
+row_means.zoo <- function (x, ...) {
     ave <- rowMeans(x)
     return(zoo(ave, order.by = index(x)))
 }

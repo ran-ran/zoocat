@@ -21,7 +21,7 @@ colapply <- function (x, ...) {
 #' data(sst)
 #' sstmelt <- melt(sst, id.var = c('year', 'month'))
 #' zc <- cast2zoocat(sstmelt, index.var = 'year', value.var = 'value')
-#' colapply(zc, fun = function(x) {mean(x, na.rm = T)}, col.as = 'vector')
+#' colapply(zc, fun = function(x) {mean(x, na.rm = TRUE)}, col.as = 'vector')
 #' 
 #' fuse <- function (x) {
 #'     mean(window(x, start = 1995, end = 2000))
@@ -54,7 +54,7 @@ colapply <- function (x, ...) {
 #' @param fun The function apply for each column.
 #' @param col.as If vector, each column will be treated as a vector. If 
 #' zoo, each column will be treated as a zoo object.
-colapply.zoocat <- function (x, fun, col.as = 'vector') {
+colapply.zoocat <- function (x, fun, col.as = 'vector', ...) {
     stopifnot(col.as %in% c('vector', 'zoo'))
     colAttr <- cattr(x)
     if (col.as == 'vector') {
@@ -92,7 +92,7 @@ colapply.zoocat <- function (x, fun, col.as = 'vector') {
 
 #' @export
 #' @rdname colapply
-colapply.mlydata <- function (x, fun, col.as = 'vector') {
+colapply.mlydata <- function (x, fun, col.as = 'vector', ...) {
     stopifnot(col.as %in% c('vector', 'zoo'))
     month <- attr(x, 'month')
     if (col.as == 'vector') {

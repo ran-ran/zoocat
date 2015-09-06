@@ -10,7 +10,7 @@
 #' lag(md, k = -1)
 #' cbind(lag(md, -1), md)
 #' 
-#' lag(md, k = -1, adjust.month = F)
+#' lag(md, k = -1, adjust.month = FALSE)
 #' 
 #' @name lag.mlydata
 #' @rdname lag.mlydata
@@ -19,7 +19,7 @@
 #' @param adjust.month Logical. If TRUE, the month of \code{x} will be 
 #' add \code{12 * k}.
 #' @export
-lag.mlydata <- function (x, k = 1, adjust.month = TRUE) {
+lag.mlydata <- function (x, k = 1, adjust.month = TRUE, ...) {
     month <- attr(x, 'month')
     x <- as.zoo(x)
     x <- lag(x, k = k)

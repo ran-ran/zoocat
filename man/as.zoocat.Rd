@@ -9,11 +9,11 @@
 \usage{
 as.zoocat(x, ...)
 
-\method{as.zoocat}{mlydata}(x, addname = TRUE, varname = NULL)
+\method{as.zoocat}{mlydata}(x, addname = TRUE, varname = NULL, ...)
 
-\method{as.zoocat}{mlydataList}(x)
+\method{as.zoocat}{mlydataList}(x, ...)
 
-\method{as.zoocat}{zoo}(x, colattr = NULL)
+\method{as.zoocat}{zoo}(x, colattr = NULL, ...)
 }
 \arguments{
 \item{x}{An object.}
@@ -42,7 +42,7 @@ Coercing objects to class \code{zoocat}.
 x <- matrix(1 : 20, nrow = 5)
 md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 as.zoocat(md)
-as.zoocat(md, addname = F)
+as.zoocat(md, addname = FALSE)
 as.zoocat(md, varname = 'x')
 
 mat <- matrix(1 : 20, nrow = 5)

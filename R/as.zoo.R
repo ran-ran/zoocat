@@ -26,7 +26,8 @@
 #' @name as.zoo
 #' @export
 #' @param x An object.
-as.zoo.mlydata <- function(x) {
+#' @param ... Further arguments.
+as.zoo.mlydata <- function(x, ...) {
     class(x) <- class(x)[-1]
     colnames(x) <- month2str(attr(x, 'month'))
     attr(x, 'month') <- NULL
@@ -35,7 +36,7 @@ as.zoo.mlydata <- function(x) {
 
 #' @rdname as.zoo
 #' @export
-as.zooreg.mlydata <- function(x) {
+as.zooreg.mlydata <- function(x, ...) {
     class(x) <- class(x)[-1]
     colnames(x) <- month2str(attr(x, 'month'))
     attr(x, 'month') <- NULL
@@ -45,7 +46,7 @@ as.zooreg.mlydata <- function(x) {
 
 #' @rdname as.zoo
 #' @export
-as.zoo.zoocat <- function (x) {
+as.zoo.zoocat <- function (x, ...) {
     if (length(x) == 0){
         return(zoo())
     } else {
@@ -58,7 +59,7 @@ as.zoo.zoocat <- function (x) {
 
 #' @rdname as.zoo
 #' @export
-as.zooreg.zoocat <- function (x) {
+as.zooreg.zoocat <- function (x, ...) {
     if (length(x) == 0){
         return(zoo())
     } else {

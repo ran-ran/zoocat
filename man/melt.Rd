@@ -8,7 +8,7 @@
 \usage{
 \method{melt}{zoocat}(x, value.name = "value", index.name = "index")
 
-\method{melt}{mlydata}(x, value.name = "value", ret = "data.frame")
+\method{melt}{mlydata}(x, value.name = "value", ret = "data.frame", ...)
 }
 \arguments{
 \item{x}{A \code{zoocat} object.}
@@ -32,7 +32,7 @@ x <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(month = c(2, 3, 5, 6), name = c('x', 'y', 'z', 'a'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 melt(zc)
-x <- matrix(1 : 36, nrow = 3, byrow = T)
+x <- matrix(1 : 36, nrow = 3, byrow = TRUE)
 md <- mlydata(x, year = 1991 : 1993, month = 1 : 12)
 melt(md)
 melt(md, ret = 'zoo')

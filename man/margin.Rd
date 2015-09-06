@@ -9,9 +9,9 @@
 margin(x, ...)
 
 \method{margin}{data.frame}(x, mar.for, value.var = "value",
-  fun.aggr = mean)
+  fun.aggr = mean, ...)
 
-\method{margin}{zoocat}(x, mar.for, fun.aggr = mean)
+\method{margin}{zoocat}(x, mar.for, fun.aggr = mean, ...)
 }
 \arguments{
 \item{x}{A data frame or \code{zoocat} object.}

@@ -4,7 +4,7 @@
 \alias{lag.mlydata}
 \title{Lags of \code{mlydata} Objects}
 \usage{
-\method{lag}{mlydata}(x, k = 1, adjust.month = TRUE)
+\method{lag}{mlydata}(x, k = 1, adjust.month = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{zoocat} or \code{mlydata} object.}
@@ -25,6 +25,6 @@ lag(md, k = -2)
 lag(md, k = -1)
 cbind(lag(md, -1), md)
 
-lag(md, k = -1, adjust.month = F)
+lag(md, k = -1, adjust.month = FALSE)
 }
 

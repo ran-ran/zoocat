@@ -7,7 +7,7 @@
 \usage{
 row_means(x, ...)
 
-\method{row_means}{zoo}(x)
+\method{row_means}{zoo}(x, ...)
 }
 \arguments{
 \item{x}{A zoo object.}

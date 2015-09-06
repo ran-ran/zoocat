@@ -8,9 +8,9 @@
 \usage{
 colapply(x, ...)
 
-\method{colapply}{zoocat}(x, fun, col.as = "vector")
+\method{colapply}{zoocat}(x, fun, col.as = "vector", ...)
 
-\method{colapply}{mlydata}(x, fun, col.as = "vector")
+\method{colapply}{mlydata}(x, fun, col.as = "vector", ...)
 }
 \arguments{
 \item{x}{A object.}
@@ -32,7 +32,7 @@ library(lattice)
 data(sst)
 sstmelt <- melt(sst, id.var = c('year', 'month'))
 zc <- cast2zoocat(sstmelt, index.var = 'year', value.var = 'value')
-colapply(zc, fun = function(x) {mean(x, na.rm = T)}, col.as = 'vector')
+colapply(zc, fun = function(x) {mean(x, na.rm = TRUE)}, col.as = 'vector')
 
 fuse <- function (x) {
     mean(window(x, start = 1995, end = 2000))

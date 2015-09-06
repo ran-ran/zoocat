@@ -8,9 +8,9 @@
 \usage{
 normalize(x, ...)
 
-\method{normalize}{default}(x, mode = "anomaly")
+\method{normalize}{default}(x, mode = "anomaly", ...)
 
-\method{normalize}{zoo}(x, mode = "anomaly", base.period = NULL)
+\method{normalize}{zoo}(x, mode = "anomaly", base.period = NULL, ...)
 }
 \arguments{
 \item{x}{A vector, matrix, data frame or zoo object.}

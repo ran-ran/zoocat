@@ -27,7 +27,7 @@ normalize <- function (x, ...) {
 #' @export
 #' @param mode \code{perc} means percentage of anomaly. \code{sd1} means
 #' normalized anomaly.
-normalize.default <- function(x, mode = 'anomaly') {
+normalize.default <- function(x, mode = 'anomaly', ...) {
     stopifnot(length(mode) == 1)
     stopifnot(any(mode == c('anomaly', 'perc', 'sd1')))
 
@@ -64,7 +64,7 @@ normalize.default <- function(x, mode = 'anomaly') {
 #' @rdname normalize
 #' @export
 #' @param base.period If NULL, base period is the all index range.
-normalize.zoo <- function(x, mode = 'anomaly', base.period = NULL) {
+normalize.zoo <- function(x, mode = 'anomaly', base.period = NULL, ...) {
     if (is.null(base.period)) {
         base.period <- index(x)
     }

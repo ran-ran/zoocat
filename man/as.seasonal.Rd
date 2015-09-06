@@ -7,7 +7,7 @@
 \usage{
 as.seasonal(x, ...)
 
-\method{as.seasonal}{mlydata}(x, DJF.first = TRUE)
+\method{as.seasonal}{mlydata}(x, DJF.first = TRUE, ...)
 }
 \arguments{
 \item{x}{A \code{mlydata} object.}

@@ -22,7 +22,7 @@ as.mlydata <- function(x, ...) { UseMethod('as.mlydata') }
 #' @export
 #' @rdname as.mlydata
 #' @param month A vector of month, must have same length as ncol of x.
-as.mlydata.zoo <- function(x, month) {
+as.mlydata.zoo <- function(x, month, ...) {
     year <- index(x)
     x <- coredata(x)
     md <- mlydata(x, year = as.integer(year), month = month)
