@@ -92,7 +92,7 @@ print.zoocat <- function (x, ...) {
 #' @export
 #' @rdname zoocat
 #' @param i,j,drop The same as in method for /code{matrix}.
-'[.zoocat' <- function(x, i = NULL, j = NULL, drop = FALSE) {
+'[.zoocat' <- function(x, i = NULL, j = NULL, drop = TRUE) {
     if (length(x) == 0) {
         return(zoocat())
     }
@@ -118,9 +118,9 @@ print.zoocat <- function (x, ...) {
             x <- as.vector(x)
             names(x) <- cname
         } else if (ncol(x) == 1) {
-            rname <- index(x)
+            idx <- index(x)
             x <- as.vector(x)    
-            names(x) <- rname
+            x <- zoo(x, order.by = idx)
         }
     }
     

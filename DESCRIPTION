@@ -17,7 +17,8 @@ Imports:
     plyr
 Suggests: 
     knitr,
-    lattice
+    lattice,
+    testthat
 License: GPL
 URL: https://github.com/vivihe/zoocat
 VignetteBuilder: knitr
