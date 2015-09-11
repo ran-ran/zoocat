@@ -4,14 +4,17 @@
 \alias{mlydataList}
 \title{mlydataList Class}
 \usage{
-mlydataList(x)
+mlydataList(...)
 }
 \arguments{
-\item{x}{A list, each elements of which is a mlydata object. x must has
-names for each elements.}
+\item{...}{A series of \code{mlydata} object.
+The first element can be a list.
+For this case, each elements of the list must be a \code{mlydata} object,
+and the list must has
+names for each elements, and followed arguments will be neglected.}
 }
 \value{
-A mlydataList object.
+A \code{mlydataList} object.
 }
 \description{
 mlydataList class.
@@ -20,7 +23,8 @@ mlydataList class.
 x <- matrix(1 : 20, nrow = 5)
 x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 y <- x + 1
-mdList <- mlydataList(list(x = x, y = y))
-as.zoocat(mdList)
+mlydataList(list(x = x, y = y))
+mlydataList(x, y)
+mlydataList(x)
 }
 
