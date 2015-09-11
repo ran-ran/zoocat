@@ -6,9 +6,11 @@
 \alias{melt.zoocat}
 \title{Melt a \code{zoocat} or \code{mlydata} Object}
 \usage{
-\method{melt}{zoocat}(x, value.name = "value", index.name = "index")
+\method{melt}{zoocat}(x, value.name = "value", index.name = "index",
+  na.rm = FALSE, ...)
 
-\method{melt}{mlydata}(x, value.name = "value", ret = "data.frame", ...)
+\method{melt}{mlydata}(x, value.name = "value", ret = "data.frame",
+  na.rm = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{zoocat} object.}
@@ -16,6 +18,11 @@
 \item{value.name}{Name of variable used to store values.}
 
 \item{index.name}{Name of variable used to store the index of the \code{zoocat} object.}
+
+\item{na.rm}{As \code{melt} in reshape2.Should NA values be removed from the data set?
+For \code{mlydata}, it is only valid when \code{ret} is \code{data.frame}.}
+
+\item{...}{Further arguments.}
 
 \item{ret}{Can be \code{data.frame} or \code{zoo}}
 }

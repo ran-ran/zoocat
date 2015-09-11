@@ -20,7 +20,10 @@
 #' @param x A \code{zoocat} object.
 #' @param value.name Name of variable used to store values.
 #' @param index.name Name of variable used to store the index of the \code{zoocat} object.
-melt.zoocat <- function (x, value.name = 'value', index.name = 'index') {
+#' @param na.rm As \code{melt} in reshape2.Should NA values be removed from the data set? 
+#' For \code{mlydata}, it is only valid when \code{ret} is \code{data.frame}.
+melt.zoocat <- function (x, value.name = 'value', index.name = 'index',
+                         na.rm = FALSE, ...) {
     colattr <- cattr(x)
     idvars <- colnames(colattr)
     xcore <- t(as.matrix(x))
@@ -29,7 +32,7 @@ melt.zoocat <- function (x, value.name = 'value', index.name = 'index') {
     dframe <- data.frame(colattr, xcore)
     colnames(dframe) <- c(idvars, ind)
     df.melt <- melt(dframe, id.vars = idvars, variable.name = index.name, value.name = value.name,
-                    factorAsStrings = FALSE)
+                    factorAsStrings = FALSE, na.rm = na.rm)
     df.melt[, index.name] <- as.character(df.melt[, index.name])
     class(df.melt[, index.name]) <- ind.class
     df.melt <- df.melt[, c(index.name, idvars, value.name)]
@@ -49,7 +52,9 @@ melt.zoocat <- function (x, value.name = 'value', index.name = 'index') {
 #' melt(md, ret = 'zoo')
 #' 
 #' @param ret Can be \code{data.frame} or \code{zoo}
-melt.mlydata <- function(x, value.name = 'value', ret = 'data.frame', ...) {
+#' @param ... Further arguments.
+melt.mlydata <- function(x, value.name = 'value', ret = 'data.frame', 
+                         na.rm = FALSE, ...) {
     stopifnot(ret %in% c('data.frame', 'zoo'))
     if (ret == 'zoo') {
         if(!all(attr(x, 'month') == 1 : 12)) {
@@ -69,7 +74,7 @@ melt.mlydata <- function(x, value.name = 'value', ret = 'data.frame', ...) {
         x <- data.frame(year = year, coredata(x))
         colnames(x) <- c('year', month) 
         ret <- melt(x, id.vars = 'year', variable.name = 'month',
-                    value.name = value.name)
+                    value.name = value.name, na.rm = na.rm)
         ret$month <- as.numeric(as.character(ret$month))
         ret <- plyr::arrange(ret, year, month)
     }

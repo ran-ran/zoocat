@@ -8,16 +8,18 @@
 \alias{as.zooreg.zoocat}
 \title{Coercion Objects to Class \code{zoo}}
 \usage{
-\method{as.zoo}{mlydata}(x)
+\method{as.zoo}{mlydata}(x, ...)
 
-\method{as.zooreg}{mlydata}(x)
+\method{as.zooreg}{mlydata}(x, ...)
 
-\method{as.zoo}{zoocat}(x)
+\method{as.zoo}{zoocat}(x, ...)
 
-\method{as.zooreg}{zoocat}(x)
+\method{as.zooreg}{zoocat}(x, ...)
 }
 \arguments{
 \item{x}{An object.}
+
+\item{...}{Further arguments.}
 }
 \value{
 A \code{zoo} object.
