@@ -9,7 +9,7 @@
 \usage{
 as.zoocat(x, ...)
 
-\method{as.zoocat}{mlydata}(x, addname = TRUE, varname = NULL, ...)
+\method{as.zoocat}{mlydata}(..., addname = TRUE)
 
 \method{as.zoocat}{mlydataList}(x, ...)
 
@@ -22,11 +22,11 @@ as.zoocat(x, ...)
 
 \item{addname}{Logical. If TRUE, a field of \code{cattr} "name" will be add.}
 
+\item{colattr}{The column attribute table for x.}
+
 \item{varname}{The value for the name field in the \code{cattr} of
 the output \code{zoocat} object. Only valid when \code{addname} is TRUE.
 If NULL, the variable name will be used.}
-
-\item{colattr}{The column attribute table for x.}
 }
 \value{
 A \code{zoocat} object.
@@ -41,11 +41,13 @@ Coercing objects to class \code{zoocat}.
 \examples{
 x <- matrix(1 : 20, nrow = 5)
 md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+md2 <- md + 100
 as.zoocat(md)
 as.zoocat(md, addname = FALSE)
-as.zoocat(md, varname = 'x')
+as.zoocat(x = md)
+as.zoocat(x = md, y = md2)
+as.zoocat(md, md2)
 
-mat <- matrix(1 : 20, nrow = 5)
 x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 y <- x + 100
 mdList <- mlydataList(list(x = x, y = y))

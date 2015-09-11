@@ -10,10 +10,11 @@
 \method{melt}{zoocat}(x, value.name = "value", index.name = "index",
   na.rm = FALSE, ...)
 
-\method{melt}{mlydata}(x, value.name = "value", ret = "data.frame",
-  na.rm = FALSE, ...)
+\method{melt}{mlydata}(..., value.name = "value",
+  variable.name = "variable", ret = "data.frame", na.rm = FALSE)
 
-\method{melt}{mlydataList}(x, value.name = "value", na.rm = FALSE, ...)
+\method{melt}{mlydataList}(x, value.name = "value",
+  variable.name = "variable", na.rm = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{zoocat} object.}
@@ -44,8 +45,10 @@ zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 melt(zc)
 x <- matrix(1 : 36, nrow = 3, byrow = TRUE)
 md <- mlydata(x, year = 1991 : 1993, month = 1 : 12)
+md2 <- md + 1
 melt(md)
 melt(md, ret = 'zoo')
+melt(md, md2)
 x <- matrix(1 : 20, nrow = 5)
 x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 y <- x + 1
