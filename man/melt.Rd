@@ -3,6 +3,7 @@
 \name{melt}
 \alias{melt}
 \alias{melt.mlydata}
+\alias{melt.mlydataList}
 \alias{melt.zoocat}
 \title{Melt a \code{zoocat} or \code{mlydata} Object}
 \usage{
@@ -11,6 +12,8 @@
 
 \method{melt}{mlydata}(x, value.name = "value", ret = "data.frame",
   na.rm = FALSE, ...)
+
+\method{melt}{mlydataList}(x, value.name = "value", na.rm = FALSE, ...)
 }
 \arguments{
 \item{x}{A \code{zoocat} object.}
@@ -43,5 +46,10 @@ x <- matrix(1 : 36, nrow = 3, byrow = TRUE)
 md <- mlydata(x, year = 1991 : 1993, month = 1 : 12)
 melt(md)
 melt(md, ret = 'zoo')
+x <- matrix(1 : 20, nrow = 5)
+x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+y <- x + 1
+mdl <- mlydataList(x, y)
+melt(mdl)
 }
 

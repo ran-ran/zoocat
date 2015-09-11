@@ -48,15 +48,23 @@ melt.zoocat <- function (x, value.name = 'value', index.name = 'index',
 #' 
 #' x <- matrix(1 : 36, nrow = 3, byrow = TRUE)
 #' md <- mlydata(x, year = 1991 : 1993, month = 1 : 12)
+#' md2 <- md + 1
 #' melt(md)
 #' melt(md, ret = 'zoo')
+#' melt(md, md2)
 #' 
 #' @param ret Can be \code{data.frame} or \code{zoo}
 #' @param ... Further arguments.
-melt.mlydata <- function(x, value.name = 'value', ret = 'data.frame', 
-                         na.rm = FALSE, ...) {
+melt.mlydata <- function(..., value.name = 'value', variable.name = 'variable',
+                         ret = 'data.frame', 
+                         na.rm = FALSE) {
     stopifnot(ret %in% c('data.frame', 'zoo'))
+    arg <- list(...)
     if (ret == 'zoo') {
+        if (length(arg) > 1) {
+            warning('For ret == "zoo", only the 1st mlydata object is used.')
+        }
+        x <- arg[[1]]
         if(!all(attr(x, 'month') == 1 : 12)) {
             stop('x must have 12 columns which respresents 12 months.')
         }
@@ -69,16 +77,59 @@ melt.mlydata <- function(x, value.name = 'value', ret = 'data.frame',
         vec <- as.vector(t(mat))
         ret <- zoo(vec, order.by = yymm)
     } else {
-        month <- attr(x, 'month')
-        year <- index(x)
-        x <- data.frame(year = year, coredata(x))
-        colnames(x) <- c('year', month) 
-        ret <- melt(x, id.vars = 'year', variable.name = 'month',
-                    value.name = value.name, na.rm = na.rm)
-        ret$month <- as.numeric(as.character(ret$month))
-        ret <- plyr::arrange(ret, year, month)
+        if (length(arg) == 1) {
+            x <- arg[[1]]
+            month <- attr(x, 'month')
+            year <- index(x)
+            x <- data.frame(year = year, coredata(x))
+            colnames(x) <- c('year', month) 
+            ret <- melt(x, id.vars = 'year', variable.name = 'month',
+                        value.name = value.name, na.rm = na.rm)
+            ret$month <- as.numeric(as.character(ret$month))
+            ret <- plyr::arrange(ret, year, month)
+        } else {
+            for (i in 2 : length(arg)) {
+                if (!inherits(arg[[i]], 'mlydata')) {
+                    stop('Some argument is not mlydata objects.')
+                }
+            }
+            if (is.null(names(arg))) {
+                callobj <- sys.call()
+                callList <- as.list(callobj)
+                argnames <- callList[2 : length(callList)]
+                names(arg) <- argnames
+            }
+            arg <- mlydataList(arg)
+            ret <- melt(arg, value.name = value.name, 
+                        variable.name = variable.name, na.rm = na.rm)
+        }
     }
     return(ret)
+}
+
+
+#' @export
+#' @rdname melt
+#' @examples
+#' 
+#' x <- matrix(1 : 20, nrow = 5)
+#' x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+#' y <- x + 1
+#' mdl <- mlydataList(x, y)
+#' melt(mdl)
+#' 
+melt.mlydataList <- function (x, value.name = 'value', variable.name = 'variable',
+                              na.rm = FALSE, ...) {
+    dfmelt <- data.frame()
+    varnames <- names(x)
+    for (i in 1 : length(x)) {
+        dfnow <- melt(x[[i]], value.name = value.name, ret = 'data.frame',
+                      na.rm = na.rm)
+        dfnow <- cbind(name = varnames[i], dfnow)
+        colnames(dfnow)[1] <- variable.name
+        dfmelt <- rbind(dfmelt, dfnow)
+    }
+    return(dfmelt)
 }
 
 
