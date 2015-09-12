@@ -3,7 +3,8 @@
 #' 
 #' Get a subset of a \code{mlydata} object.
 #' 
-#' @aliases window.mlydata
+#' @name window
+#' @rdname window
 #' @param x A \code{mlydata} object.
 #' @param year A numeric vector representing years.
 #' @param month A numeric vector in which numbers are used to represent months.
@@ -18,6 +19,11 @@
 #' md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 #' window(md, year = 1992 : 1993, month = c(3, 6))
 #' window(md, start = 1993)
+#' 
+#' 
+#' data(sst)
+#' mdList <- cast2mlydata(sst, value.var = c('nino12', 'nino3'))
+#' window(mdList, year = 1992:1993, month = 3:5)
 #' 
 #' @export
 window.mlydata <- function(x, year = NULL, month = NULL, ...) {
@@ -49,4 +55,7 @@ window.mlydata <- function(x, year = NULL, month = NULL, ...) {
     x <- x[, idCol, drop = FALSE]
     return(x)
 }
+
+
+
 
