@@ -23,7 +23,7 @@ a \code{mlydata} object.
 x <- matrix(1 : 20, nrow = 5)
 x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 y <- x + 1
-mlydataList(list(x = x, y = y))
+mlydataList(list(md1 = x, md2 = y))
 mlydataList(x, y)
 mlydataList(x)
 }
