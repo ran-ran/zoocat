@@ -38,7 +38,7 @@ rollmean_by_month.mlydata <- function (x, k, align = 'center', ...) {
     dfobj <- data.frame(year = as.numeric(format(dt, "%Y")),
                         month = as.numeric(format(dt, "%m")),
                         value = coredata(zobj))
-    xroll <- cast2mlydata(dfobj, index.var = 'year', value.var = 'value',
+    xroll <- cast2mlydata(dfobj, year.var = 'year', value.var = 'value',
                         month.var = 'month')
     xroll <- na.trim(xroll, sides = 'both', is.na = 'all')
     return(xroll) 
