@@ -2,22 +2,22 @@
 % Please edit documentation in R/mlydataList.R
 \name{mlydataList}
 \alias{mlydataList}
-\title{mlydataList Class}
+\title{\code{mlydataList} Class}
 \usage{
 mlydataList(...)
 }
 \arguments{
-\item{...}{A series of \code{mlydata} object.
-The first element can be a list.
-For this case, each elements of the list must be a \code{mlydata} object,
-and the list must has
-names for each elements, and followed arguments will be neglected.}
+\item{...}{a series of \code{mlydata} object or a list of \code{mlydata} objects.
+These can be given as named arguments.
+If the first argument is a list, followed arguments will be neglected.
+Note that the list must be named.}
 }
 \value{
 A \code{mlydataList} object.
 }
 \description{
-mlydataList class.
+A \code{mlydataList} object is a list, each element of which is
+a \code{mlydata} object.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)

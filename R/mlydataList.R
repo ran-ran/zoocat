@@ -1,20 +1,20 @@
-#' mlydataList Class
+#' \code{mlydataList} Class
 #' 
-#' mlydataList class.
+#' A \code{mlydataList} object is a list, each element of which is 
+#' a \code{mlydata} object.
 #' 
 #' 
-#' @param ... A series of \code{mlydata} object.
-#' The first element can be a list.
-#' For this case, each elements of the list must be a \code{mlydata} object, 
-#' and the list must has
-#' names for each elements, and followed arguments will be neglected.
+#' @param ... a series of \code{mlydata} object or a list of \code{mlydata} objects.
+#' These can be given as named arguments.
+#' If the first argument is a list, followed arguments will be neglected.
+#' Note that the list must be named.
 #' @return A \code{mlydataList} object.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
 #' x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 #' y <- x + 1
-#' mlydataList(list(x = x, y = y))
+#' mlydataList(list(md1 = x, md2 = y))
 #' mlydataList(x, y)
 #' mlydataList(x)
 #' 
@@ -35,11 +35,9 @@ mlydataList <- function(...) {
         class(x) <- 'mlydataList'
         return(x)
     } else {
-        if (length(arg) > 1) {
-            for (i in 2 : length(arg)) {
-                if (!inherits(arg[[i]], 'mlydata')) {
-                    stop('Some argument is not mlydata objects.')
-                }
+        for (i in 1 : length(arg)) {
+            if (!inherits(arg[[i]], 'mlydata')) {
+                stop('Some argument is not mlydata objects.')
             }
         }
         if (is.null(names(arg))) {
