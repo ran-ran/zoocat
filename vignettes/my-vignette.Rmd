@@ -86,20 +86,16 @@ head(retdf)
 # mlydata class
 
 data(sst)
-nino34 <- cast2mlydata(sst, index.var = 'year', 
-                       value.var = 'nino34', month.var = 'month')
-nino34 <- cbind(lag(nino34, -1), nino34, lag(nino34, 1))
-nino34 <- na.trim(nino34)
-nino34 <- normalize(nino34, mode = 'sd1')
+nino <- cast2mlydata(sst, year.var = 'year', month.var = 'month',
+                     value.var = c('nino12', 'nino3', 'nino34','nino4'))
+nino <- normalize(nino, mode = 'sd1')
+nino <- expand(nino, k = 1, direction = 'both')
+nino <- na.trim(nino)
 
-nino34el <- nino34[c('1983', '1998', '2010'), ]
-nino34el <- melt(nino34el)
+ninoel <- window(nino, year = c(1983, 1998, 2010))
+ninoel <- melt(ninoel)
 library(lattice)
-xyplot(value~month, group = year, data = nino34el, type = 'l')
+xyplot(value~month|variable, group = year, data = ninoel, type = 'l')
 
-
-nino34la <- nino34[c('1985', '2000', '2011'), ]
-nino34la <- melt(nino34la)
-xyplot(value~month, group = year, data = nino34la, type = 'l')
 
 
