@@ -95,7 +95,7 @@ nino <- na.trim(nino)
 ninoel <- window(nino, year = c(1983, 1998, 2010))
 ninoel <- melt(ninoel)
 library(lattice)
-xyplot(value~month|variable, group = year, data = ninoel, type = 'l')
+xyplot(value~month|year, group = variable, data = ninoel, type = 'l')
 
 
 
