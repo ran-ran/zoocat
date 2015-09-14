@@ -15,7 +15,7 @@
 #' @rdname as.mlydata
 #' @export
 #' @param x A zoo object.
-#' @param ... Additional arguments to be passed to or from methods.
+#' @param ... further arguments passed to methods.
 as.mlydata <- function(x, ...) { UseMethod('as.mlydata') }
 
 #'

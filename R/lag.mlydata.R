@@ -18,6 +18,7 @@
 #' @param k The number of the lags.
 #' @param adjust.month Logical. If TRUE, the month of \code{x} will be 
 #' add \code{12 * k}.
+#' @param ... further arguments.
 #' @export
 lag.mlydata <- function (x, k = 1, adjust.month = TRUE, ...) {
     month <- attr(x, 'month')

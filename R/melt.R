@@ -17,17 +17,17 @@
 #' @name melt
 #' @rdname melt
 #' @export
-#' @param x A \code{zoocat} object.
+#' @param data object to melt.
 #' @param value.name Name of variable used to store values.
 #' @param index.name Name of variable used to store the index of the \code{zoocat} object.
 #' @param na.rm As \code{melt} in reshape2.Should NA values be removed from the data set? 
 #' For \code{mlydata}, it is only valid when \code{ret} is \code{data.frame}.
-melt.zoocat <- function (x, value.name = 'value', index.name = 'index',
+melt.zoocat <- function (data, value.name = 'value', index.name = 'index',
                          na.rm = FALSE, ...) {
-    colattr <- cattr(x)
+    colattr <- cattr(data)
     idvars <- colnames(colattr)
-    xcore <- t(as.matrix(x))
-    ind <- index(x)
+    xcore <- t(as.matrix(data))
+    ind <- index(data)
     ind.class <- class(ind)
     dframe <- data.frame(colattr, xcore)
     colnames(dframe) <- c(idvars, ind)
@@ -54,6 +54,7 @@ melt.zoocat <- function (x, value.name = 'value', index.name = 'index',
 #' melt(md, md2)
 #' 
 #' @param ret Can be \code{data.frame} or \code{zoo}
+#' @param variable.name name of variable used to store measured variable names.
 #' @param ... Further arguments.
 melt.mlydata <- function(..., value.name = 'value', variable.name = 'variable',
                          ret = 'data.frame', 
@@ -118,12 +119,12 @@ melt.mlydata <- function(..., value.name = 'value', variable.name = 'variable',
 #' mdl <- mlydataList(x, y)
 #' melt(mdl)
 #' 
-melt.mlydataList <- function (x, value.name = 'value', variable.name = 'variable',
+melt.mlydataList <- function (data, value.name = 'value', variable.name = 'variable',
                               na.rm = FALSE, ...) {
     dfmelt <- data.frame()
-    varnames <- names(x)
-    for (i in 1 : length(x)) {
-        dfnow <- melt(x[[i]], value.name = value.name, ret = 'data.frame',
+    varnames <- names(data)
+    for (i in 1 : length(data)) {
+        dfnow <- melt(data[[i]], value.name = value.name, ret = 'data.frame',
                       na.rm = na.rm)
         dfnow <- cbind(name = varnames[i], dfnow)
         colnames(dfnow)[1] <- variable.name

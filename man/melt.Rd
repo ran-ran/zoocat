@@ -7,17 +7,17 @@
 \alias{melt.zoocat}
 \title{Melt a \code{zoocat} or \code{mlydata} Object}
 \usage{
-\method{melt}{zoocat}(x, value.name = "value", index.name = "index",
+\method{melt}{zoocat}(data, value.name = "value", index.name = "index",
   na.rm = FALSE, ...)
 
 \method{melt}{mlydata}(..., value.name = "value",
   variable.name = "variable", ret = "data.frame", na.rm = FALSE)
 
-\method{melt}{mlydataList}(x, value.name = "value",
+\method{melt}{mlydataList}(data, value.name = "value",
   variable.name = "variable", na.rm = FALSE, ...)
 }
 \arguments{
-\item{x}{A \code{zoocat} object.}
+\item{data}{object to melt.}
 
 \item{value.name}{Name of variable used to store values.}
 
@@ -27,6 +27,8 @@
 For \code{mlydata}, it is only valid when \code{ret} is \code{data.frame}.}
 
 \item{...}{Further arguments.}
+
+\item{variable.name}{name of variable used to store measured variable names.}
 
 \item{ret}{Can be \code{data.frame} or \code{zoo}}
 }

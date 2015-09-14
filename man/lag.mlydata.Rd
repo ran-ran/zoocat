@@ -13,6 +13,8 @@
 
 \item{adjust.month}{Logical. If TRUE, the month of \code{x} will be
 add \code{12 * k}.}
+
+\item{...}{further arguments.}
 }
 \description{
 Lags of \code{mlydata} Objects

@@ -168,10 +168,10 @@
         
 
 #' @export 
-'na.aggregate.zoocat' <- function (x, ...) {
-    colAttr <- cattr(x)
-    x <- as.zoo(x)
-    ret <- 'na.aggregate'(x, ...)
+'na.aggregate.zoocat' <- function (object, ...) {
+    colAttr <- cattr(object)
+    object <- as.zoo(object)
+    ret <- 'na.aggregate'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
     class(ret) <- c('zoocat', class(ret))
@@ -180,10 +180,10 @@
         
 
 #' @export
-'na.aggregate.mlydata' <- function (x, ...) {
-    month <- attr(x, 'month')
-    x <- as.zoo(x)
-    ret <- 'na.aggregate'(x, ...)
+'na.aggregate.mlydata' <- function (object, ...) {
+    month <- attr(object, 'month')
+    object <- as.zoo(object)
+    ret <- 'na.aggregate'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'month') <- month 
     class(ret) <- c('mlydata', class(ret))
@@ -192,10 +192,10 @@
         
 
 #' @export 
-'na.approx.zoocat' <- function (x, ...) {
-    colAttr <- cattr(x)
-    x <- as.zoo(x)
-    ret <- 'na.approx'(x, ...)
+'na.approx.zoocat' <- function (object, ...) {
+    colAttr <- cattr(object)
+    object <- as.zoo(object)
+    ret <- 'na.approx'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
     class(ret) <- c('zoocat', class(ret))
@@ -204,10 +204,10 @@
         
 
 #' @export
-'na.approx.mlydata' <- function (x, ...) {
-    month <- attr(x, 'month')
-    x <- as.zoo(x)
-    ret <- 'na.approx'(x, ...)
+'na.approx.mlydata' <- function (object, ...) {
+    month <- attr(object, 'month')
+    object <- as.zoo(object)
+    ret <- 'na.approx'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'month') <- month 
     class(ret) <- c('mlydata', class(ret))
@@ -216,10 +216,10 @@
         
 
 #' @export 
-'na.contiguous.zoocat' <- function (x, ...) {
-    colAttr <- cattr(x)
-    x <- as.zoo(x)
-    ret <- 'na.contiguous'(x, ...)
+'na.contiguous.zoocat' <- function (object, ...) {
+    colAttr <- cattr(object)
+    object <- as.zoo(object)
+    ret <- 'na.contiguous'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
     class(ret) <- c('zoocat', class(ret))
@@ -228,10 +228,10 @@
         
 
 #' @export
-'na.contiguous.mlydata' <- function (x, ...) {
-    month <- attr(x, 'month')
-    x <- as.zoo(x)
-    ret <- 'na.contiguous'(x, ...)
+'na.contiguous.mlydata' <- function (object, ...) {
+    month <- attr(object, 'month')
+    object <- as.zoo(object)
+    ret <- 'na.contiguous'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'month') <- month 
     class(ret) <- c('mlydata', class(ret))
@@ -240,10 +240,10 @@
         
 
 #' @export 
-'na.fill.zoocat' <- function (x, ...) {
-    colAttr <- cattr(x)
-    x <- as.zoo(x)
-    ret <- 'na.fill'(x, ...)
+'na.fill.zoocat' <- function (object, ...) {
+    colAttr <- cattr(object)
+    object <- as.zoo(object)
+    ret <- 'na.fill'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
     class(ret) <- c('zoocat', class(ret))
@@ -252,10 +252,10 @@
         
 
 #' @export
-'na.fill.mlydata' <- function (x, ...) {
-    month <- attr(x, 'month')
-    x <- as.zoo(x)
-    ret <- 'na.fill'(x, ...)
+'na.fill.mlydata' <- function (object, ...) {
+    month <- attr(object, 'month')
+    object <- as.zoo(object)
+    ret <- 'na.fill'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'month') <- month 
     class(ret) <- c('mlydata', class(ret))
@@ -264,10 +264,10 @@
         
 
 #' @export 
-'na.spline.zoocat' <- function (x, ...) {
-    colAttr <- cattr(x)
-    x <- as.zoo(x)
-    ret <- 'na.spline'(x, ...)
+'na.spline.zoocat' <- function (object, ...) {
+    colAttr <- cattr(object)
+    object <- as.zoo(object)
+    ret <- 'na.spline'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
     class(ret) <- c('zoocat', class(ret))
@@ -276,10 +276,10 @@
         
 
 #' @export
-'na.spline.mlydata' <- function (x, ...) {
-    month <- attr(x, 'month')
-    x <- as.zoo(x)
-    ret <- 'na.spline'(x, ...)
+'na.spline.mlydata' <- function (object, ...) {
+    month <- attr(object, 'month')
+    object <- as.zoo(object)
+    ret <- 'na.spline'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'month') <- month 
     class(ret) <- c('mlydata', class(ret))
@@ -288,10 +288,10 @@
         
 
 #' @export 
-'na.trim.zoocat' <- function (x, ...) {
-    colAttr <- cattr(x)
-    x <- as.zoo(x)
-    ret <- 'na.trim'(x, ...)
+'na.trim.zoocat' <- function (object, ...) {
+    colAttr <- cattr(object)
+    object <- as.zoo(object)
+    ret <- 'na.trim'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
     class(ret) <- c('zoocat', class(ret))
@@ -300,10 +300,10 @@
         
 
 #' @export
-'na.trim.mlydata' <- function (x, ...) {
-    month <- attr(x, 'month')
-    x <- as.zoo(x)
-    ret <- 'na.trim'(x, ...)
+'na.trim.mlydata' <- function (object, ...) {
+    month <- attr(object, 'month')
+    object <- as.zoo(object)
+    ret <- 'na.trim'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'month') <- month 
     class(ret) <- c('mlydata', class(ret))
@@ -312,10 +312,10 @@
         
 
 #' @export 
-'rollapply.zoocat' <- function (x, ...) {
-    colAttr <- cattr(x)
-    x <- as.zoo(x)
-    ret <- 'rollapply'(x, ...)
+'rollapply.zoocat' <- function (data, ...) {
+    colAttr <- cattr(data)
+    data <- as.zoo(data)
+    ret <- 'rollapply'(data, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
     class(ret) <- c('zoocat', class(ret))
@@ -324,10 +324,10 @@
         
 
 #' @export
-'rollapply.mlydata' <- function (x, ...) {
-    month <- attr(x, 'month')
-    x <- as.zoo(x)
-    ret <- 'rollapply'(x, ...)
+'rollapply.mlydata' <- function (data, ...) {
+    month <- attr(data, 'month')
+    data <- as.zoo(data)
+    ret <- 'rollapply'(data, ...)
     colnames(ret) <- NULL
     attr(ret, 'month') <- month 
     class(ret) <- c('mlydata', class(ret))
@@ -480,54 +480,6 @@
         
 
 #' @export 
-'coredata<-.zoocat' <- function (x, ...) {
-    colAttr <- cattr(x)
-    x <- as.zoo(x)
-    ret <- 'coredata<-'(x, ...)
-    colnames(ret) <- NULL
-    attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
-    return(ret)
-}
-        
-
-#' @export
-'coredata<-.mlydata' <- function (x, ...) {
-    month <- attr(x, 'month')
-    x <- as.zoo(x)
-    ret <- 'coredata<-'(x, ...)
-    colnames(ret) <- NULL
-    attr(ret, 'month') <- month 
-    class(ret) <- c('mlydata', class(ret))
-    return(ret)
-}
-        
-
-#' @export 
-'index<-.zoocat' <- function (x, ...) {
-    colAttr <- cattr(x)
-    x <- as.zoo(x)
-    ret <- 'index<-'(x, ...)
-    colnames(ret) <- NULL
-    attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
-    return(ret)
-}
-        
-
-#' @export
-'index<-.mlydata' <- function (x, ...) {
-    month <- attr(x, 'month')
-    x <- as.zoo(x)
-    ret <- 'index<-'(x, ...)
-    colnames(ret) <- NULL
-    attr(ret, 'month') <- month 
-    class(ret) <- c('mlydata', class(ret))
-    return(ret)
-}
-        
-
-#' @export 
 'as.data.frame.zoocat' <- function (x, ...) {
     x <- as.zoo(x)
     ret <- 'as.data.frame'(x, ...)
@@ -592,17 +544,65 @@
         
 
 #' @export 
-'barplot.zoocat' <- function (x, ...) {
-    x <- as.zoo(x)
-    ret <- 'barplot'(x, ...)
+'barplot.zoocat' <- function (height, ...) {
+    height <- as.zoo(height)
+    ret <- 'barplot'(height, ...)
     return(ret)
 }
         
 
 #' @export
-'barplot.mlydata' <- function (x, ...) {
+'barplot.mlydata' <- function (height, ...) {
+    height <- as.zoo(height)
+    ret <- 'barplot'(height, ...)
+    return(ret)
+}
+        
+
+#' @export 
+'coredata<-.zoocat' <- function (x, value) {
+    colAttr <- cattr(x)
     x <- as.zoo(x)
-    ret <- 'barplot'(x, ...)
+    ret <- 'coredata<-'(x, value)
+    colnames(ret) <- NULL
+    attr(ret, 'cattr') <- colAttr
+    class(ret) <- c('zoocat', class(ret))
+    return(ret)
+}
+        
+
+#' @export
+'coredata<-.mlydata' <- function (x, value) {
+    month <- attr(x, 'month')
+    x <- as.zoo(x)
+    ret <- 'coredata<-'(x, value)
+    colnames(ret) <- NULL
+    attr(ret, 'month') <- month 
+    class(ret) <- c('mlydata', class(ret))
+    return(ret)
+}
+        
+
+#' @export 
+'index<-.zoocat' <- function (x, value) {
+    colAttr <- cattr(x)
+    x <- as.zoo(x)
+    ret <- 'index<-'(x, value)
+    colnames(ret) <- NULL
+    attr(ret, 'cattr') <- colAttr
+    class(ret) <- c('zoocat', class(ret))
+    return(ret)
+}
+        
+
+#' @export
+'index<-.mlydata' <- function (x, value) {
+    month <- attr(x, 'month')
+    x <- as.zoo(x)
+    ret <- 'index<-'(x, value)
+    colnames(ret) <- NULL
+    attr(ret, 'month') <- month 
+    class(ret) <- c('mlydata', class(ret))
     return(ret)
 }
         

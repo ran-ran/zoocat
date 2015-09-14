@@ -20,7 +20,7 @@ Otherwise, x is a \code{zoocat} object.}
 
 \item{...}{Other arguments for \code{zoo}.}
 
-\item{i,j,drop}{The same as in method for /code{matrix}.}
+\item{i,j,drop}{The same as in method for \code{matrix}.}
 }
 \value{
 \code{zoocat} returns a \code{zoocat} object. \code{coredata} and \code{as.matrix} returns a matrix or

@@ -27,18 +27,18 @@
 #' @name as.zoocat
 #' @rdname as.zoocat
 #' @export
-#' @param x An object.
-#' @param ... Additional arguments to be passed to or from methods.
+#' @param x the object.
+#' @param ... other arguments passed to methods.
 as.zoocat <- function (x, ...) { UseMethod('as.zoocat') }
 
 #'
 #' @export
 #' @rdname as.zoocat
-#' @param addname Logical. If TRUE, a field of \code{cattr} "name" will be add.
-#' @param varname The value for the name field in the \code{cattr} of 
-#' the output \code{zoocat} object. Only valid when \code{addname} is TRUE.
-#' If NULL, the variable name will be used.
-as.zoocat.mlydata <- function (..., addname = TRUE) {
+#' @param addname logical. If TRUE, a field of \code{cattr} "name" will be add.
+#' @param variable.name the name of the field in the \code{cattr} of 
+#' the output \code{zoocat} object to store the variable name.
+#' Only valid when \code{addname} is TRUE.
+as.zoocat.mlydata <- function (..., addname = TRUE, variable.name = "variable") {
     arg <- list(...)
     for (i in 1 : length(arg)) {
         if (!inherits(arg[[i]], 'mlydata')) {
@@ -56,6 +56,7 @@ as.zoocat.mlydata <- function (..., addname = TRUE) {
         x <- arg[[1]]
         if (addname == TRUE) {
             cAttr <- data.frame(name = argnames[1], month = attr(x, 'month'), stringsAsFactors = FALSE)
+            colnames(cAttr)[1] <- variable.name
         } else {
             cAttr <- data.frame(month = attr(x, 'month'), stringsAsFactors = FALSE)
         }
@@ -74,11 +75,13 @@ as.zoocat.mlydata <- function (..., addname = TRUE) {
 #'
 #' @export
 #' @rdname as.zoocat
-as.zoocat.mlydataList <- function (x, ...) {
+as.zoocat.mlydataList <- function (x, variable.name = 'variable', ...) {
     varname <- names(x)
     for (i in 1 : length(x)) {
         x[[i]] <- as.zoocat(x[[i]])
-        cattr(x[[i]]) <- cbind(name = varname[i], cattr(x[[i]]))
+        colAttr <- cbind(name = varname[i], cattr(x[[i]]))
+        colnames(colAttr)[1] <- variable.name
+        cattr(x[[i]]) <- colAttr
     }
     x <- unclass(x)
     zc <- do.call(merge, args = x)
@@ -89,11 +92,12 @@ as.zoocat.mlydataList <- function (x, ...) {
 #' @export
 #' @rdname as.zoocat
 #' @param colattr The column attribute table for x.
-as.zoocat.zoo <- function (x, colattr = NULL, ...) {
+as.zoocat.zoo <- function (x, colattr = NULL, variable.name = 'variable', ...) {
     stopifnot(length(dim(x))== 2)
     if (is.null(colattr)) {
         stopifnot(!is.null(colnames(x)))
         colattr <- data.frame(name = colnames(x))
+        colnames(colattr) <- variable.name
     }
     attr(x, 'cattr') <- colattr
     class(x) <- c('zoocat', class(x))

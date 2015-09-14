@@ -24,8 +24,10 @@ expand <- function (x, ...) {
 #' @param k the number of cycle to be expanded.
 #' @param direction the direction to expand. Can be "left",
 #' "right" or "both".
+#' @param ... further arguments.
 #' @return a \code{mlydata} object.
-expand.mlydata <- function (x, k, direction = 'both') {
+#' @export
+expand.mlydata <- function (x, k, direction = 'both', ...) {
     stopifnot(direction %in% c('left', 'right', 'both'))
     stopifnot(k >= 1)
     if (direction == 'left') {

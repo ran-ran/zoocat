@@ -19,11 +19,11 @@ expand.mlydataList <- function (x, ...) {
 }
 
 #' @export
-na.trim.mlydataList <- function (x, ...) {
-    for (i in 1 : length(x)) {
-        x[[i]] <- na.trim(x[[i]], ...)
+na.trim.mlydataList <- function (object, ...) {
+    for (i in 1 : length(object)) {
+        object[[i]] <- na.trim(object[[i]], ...)
     }
-    return(x)
+    return(object)
 }
 
 

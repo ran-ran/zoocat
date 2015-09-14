@@ -91,7 +91,7 @@ print.zoocat <- function (x, ...) {
 
 #' @export
 #' @rdname zoocat
-#' @param i,j,drop The same as in method for /code{matrix}.
+#' @param i,j,drop The same as in method for \code{matrix}.
 '[.zoocat' <- function(x, i = NULL, j = NULL, drop = TRUE) {
     if (length(x) == 0) {
         return(zoocat())

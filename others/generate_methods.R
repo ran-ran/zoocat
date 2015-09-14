@@ -6,46 +6,60 @@ if (file.exists(fout)) {
 
 fcon <- file(fout, 'w')
 
-methodNames_1 <- c('cummax',
-                 'cummin',
-                 'cumprod',
-                 'cumsum',
-                 'diff',
-                 'head',
-                 'lag',
-                 'na.aggregate', 
-                 'na.approx',
-                 'na.contiguous',
-                 'na.fill',
-                 'na.spline',
-                 'na.trim',
-                 'rollapply',
-                 'rollmax',
-                 'rollmean',
-                 'rollmedian',
-                 'rollsum',
-                 'scale',
-                 'tail',
-                 'coredata<-',
-                 'index<-'
-                 )
+methodNames_1 <- matrix(
+                 c(
+                 'cummax', 'x',
+                 'cummin', 'x',
+                 'cumprod', 'x',
+                 'cumsum', 'x',
+                 'diff', 'x',
+                 'head', 'x',
+                 'lag', 'x',
+                 'na.aggregate', 'object',
+                 'na.approx', 'object',
+                 'na.contiguous', 'object',
+                 'na.fill', 'object',
+                 'na.spline', 'object',
+                 'na.trim', 'object',
+                 'rollapply', 'data',
+                 'rollmax', 'x',
+                 'rollmean', 'x',
+                 'rollmedian', 'x',
+                 'rollsum', 'x',
+                 'scale', 'x',
+                 'tail', 'x'
+                 ),
+                 ncol = 2, byrow = TRUE)
 
-methodNames_2 <- c('as.data.frame',
-                   'as.matrix',
-                   'coredata',
-                   'plot',
-                   'barplot'
-                   )
+methodNames_2 <- matrix( 
+                c(
+                   'as.data.frame', 'x',
+                   'as.matrix', 'x',
+                   'coredata', 'x',
+                   'plot', 'x',
+                   'barplot', 'height'
+                   ),
+                 ncol = 2, byrow = TRUE)
 
-for (mtd in methodNames_1) {
+
+methodNames_3 <- matrix(
+                c(
+                 'coredata<-', 'x',
+                 'index<-', 'x'
+                 ),
+                 ncol = 2, byrow = TRUE)
+                
+
+for (i in 1 : nrow(methodNames_1)) {
+    mtd <- methodNames_1[i, 1]
+    obj <- methodNames_1[i, 2]
     cat(
 "
 #' @export 
-'", mtd, ".zoocat' <- function (x, ...) {
-    colAttr <- cattr(x)
-    x <- as.zoo(x)
-    ret <- '",
-    mtd, "'(x, ...)
+'", mtd, ".zoocat' <- function (", obj, ", ...) {
+    colAttr <- cattr(", obj, ")
+    ", obj, " <- as.zoo(", obj, ")
+    ret <- '", mtd, "'(", obj, ", ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
     class(ret) <- c('zoocat', class(ret))
@@ -56,11 +70,10 @@ for (mtd in methodNames_1) {
 
 "
 #' @export
-'", mtd, ".mlydata' <- function (x, ...) {
-    month <- attr(x, 'month')
-    x <- as.zoo(x)
-    ret <- '",
-    mtd, "'(x, ...)
+'", mtd, ".mlydata' <- function (", obj, ", ...) {
+    month <- attr(", obj, ", 'month')
+    ", obj, " <- as.zoo(", obj, ")
+    ret <- '", mtd, "'(", obj, ", ...)
     colnames(ret) <- NULL
     attr(ret, 'month') <- month 
     class(ret) <- c('mlydata', class(ret))
@@ -75,14 +88,15 @@ for (mtd in methodNames_1) {
 
 
 
-for (mtd in methodNames_2) {
+for (i in 1 : nrow(methodNames_2)) {
+    mtd <- methodNames_2[i, 1]
+    obj <- methodNames_2[i, 2]
     cat(
 "
 #' @export 
-'", mtd, ".zoocat' <- function (x, ...) {
-    x <- as.zoo(x)
-    ret <- '",
-    mtd, "'(x, ...)
+'", mtd, ".zoocat' <- function (", obj, ", ...) {
+    ", obj, " <- as.zoo(", obj, ")
+    ret <- '", mtd, "'(", obj, ", ...)
     return(ret)
 }
         
@@ -90,10 +104,9 @@ for (mtd in methodNames_2) {
 
 "
 #' @export
-'", mtd, ".mlydata' <- function (x, ...) {
-    x <- as.zoo(x)
-    ret <- '",
-    mtd, "'(x, ...)
+'", mtd, ".mlydata' <- function (", obj, ", ...) {
+    ", obj, " <- as.zoo(", obj, ")
+    ret <- '", mtd, "'(", obj, ", ...)
     return(ret)
 }
         
@@ -102,6 +115,41 @@ for (mtd in methodNames_2) {
         file = fcon)
 }
 
+
+for (i in 1 : nrow(methodNames_3)) {
+    mtd <- methodNames_3[i, 1]
+    obj <- methodNames_3[i, 2]
+    cat(
+"
+#' @export 
+'", mtd, ".zoocat' <- function (", obj, ", value) {
+    colAttr <- cattr(", obj, ")
+    ", obj, " <- as.zoo(", obj, ")
+    ret <- '", mtd, "'(", obj, ", value)
+    colnames(ret) <- NULL
+    attr(ret, 'cattr') <- colAttr
+    class(ret) <- c('zoocat', class(ret))
+    return(ret)
+}
+        
+",
+
+"
+#' @export
+'", mtd, ".mlydata' <- function (", obj, ", value) {
+    month <- attr(", obj, ", 'month')
+    ", obj, " <- as.zoo(", obj, ")
+    ret <- '", mtd, "'(", obj, ", value)
+    colnames(ret) <- NULL
+    attr(ret, 'month') <- month 
+    class(ret) <- c('mlydata', class(ret))
+    return(ret)
+}
+        
+",
+        sep = '',
+        file = fcon)
+}
 
 
 close(fcon)

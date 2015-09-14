@@ -12,7 +12,7 @@ as.mlydata(x, ...)
 \arguments{
 \item{x}{A zoo object.}
 
-\item{...}{Additional arguments to be passed to or from methods.}
+\item{...}{further arguments passed to methods.}
 
 \item{month}{A vector of month, must have same length as ncol of x.}
 }

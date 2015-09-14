@@ -9,24 +9,24 @@
 \usage{
 as.zoocat(x, ...)
 
-\method{as.zoocat}{mlydata}(..., addname = TRUE)
+\method{as.zoocat}{mlydata}(..., addname = TRUE, variable.name = "variable")
 
-\method{as.zoocat}{mlydataList}(x, ...)
+\method{as.zoocat}{mlydataList}(x, variable.name = "variable", ...)
 
-\method{as.zoocat}{zoo}(x, colattr = NULL, ...)
+\method{as.zoocat}{zoo}(x, colattr = NULL, variable.name = "variable", ...)
 }
 \arguments{
-\item{x}{An object.}
+\item{x}{the object.}
 
-\item{...}{Additional arguments to be passed to or from methods.}
+\item{...}{other arguments passed to methods.}
 
-\item{addname}{Logical. If TRUE, a field of \code{cattr} "name" will be add.}
+\item{addname}{logical. If TRUE, a field of \code{cattr} "name" will be add.}
+
+\item{variable.name}{the name of the field in the \code{cattr} of
+the output \code{zoocat} object to store the variable name.
+Only valid when \code{addname} is TRUE.}
 
 \item{colattr}{The column attribute table for x.}
-
-\item{varname}{The value for the name field in the \code{cattr} of
-the output \code{zoocat} object. Only valid when \code{addname} is TRUE.
-If NULL, the variable name will be used.}
 }
 \value{
 A \code{zoocat} object.

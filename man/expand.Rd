@@ -8,12 +8,14 @@
 \usage{
 expand(x, ...)
 
-\method{expand}{mlydata}(x, k, direction = "both")
+\method{expand}{mlydata}(x, k, direction = "both", ...)
 
 \method{expand}{mlydataList}(x, ...)
 }
 \arguments{
 \item{x}{the \code{mlydata} object.}
+
+\item{...}{further arguments.}
 
 \item{k}{the number of cycle to be expanded.}
 
