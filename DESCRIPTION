@@ -11,6 +11,7 @@ Depends:
     zoo,
     reshape2
 Imports:
+    base,
     graphics,
     utils,
     stats,

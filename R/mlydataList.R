@@ -1,7 +1,34 @@
 #' \code{mlydataList} Class
 #' 
-#' A \code{mlydataList} object is a list, each element of which is 
+#' A \code{mlydataList} object is a list, and each element of it is 
 #' a \code{mlydata} object.
+#' 
+#' Many methods for class \code{mlydata} are redefined for  
+#' \code{mlydataList} class. When call these methods, each element in 
+#' the \code{mlydataList} object is transfered to these methods, and 
+#' the results are returned as a \code{mlydataList} object.\cr
+#' These methods include:\cr 
+#' \code{\link[=window.mlydata]{window}}, 
+#' \code{\link[=expand.mlydata]{expand}}, 
+#' \code{\link[=normalize.zoo]{normalize}}, 
+#' \code{\link[=cummin]{cummin}}, 
+#' \code{\link[=cumprod]{cumprod}}, 
+#' \code{\link[=diff]{diff}}, 
+#' \code{\link[=head]{head}}, 
+#' \code{\link[=tail]{tail}}, 
+#' \code{\link[=lag.mlydata]{lag}}, 
+#' \code{\link[=na.aggregate]{na.aggregate}}, 
+#' \code{\link[=na.approx]{na.approx}}, 
+#' \code{\link[=na.contiguous]{na.contiguous}}, 
+#' \code{\link[=na.spline]{na.spline}}, 
+#' \code{\link[=na.trim]{na.trim}}, 
+#' \code{\link[=rollapply]{rollapply}}, 
+#' \code{\link[=rollmax]{rollmax}}, 
+#' \code{\link[=rollmean]{rollmean}}, 
+#' \code{\link[=rollmedian]{rollmedian}}, 
+#' \code{\link[=rollsum]{rollsum}}, 
+#' \code{\link[=scale]{scale}}
+#' 
 #' 
 #' 
 #' @param ... a series of \code{mlydata} object or a list of \code{mlydata} objects.
