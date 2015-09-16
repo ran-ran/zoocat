@@ -7,7 +7,7 @@
 #' \code{mlydataList} class. When call these methods, each element in 
 #' the \code{mlydataList} object is transfered to these methods, and 
 #' the results are returned as a \code{mlydataList} object.\cr
-#' These methods include:\cr 
+#' These methods include:  
 #' \code{\link[=window.mlydata]{window}}, 
 #' \code{\link[=expand.mlydata]{expand}}, 
 #' \code{\link[=normalize.zoo]{normalize}}, 
@@ -27,7 +27,7 @@
 #' \code{\link[=rollmean]{rollmean}}, 
 #' \code{\link[=rollmedian]{rollmedian}}, 
 #' \code{\link[=rollsum]{rollsum}}, 
-#' \code{\link[=scale]{scale}}
+#' \code{\link[=scale]{scale}}.
 #' 
 #' 
 #' 

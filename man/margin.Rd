@@ -9,22 +9,22 @@
 margin(x, ...)
 
 \method{margin}{data.frame}(x, mar.for, value.var = "value",
-  fun.aggr = mean, ...)
+  fun.aggregate = mean, ...)
 
-\method{margin}{zoocat}(x, mar.for, fun.aggr = mean, ...)
+\method{margin}{zoocat}(x, mar.for, fun.aggregate = mean, ...)
 }
 \arguments{
-\item{x}{A data frame or \code{zoocat} object.}
+\item{x}{a data frame or \code{zoocat} object.}
 
-\item{...}{Additional arguments to be passed to or from methods.}
+\item{...}{additional arguments to be passed to methods.}
 
-\item{mar.for}{One or more variables to compute margin for.
+\item{mar.for}{one or more variables to compute margin for.
 For data frame, it means column names. For \code{zoocat} object,
-it means names of column attributes.}
+it means fields of column attributes.}
 
-\item{value.var}{The value variable.}
+\item{value.var}{the value variable.}
 
-\item{fun.aggr}{The function for aggregation.}
+\item{fun.aggregate}{the function for aggregation.}
 }
 \description{
 Computing margins for given ID variables of a data frame
@@ -38,7 +38,7 @@ Computing margins for given ID variables of a data frame
 ## The example of data frame
 data(sst)
 margin(sst, mar.for = c('year'), value.var = 'nino12')
-margin(sst, mar.for = c('year'), value.var = 'nino3', fun.aggr = length)
+margin(sst, mar.for = c('year'), value.var = 'nino3', fun.aggregate = length)
 
 library(lattice)
 sstmon <- margin(sst, mar.for = c('month'), value.var = 'nino3')

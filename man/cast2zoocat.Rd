@@ -4,29 +4,30 @@
 \alias{cast2zoocat}
 \title{Cast a Data Frame as a zoocat Object}
 \usage{
-cast2zoocat(x, index.var, value.var, attr.var = NULL, fun.aggr = NULL,
+cast2zoocat(x, index.var, value.var, attr.var = NULL, fun.aggregate = NULL,
   del.unique.cattr = TRUE)
 }
 \arguments{
-\item{x}{A data frame.}
+\item{x}{a data frame.}
 
-\item{index.var}{The name of the column to be treated as the index of the
+\item{index.var}{the name of the column to be treated as the index of the
 zoocat object.}
 
-\item{value.var}{The name of the column which stored the values.}
+\item{value.var}{the name of the column which stored the values.}
 
-\item{attr.var}{The name of the column which will be used as column attributes of
+\item{attr.var}{the name of the column which will be used as column attributes of
 the \code{zoocat} object. If NULL, all columns except \code{value.var} and \code{index.var}
 will be used.}
 
-\item{fun.aggr}{Aggregation function needed if variables do not identify a single observation
-for each output cell. Defaults to length (with a message) if needed but not specified.}
+\item{fun.aggregate}{aggregation function needed if variables do not identify a single observation
+for each output cell. Defaults to length (with a message) if needed but not specified.
+See \code{\link{dcast}}.}
 
-\item{del.unique.cattr}{If TRUE, the column attibutes with unique value will
+\item{del.unique.cattr}{logical. If TRUE, the column attibutes with unique value will
 be deleted.}
 }
 \value{
-A zoocat object.
+A \code{zoocat} object.
 }
 \description{
 Cast a data frame into a zoocat object. The data frame should be the style
@@ -41,7 +42,7 @@ cast2zoocat(df, index.var = 'year', value.var = 'value', attr.var = 'varname')
 
 ## This is the air quality example from package reshape2
 names(airquality) <- tolower(names(airquality))
-aqm <- melt(airquality, id=c("month", "day"), na.rm=TRUE)
+aqm <- melt(airquality, id = c("month", "day"), na.rm=TRUE)
 head(aqm)
 cast2zoocat(aqm, index.var = 'month', value.var = 'value', attr.var = 'variable')
 cast2zoocat(aqm, index.var = 'month', value.var = 'value')

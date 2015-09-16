@@ -5,7 +5,7 @@
 \title{Cast a Data Frame as a \code{mlydata} or \code{mlydataList} Object}
 \usage{
 cast2mlydata(x, year.var = "year", month.var = "month", value.var,
-  variable.var = NULL, fun.aggr = NULL)
+  variable.var = NULL, fun.aggregate = NULL)
 }
 \arguments{
 \item{x}{a data frame.}
@@ -15,12 +15,13 @@ cast2mlydata(x, year.var = "year", month.var = "month", value.var,
 \item{month.var}{the name of the column which stores month.}
 
 \item{value.var}{the name of the column which stores values. Can have
-several elements}
+several elements.}
 
 \item{variable.var}{the name of the column which stores the variable names.}
 
-\item{fun.aggr}{Aggregation function needed if variables do not identify a single observation
-for each output cell. Defaults to length (with a message) if needed but not specified.}
+\item{fun.aggregate}{aggregation function needed if variables do not identify a single observation
+for each output cell. Defaults to length (with a message) if needed but not specified.
+See \code{\link{decast}}.}
 }
 \value{
 A \code{mlydata} object.
@@ -37,7 +38,7 @@ the returned \code{mlydataList} object.
 }
 \examples{
 x <- data.frame(year = rep(1991 : 1993, each = 3), month = rep(3 : 1, 3), value = 1 : 9)
-md <- cast2mlydata(x, year.var = 'year', month.var = 'month', value.var = 'value', fun.aggr = mean)
+md <- cast2mlydata(x, year.var = 'year', month.var = 'month', value.var = 'value', fun.aggregate = mean)
 
 data(sst)
 cast2mlydata(sst, value.var = c('nino12', 'nino3'))
