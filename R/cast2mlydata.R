@@ -17,7 +17,7 @@
 #' @param variable.var the name of the column which stores the variable names.
 #' @param fun.aggregate aggregation function needed if variables do not identify a single observation
 #' for each output cell. Defaults to length (with a message) if needed but not specified.
-#' See \code{\link{decast}}.
+#' See \code{\link{dcast}}.
 #' @return A \code{mlydata} object. 
 #' @examples
 #' 

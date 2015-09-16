@@ -11,9 +11,9 @@
 
 #' @export 
 #' @rdname expand
-'cummax.mlydataList' <- function (x, ...) {
+'expand.mlydataList' <- function (x, ...) {
     for (i in 1 : length(x)) {
-        x[[i]] <- cummax(x[[i]], ...)
+        x[[i]] <- expand(x[[i]], ...)
     }
     return(x)
 }

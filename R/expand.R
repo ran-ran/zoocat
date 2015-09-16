@@ -15,19 +15,19 @@ expand <- function (x, ...) {
 #' 
 #' x <- matrix(1 : 48, nrow = 4)
 #' md <- mlydata(x, year = 1991 : 1994)
-#' expand(md, k = 1, direction = 'left')
+#' expand(md, direction = 'left')
 #' expand(md, k = 1, direction = 'right')
 #' expand(md, k = 1, direction = 'both')
 #' expand(md, k = 2, direction = 'both')
 #' 
 #' @param x the \code{mlydata} object.
-#' @param k the number of cycle to be expanded.
+#' @param k the number of cycle to be expanded. Default is 1.
 #' @param direction the direction to expand. Can be "left",
 #' "right" or "both".
 #' @param ... further arguments.
-#' @return a \code{mlydata} object.
+#' @return a \code{mlydata} or \code{mlydataList} object.
 #' @export
-expand.mlydata <- function (x, k, direction = 'both', ...) {
+expand.mlydata <- function (x, k = 1, direction = 'both', ...) {
     stopifnot(direction %in% c('left', 'right', 'both'))
     stopifnot(k >= 1)
     if (direction == 'left') {
