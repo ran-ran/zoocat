@@ -4,17 +4,17 @@
 \alias{lag.mlydata}
 \title{Lags of \code{mlydata} Objects}
 \usage{
-\method{lag}{mlydata}(x, k = 1, adjust.month = TRUE, ...)
+\method{lag}{mlydata}(x, ...)
 }
 \arguments{
 \item{x}{A \code{zoocat} or \code{mlydata} object.}
+
+\item{...}{further arguments.}
 
 \item{k}{The number of the lags.}
 
 \item{adjust.month}{Logical. If TRUE, the month of \code{x} will be
 add \code{12 * k}.}
-
-\item{...}{further arguments.}
 }
 \description{
 Lags of \code{mlydata} Objects
