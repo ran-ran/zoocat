@@ -84,18 +84,22 @@ head(retdf)
 
 
 # mlydata class
+mlydata class is designed for store monthly data.
 
+```{r,echo=TRUE}
 data(sst)
 nino <- cast2mlydata(sst, year.var = 'year', month.var = 'month',
                      value.var = c('nino12', 'nino3', 'nino34','nino4'))
-nino <- normalize(nino, mode = 'sd1')
-nino <- expand(nino, k = 1, direction = 'both')
+nino <- normalize(nino)
+nino <- expand(nino)
 nino <- na.trim(nino)
 
 ninoel <- window(nino, year = c(1983, 1998, 2010))
 ninoel <- melt(ninoel)
 library(lattice)
 xyplot(value~month|year, group = variable, data = ninoel, type = 'l')
+```
+
 
 
 
