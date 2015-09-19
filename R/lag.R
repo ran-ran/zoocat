@@ -1,6 +1,13 @@
 
 #' Lags of \code{mlydata} Objects
 #' 
+#' @name lag.mlydata
+#' @rdname lag.mlydata
+#' @param x A \code{zoocat} or \code{mlydata} object.
+#' @param k The number of the lags.
+#' @param adjust.month Logical. If TRUE, the month of \code{x} will be 
+#' add \code{12 * k}.
+#' @param ... further arguments.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
@@ -12,13 +19,6 @@
 #' 
 #' lag(md, k = -1, adjust.month = FALSE)
 #' 
-#' @name lag.mlydata
-#' @rdname lag.mlydata
-#' @param x A \code{zoocat} or \code{mlydata} object.
-#' @param k The number of the lags.
-#' @param adjust.month Logical. If TRUE, the month of \code{x} will be 
-#' add \code{12 * k}.
-#' @param ... further arguments.
 #' @export
 lag.mlydata <- function (x, k = 1, adjust.month = TRUE, ...) {
     month <- attr(x, 'month')
@@ -34,3 +34,13 @@ lag.mlydata <- function (x, k = 1, adjust.month = TRUE, ...) {
 }
 
 
+#' @export 
+'lag.zoocat' <- function (x, ...) {
+    colAttr <- cattr(x)
+    x <- as.zoo(x)
+    ret <- 'lag'(x, ...)
+    colnames(ret) <- NULL
+    attr(ret, 'cattr') <- colAttr
+    class(ret) <- c('zoocat', class(ret))
+    return(ret)
+}

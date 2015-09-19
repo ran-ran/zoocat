@@ -3,13 +3,6 @@
 #' Grading series by order of each element.
 #' 
 #' 
-#' @param x A vector or a zoo object.
-#' @param alloc The numbers of elements in each grade. sum(alloc) must ==
-#' length(x).
-#' @param boundary.ret If TRUE, the boundaries between adjacent grades will be
-#' returned.
-#' @param grade.name If NULL, the names of grades will be set to be 1, 2, ... ,
-#' N. The 1st element of grade.name represents the grade of smallest value.
 #' @return If boundary.ret = TRUE, a list will be returned. The first element
 #' is the grades of each element in x. The second is the boundaries between
 #' grades. If boundary.ret = FALSE, only grades will be returned.
@@ -27,6 +20,14 @@
 #' @export
 #' @name grading
 #' @rdname grading
+#' @param x a vector or a zoo object.
+#' @param alloc the numbers of elements in each grade. sum(alloc) must ==
+#' length(x).
+#' @param boundary.ret logical. If TRUE, the boundaries between adjacent grades will be
+#' returned.
+#' @param grade.name character string. If NULL, the names of grades will be set to be 1, 2, ... ,
+#' N. The 1st element of grade.name represents the grade of smallest value.
+#' @param ... further arguments.
 grading <- function (x, ...) {
     UseMethod('grading')
 }
@@ -34,7 +35,8 @@ grading <- function (x, ...) {
 
 #' @export
 #' @rdname grading
-grading.default <- function (x, alloc, boundary.ret = FALSE, grade.name = NULL) {
+grading.default <- function (x, alloc, boundary.ret = FALSE, 
+                             grade.name = NULL, ...) {
     x <- as.vector(x)
     stopifnot(sum(alloc) == length(x))
     stopifnot(all(alloc >= 1))

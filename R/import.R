@@ -3,7 +3,8 @@
 
 #' @import zoo
 #' @import reshape2 
-#' @import stats
 #' @import graphics
+#' @import stats
 #' @import utils 
+#' @import plyr
 NULL

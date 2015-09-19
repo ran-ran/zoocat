@@ -144,30 +144,6 @@
         
 
 #' @export 
-'lag.zoocat' <- function (x, ...) {
-    colAttr <- cattr(x)
-    x <- as.zoo(x)
-    ret <- 'lag'(x, ...)
-    colnames(ret) <- NULL
-    attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
-    return(ret)
-}
-        
-
-#' @export
-'lag.mlydata' <- function (x, ...) {
-    month <- attr(x, 'month')
-    x <- as.zoo(x)
-    ret <- 'lag'(x, ...)
-    colnames(ret) <- NULL
-    attr(ret, 'month') <- month 
-    class(ret) <- c('mlydata', class(ret))
-    return(ret)
-}
-        
-
-#' @export 
 'na.aggregate.zoocat' <- function (object, ...) {
     colAttr <- cattr(object)
     object <- as.zoo(object)

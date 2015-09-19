@@ -100,7 +100,7 @@ print.zoocat <- function (x, ...) {
         j <- 1 : ncol(x)
     }
     colAttr <- attr(x, 'cattr')
-    x <- as.zoo(x)
+    class(x) <- class(x)[-1]
     x <- x[i, j, drop = FALSE]
     
     if (is.character(j)) {

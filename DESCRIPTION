@@ -11,11 +11,11 @@ Depends:
     zoo,
     reshape2
 Imports:
-    base,
     graphics,
     utils,
     stats,
-    plyr
+    plyr,
+    sp
 Suggests: 
     knitr,
     lattice,

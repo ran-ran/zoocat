@@ -23,9 +23,9 @@ Translate a data frame of spatial data to a matrix. The data frame must contain
 columns of latitude, longitude and values.
 }
 \examples{
-x <- querydb(fileName = 'ncepncar/hgt500.db',nfetch = -1,
-            statement = 'select * from main where month = 6 and year = 2010',
-            mar.for = c('lat', 'lon'))
+x <- data.frame(lat = rep(1:10, each = 10),
+                lon = rep(1:10, 10),
+                value = 1:100)
 mat <- spdf2mat(x)
 }
 

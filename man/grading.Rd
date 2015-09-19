@@ -8,20 +8,23 @@
 \usage{
 grading(x, ...)
 
-\method{grading}{default}(x, alloc, boundary.ret = FALSE, grade.name = NULL)
+\method{grading}{default}(x, alloc, boundary.ret = FALSE, grade.name = NULL,
+  ...)
 
 \method{grading}{zoo}(x, ...)
 }
 \arguments{
-\item{x}{A vector or a zoo object.}
+\item{x}{a vector or a zoo object.}
 
-\item{alloc}{The numbers of elements in each grade. sum(alloc) must ==
+\item{...}{further arguments.}
+
+\item{alloc}{the numbers of elements in each grade. sum(alloc) must ==
 length(x).}
 
-\item{boundary.ret}{If TRUE, the boundaries between adjacent grades will be
+\item{boundary.ret}{logical. If TRUE, the boundaries between adjacent grades will be
 returned.}
 
-\item{grade.name}{If NULL, the names of grades will be set to be 1, 2, ... ,
+\item{grade.name}{character string. If NULL, the names of grades will be set to be 1, 2, ... ,
 N. The 1st element of grade.name represents the grade of smallest value.}
 }
 \value{

@@ -1,4 +1,4 @@
-fout <- 'E:/Codes/zoocat/R/all_others.R'
+fout <- 'E:/Codes/zoocat/R/z_all_others.R'
 
 if (file.exists(fout)) {
     file.remove(fout)
@@ -14,7 +14,6 @@ methodNames_1 <- matrix(
                  'cumsum', 'x',
                  'diff', 'x',
                  'head', 'x',
-                 'lag', 'x',
                  'na.aggregate', 'object',
                  'na.approx', 'object',
                  'na.contiguous', 'object',

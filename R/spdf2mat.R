@@ -11,19 +11,20 @@
 #' @export
 #' @examples
 #' 
-#' x <- querydb(fileName = 'ncepncar/hgt500.db',nfetch = -1,
- #'             statement = 'select * from main where month = 6 and year = 2010',
- #'             mar.for = c('lat', 'lon'))
+#' x <- data.frame(lat = rep(1:10, each = 10),
+#'                 lon = rep(1:10, 10),
+#'                 value = 1:100)
 #' mat <- spdf2mat(x)
+#' 
 #' 
 spdf2mat <- function (x, lat.var = 'lat', lon.var = 'lon', value.var = 'value') {
     stopifnot(is.data.frame(x))
     stopifnot(all(c(lat.var, lon.var, value.var) %in% colnames(x)))
     x <- x[, c(lat.var, lon.var, value.var)]
     colnames(x) <- c('lat', 'lon', 'value')
-    coordinates(x) <- ~lon+lat
-    gridded(x) <- TRUE
-    fullgrid(x) <- TRUE
+    sp::coordinates(x) <- ~lon+lat
+    sp::gridded(x) <- TRUE
+    sp::fullgrid(x) <- TRUE
     mat <- as.matrix(x)
     mat <- t(mat)
     mat <- mat[nrow(mat) : 1, ]
