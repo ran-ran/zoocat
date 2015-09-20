@@ -134,7 +134,7 @@ yr.mlydata <- function(x) {
     }
     month <- attr(x, 'month')
     if (is.character(j)) {
-        j <- which(j %in% month2str(month))
+        j <- which(j == month2str(month))
     }
     month <- month[j]
     class(x) <- class(x)[-1]

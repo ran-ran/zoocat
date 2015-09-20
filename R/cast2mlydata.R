@@ -1,7 +1,7 @@
 
-#' Cast a Data Frame as a \code{mlydata} or \code{mlydataList} Object
+#' Cast objects to \code{mlydata} or \code{mlydataList} Objects
 #' 
-#' Cast a data frame as a \code{mlydata} or \code{mlydataList} object.
+#' Cast a data frame or \code{zoo} object as a \code{mlydata} or \code{mlydataList} object.
 #' 
 #' If the length of \code{value.var} is larger than 1, each variable in \code{value.var}
 #' will be casted as a \code{mlydata} object, and a \code{mlydataList} will be returned.\cr
@@ -9,11 +9,12 @@
 #' to a variable, and corresponding row will be casted into a \code{mlydata} object in 
 #' the returned \code{mlydataList} object.
 #' 
-#' @param x a data frame.
+#' @param x a object.
+#' @param ... further arguments.
 #' @param year.var the name of the column which stores year.
 #' @param month.var the name of the column which stores month.
 #' @param value.var the name of the column which stores values. Can have 
-#' several elements.
+#' several elements. NULL means all columns except \code{year.var} and \code{month.var}.
 #' @param variable.var the name of the column which stores the variable names.
 #' @param fun.aggregate aggregation function needed if variables do not identify a single observation
 #' for each output cell. Defaults to length (with a message) if needed but not specified.
@@ -33,11 +34,30 @@
 #' sst.cast <- cast2mlydata(sst.melt, value.var = 'value', variable.var = 'variable')
 #' sst.remelt <- melt(sst.cast)
 #' 
+#' ym <- as.yearmon(2000 + seq(0, 23)/12)
+#' zooobj <- zoo(matrix(1:48, nrow = 24), order.by = ym)
+#' colnames(zooobj) <- c('x', 'y')
+#' cast2mlydata(zooobj)
+#' 
 #'
 #' @export
-cast2mlydata <- function (x, year.var = 'year', month.var = 'month', 
-                          value.var, variable.var = NULL,
+#' @rdname cast2mlydata
+#' @name cast2mlydata
+cast2mlydata <- function (x, ...) {
+    UseMethod('cast2mlydata')
+}
+
+
+
+
+#' @export
+#' @rdname cast2mlydata
+cast2mlydata.data.frame <- function (x, year.var = 'year', month.var = 'month', 
+                          value.var = NULL, variable.var = NULL,
                           fun.aggregate = NULL) {
+    if (is.null(value.var)) {
+        value.var <- setdiff(colnames(x), c(year.var, month.var))
+    }
     if (length(value.var) > 1) {
         if (!is.null(variable.var)) {
             stop('variable.var must be NULL if there are more than one value.var.')
@@ -69,6 +89,25 @@ cast2mlydata <- function (x, year.var = 'year', month.var = 'month',
     }
     
 }
+
+
+
+#' @export
+#' @rdname cast2mlydata
+cast2mlydata.zoo <- function (x, value.var = NULL, fun.aggregate = NULL) {
+    if (is.null(value.var)) {
+        value.var <- colnames(x)
+    }
+    yr <- as.numeric(format(index(x), '%Y'))
+    mon <- as.numeric(format(index(x), '%m'))
+    xdf <- data.frame(year = yr, month = mon, coredata(x),
+                      stringsAsFactors = FALSE)
+    ret <- cast2mlydata(xdf, year.var = 'year',
+                     month.var = 'month', value.var = value.var,
+                     fun.aggregate = fun.aggregate)
+    return(ret)
+}
+
 
 
 

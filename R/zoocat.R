@@ -102,7 +102,7 @@ print.zoocat <- function (x, ...) {
     colAttr <- attr(x, 'cattr')
     if (is.character(j)) {
         cattrStr <- cattr2str(colAttr)
-        j <- which(j %in% cattrStr)
+        j <- which(j == cattrStr)
     }
     colAttr <- colAttr[j, , drop = FALSE]
     class(x) <- class(x)[-1]

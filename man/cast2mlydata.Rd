@@ -2,20 +2,28 @@
 % Please edit documentation in R/cast2mlydata.R
 \name{cast2mlydata}
 \alias{cast2mlydata}
-\title{Cast a Data Frame as a \code{mlydata} or \code{mlydataList} Object}
+\alias{cast2mlydata.data.frame}
+\alias{cast2mlydata.zoo}
+\title{Cast objects to \code{mlydata} or \code{mlydataList} Objects}
 \usage{
-cast2mlydata(x, year.var = "year", month.var = "month", value.var,
-  variable.var = NULL, fun.aggregate = NULL)
+cast2mlydata(x, ...)
+
+\method{cast2mlydata}{data.frame}(x, year.var = "year", month.var = "month",
+  value.var = NULL, variable.var = NULL, fun.aggregate = NULL)
+
+\method{cast2mlydata}{zoo}(x, value.var = NULL, fun.aggregate = NULL)
 }
 \arguments{
-\item{x}{a data frame.}
+\item{x}{a object.}
+
+\item{...}{further arguments.}
 
 \item{year.var}{the name of the column which stores year.}
 
 \item{month.var}{the name of the column which stores month.}
 
 \item{value.var}{the name of the column which stores values. Can have
-several elements.}
+several elements. NULL means all columns except \code{year.var} and \code{month.var}.}
 
 \item{variable.var}{the name of the column which stores the variable names.}
 
@@ -27,7 +35,7 @@ See \code{\link{dcast}}.}
 A \code{mlydata} object.
 }
 \description{
-Cast a data frame as a \code{mlydata} or \code{mlydataList} object.
+Cast a data frame or \code{zoo} object as a \code{mlydata} or \code{mlydataList} object.
 }
 \details{
 If the length of \code{value.var} is larger than 1, each variable in \code{value.var}
@@ -48,5 +56,10 @@ cast2mlydata(sst, value.var = c('nino12', 'nino3'))
 sst.melt <- melt(sst, id.var = c('year', 'month'))
 sst.cast <- cast2mlydata(sst.melt, value.var = 'value', variable.var = 'variable')
 sst.remelt <- melt(sst.cast)
+
+ym <- as.yearmon(2000 + seq(0, 23)/12)
+zooobj <- zoo(matrix(1:48, nrow = 24), order.by = ym)
+colnames(zooobj) <- c('x', 'y')
+cast2mlydata(zooobj)
 }
 

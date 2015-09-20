@@ -12,6 +12,7 @@ test_that('Subsetting of zoocat object', {
                      coredata(zc)[1:2, 1:2])
     expect_is(zc[, '2_x'], 'zoo')
     expect_identical(zc[, '2_x'], zc[, 1])
+    expect_identical(zc[, '3_y'], zc[, 2])
 }
 )
 
@@ -28,6 +29,7 @@ test_that('Subsetting of mlydata object', {
                      coredata(md)[1:2, 1:2])
     expect_is(md[, 'Feb'], 'zoo')
     expect_identical(md[, 'Feb'], md[, 1])
+    expect_identical(md[, 'Mar'], md[, 2])
 }
 )
 
