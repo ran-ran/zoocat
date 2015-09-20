@@ -28,6 +28,6 @@ spdf2mat <- function (x, lat.var = 'lat', lon.var = 'lon', value.var = 'value') 
     mat <- as.matrix(x)
     mat <- t(mat)
     mat <- mat[nrow(mat) : 1, ]
-    ret <- list(mat = mat, bbox = bbox(x))
+    ret <- list(mat = mat, bbox = sp::bbox(x))
     return(ret)
 }

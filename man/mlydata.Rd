@@ -12,7 +12,7 @@
 \alias{yr<-.mlydata}
 \title{\code{mlydata} Class}
 \usage{
-mlydata(x, year, month = 1:12)
+mlydata(x, year, month = 1:12, order.by = NULL)
 
 mon(x)
 
@@ -42,6 +42,8 @@ treated as a matrix with only one column. For other methods, x is a
 The elements of \code{month} can be smaller than 1 or larger than 12, which
 means the months of past years or future years. For example, the months of
 last year is (1 : 12) - 12.}
+
+\item{order.by}{the same as year.}
 
 \item{value}{The new value for month and year of the object.}
 }

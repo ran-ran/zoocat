@@ -16,39 +16,40 @@
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
 #' md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' coredata(md)
+#' md <- mlydata(x, order.by = 1991 : 1995, month = c(2, 3, 5, 6))
 #' mon(md)
 #' mon(md) <- mon(md) + 1
 #' yr(md)
 #' yr(md) <- yr(md) + 1
-#' md[3, 4]
-#' md[3, , drop = FALSE]
-#' md[, 2]
-#' md['1994', ]
-#' md[, 'Apr']
 #' 
 #' x <-  matrix(1 : 36, nrow = 3)
 #' md <- mlydata(x, year = 1991 : 1993)
 #' @name mlydata
 #' @rdname mlydata
 #' @export
-#' @param x For \code{mlydata} function, it is a matrix or a vector. If x is
-#' a matrix, each row will be treated as a year. If x is a vector, it will be
-#' treated as a matrix with only one column. For other methods, x is a
-#' \code{mlydata} object.
-#' @param year A numeric vector representing years.
-#' @param month A numeric vector in which numbers are used to represent months.
+#' @param x a matrix or a vector for function \code{mlydata}. Otherwise, it is 
+#' a \code{mlydata} object. 
+#' For \code{mlydata}, if x is a matrix, each row will be treated as a year. 
+#' If x is a vector, it will be
+#' treated as a matrix with only one column.
+#' @param year a numeric vector representing years.
+#' @param month a numeric vector in which numbers are used to represent months.
 #' The elements of \code{month} can be smaller than 1 or larger than 12, which
 #' means the months of past years or future years. For example, the months of
 #' last year is (1 : 12) - 12.
-mlydata <- function(x, year, month = 1 : 12) {
-    if(!(is.vector(x) | is.matrix(x))) {
+#' @param order.by the same as year. If it is not NULL, argument \code{year} will
+#' be negleted.
+mlydata <- function(x, year, month = 1 : 12, order.by = NULL) {
+    if (!(is.vector(x) | is.matrix(x))) {
         stop('x must be a vector or a matrix.')
     }
-    if(is.vector(x)) {
+    if (is.vector(x)) {
         x <- matrix(x, nrow = length(x))
     }
-    if(length(year) != nrow(x)) {
+    if (!is.null(order.by)) {
+        year <- order.by
+    }
+    if (length(year) != nrow(x)) {
         stop('The length of year must be equal with nrow of x.')
     }
     if(length(month) != ncol(x)) {
@@ -124,42 +125,28 @@ yr.mlydata <- function(x) {
 
 
 #' @export
-'[.mlydata' <- function(x, i = NULL, j = NULL, drop = TRUE) {
-    if (is.null(i)) {
+'[.mlydata' <- function(x, i, j, drop = TRUE) {
+    if (missing(i)) {
         i <- 1 : nrow(x)
     }
-    if (is.null(j)) {
+    if (missing(j)) {
         j <- 1 : ncol(x)
     }
     month <- attr(x, 'month')
-    x <- as.zoo(x)
-    x <- x[i, j, drop = FALSE]    
-    
     if (is.character(j)) {
         j <- which(j %in% month2str(month))
     }
-    attr(x, 'month') <- month[j]
-    class(x) <- c('mlydata', class(x))
+    month <- month[j]
+    class(x) <- class(x)[-1]
+    x <- x[i, j, drop = drop]
     
-    if (drop == TRUE) {
-        if (nrow(x) == 1) {
-            cname <- colnames(x)
-            x <- as.vector(x)
-            names(x) <- cname
-        } else if (ncol(x) == 1) {
-            rname <- index(x)
-            x <- as.vector(x)    
-            names(x) <- rname
-        }
+    if (drop == TRUE & length(i) == 1) {
+        x <- as.vector(x)
+        names(x) <- month2str(month)
+    } else if (drop == FALSE | (length(i) > 1 & length(j) > 1)) { 
+        attr(x, 'month') <- month 
+        class(x) <- c('mlydata', class(x))
     }
     
-    colnames(x) <- NULL
     return(x)
 }
-
-
-
-
-
-
-

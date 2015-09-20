@@ -89,39 +89,33 @@ print.zoocat <- function (x, ...) {
 
 
 #' @export
-'[.zoocat' <- function(x, i = NULL, j = NULL, drop = TRUE) {
+'[.zoocat' <- function(x, i, j, drop = TRUE, ...) {
     if (length(x) == 0) {
         return(zoocat())
     }
-    if (is.null(i)) {
+    if (missing(i)) {
         i <- 1 : nrow(x)
     }
-    if (is.null(j)) {
+    if (missing(j)) {
         j <- 1 : ncol(x)
     }
     colAttr <- attr(x, 'cattr')
-    class(x) <- class(x)[-1]
-    x <- x[i, j, drop = FALSE]
-    
     if (is.character(j)) {
-        j <- which(j %in% cattr2str(colAttr))
+        cattrStr <- cattr2str(colAttr)
+        j <- which(j %in% cattrStr)
     }
-    attr(x, 'cattr') <- colAttr[j, , drop = FALSE]
-    class(x) <- c('zoocat', class(x))
+    colAttr <- colAttr[j, , drop = FALSE]
+    class(x) <- class(x)[-1]
+    x <- x[i, j, drop = drop]
     
-    if (drop == TRUE) {
-        if (nrow(x) == 1) {
-            cname <- colnames(x)
-            x <- as.vector(x)
-            names(x) <- cname
-        } else if (ncol(x) == 1) {
-            idx <- index(x)
-            x <- as.vector(x)    
-            x <- zoo(x, order.by = idx)
-        }
+    if (drop == TRUE & length(i) == 1) {
+        x <- as.vector(x)
+        names(x) <- cattr2str(colAttr)
+    } else if (drop == FALSE | (length(i) > 1 & length(j) > 1)) { 
+        attr(x, 'cattr') <- colAttr
+        class(x) <- c('zoocat', class(x))
     }
     
-    colnames(x) <- NULL
     return(x)
 }
 

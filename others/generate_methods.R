@@ -1,4 +1,4 @@
-fout <- 'E:/Codes/zoocat/R/z_all_others.R'
+fout <- 'E:/Codes/zoocat/R/z_other_methods.R'
 
 if (file.exists(fout)) {
     file.remove(fout)

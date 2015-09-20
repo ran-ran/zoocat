@@ -1,5 +1,5 @@
 
-fout <- 'E:/Codes/zoocat/R/methods_mlydataList.R'
+fout <- 'E:/Codes/zoocat/R/z_mlydataList_methods.R'
 
 if (file.exists(fout)) {
     file.remove(fout)
