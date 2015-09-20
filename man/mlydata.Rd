@@ -31,19 +31,21 @@ yr(x) <- value
 \method{yr}{mlydata}(x) <- value
 }
 \arguments{
-\item{x}{For \code{mlydata} function, it is a matrix or a vector. If x is
-a matrix, each row will be treated as a year. If x is a vector, it will be
-treated as a matrix with only one column. For other methods, x is a
-\code{mlydata} object.}
+\item{x}{a matrix or a vector for function \code{mlydata}. Otherwise, it is
+a \code{mlydata} object.
+For \code{mlydata}, if x is a matrix, each row will be treated as a year.
+If x is a vector, it will be
+treated as a matrix with only one column.}
 
-\item{year}{A numeric vector representing years.}
+\item{year}{a numeric vector representing years.}
 
-\item{month}{A numeric vector in which numbers are used to represent months.
+\item{month}{a numeric vector in which numbers are used to represent months.
 The elements of \code{month} can be smaller than 1 or larger than 12, which
 means the months of past years or future years. For example, the months of
 last year is (1 : 12) - 12.}
 
-\item{order.by}{the same as year.}
+\item{order.by}{the same as year. If it is not NULL, argument \code{year} will
+be negleted.}
 
 \item{value}{The new value for month and year of the object.}
 }
@@ -65,16 +67,11 @@ month of the object.
 \examples{
 x <- matrix(1 : 20, nrow = 5)
 md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-coredata(md)
+md <- mlydata(x, order.by = 1991 : 1995, month = c(2, 3, 5, 6))
 mon(md)
 mon(md) <- mon(md) + 1
 yr(md)
 yr(md) <- yr(md) + 1
-md[3, 4]
-md[3, , drop = FALSE]
-md[, 2]
-md['1994', ]
-md[, 'Apr']
 
 x <-  matrix(1 : 36, nrow = 3)
 md <- mlydata(x, year = 1991 : 1993)
