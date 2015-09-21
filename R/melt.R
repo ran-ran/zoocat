@@ -14,14 +14,33 @@
 #' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 #' melt(zc)
 #' 
+#' x <- matrix(1 : 24, nrow = 3, byrow = TRUE)
+#' md <- mlydata(x, year = 1991 : 1993, month = 2 : 9)
+#' md2 <- md + 1
+#' melt(md)
+#' melt(md, ret = 'zoo')
+#' melt(md, md2, ret = 'zoo')
+#' 
+#' x <- matrix(1 : 36, nrow = 3)
+#' x <- mlydata(x, year = 1991 : 1993)
+#' y <- x + 1
+#' mdl <- mlydataList(x, y)
+#' melt(mdl, variable.name = 'var', value.name = 'val')
+#' melt(mdl, ret = 'zoo')
+#' 
 #' @name melt
 #' @rdname melt
 #' @export
 #' @param data object to melt.
-#' @param value.name Name of variable used to store values.
-#' @param index.name Name of variable used to store the index of the \code{zoocat} object.
-#' @param na.rm As \code{melt} in reshape2.Should NA values be removed from the data set? 
-#' For \code{mlydata}, it is only valid when \code{ret} is \code{data.frame}.
+#' @param value.name name of the column used to store values. It is valid only when 
+#' a data frame is returned.
+#' @param index.name name of the column used to store the index of the \code{zoocat} object.
+#' @param na.rm as \code{melt} in reshape2. Should NA values be removed from the data set? 
+#' @param ret character string. Can be \code{data.frame} or \code{zoo}
+#' @param variable.name name of the column used to store variable names.
+#' Only valid when a data frame is returned. For \code{melt.mlydata}, it is only 
+#' valid when there are several input \code{mlydata} objects.
+#' @param ... further arguments.
 melt.zoocat <- function (data, value.name = 'value', index.name = 'index',
                          na.rm = FALSE, ...) {
     colattr <- cattr(data)
@@ -44,41 +63,31 @@ melt.zoocat <- function (data, value.name = 'value', index.name = 'index',
 
 #' @export
 #' @rdname melt
-#' @examples
 #' 
-#' x <- matrix(1 : 36, nrow = 3, byrow = TRUE)
-#' md <- mlydata(x, year = 1991 : 1993, month = 1 : 12)
-#' md2 <- md + 1
-#' melt(md)
-#' melt(md, ret = 'zoo')
-#' melt(md, md2)
-#' 
-#' @param ret Can be \code{data.frame} or \code{zoo}
-#' @param variable.name name of variable used to store measured variable names.
-#' @param ... Further arguments.
 melt.mlydata <- function(..., value.name = 'value', variable.name = 'variable',
                          ret = 'data.frame', 
                          na.rm = FALSE) {
     stopifnot(ret %in% c('data.frame', 'zoo'))
     arg <- list(...)
-    if (ret == 'zoo') {
-        if (length(arg) > 1) {
-            warning('For ret == "zoo", only the 1st mlydata object is used.')
+    if (length(arg) > 1) {
+        for (i in 2 : length(arg)) {
+            if (!inherits(arg[[i]], 'mlydata')) {
+                stop('Some argument is not mlydata objects.')
+            }
         }
-        x <- arg[[1]]
-        if(!all(attr(x, 'month') == 1 : 12)) {
-            stop('x must have 12 columns which respresents 12 months.')
-        }
-        year <- index(x)
-        month <- 1 : 12
-        yy <- rep(year, each = 12)
-        mm <- rep(month, length(year))
-        yymm <- yearmon(yy + (mm - 1) / 12)
-        mat <- coredata(x)
-        vec <- as.vector(t(mat))
-        ret <- zoo(vec, order.by = yymm)
-    } else {
-        if (length(arg) == 1) {
+    }
+    if (length(arg) == 1) {
+        if (ret == 'zoo') {
+            x <- arg[[1]]
+            year <- index(x)
+            month <- attr(x, 'month')
+            yy <- rep(year, each = length(month))
+            mm <- rep(month, length(year))
+            yymm <- yearmon(yy + (mm - 1) / 12)
+            mat <- coredata(x)
+            vec <- as.vector(t(mat))
+            ret <- zoo(vec, order.by = yymm)
+        } else {
             x <- arg[[1]]
             month <- attr(x, 'month')
             year <- index(x)
@@ -88,22 +97,18 @@ melt.mlydata <- function(..., value.name = 'value', variable.name = 'variable',
                         value.name = value.name, na.rm = na.rm)
             ret$month <- as.numeric(as.character(ret$month))
             ret <- plyr::arrange(ret, year, month)
-        } else {
-            for (i in 2 : length(arg)) {
-                if (!inherits(arg[[i]], 'mlydata')) {
-                    stop('Some argument is not mlydata objects.')
-                }
-            }
-            if (is.null(names(arg))) {
-                callobj <- sys.call()
-                callList <- as.list(callobj)
-                argnames <- callList[2 : length(callList)]
-                names(arg) <- argnames
-            }
-            arg <- mlydataList(arg)
-            ret <- melt(arg, value.name = value.name, 
-                        variable.name = variable.name, na.rm = na.rm)
         }
+    } else {
+        if (is.null(names(arg))) {
+            callobj <- sys.call()
+            callList <- as.list(callobj)[-1]
+            idxNoName <- which(nchar(names(callList)) == 0)
+            argnames <- callList[idxNoName]
+            names(arg) <- argnames
+        }
+        arg <- mlydataList(arg)
+        ret <- melt(arg, value.name = value.name, 
+                    variable.name = variable.name, ret = ret, na.rm = na.rm)
     }
     return(ret)
 }
@@ -111,26 +116,34 @@ melt.mlydata <- function(..., value.name = 'value', variable.name = 'variable',
 
 #' @export
 #' @rdname melt
-#' @examples
-#' 
-#' x <- matrix(1 : 20, nrow = 5)
-#' x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' y <- x + 1
-#' mdl <- mlydataList(x, y)
-#' melt(mdl)
-#' 
 melt.mlydataList <- function (data, value.name = 'value', variable.name = 'variable',
+                              ret = 'data.frame',
                               na.rm = FALSE, ...) {
-    dfmelt <- data.frame()
-    varnames <- names(data)
-    for (i in 1 : length(data)) {
-        dfnow <- melt(data[[i]], value.name = value.name, ret = 'data.frame',
-                      na.rm = na.rm)
-        dfnow <- cbind(name = varnames[i], dfnow)
-        colnames(dfnow)[1] <- variable.name
-        dfmelt <- rbind(dfmelt, dfnow)
+    stopifnot(ret %in% c('data.frame', 'zoo'))
+    if (ret == 'data.frame') {
+        dfmelt <- data.frame()
+        varnames <- names(data)
+        for (i in 1 : length(data)) {
+            dfnow <- melt(data[[i]], value.name = value.name, ret = 'data.frame',
+                          na.rm = na.rm)
+            dfnow <- cbind(name = varnames[i], dfnow)
+            colnames(dfnow)[1] <- variable.name
+            dfmelt <- rbind(dfmelt, dfnow)
+        }
+        return(dfmelt)
+    } else {
+        zooret <- melt(data[[1]], value.name = value.name, ret = 'zoo',
+                       na.rm = na.rm)
+        if (length(data) > 1) {
+            for (i in 2 : length(data)) {
+                zoonow <- melt(data[[i]], value.name = value.name, ret = 'zoo',
+                               na.rm = na.rm)
+                zooret <- cbind(zooret, zoonow)
+            }
+        }
+        colnames(zooret) <- names(data)
+        return(zooret)
     }
-    return(dfmelt)
 }
 
 

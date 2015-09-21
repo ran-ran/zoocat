@@ -13,7 +13,7 @@ test_that('Melt of zoocat object with NA', {
             cattr(zc)[, 'name'] == zcm[i, 'name'])
         valNow <- zc[index(zc) == zcm[i, 'index'], colNow]
         names(valNow) <- NULL
-        expect_identical(valNow, zcm[i, 'value'])
+        expect_identical(coredata(valNow), zcm[i, 'value'])
     }
 })
 
@@ -28,10 +28,23 @@ test_that('Melt of mlydata object with NA', {
         colNow <- which(mon(md) == mdm[i, 'month'])
         valNow <- md[yr(md) == mdm[i, 'year'], colNow]
         names(valNow) <- NULL
-        expect_identical(valNow, mdm[i, 'value'])
+        expect_identical(coredata(valNow), mdm[i, 'value'])
     }
 })
 
 
-
+test_that('Cast and melt of mlydataList', {
+    ym <- as.yearmon(2000 + seq(0, 23)/12)
+    zooobj <- zoo(matrix(1:48, nrow = 24), order.by = ym)
+    colnames(zooobj) <- c('x', 'y')
+    mdl <- cast2mlydata(zooobj)
+    mdl.melt <- melt(mdl, ret = 'zoo')
+    expect_identical(zooobj, mdl.melt)
+    
+    df <- melt(mdl)
+    mdl <- cast2mlydata(df, value.var = 'value', 
+                        variable.var = 'variable')
+    mdl.melt <- melt(mdl) 
+    expect_identical(df, mdl.melt)
+})
 

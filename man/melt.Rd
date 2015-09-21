@@ -14,23 +14,25 @@
   variable.name = "variable", ret = "data.frame", na.rm = FALSE)
 
 \method{melt}{mlydataList}(data, value.name = "value",
-  variable.name = "variable", na.rm = FALSE, ...)
+  variable.name = "variable", ret = "data.frame", na.rm = FALSE, ...)
 }
 \arguments{
 \item{data}{object to melt.}
 
-\item{value.name}{Name of variable used to store values.}
+\item{value.name}{name of the column used to store values. It is valid only when
+a data frame is returned.}
 
-\item{index.name}{Name of variable used to store the index of the \code{zoocat} object.}
+\item{index.name}{name of the column used to store the index of the \code{zoocat} object.}
 
-\item{na.rm}{As \code{melt} in reshape2.Should NA values be removed from the data set?
-For \code{mlydata}, it is only valid when \code{ret} is \code{data.frame}.}
+\item{na.rm}{as \code{melt} in reshape2. Should NA values be removed from the data set?}
 
-\item{...}{Further arguments.}
+\item{...}{further arguments.}
 
-\item{variable.name}{name of variable used to store measured variable names.}
+\item{variable.name}{name of the column used to store variable names.
+Only valid when a data frame is returned. For \code{melt.mlydata}, it is only
+valid when there are several input \code{mlydata} objects.}
 
-\item{ret}{Can be \code{data.frame} or \code{zoo}}
+\item{ret}{character string. Can be \code{data.frame} or \code{zoo}}
 }
 \value{
 A data frame or a \code{zoo} object.
@@ -45,16 +47,19 @@ x <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(month = c(2, 3, 5, 6), name = c('x', 'y', 'z', 'a'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 melt(zc)
-x <- matrix(1 : 36, nrow = 3, byrow = TRUE)
-md <- mlydata(x, year = 1991 : 1993, month = 1 : 12)
+
+x <- matrix(1 : 24, nrow = 3, byrow = TRUE)
+md <- mlydata(x, year = 1991 : 1993, month = 2 : 9)
 md2 <- md + 1
 melt(md)
 melt(md, ret = 'zoo')
-melt(md, md2)
-x <- matrix(1 : 20, nrow = 5)
-x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+melt(md, md2, ret = 'zoo')
+
+x <- matrix(1 : 36, nrow = 3)
+x <- mlydata(x, year = 1991 : 1993)
 y <- x + 1
 mdl <- mlydataList(x, y)
-melt(mdl)
+melt(mdl, variable.name = 'var', value.name = 'val')
+melt(mdl, ret = 'zoo')
 }
 
