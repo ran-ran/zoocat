@@ -21,7 +21,7 @@ aggregate_by_cattr <- function (x, by, FUN = mean, ...) {
     str <- paste(str, '+', 'index', sep = '')
     str <- paste('value ~', str, sep = '')
     fml <- as.formula(str)
-    df.aggr <- aggregate(fml, df.melt, FUN = FUN)
+    df.aggr <- aggregate(fml, df.melt, FUN = FUN, ...)
     zcast <- cast2zoocat(df.aggr, index.var = 'index', value.var = 'value')
     return(zcast)
 }
