@@ -54,7 +54,7 @@ cast2mlydata <- function (x, ...) {
 #' @rdname cast2mlydata
 cast2mlydata.data.frame <- function (x, year.var = 'year', month.var = 'month', 
                           value.var = NULL, variable.var = NULL,
-                          fun.aggregate = NULL) {
+                          fun.aggregate = NULL, ...) {
     if (is.null(value.var)) {
         value.var <- setdiff(colnames(x), c(year.var, month.var))
     }
@@ -94,7 +94,7 @@ cast2mlydata.data.frame <- function (x, year.var = 'year', month.var = 'month',
 
 #' @export
 #' @rdname cast2mlydata
-cast2mlydata.zoo <- function (x, value.var = NULL, fun.aggregate = NULL) {
+cast2mlydata.zoo <- function (x, value.var = NULL, fun.aggregate = NULL, ...) {
     if (is.null(value.var)) {
         value.var <- colnames(x)
     }

@@ -126,3 +126,15 @@ colapply.mlydata <- function (x, fun, col.as = 'vector', ...) {
     }
     return(retdf)
 }
+
+
+
+#' @export
+#' @rdname colapply
+colapply.mlydataList <- function (x, ...) {
+    return(colapply(as.zoocat(x), ...))    
+}
+
+
+
+

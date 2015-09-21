@@ -3,6 +3,7 @@
 \name{colapply}
 \alias{colapply}
 \alias{colapply.mlydata}
+\alias{colapply.mlydataList}
 \alias{colapply.zoocat}
 \title{Apply Functions Over Each Column}
 \usage{
@@ -11,6 +12,8 @@ colapply(x, ...)
 \method{colapply}{zoocat}(x, fun, col.as = "vector", ...)
 
 \method{colapply}{mlydata}(x, fun, col.as = "vector", ...)
+
+\method{colapply}{mlydataList}(x, ...)
 }
 \arguments{
 \item{x}{A object.}

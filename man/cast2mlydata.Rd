@@ -9,9 +9,9 @@
 cast2mlydata(x, ...)
 
 \method{cast2mlydata}{data.frame}(x, year.var = "year", month.var = "month",
-  value.var = NULL, variable.var = NULL, fun.aggregate = NULL)
+  value.var = NULL, variable.var = NULL, fun.aggregate = NULL, ...)
 
-\method{cast2mlydata}{zoo}(x, value.var = NULL, fun.aggregate = NULL)
+\method{cast2mlydata}{zoo}(x, value.var = NULL, fun.aggregate = NULL, ...)
 }
 \arguments{
 \item{x}{a object.}
