@@ -46,6 +46,7 @@ expand.mlydata <- function (x, left = 1, right = 12, naTrim = TRUE,
         nlagLeft <- floor(-left / 12) + 1
         vecLagLeft <- seq(from = -nlagLeft, to = -1, by = 1)
         ncolLeft <- (-left + 1) %% 12
+        if (ncolLeft == 0) {ncolLeft <- 12}
         leftAdd <- lag(x[, (12 - ncolLeft + 1) : 12], k = -nlagLeft)
         if (nlagLeft > 1) {
             for (i in 2 : nlagLeft) {
@@ -58,6 +59,7 @@ expand.mlydata <- function (x, left = 1, right = 12, naTrim = TRUE,
         nlagRight <- floor((right - 1) / 12)
         vecLagRight <- seq(from = nlagRight, to = 1, by = -1)
         ncolRight <- right %% 12
+        if (ncolRight == 0) {ncolRight <- 12}
         rightAdd <- lag(x[, 1 : ncolRight], k = nlagRight)
         if (nlagRight > 1) {
             for (i in 2 : nlagRight) {
