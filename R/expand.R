@@ -13,34 +13,61 @@ expand <- function (x, ...) {
 #' 
 #' @examples
 #' 
-#' x <- matrix(1 : 48, nrow = 4)
+#' x <- matrix(1 : 48, nrow = 4, byrow = TRUE)
 #' md <- mlydata(x, year = 1991 : 1994)
-#' expand(md, direction = 'left')
-#' expand(md, k = 1, direction = 'right')
-#' expand(md, k = 1, direction = 'both')
-#' expand(md, k = 2, direction = 'both')
+#' expand(md, left = -2)
+#' expand(md, right = 15)
+#' expand(md, right = 15, naTrim = FALSE)
+#' expand(md, left = -13, right = 14)
+#' expand(md, left = -25, right = 14, naTrim = FALSE)
 #' 
 #' @param x the \code{mlydata} object.
-#' @param k the number of cycle to be expanded. Default is 1.
-#' @param direction the direction to expand. Can be "left",
-#' "right" or "both".
-#' @param ... further arguments.
+#' @param left the month of the left limit.
+#' @param right the month of the right limit.
+#' @param naTrim logical. If TRUE, na.trim will be used to trim the
+#' result.
+#' @param ... further arguments input to \code{na.trim}.
 #' @return a \code{mlydata} or \code{mlydataList} object.
 #' @export
-expand.mlydata <- function (x, k = 1, direction = 'both', ...) {
-    stopifnot(direction %in% c('left', 'right', 'both'))
-    stopifnot(k >= 1)
-    if (direction == 'left') {
-        lagvec <- seq(from = -k, to = 0, by = 1)
-    } else if (direction == 'right') {
-        lagvec <- seq(from = 0, to = k, by = 1)
-    } else if (direction == 'both') {
-        lagvec <- seq(from = -k, to = k, by = 1)
+expand.mlydata <- function (x, left = 1, right = 12, naTrim = TRUE,
+                            ...) {
+    if (ncol(x) != 12 || !all(attr(x, 'month') == 1 : 12)) {
+        stop('the month of x must be 1 : 12.')
     }
-    ret <- lag(x, k = lagvec[1])
-    stopifnot(length(lagvec) >= 2)
-    for (i in 2 : length(lagvec)) {
-        ret <- merge(ret, lag(x, k =lagvec[i]))
+    if (right < 12) {
+        warning('neglect invalid argument right.')
+    }
+    if (left > 1) {
+        warning('neglect invalid argument left.')
+    }
+    ret <- x
+    
+    if (left < 1) {
+        nlagLeft <- floor(-left / 12) + 1
+        vecLagLeft <- seq(from = -nlagLeft, to = -1, by = 1)
+        ncolLeft <- (-left + 1) %% 12
+        leftAdd <- lag(x[, (12 - ncolLeft + 1) : 12], k = -nlagLeft)
+        if (nlagLeft > 1) {
+            for (i in 2 : nlagLeft) {
+                leftAdd <- merge(leftAdd, lag(x, k = vecLagLeft[i]))
+            }
+        }
+        ret <- merge(leftAdd, ret)
+    }
+    if (right > 12) {
+        nlagRight <- floor((right - 1) / 12)
+        vecLagRight <- seq(from = nlagRight, to = 1, by = -1)
+        ncolRight <- right %% 12
+        rightAdd <- lag(x[, 1 : ncolRight], k = nlagRight)
+        if (nlagRight > 1) {
+            for (i in 2 : nlagRight) {
+                leftAdd <- merge(lag(x, k = vecLagLeft[i]), rightAdd)
+            }
+        }
+        ret <- merge(ret, rightAdd)
+    }
+    if (naTrim == TRUE) {
+        ret <- na.trim(ret, ...)
     }
     return(ret)
 }

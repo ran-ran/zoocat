@@ -8,19 +8,21 @@
 \usage{
 expand(x, ...)
 
-\method{expand}{mlydata}(x, k = 1, direction = "both", ...)
+\method{expand}{mlydata}(x, left = 1, right = 12, naTrim = TRUE, ...)
 
 \method{expand}{mlydataList}(x, ...)
 }
 \arguments{
 \item{x}{the \code{mlydata} object.}
 
-\item{...}{further arguments.}
+\item{...}{further arguments input to \code{na.trim}.}
 
-\item{k}{the number of cycle to be expanded. Default is 1.}
+\item{left}{the month of the left limit.}
 
-\item{direction}{the direction to expand. Can be "left",
-"right" or "both".}
+\item{right}{the month of the right limit.}
+
+\item{naTrim}{logical. If TRUE, na.trim will be used to trim the
+result.}
 }
 \value{
 a \code{mlydata} or \code{mlydataList} object.
@@ -29,11 +31,12 @@ a \code{mlydata} or \code{mlydataList} object.
 Expand \code{mlydata} objects
 }
 \examples{
-x <- matrix(1 : 48, nrow = 4)
+x <- matrix(1 : 48, nrow = 4, byrow = TRUE)
 md <- mlydata(x, year = 1991 : 1994)
-expand(md, direction = 'left')
-expand(md, k = 1, direction = 'right')
-expand(md, k = 1, direction = 'both')
-expand(md, k = 2, direction = 'both')
+expand(md, left = -2)
+expand(md, right = 15)
+expand(md, right = 15, naTrim = FALSE)
+expand(md, left = -13, right = 14)
+expand(md, left = -25, right = 14, naTrim = FALSE)
 }
 
