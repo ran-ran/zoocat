@@ -79,7 +79,8 @@ as.zoocat.mlydataList <- function (x, variable.name = 'variable', ...) {
     varname <- names(x)
     for (i in 1 : length(x)) {
         x[[i]] <- as.zoocat(x[[i]])
-        colAttr <- cbind(name = varname[i], cattr(x[[i]]))
+        colAttr <- cbind(name = varname[i], cattr(x[[i]]),
+                         stringsAsFactors = FALSE)
         colnames(colAttr)[1] <- variable.name
         cattr(x[[i]]) <- colAttr
     }
