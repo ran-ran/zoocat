@@ -60,7 +60,7 @@ colapply.zoocat <- function (x, fun, col.as = 'vector', ...) {
     if (col.as == 'vector') {
         x <- coredata(x)
     } else if (col.as == 'zoo') {
-        x <- as.zoo(x)
+        x <- as.zoo(x, add.colname = FALSE)
     }
     
     ret1 <- fun(x[, 1])

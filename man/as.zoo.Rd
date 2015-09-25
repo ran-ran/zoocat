@@ -8,21 +8,23 @@
 \alias{as.zooreg.zoocat}
 \title{Coercion Objects to Class \code{zoo}}
 \usage{
-\method{as.zoo}{mlydata}(x, ...)
+\method{as.zoo}{mlydata}(x, add.colname = TRUE, ...)
 
-\method{as.zooreg}{mlydata}(x, ...)
+\method{as.zooreg}{mlydata}(x, add.colname = TRUE, ...)
 
-\method{as.zoo}{zoocat}(x, ...)
+\method{as.zoo}{zoocat}(x, add.colname = TRUE, ...)
 
-\method{as.zooreg}{zoocat}(x, ...)
+\method{as.zooreg}{zoocat}(x, add.colname = TRUE, ...)
 }
 \arguments{
-\item{x}{An object.}
+\item{x}{an object.}
+
+\item{add.colname}{logical. If TRUE, column names will be added automatically.}
 
 \item{...}{Further arguments.}
 }
 \value{
-A \code{zoo} object.
+A \code{zoo} or \code{zoocat} object.
 }
 \description{
 Coercing objects to class \code{zoo}.

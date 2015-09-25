@@ -6,6 +6,9 @@ if (file.exists(fout)) {
 
 fcon <- file(fout, 'w')
 
+
+# These methods will return a object of the same class as 
+# the input.
 methodNames_1 <- matrix(
                  c(
                  'cummax', 'x',
@@ -30,20 +33,21 @@ methodNames_1 <- matrix(
                  ),
                  ncol = 2, byrow = TRUE)
 
+
+# These methods do not need to consider the class of return.
 methodNames_2 <- matrix( 
                 c(
-                   'as.data.frame', 'x',
-                   'as.matrix', 'x',
-                   'coredata', 'x',
-                   'plot', 'x',
-                   'barplot', 'height'
+                    'as.matrix', 'x',
+                    'as.data.frame', 'x',
+                    'coredata', 'x',
+                    'plot', 'x',
+                    'barplot', 'height'
                    ),
                  ncol = 2, byrow = TRUE)
 
-
+# Replace methods.
 methodNames_3 <- matrix(
                 c(
-                 'coredata<-', 'x',
                  'index<-', 'x'
                  ),
                  ncol = 2, byrow = TRUE)
@@ -57,7 +61,7 @@ for (i in 1 : nrow(methodNames_1)) {
 #' @export 
 '", mtd, ".zoocat' <- function (", obj, ", ...) {
     colAttr <- cattr(", obj, ")
-    ", obj, " <- as.zoo(", obj, ")
+    ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
     ret <- '", mtd, "'(", obj, ", ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
@@ -71,7 +75,7 @@ for (i in 1 : nrow(methodNames_1)) {
 #' @export
 '", mtd, ".mlydata' <- function (", obj, ", ...) {
     month <- attr(", obj, ", 'month')
-    ", obj, " <- as.zoo(", obj, ")
+    ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
     ret <- '", mtd, "'(", obj, ", ...)
     colnames(ret) <- NULL
     attr(ret, 'month') <- month 
@@ -123,7 +127,7 @@ for (i in 1 : nrow(methodNames_3)) {
 #' @export 
 '", mtd, ".zoocat' <- function (", obj, ", value) {
     colAttr <- cattr(", obj, ")
-    ", obj, " <- as.zoo(", obj, ")
+    ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
     ret <- '", mtd, "'(", obj, ", value)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
@@ -137,7 +141,7 @@ for (i in 1 : nrow(methodNames_3)) {
 #' @export
 '", mtd, ".mlydata' <- function (", obj, ", value) {
     month <- attr(", obj, ", 'month')
-    ", obj, " <- as.zoo(", obj, ")
+    ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
     ret <- '", mtd, "'(", obj, ", value)
     colnames(ret) <- NULL
     attr(ret, 'month') <- month 

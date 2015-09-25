@@ -8,7 +8,7 @@
 #' Note that the result of \code{as.zoo} will be a \code{zooreg} object if 
 #' the input \code{x} is inherited from \code{zooreg}.
 #' 
-#' @return A \code{zoo} object.
+#' @return A \code{zoo} or \code{zoocat} object.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
@@ -25,20 +25,25 @@
 #' @rdname as.zoo
 #' @name as.zoo
 #' @export
-#' @param x An object.
+#' @param x an object.
+#' @param add.colname logical. If TRUE, column names will be added automatically.
 #' @param ... Further arguments.
-as.zoo.mlydata <- function(x, ...) {
+as.zoo.mlydata <- function(x, add.colname = TRUE, ...) {
     class(x) <- class(x)[-1]
-    colnames(x) <- month2str(attr(x, 'month'))
+    if (add.colname == TRUE) {
+        colnames(x) <- month2str(attr(x, 'month'))
+    }
     attr(x, 'month') <- NULL
     return(x)
 }
 
 #' @rdname as.zoo
 #' @export
-as.zooreg.mlydata <- function(x, ...) {
+as.zooreg.mlydata <- function(x, add.colname = TRUE, ...) {
     class(x) <- class(x)[-1]
-    colnames(x) <- month2str(attr(x, 'month'))
+    if (add.colname == TRUE) {
+        colnames(x) <- month2str(attr(x, 'month'))
+    }
     attr(x, 'month') <- NULL
     x <- as.zooreg(x)
     return(x)
@@ -46,11 +51,13 @@ as.zooreg.mlydata <- function(x, ...) {
 
 #' @rdname as.zoo
 #' @export
-as.zoo.zoocat <- function (x, ...) {
+as.zoo.zoocat <- function (x, add.colname = TRUE, ...) {
     if (length(x) == 0){
         return(zoo())
     } else {
-        colnames(x) <- cattr2str(attr(x, 'cattr'))
+        if (add.colname == TRUE) {
+            colnames(x) <- cattr2str(attr(x, 'cattr'))
+        }
         attr(x, 'cattr') <- NULL
         class(x) <- class(x)[-1]
         return(x)
@@ -59,11 +66,13 @@ as.zoo.zoocat <- function (x, ...) {
 
 #' @rdname as.zoo
 #' @export
-as.zooreg.zoocat <- function (x, ...) {
+as.zooreg.zoocat <- function (x, add.colname = TRUE, ...) {
     if (length(x) == 0){
         return(zoo())
     } else {
-        colnames(x) <- cattr2str(attr(x, 'cattr'))
+        if (add.colname == TRUE) {
+            colnames(x) <- cattr2str(attr(x, 'cattr'))
+        }
         attr(x, 'cattr') <- NULL
         class(x) <- class(x)[-1]
         x <- as.zooreg(x)
