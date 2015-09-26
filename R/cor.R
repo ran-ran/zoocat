@@ -77,6 +77,7 @@ cor.zoocat <- function (x, y = NULL, ...) {
     if (!is.null(y) & (is.null(dim(y)) || ncol(y) == 1)) {
         ccvec <- stats::cor(x, y, ...)
         ret <- data.frame(cAttr, cor.value = ccvec)
+        rownames(ret) <- NULL
     } else {
         ret <- stats::cor(x, y, ...)
     }
