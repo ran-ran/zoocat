@@ -1,9 +1,9 @@
 
-#' \code{mlydata} Class
+#' \code{zoomly} Class
 #' 
 #' A class designed for monthly data.
 #' 
-#' \code{mlydata} class is dependent on \code{zoo} class. An attribute
+#' \code{zoomly} class is dependent on \code{zoo} class. An attribute
 #' "month" is added for storing the month information.\cr For \code{print}
 #' method, each column name is set as month abbreviation + month number. For
 #' example, the column name corresponding to Feb of current year is "Feb.2".
@@ -11,25 +11,25 @@
 #' printed.\cr Using \code{yr} and \code{mon} to get and set the year and the
 #' month of the object.
 #' 
-#' @return \code{mlydata} returns a \code{mlydata} object.
+#' @return \code{zoomly} returns a \code{zoomly} object.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
-#' md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' md <- mlydata(x, order.by = 1991 : 1995, month = c(2, 3, 5, 6))
+#' md <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+#' md <- zoomly(x, order.by = 1991 : 1995, month = c(2, 3, 5, 6))
 #' mon(md)
 #' mon(md) <- mon(md) + 1
 #' yr(md)
 #' yr(md) <- yr(md) + 1
 #' 
 #' x <-  matrix(1 : 36, nrow = 3)
-#' md <- mlydata(x, year = 1991 : 1993)
-#' @name mlydata
-#' @rdname mlydata
+#' md <- zoomly(x, year = 1991 : 1993)
+#' @name zoomly
+#' @rdname zoomly
 #' @export
-#' @param x a matrix or a vector for function \code{mlydata}. Otherwise, it is 
-#' a \code{mlydata} object. 
-#' For \code{mlydata}, if x is a matrix, each row will be treated as a year. 
+#' @param x a matrix or a vector for function \code{zoomly}. Otherwise, it is 
+#' a \code{zoomly} object. 
+#' For \code{zoomly}, if x is a matrix, each row will be treated as a year. 
 #' If x is a vector, it will be
 #' treated as a matrix with only one column.
 #' @param year a numeric vector representing years.
@@ -39,7 +39,7 @@
 #' last year is (1 : 12) - 12.
 #' @param order.by the same as year. If it is not NULL, argument \code{year} will
 #' be negleted.
-mlydata <- function(x, year, month = 1 : 12, order.by = NULL) {
+zoomly <- function(x, year, month = 1 : 12, order.by = NULL) {
     if (!(is.vector(x) | is.matrix(x))) {
         stop('x must be a vector or a matrix.')
     }
@@ -58,95 +58,67 @@ mlydata <- function(x, year, month = 1 : 12, order.by = NULL) {
     year <- as.integer(year)
     month <- as.integer(month)
     colnames(x) <- NULL
-    md <- zoo(x, order.by = year, frequency = 1)
-    attr(md, 'month') <- month
-    class(md) <- c('mlydata', class(md))
-    return(md)
+    zm <- zoo(x, order.by = year, frequency = 1)
+    attr(zm, 'cattr') <- data.frame(month = month)
+    class(zm) <- c('zoomly', class(zm))
+    return(zm)
 }
 
 
 #' @export
-print.mlydata <- function(x, ...) {
-    cat('A mlydata object: \n\n')
-    month <- attr(x, 'month')
+print.zoomly <- function(x, ...) {
+    cat('A zoomly object: \n\n')
+    month <- mon(x)
     z <- x
     class(z) <- 'zoo'
-    attr(z, 'month') <- NULL
+    attr(z, 'cattr') <- NULL
     colnames(z) <- month2str(month)
     print(z)
 }
 
 #' @export
-#' @rdname mlydata
+#' @rdname zoomly
 mon <- function(x) { UseMethod('mon') }
 
 #' @export
-#' @rdname mlydata
+#' @rdname zoomly
 'mon<-' <- function(x, value) { UseMethod('mon<-') }
 
 #' @export
-#' @rdname mlydata
+#' @rdname zoomly
 yr <- function(x) { UseMethod('yr') }
 
 #' @export
-#' @rdname mlydata
+#' @rdname zoomly
 'yr<-' <- function(x, value) { UseMethod('yr<-') }
 
 #' @export
-#' @rdname mlydata
-mon.mlydata <- function(x) {
-    return(attr(x, 'month'))
+#' @rdname zoomly
+mon.zoomly <- function(x) {
+    return(as.vector(attr(x, 'cattr'))
 }
 
 #' @export
-#' @rdname mlydata
-yr.mlydata <- function(x) {
+#' @rdname zoomly
+yr.zoomly <- function(x) {
     return(index(x))
 }
 
 #' @export
-#' @rdname mlydata
+#' @rdname zoomly
 #' @param value The new value for month and year of the object.
-'mon<-.mlydata' <- function (x, value) {
+'mon<-.zoomly' <- function (x, value) {
     stopifnot(length(value) == ncol(x))
     value <- as.integer(value)
-    attr(x, 'month') <- value
+    attr(x, 'month') <- data.frame(month = value)
     return(x)
 }
 
 #' @export
-#' @rdname mlydata
-'yr<-.mlydata' <- function (x, value) {
+#' @rdname zoomly
+'yr<-.zoomly' <- function (x, value) {
     stopifnot(length(value) == nrow(x))
     index(x) <- as.integer(value)
     return(x)
 }
 
-
-
-#' @export
-'[.mlydata' <- function(x, i, j, drop = TRUE) {
-    if (missing(i)) {
-        i <- 1 : nrow(x)
-    }
-    if (missing(j)) {
-        j <- 1 : ncol(x)
-    }
-    month <- attr(x, 'month')
-    if (is.character(j)) {
-        j <- which(j == month2str(month))
-    }
-    month <- month[j]
-    class(x) <- class(x)[-1]
-    x <- x[i, j, drop = drop]
-    
-    if (drop == TRUE & length(i) == 1) {
-        x <- as.vector(x)
-        names(x) <- month2str(month)
-    } else if (drop == FALSE | (length(i) > 1 & length(j) > 1)) { 
-        attr(x, 'month') <- month 
-        class(x) <- c('mlydata', class(x))
-    }
-    
-    return(x)
-}

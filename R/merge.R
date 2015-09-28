@@ -1,19 +1,19 @@
 
-#' Combine \code{zoocat} or \code{mlydata} Objects by Columns
+#' Combine \code{zoocat} or \code{zoomly} Objects by Columns
 #' 
-#' Combine \code{zoocat} or \code{mlydata} objects by columns.
+#' Combine \code{zoocat} or \code{zoomly} objects by columns.
 #' 
-#' \code{merge.zoocat} and \code{merge.mlydata} are the extensions of \code{merge.zoo}.
+#' \code{merge.zoocat} and \code{merge.zoomly} are the extensions of \code{merge.zoo}.
 #' For \code{merge.zoocat}, when combining \code{cattr}, some NA will be filled in if it is
 #' necessary. \cr
 #' The arguments \code{all} and \code{fill} are used same as in \code{merge.zoo}.
 #' The arguments \code{suffixes}, \code{check.names}, \code{retclass} 
 #' and \code{drop} are not used.
 #'
-#' @param ...  \code{zoocat} or \code{mlydata} objects.
+#' @param ...  \code{zoocat} or \code{zoomly} objects.
 #' @param all,fill,suffixes,check.names,retclass,drop See details.
 #' @return \code{merge.zoocat} will return a \code{zoocat} object.
-#'  \code{merge.mlydata} will return a \code{mlydata} object.
+#'  \code{merge.zoomly} will return a \code{zoomly} object.
 #' @examples
 #' 
 #' x1 <- matrix(1 : 20, nrow = 5)
@@ -28,7 +28,7 @@
 #' cbind(zc1, zc2)
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
-#' md1 <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+#' md1 <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 #' md2 <- lag(md1, k = -1)
 #' merge(md2, md1)
 #' cbind(md2, md1)
@@ -61,32 +61,6 @@ merge.zoocat <- function (..., all = TRUE, fill = NA, suffixes = NULL,
 }
 
 
-#' @export
-#' @rdname merge
-merge.mlydata <- function (..., all = TRUE, fill = NA, suffixes = NULL,
-                           check.names = FALSE, retclass = 'mlydata',
-                           drop = TRUE) {
-    listin <- list(...)
-    month <- c()
-    for (i in 1 : length(listin)) {
-        stopifnot(class(listin[[i]])[1] == 'mlydata')
-        month <- c(month, attr(listin[[i]], 'month'))
-        listin[[i]] <- as.zoo(listin[[i]])
-    }
-    zooobj <- do.call(merge, 
-                      args = c(listin, list(all = all, fill = fill,
-                                            suffixes = NULL,
-                                            check.names = FALSE,
-                                            retclass = 'zoo',
-                                            drop = TRUE))) 
-    colnames(zooobj) <- NULL
-    if (!is.null(retclass)) {
-        ret <- as.mlydata(zooobj, month = month)
-        return(ret)
-    }
-}
-
-
 
 #' @export
 #' @rdname merge
@@ -95,8 +69,3 @@ cbind.zoocat <- function (...) {
 }
 
 
-#' @export
-#' @rdname merge
-cbind.mlydata <- function (...) {
-    return(merge(...))
-}

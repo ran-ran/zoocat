@@ -1,13 +1,13 @@
 
-#' Cast objects to \code{mlydata} or \code{mlydataList} Objects
+#' Cast objects to \code{zoomly} or \code{zoomlyList} Objects
 #' 
-#' Cast a data frame or \code{zoo} object as a \code{mlydata} or \code{mlydataList} object.
+#' Cast a data frame or \code{zoo} object as a \code{zoomly} or \code{zoomlyList} object.
 #' 
 #' If the length of \code{value.var} is larger than 1, each variable in \code{value.var}
-#' will be casted as a \code{mlydata} object, and a \code{mlydataList} will be returned.\cr
+#' will be casted as a \code{zoomly} object, and a \code{zoomlyList} will be returned.\cr
 #' If the \code{variable.var} is specified, each value in \code{variable.var} corresponding 
-#' to a variable, and corresponding row will be casted into a \code{mlydata} object in 
-#' the returned \code{mlydataList} object.
+#' to a variable, and corresponding row will be casted into a \code{zoomly} object in 
+#' the returned \code{zoomlyList} object.
 #' 
 #' @param x a object.
 #' @param ... further arguments.
@@ -19,40 +19,40 @@
 #' @param fun.aggregate aggregation function needed if variables do not identify a single observation
 #' for each output cell. Defaults to length (with a message) if needed but not specified.
 #' See \code{\link{dcast}}.
-#' @return A \code{mlydata} object. 
+#' @return A \code{zoomly} object. 
 #' @examples
 #' 
 #' x <- data.frame(year = rep(1991 : 1993, each = 3), month = rep(3 : 1, 3), 
 #'                 value = 1 : 9)
-#' md <- cast2mlydata(x, year.var = 'year', month.var = 'month', 
+#' md <- cast2zoomly(x, year.var = 'year', month.var = 'month', 
 #'                    value.var = 'value', fun.aggregate = mean)
 #' 
 #' data(sst)
-#' cast2mlydata(sst, value.var = c('nino12', 'nino3'))
+#' cast2zoomly(sst, value.var = c('nino12', 'nino3'))
 #' 
 #' sst.melt <- melt(sst, id.var = c('year', 'month'))
-#' sst.cast <- cast2mlydata(sst.melt, value.var = 'value', variable.var = 'variable')
+#' sst.cast <- cast2zoomly(sst.melt, value.var = 'value', variable.var = 'variable')
 #' sst.remelt <- melt(sst.cast)
 #' 
 #' ym <- as.yearmon(2000 + seq(0, 23)/12)
 #' zooobj <- zoo(matrix(1:48, nrow = 24), order.by = ym)
 #' colnames(zooobj) <- c('x', 'y')
-#' cast2mlydata(zooobj)
+#' cast2zoomly(zooobj)
 #' 
 #'
 #' @export
-#' @rdname cast2mlydata
-#' @name cast2mlydata
-cast2mlydata <- function (x, ...) {
-    UseMethod('cast2mlydata')
+#' @rdname cast2zoomly
+#' @name cast2zoomly
+cast2zoomly <- function (x, ...) {
+    UseMethod('cast2zoomly')
 }
 
 
 
 
 #' @export
-#' @rdname cast2mlydata
-cast2mlydata.data.frame <- function (x, year.var = 'year', month.var = 'month', 
+#' @rdname cast2zoomly
+cast2zoomly.data.frame <- function (x, year.var = 'year', month.var = 'month', 
                           value.var = NULL, variable.var = NULL,
                           fun.aggregate = NULL, ...) {
     if (is.null(value.var)) {
@@ -64,28 +64,28 @@ cast2mlydata.data.frame <- function (x, year.var = 'year', month.var = 'month',
         }
     }
     if (length(value.var) == 1 & is.null(variable.var)) {
-        zcat <- cast2zoocat(x, index.var = year.var, value.var, attr.var = month.var,
+        ret <- cast2zoocat(x, index.var = year.var, value.var, attr.var = month.var,
                             fun.aggregate = fun.aggregate)
-        md <- mlydata(coredata(zcat), year = index(zcat), month = cattr(zcat)[, 1])
-        return(md)
+        ret <- as.zoomly(ret)
+        return(ret)
     } else if (length(value.var) > 1) {
-        mdList <- list()
+        zmList <- list()
         for (i in 1 : length(value.var)) {
-            mdList[[i]] <- cast2mlydata(x, year.var = year.var, month.var = month.var,
+            zmList[[i]] <- cast2zoomly(x, year.var = year.var, month.var = month.var,
                                         value.var = value.var[i], variable.var = NULL,
                                         fun.aggregate = fun.aggregate)
         }
-        names(mdList) <- value.var
-        class(mdList) <- 'mlydataList'
-        return(mdList)
+        names(zmList) <- value.var
+        class(zmList) <- 'zoomlyList'
+        return(zmList)
     } else if (!is.null(variable.var)) {
         fml <- paste(year.var, '+', month.var, '~', variable.var, sep = '')
         xcast <- dcast(x, fml, value.var = value.var)
         value.var.new <- as.character(unique(x[, variable.var]))
-        mdList <- cast2mlydata(xcast, year.var = year.var, month.var = month.var,
+        zmList <- cast2zoomly(xcast, year.var = year.var, month.var = month.var,
                                value.var = value.var.new, variable.var = NULL,
                                fun.aggregate = fun.aggregate)
-        return(mdList)    
+        return(zmList)    
     }
     
 }
@@ -93,8 +93,8 @@ cast2mlydata.data.frame <- function (x, year.var = 'year', month.var = 'month',
 
 
 #' @export
-#' @rdname cast2mlydata
-cast2mlydata.zoo <- function (x, value.var = NULL, fun.aggregate = NULL, ...) {
+#' @rdname cast2zoomly
+cast2zoomly.zoo <- function (x, value.var = NULL, fun.aggregate = NULL, ...) {
     if (is.null(value.var)) {
         value.var <- colnames(x)
     }
@@ -102,7 +102,7 @@ cast2mlydata.zoo <- function (x, value.var = NULL, fun.aggregate = NULL, ...) {
     mon <- as.numeric(format(index(x), '%m'))
     xdf <- data.frame(year = yr, month = mon, coredata(x),
                       stringsAsFactors = FALSE)
-    ret <- cast2mlydata(xdf, year.var = 'year',
+    ret <- cast2zoomly(xdf, year.var = 'year',
                      month.var = 'month', value.var = value.var,
                      fun.aggregate = fun.aggregate)
     return(ret)
