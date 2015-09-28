@@ -58,7 +58,7 @@ colapply.zoocat <- function (x, fun, col.as = 'vector', ...) {
     stopifnot(col.as %in% c('vector', 'zoo'))
     colAttr <- cattr(x)
     if (col.as == 'vector') {
-        x <- coredata(x)
+        x <- as.matrix(x)
     } else if (col.as == 'zoo') {
         x <- as.zoo(x, add.colname = FALSE)
     }
@@ -75,18 +75,18 @@ colapply.zoocat <- function (x, fun, col.as = 'vector', ...) {
             outnames <- paste('output', 1 : length(ret1), sep = '.')
         }
     }
-    retdf <- data.frame(colAttr, 
-                        matrix(NA, nrow = nrow(colAttr), ncol = length(ret1)))
-    colnames(retdf) <- c(colnames(colAttr), outnames)
-    retdf[1, (ncol(colAttr) + 1) : ncol(retdf)] <- ret1
-    for (i in 1 : ncol(x)) {
+    outmat <- matrix(NA, nrow = nrow(colAttr), ncol = length(ret1))
+    colnames(outmat) <- outnames
+    outmat[1, ] <- ret1
+    for (i in 2 : ncol(x)) {
         vecnow <- fun(x[, i])
         if (!is.vector(vecnow)) {
             vecnow <- as.vector(vecnow)
         }
-        retdf[i, (ncol(colAttr) + 1) : ncol(retdf)] <- vecnow 
+        outmat[i, ] <- vecnow 
     }
-    return(retdf)
+    ret <- data.frame(colAttr, outmat)
+    return(ret)
 }
 
 
