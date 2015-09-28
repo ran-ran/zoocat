@@ -56,8 +56,8 @@ be negleted.}
 A class designed for monthly data.
 }
 \details{
-\code{zoomly} class is dependent on \code{zoo} class. An attribute
-"month" is added for storing the month information.\cr For \code{print}
+\code{zoomly} class inherits \code{zoocat} class. There is only one field "month"
+in the column attributes table. \cr For \code{print}
 method, each column name is set as month abbreviation + month number. For
 example, the column name corresponding to Feb of current year is "Feb.2".
 When all month numbers are between 1 and 12, only the abbreviations of months is
@@ -66,14 +66,14 @@ month of the object.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
-md <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-md <- zoomly(x, order.by = 1991 : 1995, month = c(2, 3, 5, 6))
-mon(md)
-mon(md) <- mon(md) + 1
-yr(md)
-yr(md) <- yr(md) + 1
+zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+zm <- zoomly(x, order.by = 1991 : 1995, month = c(2, 3, 5, 6))
+mon(zm)
+mon(zm) <- mon(zm) + 1
+yr(zm)
+yr(zm) <- yr(zm) + 1
 
 x <-  matrix(1 : 36, nrow = 3)
-md <- zoomly(x, year = 1991 : 1993)
+zm <- zoomly(x, year = 1991 : 1993)
 }
 

@@ -8,9 +8,9 @@
 #' @examples
 #' 
 #' x <- matrix(1 : 36, nrow = 3, byrow = TRUE)
-#' md <- zoomly(x, year = 1991 : 1993, month = 1 : 12)
-#' as.seasonal(md)
-#' as.seasonal(md, DJF.first = FALSE)
+#' zm <- zoomly(x, year = 1991 : 1993, month = 1 : 12)
+#' as.seasonal(zm)
+#' as.seasonal(zm, DJF.first = FALSE)
 #' 
 #' @export
 #' @name as.seasonal

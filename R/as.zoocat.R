@@ -7,18 +7,18 @@
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
-#' md <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' md2 <- md + 100
-#' as.zoocat(md)
-#' as.zoocat(md, addname = FALSE)
-#' as.zoocat(x = md)
-#' as.zoocat(x = md, y = md2)
-#' as.zoocat(md, md2)
+#' zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+#' zm2 <- zm + 100
+#' as.zoocat(zm)
+#' as.zoocat(zm, addname = FALSE)
+#' as.zoocat(x = zm)
+#' as.zoocat(x = zm, y = zm2)
+#' as.zoocat(zm, zm2)
 #' 
 #' x <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 #' y <- x + 100
-#' mdList <- zoomlyList(list(x = x, y = y))
-#' as.zoocat(mdList)
+#' zmList <- zoomlyList(list(x = x, y = y))
+#' as.zoocat(zmList)
 #' 
 #' zobj <- zoo(matrix(1:10, nrow = 5), order.by = 11:15)
 #' colnames(zobj) <- c('a', 'b')

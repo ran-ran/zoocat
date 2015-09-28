@@ -71,19 +71,6 @@ for (i in 1 : nrow(methodNames_1)) {
         
 ",
 
-"
-#' @export
-'", mtd, ".mlydata' <- function (", obj, ", ...) {
-    month <- attr(", obj, ", 'month')
-    ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
-    ret <- '", mtd, "'(", obj, ", ...)
-    colnames(ret) <- NULL
-    attr(ret, 'month') <- month 
-    class(ret) <- c('mlydata', class(ret))
-    return(ret)
-}
-        
-",
         sep = '',
         file = fcon)
 }
@@ -105,15 +92,6 @@ for (i in 1 : nrow(methodNames_2)) {
         
 ",
 
-"
-#' @export
-'", mtd, ".mlydata' <- function (", obj, ", ...) {
-    ", obj, " <- as.zoo(", obj, ")
-    ret <- '", mtd, "'(", obj, ", ...)
-    return(ret)
-}
-        
-",
         sep = '',
         file = fcon)
 }
@@ -137,19 +115,6 @@ for (i in 1 : nrow(methodNames_3)) {
         
 ",
 
-"
-#' @export
-'", mtd, ".mlydata' <- function (", obj, ", value) {
-    month <- attr(", obj, ", 'month')
-    ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
-    ret <- '", mtd, "'(", obj, ", value)
-    colnames(ret) <- NULL
-    attr(ret, 'month') <- month 
-    class(ret) <- c('mlydata', class(ret))
-    return(ret)
-}
-        
-",
         sep = '',
         file = fcon)
 }

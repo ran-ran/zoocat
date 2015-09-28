@@ -3,8 +3,8 @@
 #' 
 #' A class designed for monthly data.
 #' 
-#' \code{zoomly} class is dependent on \code{zoo} class. An attribute
-#' "month" is added for storing the month information.\cr For \code{print}
+#' \code{zoomly} class inherits \code{zoocat} class. There is only one field "month"
+#' in the column attributes table. \cr For \code{print}
 #' method, each column name is set as month abbreviation + month number. For
 #' example, the column name corresponding to Feb of current year is "Feb.2".
 #' When all month numbers are between 1 and 12, only the abbreviations of months is
@@ -15,15 +15,16 @@
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
-#' md <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' md <- zoomly(x, order.by = 1991 : 1995, month = c(2, 3, 5, 6))
-#' mon(md)
-#' mon(md) <- mon(md) + 1
-#' yr(md)
-#' yr(md) <- yr(md) + 1
+#' zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+#' zm <- zoomly(x, order.by = 1991 : 1995, month = c(2, 3, 5, 6))
+#' mon(zm)
+#' mon(zm) <- mon(zm) + 1
+#' yr(zm)
+#' yr(zm) <- yr(zm) + 1
 #' 
 #' x <-  matrix(1 : 36, nrow = 3)
-#' md <- zoomly(x, year = 1991 : 1993)
+#' zm <- zoomly(x, year = 1991 : 1993)
+#' 
 #' @name zoomly
 #' @rdname zoomly
 #' @export
@@ -55,12 +56,12 @@ zoomly <- function(x, year, month = 1 : 12, order.by = NULL) {
     if(length(month) != ncol(x)) {
         stop('The length of month must be equal with ncol of x.')
     }
-    year <- as.integer(year)
-    month <- as.integer(month)
+    year <- round(year)
+    month <- round(month)
     colnames(x) <- NULL
     zm <- zoo(x, order.by = year, frequency = 1)
     attr(zm, 'cattr') <- data.frame(month = month)
-    class(zm) <- c('zoomly', class(zm))
+    class(zm) <- c('zoomly', 'zoocat', class(zm))
     return(zm)
 }
 
@@ -69,11 +70,10 @@ zoomly <- function(x, year, month = 1 : 12, order.by = NULL) {
 print.zoomly <- function(x, ...) {
     cat('A zoomly object: \n\n')
     month <- mon(x)
-    z <- x
-    class(z) <- 'zoo'
-    attr(z, 'cattr') <- NULL
-    colnames(z) <- month2str(month)
-    print(z)
+    class(x) <- 'zoo'
+    attr(x, 'cattr') <- NULL
+    colnames(x) <- month2str(month)
+    print(x)
 }
 
 #' @export
@@ -95,7 +95,7 @@ yr <- function(x) { UseMethod('yr') }
 #' @export
 #' @rdname zoomly
 mon.zoomly <- function(x) {
-    return(as.vector(attr(x, 'cattr')))
+    return(as.vector(attr(x, 'cattr')[, 1]))
 }
 
 #' @export
@@ -110,7 +110,7 @@ yr.zoomly <- function(x) {
 'mon<-.zoomly' <- function (x, value) {
     stopifnot(length(value) == ncol(x))
     value <- as.integer(value)
-    attr(x, 'month') <- data.frame(month = value)
+    attr(x, 'cattr') <- data.frame(month = value)
     return(x)
 }
 

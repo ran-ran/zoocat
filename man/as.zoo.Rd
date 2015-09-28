@@ -2,49 +2,41 @@
 % Please edit documentation in R/as.zoo.R
 \name{as.zoo}
 \alias{as.zoo}
-\alias{as.zoo.mlydata}
 \alias{as.zoo.zoocat}
-\alias{as.zooreg.mlydata}
-\alias{as.zooreg.zoocat}
+\alias{as.zoo.zoomly}
 \title{Coercion Objects to Class \code{zoo}}
 \usage{
-\method{as.zoo}{mlydata}(x, add.colname = TRUE, ...)
-
-\method{as.zooreg}{mlydata}(x, add.colname = TRUE, ...)
+\method{as.zoo}{zoomly}(x, add.colname = TRUE, ...)
 
 \method{as.zoo}{zoocat}(x, add.colname = TRUE, ...)
-
-\method{as.zooreg}{zoocat}(x, add.colname = TRUE, ...)
 }
 \arguments{
 \item{x}{an object.}
 
 \item{add.colname}{logical. If TRUE, column names will be added automatically.}
 
-\item{...}{Further arguments.}
+\item{...}{further arguments.}
 }
 \value{
-A \code{zoo} or \code{zoocat} object.
+A \code{zoo} object.
 }
 \description{
 Coercing objects to class \code{zoo}.
 }
 \details{
-For \code{mlydata} and \code{zoocat}, the returned \code{zoo} object will
+For \code{zoomly} and \code{zoocat}, the returned \code{zoo} object will
 be added column names automatically. \cr
 Note that the result of \code{as.zoo} will be a \code{zooreg} object if
 the input \code{x} is inherited from \code{zooreg}.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
-md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-z <- as.zoo(md)
+zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+z <- as.zoo(zm)
 
 x <- matrix(1 : 20, nrow = 5)
-md1 <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-md2 <- md1 + 1
-mdList <- mlydataList(list(md1 = md1, md2 = md2))
-zc <- as.zoocat(mdList)
-as.zoo(zc)
+zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+class(zm) <- class(zm)[-1]
+as.zoo(zm)
 }
 
