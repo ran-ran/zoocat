@@ -2,15 +2,15 @@
 % Please edit documentation in R/as.seasonal.R
 \name{as.seasonal}
 \alias{as.seasonal}
-\alias{as.seasonal.mlydata}
-\title{Transforming a \code{mlydata} Object to be Seasonal Data}
+\alias{as.seasonal.zoomly}
+\title{Transforming a \code{zoomly} Object to be Seasonal Data}
 \usage{
 as.seasonal(x, ...)
 
-\method{as.seasonal}{mlydata}(x, DJF.first = TRUE, ...)
+\method{as.seasonal}{zoomly}(x, DJF.first = TRUE, ...)
 }
 \arguments{
-\item{x}{A \code{mlydata} object.}
+\item{x}{A \code{zoomly} object.}
 
 \item{...}{Additional arguments to be passed to or from methods.}
 
@@ -20,11 +20,11 @@ as.seasonal(x, ...)
 A \code{zoo} object.
 }
 \description{
-Transforming a \code{mlydata} object to be seasonal data.
+Transforming a \code{zoomly} object to be seasonal data.
 }
 \examples{
 x <- matrix(1 : 36, nrow = 3, byrow = TRUE)
-md <- mlydata(x, year = 1991 : 1993, month = 1 : 12)
+md <- zoomly(x, year = 1991 : 1993, month = 1 : 12)
 as.seasonal(md)
 as.seasonal(md, DJF.first = FALSE)
 }

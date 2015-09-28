@@ -31,7 +31,8 @@ as.zoomly.zoo <- function(x, month, ...) {
 
 
 #' @export
-#' @rdname as.zoomlyas.zoomly.zoocat <- function (x) {
+#' @rdname as.zoomly
+as.zoomly.zoocat <- function (x) {
     colAttr <- cattr(x)
     if (!all.equal(colnames(colAttr), 'month')) {
         stop('Can not trasform to zoomly object.')

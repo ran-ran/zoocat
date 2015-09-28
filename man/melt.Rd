@@ -2,18 +2,18 @@
 % Please edit documentation in R/melt.R
 \name{melt}
 \alias{melt}
-\alias{melt.mlydata}
-\alias{melt.mlydataList}
 \alias{melt.zoocat}
-\title{Melt a \code{zoocat} or \code{mlydata} Object}
+\alias{melt.zoomly}
+\alias{melt.zoomlyList}
+\title{Melt a \code{zoocat} or \code{zoomly} Object}
 \usage{
 \method{melt}{zoocat}(data, value.name = "value", index.name = "index",
   na.rm = FALSE, ...)
 
-\method{melt}{mlydata}(..., value.name = "value",
-  variable.name = "variable", ret = "data.frame", na.rm = FALSE)
+\method{melt}{zoomly}(..., value.name = "value", variable.name = "variable",
+  ret = "data.frame", na.rm = FALSE)
 
-\method{melt}{mlydataList}(data, value.name = "value",
+\method{melt}{zoomlyList}(data, value.name = "value",
   variable.name = "variable", ret = "data.frame", na.rm = FALSE, ...)
 }
 \arguments{
@@ -29,8 +29,8 @@ a data frame is returned.}
 \item{...}{further arguments.}
 
 \item{variable.name}{name of the column used to store variable names.
-Only valid when a data frame is returned. For \code{melt.mlydata}, it is only
-valid when there are several input \code{mlydata} objects.}
+Only valid when a data frame is returned. For \code{melt.zoomly}, it is only
+valid when there are several input \code{zoomly} objects.}
 
 \item{ret}{character string. Can be \code{data.frame} or \code{zoo}}
 }
@@ -38,9 +38,9 @@ valid when there are several input \code{mlydata} objects.}
 A data frame or a \code{zoo} object.
 }
 \description{
-Melt a \code{zoocat} object or \code{mlydata} to a data frame of the long table style,
+Melt a \code{zoocat} object or \code{zoomly} to a data frame of the long table style,
 which is similar as in package \code{reshape2}.
-For \code{mlydata}, a \code{zoo} object can be returned.
+For \code{zoomly}, a \code{zoo} object can be returned.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
@@ -49,16 +49,16 @@ zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 melt(zc)
 
 x <- matrix(1 : 24, nrow = 3, byrow = TRUE)
-md <- mlydata(x, year = 1991 : 1993, month = 2 : 9)
+md <- zoomly(x, year = 1991 : 1993, month = 2 : 9)
 md2 <- md + 1
 melt(md)
 melt(md, ret = 'zoo')
 melt(md, md2, ret = 'zoo')
 
 x <- matrix(1 : 36, nrow = 3)
-x <- mlydata(x, year = 1991 : 1993)
+x <- zoomly(x, year = 1991 : 1993)
 y <- x + 1
-mdl <- mlydataList(x, y)
+mdl <- zoomlyList(x, y)
 melt(mdl, variable.name = 'var', value.name = 'val')
 melt(mdl, ret = 'zoo')
 }

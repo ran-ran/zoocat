@@ -2,18 +2,15 @@
 % Please edit documentation in R/colapply.R
 \name{colapply}
 \alias{colapply}
-\alias{colapply.mlydata}
-\alias{colapply.mlydataList}
 \alias{colapply.zoocat}
+\alias{colapply.zoomlyList}
 \title{Apply Functions Over Each Column}
 \usage{
 colapply(x, ...)
 
 \method{colapply}{zoocat}(x, fun, col.as = "vector", ...)
 
-\method{colapply}{mlydata}(x, fun, col.as = "vector", ...)
-
-\method{colapply}{mlydataList}(x, ...)
+\method{colapply}{zoomlyList}(x, ...)
 }
 \arguments{
 \item{x}{A object.}
@@ -54,7 +51,7 @@ retdf <- colapply(zc, fun = fuse, col.as = 'zoo')
 xyplot(sd~month|variable, data = retdf, type = 'o')
 
 
-md <- cast2mlydata(sst, year.var = 'year', value.var = 'nino12',
+md <- cast2zoomly(sst, year.var = 'year', value.var = 'nino12',
                    month.var = 'month')
 fuse <- function(x) {
     xwd <- window(x, start = 1980, end = 2010)

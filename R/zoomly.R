@@ -95,7 +95,7 @@ yr <- function(x) { UseMethod('yr') }
 #' @export
 #' @rdname zoomly
 mon.zoomly <- function(x) {
-    return(as.vector(attr(x, 'cattr'))
+    return(as.vector(attr(x, 'cattr')))
 }
 
 #' @export

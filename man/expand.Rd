@@ -2,18 +2,18 @@
 % Please edit documentation in R/expand.R, R/z_mlydataList_methods.R
 \name{expand}
 \alias{expand}
-\alias{expand.mlydata}
 \alias{expand.mlydataList}
-\title{Expand \code{mlydata} objects}
+\alias{expand.zoomly}
+\title{Expand \code{zoomly} objects}
 \usage{
 expand(x, ...)
 
-\method{expand}{mlydata}(x, left = 1, right = 12, naTrim = TRUE, ...)
+\method{expand}{zoomly}(x, left = 1, right = 12, naTrim = TRUE, ...)
 
 \method{expand}{mlydataList}(x, ...)
 }
 \arguments{
-\item{x}{the \code{mlydata} object.}
+\item{x}{the \code{zoomly} object.}
 
 \item{...}{further arguments input to \code{na.trim}.}
 
@@ -25,14 +25,14 @@ expand(x, ...)
 result.}
 }
 \value{
-a \code{mlydata} or \code{mlydataList} object.
+a \code{zoomly} or \code{zoomlyList} object.
 }
 \description{
-Expand \code{mlydata} objects
+Expand \code{zoomly} objects
 }
 \examples{
 x <- matrix(1 : 48, nrow = 4, byrow = TRUE)
-md <- mlydata(x, year = 1991 : 1994)
+md <- zoomly(x, year = 1991 : 1994)
 expand(md, left = -2)
 expand(md, right = 15)
 expand(md, right = 15, naTrim = FALSE)
