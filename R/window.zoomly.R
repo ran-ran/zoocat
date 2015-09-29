@@ -16,35 +16,33 @@
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
-#' md <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' window(md, year = 1992 : 1993, month = c(3, 6))
-#' window(md, start = 1993)
+#' zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+#' window(zm, year = 1992 : 1993, month = c(3, 6))
+#' window(zm, start = 1993)
 #' 
 #' 
 #' data(sst)
-#' mdList <- cast2zoomly(sst, value.var = c('nino12', 'nino3'))
-#' window(mdList, year = 1992:1993, month = 3:5)
+#' zmList <- cast2zoomly(sst, value.var = c('nino12', 'nino3'))
+#' window(zmList, year = 1992:1993, month = 3:5)
 #' 
 #' @export
 window.zoomly <- function(x, year = NULL, month = NULL, ...) {
     class0 <- class(x)
-    mon0 <- mon(x)
-    class(x) <- 'zoo'
+    mon0 <- attr(x, 'cattr')
+    class(x) <- c('zooreg', 'zoo')
     if (!is.null(year)) {
         x <- window(x, index. = year, ...)
     } else {
         x <- window(x, ...)
     }
-    if (is.null(ncol(x))) {
-        x <- zoo(matrix(coredata(x), ncol = 1), order.by = index(x))
-    }
-    mon(x) <- mon0
+    attr(x, 'cattr') <- mon0
+    mon0 <- mon0[, 1]
     class(x) <- class0
     nMonth <- length(month)
     if(!is.null(month)) {
         idCol <- rep(0, nMonth)
         for(i in 1 : nMonth) {
-            colNow <- which(month[i] == mon(x))
+            colNow <- which(month[i] == mon0)
             if(length(colNow) == 0)
                 stop('Some month does not exist in x.')
             idCol[i] <- colNow

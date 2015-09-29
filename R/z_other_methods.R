@@ -1,228 +1,247 @@
 
 #' @export 
 'cummax.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'cummax'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'cummin.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'cummin'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'cumprod.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'cumprod'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'cumsum.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'cumsum'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'diff.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'diff'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'head.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'head'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'na.aggregate.zoocat' <- function (object, ...) {
+    class0 <- class(object)
     colAttr <- cattr(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.aggregate'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'na.approx.zoocat' <- function (object, ...) {
+    class0 <- class(object)
     colAttr <- cattr(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.approx'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'na.contiguous.zoocat' <- function (object, ...) {
+    class0 <- class(object)
     colAttr <- cattr(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.contiguous'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'na.fill.zoocat' <- function (object, ...) {
+    class0 <- class(object)
     colAttr <- cattr(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.fill'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'na.spline.zoocat' <- function (object, ...) {
+    class0 <- class(object)
     colAttr <- cattr(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.spline'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'na.trim.zoocat' <- function (object, ...) {
+    class0 <- class(object)
     colAttr <- cattr(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.trim'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'rollapply.zoocat' <- function (data, ...) {
+    class0 <- class(data)
     colAttr <- cattr(data)
     data <- as.zoo(data, add.colname = FALSE)
     ret <- 'rollapply'(data, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'rollmax.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'rollmax'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'rollmean.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'rollmean'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'rollmedian.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'rollmedian'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'rollsum.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'rollsum'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'scale.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'scale'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
 
 #' @export 
 'tail.zoocat' <- function (x, ...) {
+    class0 <- class(x)
     colAttr <- cattr(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'tail'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         

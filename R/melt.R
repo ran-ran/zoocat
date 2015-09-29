@@ -15,18 +15,18 @@
 #' melt(zc)
 #' 
 #' x <- matrix(1 : 24, nrow = 3, byrow = TRUE)
-#' md <- zoomly(x, year = 1991 : 1993, month = 2 : 9)
-#' md2 <- md + 1
-#' melt(md)
-#' melt(md, ret = 'zoo')
-#' melt(md, md2, ret = 'zoo')
+#' zm <- zoomly(x, year = 1991 : 1993, month = 2 : 9)
+#' zm2 <- zm + 1
+#' melt(zm)
+#' melt(zm, ret = 'zoo')
+#' melt(zm, zm2, ret = 'zoo')
 #' 
 #' x <- matrix(1 : 36, nrow = 3)
 #' x <- zoomly(x, year = 1991 : 1993)
 #' y <- x + 1
-#' mdl <- zoomlyList(x, y)
-#' melt(mdl, variable.name = 'var', value.name = 'val')
-#' melt(mdl, ret = 'zoo')
+#' zml <- zoomlyList(x, y)
+#' melt(zml, variable.name = 'var', value.name = 'val')
+#' melt(zml, ret = 'zoo')
 #' 
 #' @name melt
 #' @rdname melt
@@ -88,8 +88,8 @@ melt.zoomly <- function(..., value.name = 'value', variable.name = 'variable',
             vec <- as.vector(t(mat))
             ret <- zoo(vec, order.by = yymm)
         } else {
-            x <- as.zoocat(arg[[1]])
-            ret <- melt(x, index.vars = 'year', value.name = value.name, 
+            x <- as.zoocat(arg[[1]], addname = FALSE)
+            ret <- melt(x, index.name = 'year', value.name = value.name, 
                         na.rm = na.rm)
             ret <- plyr::arrange(ret, year, month)
         }

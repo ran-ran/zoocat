@@ -56,7 +56,7 @@ as.zoocat.zoomly <- function (..., addname = TRUE, variable.name = "variable") {
         x <- arg[[1]]
         if (addname == TRUE) {
             cAttr <- data.frame(variable = argnames[1], month = attr(x, 'cattr'),
-                                           stringsAsFactors = FALSE)
+                               stringsAsFactors = FALSE)
             colnames(cAttr)[1] <- variable.name
             attr(x, 'cattr') <- cAttr
         }
@@ -90,7 +90,7 @@ as.zoocat.zoomlyList <- function (x, variable.name = 'variable', ...) {
 
 #' @export
 #' @rdname as.zoocat
-#' @param colattr The column attribute table for x.
+#' @param colattr a data frame the column attribute table for x.
 as.zoocat.zoo <- function (x, colattr = NULL, variable.name = 'variable', ...) {
     stopifnot(length(dim(x))== 2)
     if (is.null(colattr)) {

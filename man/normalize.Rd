@@ -39,11 +39,11 @@ normalize(x)
 normalize(x, method = 'perc')
 normalize(x, method = 'sd1')
 
-md <- mlydata(x, year = 1991 : 1993, month = 1 : 12)
-normalize(md)
-normalize(md, method = 'perc')
-normalize(md, method = 'sd1')
-normalize(as.zoocat(md), method = 'sd1')
-normalize(as.zoocat(md), method = 'sd1', base.period = 1991 : 1992)
+zm <- zoomly(x, year = 1991 : 1993, month = 1 : 12)
+normalize(zm)
+normalize(zm, method = 'perc')
+normalize(zm, method = 'sd1')
+normalize(as.zoocat(zm), method = 'sd1')
+normalize(as.zoocat(zm), method = 'sd1', base.period = 1991 : 1992)
 }
 

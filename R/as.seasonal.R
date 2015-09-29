@@ -27,6 +27,7 @@ as.seasonal <- function (x, ...) {
 #' @param DJF.first If TRUE, the winter season will be in the first column.
 as.seasonal.zoomly <- function (x, DJF.first = TRUE, ...) {
     stopifnot(all(mon(x) == 1 : 12))
+    x <- as.zoo(x)
     if (DJF.first == TRUE) {
         xDec <- x[, 12, drop = FALSE]
         index(xDec) <- index(xDec) + 1

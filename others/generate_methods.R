@@ -60,12 +60,13 @@ for (i in 1 : nrow(methodNames_1)) {
 "
 #' @export 
 '", mtd, ".zoocat' <- function (", obj, ", ...) {
+    class0 <- class(", obj, ")
     colAttr <- cattr(", obj, ")
     ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
     ret <- '", mtd, "'(", obj, ", ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         

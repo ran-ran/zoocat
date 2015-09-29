@@ -47,7 +47,7 @@ the returned \code{zoomlyList} object.
 \examples{
 x <- data.frame(year = rep(1991 : 1993, each = 3), month = rep(3 : 1, 3),
                 value = 1 : 9)
-md <- cast2zoomly(x, year.var = 'year', month.var = 'month',
+zm <- cast2zoomly(x, year.var = 'year', month.var = 'month',
                    value.var = 'value', fun.aggregate = mean)
 
 data(sst)

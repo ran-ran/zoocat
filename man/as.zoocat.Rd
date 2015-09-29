@@ -26,7 +26,7 @@ as.zoocat(x, ...)
 the output \code{zoocat} object to store the variable name.
 Only valid when \code{addname} is TRUE.}
 
-\item{colattr}{The column attribute table for x.}
+\item{colattr}{a data frame the column attribute table for x.}
 }
 \value{
 A \code{zoocat} object.

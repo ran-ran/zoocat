@@ -17,9 +17,9 @@ test_that('Melt of zoocat object with NA', {
     }
 })
 
-test_that('Melt of mlydata object with NA', {
+test_that('Melt of zoomly object with NA', {
     x <- matrix(c(1 : 13, rep(NA, 7)), nrow = 5)
-    md <- mlydata(x, year = 1991 : 1995, month = 3 : 6)
+    md <- zoomly(x, year = 1991 : 1995, month = 3 : 6)
     mdm <- melt(md, na.rm = FALSE)
     expect_equal(nrow(mdm), 20)
     mdm <- melt(md, na.rm = TRUE)
@@ -33,16 +33,16 @@ test_that('Melt of mlydata object with NA', {
 })
 
 
-test_that('Cast and melt of mlydataList', {
+test_that('Cast and melt of zoomlyList', {
     ym <- as.yearmon(2000 + seq(0, 23)/12)
     zooobj <- zoo(matrix(1:48, nrow = 24), order.by = ym)
     colnames(zooobj) <- c('x', 'y')
-    mdl <- cast2mlydata(zooobj)
+    mdl <- cast2zoomly(zooobj)
     mdl.melt <- melt(mdl, ret = 'zoo')
     expect_identical(zooobj, mdl.melt)
     
     df <- melt(mdl)
-    mdl <- cast2mlydata(df, value.var = 'value', 
+    mdl <- cast2zoomly(df, value.var = 'value', 
                         variable.var = 'variable')
     mdl.melt <- melt(mdl) 
     expect_identical(df, mdl.melt)

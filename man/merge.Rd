@@ -44,9 +44,9 @@ merge(zc1, lag(zc2), all = FALSE)
 cbind(zc1, zc2)
 
 x <- matrix(1 : 20, nrow = 5)
-md1 <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-md2 <- lag(md1, k = -1)
-merge(md2, md1)
-cbind(md2, md1)
+zm1 <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+zm2 <- lag(zm1, k = -1)
+merge(zm2, zm1)
+cbind(zm2, zm1)
 }
 

@@ -28,10 +28,10 @@
 #' cbind(zc1, zc2)
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
-#' md1 <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' md2 <- lag(md1, k = -1)
-#' merge(md2, md1)
-#' cbind(md2, md1)
+#' zm1 <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+#' zm2 <- lag(zm1, k = -1)
+#' merge(zm2, zm1)
+#' cbind(zm2, zm1)
 #'
 #' @export
 #' @rdname merge
@@ -40,10 +40,11 @@ merge.zoocat <- function (..., all = TRUE, fill = NA, suffixes = NULL,
                           check.names = FALSE, retclass = 'zoocat',
                           drop = TRUE) {
     listin <- list(...)
+    class0 <- class(listin[[1]])
     numZoo <- length(listin)
     cattrList <- list()
     for (i in 1 : numZoo) {
-        stopifnot(class(listin[[i]])[1] == 'zoocat')
+        stopifnot(inherits(listin[[i]], 'zoocat'))
         cattrList[[i]] <- attr(listin[[i]], 'cattr')
         listin[[i]] <- as.zoo(listin[[i]])
     }
@@ -56,7 +57,7 @@ merge.zoocat <- function (..., all = TRUE, fill = NA, suffixes = NULL,
                                             drop = TRUE))) 
     colnames(zooTotal) <- NULL
     attr(zooTotal, 'cattr') <- cattrTotal
-    class(zooTotal) <- c('zoocat', class(listin[[1]]))
+    class(zooTotal) <- class0
     return(zooTotal)
 }
 

@@ -35,11 +35,11 @@ Expand \code{zoomly} objects
 }
 \examples{
 x <- matrix(1 : 48, nrow = 4, byrow = TRUE)
-md <- zoomly(x, year = 1991 : 1994)
-expand(md, left = -2)
-expand(md, right = 15)
-expand(md, right = 15, naTrim = FALSE)
-expand(md, left = -13, right = 14)
-expand(md, left = -25, right = 14, naTrim = FALSE)
+zm <- zoomly(x, year = 1991 : 1994)
+expand(zm, left = -2)
+expand(zm, right = 15)
+expand(zm, right = 15, naTrim = FALSE)
+expand(zm, left = -13, right = 14)
+expand(zm, left = -25, right = 14, naTrim = FALSE)
 }
 

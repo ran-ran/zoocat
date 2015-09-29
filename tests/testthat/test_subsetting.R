@@ -17,19 +17,19 @@ test_that('Subsetting of zoocat object', {
 )
 
 
-test_that('Subsetting of mlydata object', {
+test_that('Subsetting of zoomly object', {
     x <- matrix(1 : 6, nrow = 3)
-    md <- mlydata(x, year = 1991 : 1993, month = c(2, 3))
-    expect_is(md[, 1], 'zoo')
-    expect_identical(index(md[, 1]), as.numeric(1991 : 1993))
-    expect_identical(is.vector(md[2, ]), TRUE)
-    expect_identical(names(md[2, ]), c('Feb', 'Mar'))
-    expect_is(md[1:2, 1:2], 'mlydata')
-    expect_identical(coredata(md[1:2, 1:2]), 
-                     coredata(md)[1:2, 1:2])
-    expect_is(md[, 'Feb'], 'zoo')
-    expect_identical(md[, 'Feb'], md[, 1])
-    expect_identical(md[, 'Mar'], md[, 2])
+    zm <- zoomly(x, year = 1991 : 1993, month = c(2, 3))
+    expect_is(zm[, 1], 'zoo')
+    expect_identical(index(zm[, 1]), as.numeric(1991 : 1993))
+    expect_identical(is.vector(zm[2, ]), TRUE)
+    expect_identical(names(zm[2, ]), c('Feb', 'Mar'))
+    expect_is(zm[1:2, 1:2], 'zoomly')
+    expect_identical(coredata(zm[1:2, 1:2]), 
+                     coredata(zm)[1:2, 1:2])
+    expect_is(zm[, 'Feb'], 'zoo')
+    expect_identical(zm[, 'Feb'], zm[, 1])
+    expect_identical(zm[, 'Mar'], zm[, 2])
 }
 )
 

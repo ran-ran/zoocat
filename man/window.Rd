@@ -33,13 +33,13 @@ Get a subset of a \code{zoomly} object.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
-md <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-window(md, year = 1992 : 1993, month = c(3, 6))
-window(md, start = 1993)
+zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+window(zm, year = 1992 : 1993, month = c(3, 6))
+window(zm, start = 1993)
 
 
 data(sst)
-mdList <- cast2zoomly(sst, value.var = c('nino12', 'nino3'))
-window(mdList, year = 1992:1993, month = 3:5)
+zmList <- cast2zoomly(sst, value.var = c('nino12', 'nino3'))
+window(zmList, year = 1992:1993, month = 3:5)
 }
 

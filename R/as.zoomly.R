@@ -11,10 +11,15 @@
 #' zobj <- zoo(x, order.by = 1991 : 1993)
 #' as.zoomly(zobj, month = 1 : 12)
 #' 
+#' zc <- zoocat(x, order.by = 1991 : 1993, 
+#'              colattr = data.frame(month = 1 : 12))
+#' as.zoomly(zc)
+#'              
+#' 
 #' @name as.zoomly
 #' @rdname as.zoomly
 #' @export
-#' @param x A zoo object.
+#' @param x an object.
 #' @param ... further arguments passed to methods.
 as.zoomly <- function(x, ...) { UseMethod('as.zoomly') }
 
@@ -25,17 +30,20 @@ as.zoomly <- function(x, ...) { UseMethod('as.zoomly') }
 as.zoomly.zoo <- function(x, month, ...) {
     year <- index(x)
     x <- coredata(x)
-    md <- zoomly(x, year = as.integer(year), month = month)
-    return(md)
+    zm <- zoomly(x, year = year, month = month)
+    return(zm)
 }
 
 
 #' @export
 #' @rdname as.zoomly
-as.zoomly.zoocat <- function (x) {
+as.zoomly.zoocat <- function (x, ...) {
+    if (inherits(x, 'zoomly')) {
+        return(x)
+    }
     colAttr <- cattr(x)
-    if (!all.equal(colnames(colAttr), 'month')) {
-        stop('Can not trasform to zoomly object.')
+    if (ncol(colAttr) != 1 || colnames(colAttr) != 'month') {
+        stop('Can not transform to zoomly object.')
     }
     class(x) <- c('zoomly', class(x))
     return(x)

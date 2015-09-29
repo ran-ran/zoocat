@@ -99,21 +99,35 @@ print.zoocat <- function (x, ...) {
     if (missing(j)) {
         j <- 1 : ncol(x)
     }
+    if (inherits(x, 'zoomly')) {
+        fun_cattr2str <- month2str
+    } else {
+        fun_cattr2str <- cattr2str
+    }
+    class0 <- class(x)
     colAttr <- attr(x, 'cattr')
+    
     if (is.character(j)) {
-        cattrStr <- cattr2str(colAttr)
+        cattrStr <- fun_cattr2str(colAttr)
         j <- which(j == cattrStr)
+        if (length(j) == 0) {
+            stop('No column is selected.')
+        }
     }
     colAttr <- colAttr[j, , drop = FALSE]
-    class(x) <- class(x)[-1]
+    class(x) <- class(x)[class(x) %in% c('zooreg', 'zoo')]
     x <- x[i, j, drop = drop]
     
     if (drop == TRUE & length(i) == 1) {
         x <- as.vector(x)
-        names(x) <- cattr2str(colAttr)
+        if (class0[1] == 'zoomly') {
+            names(x) <- fun_cattr2str(colAttr)
+        } else {
+            names(x) <- cattr2str(colAttr)
+        }
     } else if (drop == FALSE | (length(i) > 1 & length(j) > 1)) { 
         attr(x, 'cattr') <- colAttr
-        class(x) <- c('zoocat', class(x))
+        class(x) <- class0
     }
     
     return(x)

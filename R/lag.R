@@ -11,25 +11,25 @@
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
-#' md <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' lag(md, k = 1)
-#' lag(md, k = -2)
-#' lag(md, k = -1)
-#' cbind(lag(md, -1), md)
+#' zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+#' lag(zm, k = 1)
+#' lag(zm, k = -2)
+#' lag(zm, k = -1)
+#' cbind(lag(zm, -1), zm)
 #' 
-#' lag(md, k = -1, adjust.month = FALSE)
+#' lag(zm, k = -1, adjust.month = FALSE)
 #' 
 #' @export
 lag.zoomly <- function (x, k = 1, adjust.month = TRUE, ...) {
     month <- mon(x)
-    x <- as.zoo(x)
+    x <- as.zoo(x, add.colname = FALSE)
     x <- lag(x, k = k)
     if (adjust.month == TRUE) {
-        mon(x) <- month + 12 * k
+        attr(x, 'cattr') <- data.frame(month = month + 12 * k)
     } else {
-        mon(x) <- month
+        attr(x, 'cattr') <- data.frame(month = month)
     }
-    class(x) <- c('zoomly', class(x))
+    class(x) <- c('zoomly', 'zoocat', class(x))
     return(x)
 }
 

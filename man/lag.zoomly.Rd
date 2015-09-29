@@ -21,12 +21,12 @@ Lags of \code{zoomly} Objects
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
-md <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-lag(md, k = 1)
-lag(md, k = -2)
-lag(md, k = -1)
-cbind(lag(md, -1), md)
+zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+lag(zm, k = 1)
+lag(zm, k = -2)
+lag(zm, k = -1)
+cbind(lag(zm, -1), zm)
 
-lag(md, k = -1, adjust.month = FALSE)
+lag(zm, k = -1, adjust.month = FALSE)
 }
 
