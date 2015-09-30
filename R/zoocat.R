@@ -109,9 +109,9 @@ print.zoocat <- function (x, ...) {
     
     if (is.character(j)) {
         cattrStr <- fun_cattr2str(colAttr)
-        j <- which(j == cattrStr)
-        if (length(j) == 0) {
-            stop('No column is selected.')
+        j <- sapply(j, FUN = function (j1) which(j1 == cattrStr)[1])
+        if (any(is.na(j))) {
+            stop('Some column does not exist.')
         }
     }
     colAttr <- colAttr[j, , drop = FALSE]
