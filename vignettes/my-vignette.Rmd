@@ -83,12 +83,12 @@ head(retdf)
 ```
 
 
-# mlydata class
-mlydata class is designed for store monthly data.
+# zoomly class
+zoomly class is designed for store monthly data.
 
 ```{r,echo=TRUE}
 data(sst)
-nino <- cast2mlydata(sst, year.var = 'year', month.var = 'month',
+nino <- cast2zoomly(sst, year.var = 'year', month.var = 'month',
                      value.var = c('nino12', 'nino3', 'nino34','nino4'))
 nino <- normalize(nino)
 nino <- expand(nino)

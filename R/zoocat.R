@@ -25,8 +25,7 @@
 #' Otherwise, x is a \code{zoocat} object.
 #' @param colattr The column attributes. Must be a data frame with column names.
 #' @param ... Other arguments for \code{zoo}.
-#' @return \code{zoocat} returns a \code{zoocat} object. \code{coredata} and \code{as.matrix} returns a matrix or
-#' a data frame.
+#' @return A \code{zoocat} object.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
@@ -99,21 +98,35 @@ print.zoocat <- function (x, ...) {
     if (missing(j)) {
         j <- 1 : ncol(x)
     }
+    if (inherits(x, 'zoomly')) {
+        fun_cattr2str <- month2str
+    } else {
+        fun_cattr2str <- cattr2str
+    }
+    class0 <- class(x)
     colAttr <- attr(x, 'cattr')
+    
     if (is.character(j)) {
-        cattrStr <- cattr2str(colAttr)
-        j <- which(j == cattrStr)
+        cattrStr <- fun_cattr2str(colAttr)
+        j <- sapply(j, FUN = function (j1) which(j1 == cattrStr)[1])
+        if (any(is.na(j))) {
+            stop('Some column does not exist.')
+        }
     }
     colAttr <- colAttr[j, , drop = FALSE]
-    class(x) <- class(x)[-1]
+    class(x) <- class(x)[class(x) %in% c('zooreg', 'zoo')]
     x <- x[i, j, drop = drop]
     
     if (drop == TRUE & length(i) == 1) {
         x <- as.vector(x)
-        names(x) <- cattr2str(colAttr)
+        if (class0[1] == 'zoomly') {
+            names(x) <- fun_cattr2str(colAttr)
+        } else {
+            names(x) <- cattr2str(colAttr)
+        }
     } else if (drop == FALSE | (length(i) > 1 & length(j) > 1)) { 
         attr(x, 'cattr') <- colAttr
-        class(x) <- c('zoocat', class(x))
+        class(x) <- class0
     }
     
     return(x)

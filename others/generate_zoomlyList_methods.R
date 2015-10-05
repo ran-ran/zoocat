@@ -1,5 +1,5 @@
 
-fout <- 'E:/Codes/zoocat/R/z_mlydataList_methods.R'
+fout <- 'E:/Codes/zoocat/R/z_zoomlyList_methods.R'
 
 if (file.exists(fout)) {
     file.remove(fout)
@@ -53,7 +53,7 @@ if (nchar(rdname) != 0) {
 }
 
     cat(
-"'", mtd, ".mlydataList' <- function (", obj, ", ...) {
+"'", mtd, ".zoomlyList' <- function (", obj, ", ...) {
     for (i in 1 : length(", obj, ")) {
         ", obj, "[[i]] <- ", mtd, "(", obj, "[[i]], ...)
     }

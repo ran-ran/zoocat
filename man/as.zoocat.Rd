@@ -2,16 +2,16 @@
 % Please edit documentation in R/as.zoocat.R
 \name{as.zoocat}
 \alias{as.zoocat}
-\alias{as.zoocat.mlydata}
-\alias{as.zoocat.mlydataList}
 \alias{as.zoocat.zoo}
+\alias{as.zoocat.zoomly}
+\alias{as.zoocat.zoomlyList}
 \title{Coercing Objects to Class \code{zoocat}}
 \usage{
 as.zoocat(x, ...)
 
-\method{as.zoocat}{mlydata}(..., addname = TRUE, variable.name = "variable")
+\method{as.zoocat}{zoomly}(..., addname = TRUE, variable.name = "variable")
 
-\method{as.zoocat}{mlydataList}(x, variable.name = "variable", ...)
+\method{as.zoocat}{zoomlyList}(x, variable.name = "variable", ...)
 
 \method{as.zoocat}{zoo}(x, colattr = NULL, variable.name = "variable", ...)
 }
@@ -26,7 +26,7 @@ as.zoocat(x, ...)
 the output \code{zoocat} object to store the variable name.
 Only valid when \code{addname} is TRUE.}
 
-\item{colattr}{The column attribute table for x.}
+\item{colattr}{a data frame the column attribute table for x.}
 }
 \value{
 A \code{zoocat} object.
@@ -40,18 +40,18 @@ Coercing objects to class \code{zoocat}.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
-md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-md2 <- md + 100
-as.zoocat(md)
-as.zoocat(md, addname = FALSE)
-as.zoocat(x = md)
-as.zoocat(x = md, y = md2)
-as.zoocat(md, md2)
+zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+zm2 <- zm + 100
+as.zoocat(zm)
+as.zoocat(zm, addname = FALSE)
+as.zoocat(x = zm)
+as.zoocat(x = zm, y = zm2)
+as.zoocat(zm, zm2)
 
-x <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+x <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
 y <- x + 100
-mdList <- mlydataList(list(x = x, y = y))
-as.zoocat(mdList)
+zmList <- zoomlyList(list(x = x, y = y))
+as.zoocat(zmList)
 
 zobj <- zoo(matrix(1:10, nrow = 5), order.by = 11:15)
 colnames(zobj) <- c('a', 'b')

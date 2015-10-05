@@ -1,5 +1,5 @@
 
-#' Expand \code{mlydata} objects
+#' Expand \code{zoomly} objects
 #' 
 #' @name expand
 #' @rdname expand
@@ -14,24 +14,24 @@ expand <- function (x, ...) {
 #' @examples
 #' 
 #' x <- matrix(1 : 48, nrow = 4, byrow = TRUE)
-#' md <- mlydata(x, year = 1991 : 1994)
-#' expand(md, left = -2)
-#' expand(md, right = 15)
-#' expand(md, right = 15, naTrim = FALSE)
-#' expand(md, left = -13, right = 14)
-#' expand(md, left = -25, right = 14, naTrim = FALSE)
+#' zm <- zoomly(x, year = 1991 : 1994)
+#' expand(zm, left = -2)
+#' expand(zm, right = 15)
+#' expand(zm, right = 15, naTrim = FALSE)
+#' expand(zm, left = -13, right = 14)
+#' expand(zm, left = -25, right = 14, naTrim = FALSE)
 #' 
-#' @param x the \code{mlydata} object.
+#' @param x the \code{zoomly} object.
 #' @param left the month of the left limit.
 #' @param right the month of the right limit.
 #' @param naTrim logical. If TRUE, na.trim will be used to trim the
 #' result.
 #' @param ... further arguments input to \code{na.trim}.
-#' @return a \code{mlydata} or \code{mlydataList} object.
+#' @return a \code{zoomly} or \code{zoomlyList} object.
 #' @export
-expand.mlydata <- function (x, left = 1, right = 12, naTrim = TRUE,
+expand.zoomly <- function (x, left = 1, right = 12, naTrim = TRUE,
                             ...) {
-    if (ncol(x) != 12 || !all(attr(x, 'month') == 1 : 12)) {
+    if (ncol(x) != 12 || !all(mon(x) == 1 : 12)) {
         stop('the month of x must be 1 : 12.')
     }
     if (right < 12) {

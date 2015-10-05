@@ -1,7 +1,7 @@
 
 #' @export 
 #' @rdname window
-'window.mlydataList' <- function (x, ...) {
+'window.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- window(x[[i]], ...)
     }
@@ -11,7 +11,7 @@
 
 #' @export 
 #' @rdname expand
-'expand.mlydataList' <- function (x, ...) {
+'expand.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- expand(x[[i]], ...)
     }
@@ -21,7 +21,7 @@
 
 #' @export 
 #' @rdname normalize
-'normalize.mlydataList' <- function (x, ...) {
+'normalize.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- normalize(x[[i]], ...)
     }
@@ -30,7 +30,7 @@
 
 
 #' @export 
-'cummin.mlydataList' <- function (x, ...) {
+'cummin.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- cummin(x[[i]], ...)
     }
@@ -39,7 +39,7 @@
 
 
 #' @export 
-'cumprod.mlydataList' <- function (x, ...) {
+'cumprod.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- cumprod(x[[i]], ...)
     }
@@ -48,7 +48,7 @@
 
 
 #' @export 
-'cumsum.mlydataList' <- function (x, ...) {
+'cumsum.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- cumsum(x[[i]], ...)
     }
@@ -57,7 +57,7 @@
 
 
 #' @export 
-'diff.mlydataList' <- function (x, ...) {
+'diff.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- diff(x[[i]], ...)
     }
@@ -66,7 +66,7 @@
 
 
 #' @export 
-'head.mlydataList' <- function (x, ...) {
+'head.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- head(x[[i]], ...)
     }
@@ -75,7 +75,7 @@
 
 
 #' @export 
-'lag.mlydataList' <- function (x, ...) {
+'lag.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- lag(x[[i]], ...)
     }
@@ -84,7 +84,7 @@
 
 
 #' @export 
-'na.aggregate.mlydataList' <- function (object, ...) {
+'na.aggregate.zoomlyList' <- function (object, ...) {
     for (i in 1 : length(object)) {
         object[[i]] <- na.aggregate(object[[i]], ...)
     }
@@ -93,7 +93,7 @@
 
 
 #' @export 
-'na.approx.mlydataList' <- function (object, ...) {
+'na.approx.zoomlyList' <- function (object, ...) {
     for (i in 1 : length(object)) {
         object[[i]] <- na.approx(object[[i]], ...)
     }
@@ -102,7 +102,7 @@
 
 
 #' @export 
-'na.contiguous.mlydataList' <- function (object, ...) {
+'na.contiguous.zoomlyList' <- function (object, ...) {
     for (i in 1 : length(object)) {
         object[[i]] <- na.contiguous(object[[i]], ...)
     }
@@ -111,7 +111,7 @@
 
 
 #' @export 
-'na.fill.mlydataList' <- function (object, ...) {
+'na.fill.zoomlyList' <- function (object, ...) {
     for (i in 1 : length(object)) {
         object[[i]] <- na.fill(object[[i]], ...)
     }
@@ -120,7 +120,7 @@
 
 
 #' @export 
-'na.spline.mlydataList' <- function (object, ...) {
+'na.spline.zoomlyList' <- function (object, ...) {
     for (i in 1 : length(object)) {
         object[[i]] <- na.spline(object[[i]], ...)
     }
@@ -129,7 +129,7 @@
 
 
 #' @export 
-'na.trim.mlydataList' <- function (object, ...) {
+'na.trim.zoomlyList' <- function (object, ...) {
     for (i in 1 : length(object)) {
         object[[i]] <- na.trim(object[[i]], ...)
     }
@@ -138,7 +138,7 @@
 
 
 #' @export 
-'rollapply.mlydataList' <- function (data, ...) {
+'rollapply.zoomlyList' <- function (data, ...) {
     for (i in 1 : length(data)) {
         data[[i]] <- rollapply(data[[i]], ...)
     }
@@ -147,7 +147,7 @@
 
 
 #' @export 
-'rollmax.mlydataList' <- function (x, ...) {
+'rollmax.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- rollmax(x[[i]], ...)
     }
@@ -156,7 +156,7 @@
 
 
 #' @export 
-'rollmean.mlydataList' <- function (x, ...) {
+'rollmean.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- rollmean(x[[i]], ...)
     }
@@ -165,7 +165,7 @@
 
 
 #' @export 
-'rollmedian.mlydataList' <- function (x, ...) {
+'rollmedian.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- rollmedian(x[[i]], ...)
     }
@@ -174,7 +174,7 @@
 
 
 #' @export 
-'rollsum.mlydataList' <- function (x, ...) {
+'rollsum.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- rollsum(x[[i]], ...)
     }
@@ -183,7 +183,7 @@
 
 
 #' @export 
-'scale.mlydataList' <- function (x, ...) {
+'scale.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- scale(x[[i]], ...)
     }
@@ -192,7 +192,7 @@
 
 
 #' @export 
-'tail.mlydataList' <- function (x, ...) {
+'tail.zoomlyList' <- function (x, ...) {
     for (i in 1 : length(x)) {
         x[[i]] <- tail(x[[i]], ...)
     }

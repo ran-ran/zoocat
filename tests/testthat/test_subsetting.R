@@ -1,4 +1,6 @@
 
+context('Test subsetting')
+
 test_that('Subsetting of zoocat object', {
     x <- matrix(1 : 6, nrow = 3)
     colAttr <- data.frame(month = c(2, 3), variable = c('x', 'y'))
@@ -17,21 +19,32 @@ test_that('Subsetting of zoocat object', {
 )
 
 
-test_that('Subsetting of mlydata object', {
+test_that('Subsetting of zoomly object', {
     x <- matrix(1 : 6, nrow = 3)
-    md <- mlydata(x, year = 1991 : 1993, month = c(2, 3))
-    expect_is(md[, 1], 'zoo')
-    expect_identical(index(md[, 1]), as.numeric(1991 : 1993))
-    expect_identical(is.vector(md[2, ]), TRUE)
-    expect_identical(names(md[2, ]), c('Feb', 'Mar'))
-    expect_is(md[1:2, 1:2], 'mlydata')
-    expect_identical(coredata(md[1:2, 1:2]), 
-                     coredata(md)[1:2, 1:2])
-    expect_is(md[, 'Feb'], 'zoo')
-    expect_identical(md[, 'Feb'], md[, 1])
-    expect_identical(md[, 'Mar'], md[, 2])
+    zm <- zoomly(x, year = 1991 : 1993, month = c(2, 3))
+    expect_is(zm[, 1], 'zoo')
+    expect_identical(index(zm[, 1]), as.numeric(1991 : 1993))
+    expect_identical(is.vector(zm[2, ]), TRUE)
+    expect_identical(names(zm[2, ]), c('Feb', 'Mar'))
+    expect_is(zm[1:2, 1:2], 'zoomly')
+    expect_identical(coredata(zm[1:2, 1:2]), 
+                     coredata(zm)[1:2, 1:2])
+    expect_is(zm[, 'Feb'], 'zoo')
+    expect_identical(zm[, 'Feb'], zm[, 1])
+    expect_identical(zm[, 'Mar'], zm[, 2])
 }
 )
 
 
+test_that("Drop of zoocat object", {
+    x <- matrix(1 : 20, nrow = 5)
+    colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
+    zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
+    expect_true(is.zoo(zc[, 1]))
+    expect_true(is.null(dim(zc[, 1])))
+    expect_equal(index(zc[, 1]), index(zc))
+    expect_true(inherits(zc[, 1, drop = FALSE], 'zoocat'))
+    expect_true(is.vector(zc[1, ]))
+    expect_true(inherits(zc[1, , drop = FALSE], 'zoocat'))
+})
 

@@ -1,9 +1,9 @@
 
-#' Melt a \code{zoocat} or \code{mlydata} Object
+#' Melt a \code{zoocat} or \code{zoomly} Object
 #' 
-#' Melt a \code{zoocat} object or \code{mlydata} to a data frame of the long table style,
+#' Melt a \code{zoocat} object or \code{zoomly} to a data frame of the long table style,
 #' which is similar as in package \code{reshape2}.
-#' For \code{mlydata}, a \code{zoo} object can be returned.
+#' For \code{zoomly}, a \code{zoo} object can be returned.
 #' 
 #' @return A data frame or a \code{zoo} object.
 #' 
@@ -15,18 +15,18 @@
 #' melt(zc)
 #' 
 #' x <- matrix(1 : 24, nrow = 3, byrow = TRUE)
-#' md <- mlydata(x, year = 1991 : 1993, month = 2 : 9)
-#' md2 <- md + 1
-#' melt(md)
-#' melt(md, ret = 'zoo')
-#' melt(md, md2, ret = 'zoo')
+#' zm <- zoomly(x, year = 1991 : 1993, month = 2 : 9)
+#' zm2 <- zm + 1
+#' melt(zm)
+#' melt(zm, ret = 'zoo')
+#' melt(zm, zm2, ret = 'zoo')
 #' 
 #' x <- matrix(1 : 36, nrow = 3)
-#' x <- mlydata(x, year = 1991 : 1993)
+#' x <- zoomly(x, year = 1991 : 1993)
 #' y <- x + 1
-#' mdl <- mlydataList(x, y)
-#' melt(mdl, variable.name = 'var', value.name = 'val')
-#' melt(mdl, ret = 'zoo')
+#' zml <- zoomlyList(x, y)
+#' melt(zml, variable.name = 'var', value.name = 'val')
+#' melt(zml, ret = 'zoo')
 #' 
 #' @name melt
 #' @rdname melt
@@ -38,8 +38,8 @@
 #' @param na.rm as \code{melt} in reshape2. Should NA values be removed from the data set? 
 #' @param ret character string. Can be \code{data.frame} or \code{zoo}
 #' @param variable.name name of the column used to store variable names.
-#' Only valid when a data frame is returned. For \code{melt.mlydata}, it is only 
-#' valid when there are several input \code{mlydata} objects.
+#' Only valid when a data frame is returned. For \code{melt.zoomly}, it is only 
+#' valid when there are several input \code{zoomly} objects.
 #' @param ... further arguments.
 melt.zoocat <- function (data, value.name = 'value', index.name = 'index',
                          na.rm = FALSE, ...) {
@@ -64,15 +64,15 @@ melt.zoocat <- function (data, value.name = 'value', index.name = 'index',
 #' @export
 #' @rdname melt
 #' 
-melt.mlydata <- function(..., value.name = 'value', variable.name = 'variable',
+melt.zoomly <- function(..., value.name = 'value', variable.name = 'variable',
                          ret = 'data.frame', 
                          na.rm = FALSE) {
     stopifnot(ret %in% c('data.frame', 'zoo'))
     arg <- list(...)
     if (length(arg) > 1) {
         for (i in 2 : length(arg)) {
-            if (!inherits(arg[[i]], 'mlydata')) {
-                stop('Some argument is not mlydata objects.')
+            if (!inherits(arg[[i]], 'zoomly')) {
+                stop('Some argument is not zoomly objects.')
             }
         }
     }
@@ -80,7 +80,7 @@ melt.mlydata <- function(..., value.name = 'value', variable.name = 'variable',
         if (ret == 'zoo') {
             x <- arg[[1]]
             year <- index(x)
-            month <- attr(x, 'month')
+            month <- mon(x)
             yy <- rep(year, each = length(month))
             mm <- rep(month, length(year))
             yymm <- yearmon(yy + (mm - 1) / 12)
@@ -88,14 +88,9 @@ melt.mlydata <- function(..., value.name = 'value', variable.name = 'variable',
             vec <- as.vector(t(mat))
             ret <- zoo(vec, order.by = yymm)
         } else {
-            x <- arg[[1]]
-            month <- attr(x, 'month')
-            year <- index(x)
-            x <- data.frame(year = year, coredata(x))
-            colnames(x) <- c('year', month) 
-            ret <- melt(x, id.vars = 'year', variable.name = 'month',
-                        value.name = value.name, na.rm = na.rm)
-            ret$month <- as.numeric(as.character(ret$month))
+            x <- as.zoocat(arg[[1]], addname = FALSE)
+            ret <- melt(x, index.name = 'year', value.name = value.name, 
+                        na.rm = na.rm)
             ret <- plyr::arrange(ret, year, month)
         }
     } else {
@@ -106,7 +101,7 @@ melt.mlydata <- function(..., value.name = 'value', variable.name = 'variable',
             argnames <- callList[idxNoName]
             names(arg) <- argnames
         }
-        arg <- mlydataList(arg)
+        arg <- zoomlyList(arg)
         ret <- melt(arg, value.name = value.name, 
                     variable.name = variable.name, ret = ret, na.rm = na.rm)
     }
@@ -116,7 +111,7 @@ melt.mlydata <- function(..., value.name = 'value', variable.name = 'variable',
 
 #' @export
 #' @rdname melt
-melt.mlydataList <- function (data, value.name = 'value', variable.name = 'variable',
+melt.zoomlyList <- function (data, value.name = 'value', variable.name = 'variable',
                               ret = 'data.frame',
                               na.rm = FALSE, ...) {
     stopifnot(ret %in% c('data.frame', 'zoo'))

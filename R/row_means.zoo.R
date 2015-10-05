@@ -9,8 +9,8 @@
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
-#' md <- mlydata(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' row_means(md)
+#' zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+#' row_means(zm)
 #' 
 #' @export
 #' @name row_means
