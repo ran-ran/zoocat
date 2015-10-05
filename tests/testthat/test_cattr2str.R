@@ -1,6 +1,6 @@
+context('Test cattr2str')
 
-
-test_that('test cattr2str', {
+test_that('Test cattr2str', {
     ca <- data.frame(month = c(2, 3, 5, 6), 
                           variable = c(rep('x', 3), 'y'),
                           used = c(TRUE, FALSE, TRUE, FALSE))

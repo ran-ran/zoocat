@@ -1,4 +1,4 @@
-
+context('Test melt and cast')
 
 test_that('Melt of zoocat object with NA', {
     x <- matrix(c(1 : 14, rep(NA, 6)), nrow = 5)

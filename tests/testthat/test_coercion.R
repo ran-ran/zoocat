@@ -1,4 +1,4 @@
-
+context('Test coercion between classes')
 
 test_that('as.zoo for zoomly and zoocat', {
     x <- matrix(1 : 20, nrow = 5)

@@ -15,8 +15,7 @@ Otherwise, x is a \code{zoocat} object.}
 \item{...}{Other arguments for \code{zoo}.}
 }
 \value{
-\code{zoocat} returns a \code{zoocat} object. \code{coredata} and \code{as.matrix} returns a matrix or
-a data frame.
+A \code{zoocat} object.
 }
 \description{
 A class designed for \code{zoo} with column attributes.

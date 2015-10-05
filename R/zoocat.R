@@ -25,8 +25,7 @@
 #' Otherwise, x is a \code{zoocat} object.
 #' @param colattr The column attributes. Must be a data frame with column names.
 #' @param ... Other arguments for \code{zoo}.
-#' @return \code{zoocat} returns a \code{zoocat} object. \code{coredata} and \code{as.matrix} returns a matrix or
-#' a data frame.
+#' @return A \code{zoocat} object.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
