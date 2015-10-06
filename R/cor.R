@@ -53,7 +53,11 @@ cor.zoo <- function (x, y = NULL, ...) {
             y <- as.matrix(y)
         }
     }
-    x <- as.matrix(x)
+    if (is.null(dim(x))) {
+        x <- as.vector(x)
+    } else {
+        x <- as.matrix(x)
+    }
     ret <- stats::cor(x, y, ...)
     return(ret)
 }
