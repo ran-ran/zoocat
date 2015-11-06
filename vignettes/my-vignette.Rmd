@@ -9,14 +9,17 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-The zoocat package is a extension of the zoo package. The aim of the zoocat package is to provide a better manament of multidimensional time series. In zoo package, you can create a 2-dimension zoo object, in which each column stores a time series. You can use column names to store the information of each column.
-The zoocat package give a another method to store the attributes of each column. For a zoocat object, a column attributes table is added to the object:
+**zoocat** package is a extension of the **zoo** package. The aim of the **zoocat** package is to provide a better manament method for multidimensional time series. In **zoo** package, you can create a 2-dimension zoo object, in which each column stores a time series. You can use column names to store the information of each column.
+The **zoocat** package give a another method to store the attributes of each column.
 
-```{r,echo=FALSE}
+```{r,message=FALSE}
 library(zoocat)
 ```
 
-# A simple case
+# zoocat class
+
+## A simple case
+You can use `zoocat` function to construct a zoocat object. So for constructing a zoocat object, a data frame of the column attributes table should be given as the argument `colattr`. 
 
 ```{r,echo=TRUE}
 x <- matrix(1 : 20, nrow = 5)
@@ -28,21 +31,21 @@ zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 print(zc)
 ```
 
-So for constructing a zoocat object, a data frame of the column attributes table should be given. The struction of the zoocat object is quite simple:
+The struction of the zoocat object is quite simple:
 
 ```{r,echo=TRUE}
 unclass(zc)
 ```
 
 It can be seen that an attribute 'cattr' is added, in which there is the column attributes (cattr) table. Each row of the cattr table corresponding to a column of the core data.
-The action of the zoocat object is similar with zoo object. When print, the column names will be added. You can use as.zoo to translate a zoocat object to be a real zoo object:
+The action of the zoocat object is similar with zoo object. When print, the column names will be added. You can use `as.zoo` to translate a zoocat object to be a real zoo object:
 
 ```{r,echo=TRUE}
 zo <- as.zoo(zc)
 print(zo)
 ```
 
-Like zoo, you can get a subset of the object:
+Like zoo object, you can get a subset of the object:
 ```{r,echo=TRUE}
 zc[1 : 3, 2 : 4]
 zc[3, 3]
@@ -50,28 +53,33 @@ zc['1994', ]
 window(zc, start = 1993)
 ```
 
-Like what can be done in reshapes package, you can melt the zoocat object:
+Like what can be done in **reshapes** package, you can melt the zoocat object:
 ```{r,echo=TRUE}
 dfm <- melt(zc, index.name = 'year')
 head(dfm)
 ```
 
-You can also cast the melt data frame to be a zoocat object:
+You can also cast the melted data frame to be a zoocat object:
 ```{r,echo=TRUE}
 zc.cast <- cast2zoocat(dfm, index.var = 'year', value.var = 'value')
 print(zc.cast)
 ```
 
-You can see that the zc.cast is the same with zc. If you want to get a time series whose index is month, you can cast dfm to another zoocat object:
+It can be seen that the zc.cast is the same with zc.
 
 
-# A example of SST data
+## A example of SST data
  
 ```{r,echo=TRUE}
 data(sst)
 sstmelt <- melt(sst, id.var = c('year', 'month'))
 zc <- cast2zoocat(sstmelt, index.var = 'year', value.var = 'value')
 head(zc)
+```
+
+You can use `colapply` to apply a function for each column of the zoocat object. 
+
+```{r,echo=TRUE}
 fuse <- function (x) {
     x <- window(x, start = 1980, end = 2014)
     ret <- c(max(x), min(x), mean(x), median(x), sd(x))
@@ -83,22 +91,39 @@ head(retdf)
 ```
 
 
-# zoomly class
-zoomly class is designed for store monthly data.
+# zoomly and zoomlyList class
+zoomly class is designed for store monthly data. Each zoomly object is just a zoocat object who has only one column attributes "month". A zoomlyList object is just a list with several zoomly objects. Many functions for zoomly objects can be used for zoomlyList objects, such as head, tail.
 
 ```{r,echo=TRUE}
 data(sst)
 nino <- cast2zoomly(sst, year.var = 'year', month.var = 'month',
                      value.var = c('nino12', 'nino3', 'nino34','nino4'))
+head(nino, 2)
+tail(nino, 2)
 nino <- normalize(nino)
-nino <- expand(nino)
-nino <- na.trim(nino)
+head(nino, 2)
+```
 
+You can expand it, which means that you can "add" data of previous year and followed year. 
+```{r,echo=TRUE}
+nino <- expand(nino, left = -11, right = 24)
+nino <- na.trim(nino)
+head(nino, 2)
+```
+
+
+Most convenient method to plot data is to use lattice package.
+
+```{r,echo=TRUE,fig.height=5,fig.width=8}
 ninoel <- window(nino, year = c(1983, 1998, 2010))
 ninoel <- melt(ninoel)
+ninoel$year <- as.character(ninoel$year)
 library(lattice)
 xyplot(value~month|year, group = variable, data = ninoel, type = 'l')
 ```
+
+
+
 
 
 
