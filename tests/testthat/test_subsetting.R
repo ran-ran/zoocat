@@ -48,3 +48,13 @@ test_that("Drop of zoocat object", {
     expect_true(inherits(zc[1, , drop = FALSE], 'zoocat'))
 })
 
+
+test_that('Subsetting of a zoomlyList object.', {
+    x <- matrix(1 : 20, nrow = 5)
+    x <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
+    y <- x + 1
+    zl <- zoomlyList(list(md1 = x, md2 = y))
+    expect_identical(class(zl[1]), 'zoomlyList')
+    expect_identical(class(zl[2]), 'zoomlyList')
+}
+)

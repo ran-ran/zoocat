@@ -81,4 +81,13 @@ zoomlyList <- function(...) {
 
 
 
+#' @export
+#' 
+'[.zoomlyList' <- function (x, ...) {
+    class(x) <- NULL
+    ret <- x[...]
+    class(ret) <- 'zoomlyList'
+    return(ret)
+}
+
 

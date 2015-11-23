@@ -55,7 +55,7 @@ if (nchar(rdname) != 0) {
     cat(
 "'", mtd, ".zoomlyList' <- function (", obj, ", ...) {
     for (i in 1 : length(", obj, ")) {
-        ", obj, "[[i]] <- ", mtd, "(", obj, "[[i]], ...)
+        ", obj, "[[i]] <- '", mtd, "'(", obj, "[[i]], ...)
     }
     return(", obj, ")
 }
