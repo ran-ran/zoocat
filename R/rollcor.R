@@ -87,7 +87,7 @@ rollcor.zoo <- function (x, y, width, show = TRUE, ...) {
     halfWidth <- (width - 1) / 2
     xcore <- coredata(x)
     ycore <- coredata(y)
-    cc <- rollcor(xcore, ycore, width = width, show = FALSE)
+    cc <- rollcor(xcore, ycore, width = width, show = FALSE, ...)
     cc <- zoo(cc, order.by = index(x)[halfWidth + 1] : index(x)[len - halfWidth])
     if (show == TRUE) {
         dev.new()
