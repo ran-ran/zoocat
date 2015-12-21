@@ -7,8 +7,7 @@
 zoocat(x = NULL, colattr = NULL, ...)
 }
 \arguments{
-\item{x}{For \code{zoocat} function, x is a matrix or a data frame.
-Otherwise, x is a \code{zoocat} object.}
+\item{x}{a matrix. If \code{x} is a data frame, it will be converted to a matrix.}
 
 \item{colattr}{The column attributes. Must be a data frame with column names.}
 

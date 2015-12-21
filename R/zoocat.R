@@ -21,8 +21,7 @@
 #' with column and row names. The row names is the index of the \code{zoocat}
 #' object, and the column names is based on the \code{cattr}.
 #' 
-#' @param x For \code{zoocat} function, x is a matrix or a data frame.
-#' Otherwise, x is a \code{zoocat} object.
+#' @param x a matrix. If \code{x} is a data frame, it will be converted to a matrix.
 #' @param colattr The column attributes. Must be a data frame with column names.
 #' @param ... Other arguments for \code{zoo}.
 #' @return A \code{zoocat} object.
