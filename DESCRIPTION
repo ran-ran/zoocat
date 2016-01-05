@@ -1,7 +1,7 @@
 Package: zoocat 
 Type: Package
 Title: zoo with Column Attributes
-Version: 1.0
+Version: 2.0
 Date: 2015-09-06
 Author: Ranran He
 Maintainer: Ranran He <heran198311@163.com>
