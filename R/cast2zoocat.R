@@ -62,7 +62,7 @@ cast2zoocat <- function (x, index.var, value.var, attr.var = NULL, fun.aggregate
         }
     }
     
-    index.class <- class(x[,  index.var])
+    index.class <- class(x[1,  index.var])
     if (is.factor(x[, index.var])) {
         index.levels <- levels(x[, index.var])
     }
@@ -74,7 +74,8 @@ cast2zoocat <- function (x, index.var, value.var, attr.var = NULL, fun.aggregate
 
     mat <- as.matrix(data.cast[, (nattr + 1) : ncol(data.cast), drop = FALSE])
     if (index.class != 'factor') {
-        ord <- as(colnames(mat), index.class)
+        coerce.func <- paste('as.', index.class, sep = '')
+        ord <- match.fun(coerce.func)(colnames(mat))
     } else {
         ord <- factor(colnames(mat), levels = index.levels)
     }
