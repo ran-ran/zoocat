@@ -66,6 +66,7 @@ cast2zoocat <- function (x, index.var, value.var, attr.var = NULL, fun.aggregate
     if (is.factor(x[, index.var])) {
         index.levels <- levels(x[, index.var])
     }
+    x[, index.var] <- as.character(x[, index.var])
     
     left <- paste(attr.var, collapse = "+")
     right <- paste(index.var, collapse = "+")

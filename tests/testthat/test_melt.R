@@ -33,6 +33,21 @@ test_that('Melt of zoomly object with NA', {
 })
 
 
+test_that('cast2zoocat, the index is Date class', {
+    ind <- as.Date(12450:12455)
+    mat <- matrix(rnorm(24), ncol = 4)
+    ctable <- data.frame(variable = rep(c('a', 'b'), each = 2), 
+                         site = rep(c('s1', 's2'), 2))
+    zc <- zoocat(mat, order.by = as.Date(12450:12455), colattr = ctable)
+    df.melt <- melt(zc)
+    zc2 <- cast2zoocat(df.melt, index.var = 'index', value.var = 'value')
+    # expect_identical(zc, zc2) # should be noted
+    expect_identical(cattr(zc), cattr(zc2))
+    expect_identical(index(zc), index(zc2))
+    expect_identical(coredata(zc), coredata(zc2))
+})
+
+
 test_that('Cast and melt of zoomlyList', {
     ym <- as.yearmon(2000 + seq(0, 23)/12)
     zooobj <- zoo(matrix(1:48, nrow = 24), order.by = ym)
