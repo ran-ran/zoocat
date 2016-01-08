@@ -72,18 +72,19 @@ print.zoocat <- function (x, ...) {
         cat('empty zoocat\n')
     } else {
         attrName <- colnames(cattr(x))
-        class(x) <- 'zoo'
         colnames(x) <- cattr2str(attr(x, 'cattr'))
-        attr(x, 'cattr') <- NULL
-        attr(x, 'index.name') <- NULL
-        cat('A zoocat object with column attributes: ')
+        cat('A zoocat object with:\n- [column attributes]: ')
         for (i in 1 : length(attrName)) {
             cat(attrName[i])
             if (i < length(attrName)) {
-                cat('_')
+                cat(', ')
             }
         }
+        cat('\n- [index variable]: ', attr(x, 'index.name'), sep = '')
         cat('\n\n')
+        class(x) <- 'zoo'
+        attr(x, 'cattr') <- NULL
+        attr(x, 'index.name') <- NULL
         print(x)
     }
 }
