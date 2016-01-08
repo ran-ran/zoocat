@@ -3,10 +3,12 @@
 'cummax.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'cummax'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -16,10 +18,12 @@
 'cummin.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'cummin'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -29,10 +33,12 @@
 'cumprod.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'cumprod'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -42,10 +48,12 @@
 'cumsum.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'cumsum'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -55,10 +63,12 @@
 'diff.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'diff'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -68,10 +78,12 @@
 'head.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'head'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -81,10 +93,12 @@
 'na.aggregate.zoocat' <- function (object, ...) {
     class0 <- class(object)
     colAttr <- cattr(object)
+    indexName <- index.name(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.aggregate'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -94,10 +108,12 @@
 'na.approx.zoocat' <- function (object, ...) {
     class0 <- class(object)
     colAttr <- cattr(object)
+    indexName <- index.name(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.approx'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -107,10 +123,12 @@
 'na.contiguous.zoocat' <- function (object, ...) {
     class0 <- class(object)
     colAttr <- cattr(object)
+    indexName <- index.name(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.contiguous'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -120,10 +138,12 @@
 'na.fill.zoocat' <- function (object, ...) {
     class0 <- class(object)
     colAttr <- cattr(object)
+    indexName <- index.name(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.fill'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -133,10 +153,12 @@
 'na.spline.zoocat' <- function (object, ...) {
     class0 <- class(object)
     colAttr <- cattr(object)
+    indexName <- index.name(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.spline'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -146,10 +168,12 @@
 'na.trim.zoocat' <- function (object, ...) {
     class0 <- class(object)
     colAttr <- cattr(object)
+    indexName <- index.name(object)
     object <- as.zoo(object, add.colname = FALSE)
     ret <- 'na.trim'(object, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -159,10 +183,12 @@
 'rollapply.zoocat' <- function (data, ...) {
     class0 <- class(data)
     colAttr <- cattr(data)
+    indexName <- index.name(data)
     data <- as.zoo(data, add.colname = FALSE)
     ret <- 'rollapply'(data, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -172,10 +198,12 @@
 'rollmax.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'rollmax'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -185,10 +213,12 @@
 'rollmean.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'rollmean'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -198,10 +228,12 @@
 'rollmedian.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'rollmedian'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -211,10 +243,12 @@
 'rollsum.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'rollsum'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -224,10 +258,12 @@
 'scale.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'scale'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }
@@ -237,10 +273,27 @@
 'tail.zoocat' <- function (x, ...) {
     class0 <- class(x)
     colAttr <- cattr(x)
+    indexName <- index.name(x)
     x <- as.zoo(x, add.colname = FALSE)
     ret <- 'tail'(x, ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
+    class(ret) <- class0
+    return(ret)
+}
+        
+
+#' @export 
+'window.zoocat' <- function (x, ...) {
+    class0 <- class(x)
+    colAttr <- cattr(x)
+    indexName <- index.name(x)
+    x <- as.zoo(x, add.colname = FALSE)
+    ret <- 'window'(x, ...)
+    colnames(ret) <- NULL
+    attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }

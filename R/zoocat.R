@@ -23,7 +23,7 @@
 #' 
 #' @param x a matrix. If \code{x} is a data frame, it will be converted to a matrix.
 #' @param colattr the column attributes. Must be a data frame with column names.
-#' @param index.name the name of the index variable.
+#' @param index.name. the name of the index variable.
 #' @param ... other arguments for \code{zoo}.
 #' @return A \code{zoocat} object.
 #' @examples
@@ -45,7 +45,7 @@
 #' @name zoocat
 #' @export
 #' @rdname zoocat
-zoocat <- function (x = NULL, colattr = NULL, index.name = 'index', ...) {
+zoocat <- function (x = NULL, colattr = NULL, index.name. = 'index', ...) {
     if (is.null(x)) {
         z <- zoo(x, ...)
         class(z) <- c('zoocat', class(z))

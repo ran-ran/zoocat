@@ -29,7 +29,8 @@ methodNames_1 <- matrix(
                  'rollmedian', 'x',
                  'rollsum', 'x',
                  'scale', 'x',
-                 'tail', 'x'
+                 'tail', 'x',
+                 'window', 'x'
                  ),
                  ncol = 2, byrow = TRUE)
 
@@ -62,10 +63,12 @@ for (i in 1 : nrow(methodNames_1)) {
 '", mtd, ".zoocat' <- function (", obj, ", ...) {
     class0 <- class(", obj, ")
     colAttr <- cattr(", obj, ")
+    indexName <- index.name(", obj, ")
     ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
     ret <- '", mtd, "'(", obj, ", ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
     class(ret) <- class0
     return(ret)
 }

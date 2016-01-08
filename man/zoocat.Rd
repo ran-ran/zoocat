@@ -4,14 +4,14 @@
 \alias{zoocat}
 \title{zoocat Class}
 \usage{
-zoocat(x = NULL, colattr = NULL, index.name = "index", ...)
+zoocat(x = NULL, colattr = NULL, index.name. = "index", ...)
 }
 \arguments{
 \item{x}{a matrix. If \code{x} is a data frame, it will be converted to a matrix.}
 
 \item{colattr}{the column attributes. Must be a data frame with column names.}
 
-\item{index.name}{the name of the index variable.}
+\item{index.name.}{the name of the index variable.}
 
 \item{...}{other arguments for \code{zoo}.}
 }
