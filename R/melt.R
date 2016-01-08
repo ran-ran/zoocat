@@ -52,14 +52,14 @@ melt.zoocat <- function (data, value.name = 'value', index.name = NULL,
     ind <- index(data)
     ind.class <- class(ind)
     dframe <- data.frame(colattr, xcore)
-    colnames(dframe) <- c(idvars, ind)
+    colnames(dframe) <- c(idvars, as.character(ind))
     df.melt <- melt(dframe, id.vars = idvars, variable.name = index.name, value.name = value.name,
                     factorAsStrings = FALSE, na.rm = na.rm)
     df.melt[, index.name] <- as.character(df.melt[, index.name])
-    class(df.melt[, index.name]) <- ind.class
+    coerceFunc <- match.fun(paste('as.', ind.class, sep = ''))
+    df.melt[, index.name] <- coerceFunc(df.melt[, index.name])
     df.melt <- df.melt[, c(index.name, idvars, value.name)]
     return(df.melt)
-    
 }
 
 
