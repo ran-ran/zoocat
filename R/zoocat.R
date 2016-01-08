@@ -60,7 +60,7 @@ zoocat <- function (x = NULL, colattr = NULL, index.name. = 'index', ...) {
     z <- zoo(x, ...)
     rownames(colattr) <- NULL
     attr(z, 'cattr') <- colattr
-    attr(z, 'index.name') <- index.name
+    attr(z, 'index.name') <- index.name.
     class(z) <- c('zoocat', class(z))
     return(z)
 }
@@ -81,7 +81,7 @@ print.zoocat <- function (x, ...) {
             }
         }
         cat('\n- [index variable]: ', attr(x, 'index.name'), sep = '')
-        cat('\n\n')
+        cat('\n- [data]:\n')
         class(x) <- 'zoo'
         attr(x, 'cattr') <- NULL
         attr(x, 'index.name') <- NULL
@@ -108,6 +108,7 @@ print.zoocat <- function (x, ...) {
     }
     class0 <- class(x)
     colAttr <- attr(x, 'cattr')
+    indexName <- attr(x, 'index.name')
     
     if (is.character(j)) {
         cattrStr <- fun_cattr2str(colAttr)
@@ -129,6 +130,7 @@ print.zoocat <- function (x, ...) {
         }
     } else if (drop == FALSE | (length(i) > 1 & length(j) > 1)) { 
         attr(x, 'cattr') <- colAttr
+        attr(x, 'index.name') <- indexName
         class(x) <- class0
     }
     
