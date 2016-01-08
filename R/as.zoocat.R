@@ -91,7 +91,9 @@ as.zoocat.zoomlyList <- function (x, variable.name = 'variable', ...) {
 #' @export
 #' @rdname as.zoocat
 #' @param colattr a data frame the column attribute table for x.
-as.zoocat.zoo <- function (x, colattr = NULL, variable.name = 'variable', ...) {
+#' @param index.name the name of the index variable.
+as.zoocat.zoo <- function (x, colattr = NULL, variable.name = 'variable', 
+                           index.name = 'index.name', ...) {
     stopifnot(length(dim(x))== 2)
     if (is.null(colattr)) {
         stopifnot(!is.null(colnames(x)))
@@ -99,6 +101,7 @@ as.zoocat.zoo <- function (x, colattr = NULL, variable.name = 'variable', ...) {
         colnames(colattr) <- variable.name
     }
     attr(x, 'cattr') <- colattr
+    attr(x, 'index.name') <- index.name
     class(x) <- c('zoocat', class(x))
     return(x)
 }

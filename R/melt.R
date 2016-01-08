@@ -41,8 +41,11 @@
 #' Only valid when a data frame is returned. For \code{melt.zoomly}, it is only 
 #' valid when there are several input \code{zoomly} objects.
 #' @param ... further arguments.
-melt.zoocat <- function (data, value.name = 'value', index.name = 'index',
+melt.zoocat <- function (data, value.name = 'value', index.name = NULL,
                          na.rm = FALSE, ...) {
+    if (is.null(index.name)) {
+        index.name <- attr(data, 'index.name')
+    }
     colattr <- cattr(data)
     idvars <- colnames(colattr)
     xcore <- t(as.matrix(data))

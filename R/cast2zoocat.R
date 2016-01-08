@@ -100,7 +100,8 @@ cast2zoocat <- function (x, index.var, value.var, attr.var = NULL, fun.aggregate
         zcat <- zoo(t(mat), order.by = ord)
         cat('There is no column attribute, so a zoo object is returned.\n')
     } else {
-        zcat <- zoocat(t(mat), order.by = ord, colattr = col.attr)
+        zcat <- zoocat(t(mat), order.by = ord, colattr = col.attr,
+                       index.name = index.var)
     }
     return(zcat)
 }

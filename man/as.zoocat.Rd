@@ -13,7 +13,8 @@ as.zoocat(x, ...)
 
 \method{as.zoocat}{zoomlyList}(x, variable.name = "variable", ...)
 
-\method{as.zoocat}{zoo}(x, colattr = NULL, variable.name = "variable", ...)
+\method{as.zoocat}{zoo}(x, colattr = NULL, variable.name = "variable",
+  index.name = "index.name", ...)
 }
 \arguments{
 \item{x}{the object.}
@@ -27,6 +28,8 @@ the output \code{zoocat} object to store the variable name.
 Only valid when \code{addname} is TRUE.}
 
 \item{colattr}{a data frame the column attribute table for x.}
+
+\item{index.name}{the name of the index variable.}
 }
 \value{
 A \code{zoocat} object.

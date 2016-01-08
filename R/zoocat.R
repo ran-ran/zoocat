@@ -22,8 +22,9 @@
 #' object, and the column names is based on the \code{cattr}.
 #' 
 #' @param x a matrix. If \code{x} is a data frame, it will be converted to a matrix.
-#' @param colattr The column attributes. Must be a data frame with column names.
-#' @param ... Other arguments for \code{zoo}.
+#' @param colattr the column attributes. Must be a data frame with column names.
+#' @param index.name the name of the index variable.
+#' @param ... other arguments for \code{zoo}.
 #' @return A \code{zoocat} object.
 #' @examples
 #' 
@@ -44,7 +45,7 @@
 #' @name zoocat
 #' @export
 #' @rdname zoocat
-zoocat <- function (x = NULL, colattr = NULL, ...) {
+zoocat <- function (x = NULL, colattr = NULL, index.name = 'index', ...) {
     if (is.null(x)) {
         z <- zoo(x, ...)
         class(z) <- c('zoocat', class(z))
@@ -59,6 +60,7 @@ zoocat <- function (x = NULL, colattr = NULL, ...) {
     z <- zoo(x, ...)
     rownames(colattr) <- NULL
     attr(z, 'cattr') <- colattr
+    attr(z, 'index.name') <- index.name
     class(z) <- c('zoocat', class(z))
     return(z)
 }
@@ -73,6 +75,7 @@ print.zoocat <- function (x, ...) {
         class(x) <- 'zoo'
         colnames(x) <- cattr2str(attr(x, 'cattr'))
         attr(x, 'cattr') <- NULL
+        attr(x, 'index.name') <- NULL
         cat('A zoocat object with column attributes: ')
         for (i in 1 : length(attrName)) {
             cat(attrName[i])

@@ -7,7 +7,7 @@
 \alias{melt.zoomlyList}
 \title{Melt a \code{zoocat} or \code{zoomly} Object}
 \usage{
-\method{melt}{zoocat}(data, value.name = "value", index.name = "index",
+\method{melt}{zoocat}(data, value.name = "value", index.name = NULL,
   na.rm = FALSE, ...)
 
 \method{melt}{zoomly}(..., value.name = "value", variable.name = "variable",
