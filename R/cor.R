@@ -80,6 +80,7 @@ cor.zoocat <- function (x, y = NULL, ...) {
     x <- as.matrix(x)
     if (!is.null(y) & (is.null(dim(y)) || ncol(y) == 1)) {
         ccvec <- stats::cor(x, y, ...)
+        ccvec <- as.vector(ccvec)
         ret <- data.frame(cAttr, cor.value = ccvec)
         rownames(ret) <- NULL
     } else {
