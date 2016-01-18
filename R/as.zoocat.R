@@ -101,7 +101,7 @@ as.zoocat.zoo <- function (x, colattr = NULL, variable.name = 'variable',
         colnames(colattr) <- variable.name
     }
     attr(x, 'cattr') <- colattr
-    attr(x, 'index.name') <- index.name
+    attr(x, 'index.name') <- index.name.
     class(x) <- c('zoocat', class(x))
     return(x)
 }
