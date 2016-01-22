@@ -31,6 +31,7 @@ and bind the return data with \code{cattr} or \code{index}.
 x <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
+
 core_apply(zc, fun = colMeans, bind = 'cattr')
 core_apply(zc, fun = rowMeans, bind = 'index')
 core_apply(zc, fun = function (x) {x*2}, bind = c('index', 'cattr'))
