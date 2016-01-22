@@ -1,6 +1,6 @@
 
 
-#' Apply Functions Over the Core Matrix
+#' Apply a Function Over the Core Matrix
 #' 
 #' Apply a function over the core matrix of the \code{zoocat} object,
 #' and bind the return data with \code{cattr} or \code{index}.

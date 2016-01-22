@@ -3,7 +3,7 @@
 \name{core_apply}
 \alias{core_apply}
 \alias{core_apply.zoocat}
-\title{Apply Functions Over the Core Matrix}
+\title{Apply a Function Over the Core Matrix}
 \usage{
 core_apply(x, ...)
 
