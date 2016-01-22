@@ -5,13 +5,13 @@
 #' Apply a function over each column of the \code{zoocat} object
 #' and return a data frame.
 #'
-#' @name colapply
-#' @rdname colapply
+#' @name col_apply
+#' @rdname col_apply
 #' @export
 #' @param x A object.
 #' @param ... Additional arguments to be passed to or from methods.
-colapply <- function (x, ...) {
-    UseMethod('colapply')
+col_apply <- function (x, ...) {
+    UseMethod('col_apply')
 }
 
 
@@ -21,12 +21,12 @@ colapply <- function (x, ...) {
 #' data(sst)
 #' sstmelt <- melt(sst, id.var = c('year', 'month'))
 #' zc <- cast2zoocat(sstmelt, index.var = 'year', value.var = 'value')
-#' colapply(zc, fun = function(x) {mean(x, na.rm = TRUE)}, col.as = 'vector')
+#' col_apply(zc, fun = function(x) {mean(x, na.rm = TRUE)}, col.as = 'vector')
 #' 
 #' fuse <- function (x) {
 #'     mean(window(x, start = 1995, end = 2000))
 #' }
-#' retdf <- colapply(zc, fun = fuse, col.as = 'zoo')
+#' retdf <- col_apply(zc, fun = fuse, col.as = 'zoo')
 #' xyplot(output~month|variable, data = retdf, type = 'o')
 #' 
 #' 
@@ -36,7 +36,7 @@ colapply <- function (x, ...) {
 #'     names(ret) <- c('max', 'min', 'mean', 'median', 'sd')
 #'     return(ret)
 #' }
-#' retdf <- colapply(zc, fun = fuse, col.as = 'zoo')
+#' retdf <- col_apply(zc, fun = fuse, col.as = 'zoo')
 #' xyplot(sd~month|variable, data = retdf, type = 'o')
 #'
 #'  
@@ -46,15 +46,15 @@ colapply <- function (x, ...) {
 #'     xwd <- window(x, start = 1980, end = 2010)
 #'     c(mean = mean(xwd), max = max(xwd), min = min(xwd))
 #' }
-#' colapply(md, fun = fuse, col.as = 'zoo')
+#' col_apply(md, fun = fuse, col.as = 'zoo')
 #' 
 #' 
 #' @export
-#' @rdname colapply
+#' @rdname col_apply
 #' @param fun The function apply for each column.
 #' @param col.as If vector, each column will be treated as a vector. If 
 #' zoo, each column will be treated as a zoo object.
-colapply.zoocat <- function (x, fun, col.as = 'vector', ...) {
+col_apply.zoocat <- function (x, fun, col.as = 'vector', ...) {
     stopifnot(col.as %in% c('vector', 'zoo'))
     colAttr <- cattr(x)
     if (col.as == 'vector') {
@@ -94,9 +94,9 @@ colapply.zoocat <- function (x, fun, col.as = 'vector', ...) {
 
 
 #' @export
-#' @rdname colapply
-colapply.zoomlyList <- function (x, ...) {
-    return(colapply(as.zoocat(x), ...))    
+#' @rdname col_apply
+col_apply.zoomlyList <- function (x, ...) {
+    return(col_apply(as.zoocat(x), ...))    
 }
 
 
