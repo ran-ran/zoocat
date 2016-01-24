@@ -2,12 +2,13 @@
 % Please edit documentation in R/filter_col.R
 \name{filter_col}
 \alias{filter_col}
-\alias{filter_col.zoocat}
+\alias{filter_col_q}
+\alias{filter_col_q.zoocat}
 \title{Return columns with matching conditions}
 \usage{
-filter_col(x, ...)
+filter_col_q(x, ...)
 
-\method{filter_col}{zoocat}(x, cond)
+\method{filter_col_q}{zoocat}(x, cond)
 }
 \arguments{
 \item{x}{the object.}
@@ -25,9 +26,9 @@ table.
 x <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
-filter_col(zc, month > 2)
+filter_col_q(zc, quote(month > 2))
 temp <- 2
-filter_col(zc, month == temp)
-filter_col(zc, month > temp & name == 'yyy')
+filter_col_q(zc, quote(month == temp))
+filter_col_q(zc, quote(month > temp & name == 'yyy'))
 }
 

@@ -104,17 +104,12 @@ print.zoocat <- function (x, ...) {
     if (missing(j)) {
         j <- 1 : ncol(x)
     }
-    if (inherits(x, 'zoomly')) {
-        fun_cattr2str <- month2str
-    } else {
-        fun_cattr2str <- cattr2str
-    }
     class0 <- class(x)
     colAttr <- attr(x, 'cattr')
     indexName <- attr(x, 'index.name')
     
     if (is.character(j)) {
-        cattrStr <- fun_cattr2str(colAttr)
+        cattrStr <- cattr2str(colAttr)
         j <- sapply(j, FUN = function (j1) which(j1 == cattrStr)[1])
         if (any(is.na(j))) {
             stop('Some column does not exist.')
