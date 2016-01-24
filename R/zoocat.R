@@ -22,6 +22,8 @@
 #' object, and the column names is based on the \code{cattr}.
 #' 
 #' @param x a matrix. If \code{x} is a data frame, it will be converted to a matrix.
+#' @param order.by an index vector with unique entries by which the observations
+#'  in x are ordered.
 #' @param colattr the column attributes. Must be a data frame with column names.
 #' @param index.name. the name of the index variable.
 #' @param ... other arguments for \code{zoo}.
@@ -45,7 +47,8 @@
 #' @name zoocat
 #' @export
 #' @rdname zoocat
-zoocat <- function (x = NULL, colattr = NULL, index.name. = 'index', ...) {
+zoocat <- function (x = NULL, order.by = index(x), colattr = NULL, 
+                    index.name. = 'index', ...) {
     if (is.null(x)) {
         z <- zoo(x, ...)
         class(z) <- c('zoocat', class(z))
@@ -57,7 +60,7 @@ zoocat <- function (x = NULL, colattr = NULL, index.name. = 'index', ...) {
     stopifnot(!is.null(colnames(colattr)))
     colnames(x) <- NULL
     rownames(x) <- NULL
-    z <- zoo(x, ...)
+    z <- zoo(x, order.by = order.by, ...)
     rownames(colattr) <- NULL
     attr(z, 'cattr') <- colattr
     attr(z, 'index.name') <- index.name.
