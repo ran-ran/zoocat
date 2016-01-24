@@ -25,7 +25,12 @@
 #' treated as a matrix with only one column.
 #' @param order.by a numeric vector representing years.
 #' @param colattr a column attributes table contain a column "month".
-zoomly <- function(x, order.by, colattr) {
+zoomly <- function(x = NULL, order.by, colattr) {
+    if (is.null(x)) {
+        z <- zoo(x, frequency = 1)
+        class(z) <- c('zoomly', 'zoocat', class(z))
+        return(z)
+    }
     if (!(is.vector(x) | is.matrix(x))) {
         stop('x must be a vector or a matrix.')
     }

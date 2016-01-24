@@ -46,10 +46,10 @@ merge.zoocat <- function (..., all = TRUE, fill = NA, suffixes = NULL,
     for (i in 1 : numZoo) {
         stopifnot(inherits(listin[[i]], 'zoocat'))
         cattrList[[i]] <- attr(listin[[i]], 'cattr')
-        listin[[i]] <- as.zoo(listin[[i]])
+        listin[[i]] <- as.zoo(listin[[i]], add.colname = FALSE)
     }
     cattrTotal <- plyr::rbind.fill(cattrList)
-    zooTotal <- do.call(merge, 
+    zooTotal <- do.call(merge.zoo, 
                       args = c(listin, list(all = all, fill = fill,
                                             suffixes = NULL,
                                             check.names = FALSE,

@@ -4,7 +4,7 @@
 \alias{zoomly}
 \title{\code{zoomly} Class}
 \usage{
-zoomly(x, order.by, colattr)
+zoomly(x = NULL, order.by, colattr)
 }
 \arguments{
 \item{x}{a matrix or a vector.

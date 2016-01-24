@@ -12,13 +12,8 @@
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
-#' zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' z <- as.zoo(zm)
-#' 
-#' x <- matrix(1 : 20, nrow = 5)
-#' zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-#' class(zm) <- class(zm)[-1]
-#' as.zoo(zm)
+#' zc <- zoocat(x, order.by = 1991 : 1995, colattr = data.frame(month=c(2, 3, 5, 6)))
+#' z <- as.zoo(zc)
 #' 
 #' @rdname as.zoo
 #' @name as.zoo
@@ -26,18 +21,6 @@
 #' @param x an object.
 #' @param add.colname logical. If TRUE, column names will be added automatically.
 #' @param ... further arguments.
-as.zoo.zoomly <- function(x, add.colname = TRUE, ...) {
-    if (add.colname == TRUE) {
-        colnames(x) <- month2str(mon(x))
-    }
-    class(x) <- class(x)[-c(1, 2)]
-    attr(x, 'cattr') <- NULL
-    return(x)
-}
-
-
-#' @rdname as.zoo
-#' @export
 as.zoo.zoocat <- function (x, add.colname = TRUE, ...) {
     if (length(x) == 0){
         return(zoo())
@@ -47,7 +30,8 @@ as.zoo.zoocat <- function (x, add.colname = TRUE, ...) {
         }
         attr(x, 'cattr') <- NULL
         attr(x, 'index.name') <- NULL
-        class(x) <- class(x)[-1]
+        iclass <- which(class(x) == 'zoocat') + 1
+        class(x) <- class(x)[iclass : length(class(x))]
         return(x)
     }
 }

@@ -3,11 +3,8 @@
 \name{as.zoo}
 \alias{as.zoo}
 \alias{as.zoo.zoocat}
-\alias{as.zoo.zoomly}
 \title{Coercion Objects to Class \code{zoo}}
 \usage{
-\method{as.zoo}{zoomly}(x, add.colname = TRUE, ...)
-
 \method{as.zoo}{zoocat}(x, add.colname = TRUE, ...)
 }
 \arguments{
@@ -31,12 +28,7 @@ the input \code{x} is inherited from \code{zooreg}.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
-zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-z <- as.zoo(zm)
-
-x <- matrix(1 : 20, nrow = 5)
-zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-class(zm) <- class(zm)[-1]
-as.zoo(zm)
+zc <- zoocat(x, order.by = 1991 : 1995, colattr = data.frame(month=c(2, 3, 5, 6)))
+z <- as.zoo(zc)
 }
 
