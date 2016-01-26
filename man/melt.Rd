@@ -3,18 +3,10 @@
 \name{melt}
 \alias{melt}
 \alias{melt.zoocat}
-\alias{melt.zoomly}
-\alias{melt.zoomlyList}
-\title{Melt a \code{zoocat} or \code{zoomly} Object}
+\title{Melt a \code{zoocat} Object}
 \usage{
 \method{melt}{zoocat}(data, value.name = "value", index.name = NULL,
   na.rm = FALSE, ...)
-
-\method{melt}{zoomly}(..., value.name = "value", variable.name = "variable",
-  ret = "data.frame", na.rm = FALSE)
-
-\method{melt}{zoomlyList}(data, value.name = "value",
-  variable.name = "variable", ret = "data.frame", na.rm = FALSE, ...)
 }
 \arguments{
 \item{data}{object to melt.}
@@ -28,19 +20,18 @@ a data frame is returned.}
 
 \item{...}{further arguments.}
 
+\item{ret}{character string. Can be \code{data.frame} or \code{zoo}}
+
 \item{variable.name}{name of the column used to store variable names.
 Only valid when a data frame is returned. For \code{melt.zoomly}, it is only
 valid when there are several input \code{zoomly} objects.}
-
-\item{ret}{character string. Can be \code{data.frame} or \code{zoo}}
 }
 \value{
 A data frame or a \code{zoo} object.
 }
 \description{
-Melt a \code{zoocat} object or \code{zoomly} to a data frame of the long table style,
+Melt a \code{zoocat} to a data frame of the long table style,
 which is similar as in package \code{reshape2}.
-For \code{zoomly}, a \code{zoo} object can be returned.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
@@ -48,18 +39,7 @@ colAttr <- data.frame(month = c(2, 3, 5, 6), name = c('x', 'y', 'z', 'a'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 melt(zc)
 
-x <- matrix(1 : 24, nrow = 3, byrow = TRUE)
-zm <- zoomly(x, year = 1991 : 1993, month = 2 : 9)
-zm2 <- zm + 1
+zm <- as.zoomly(zc)
 melt(zm)
-melt(zm, ret = 'zoo')
-melt(zm, zm2, ret = 'zoo')
-
-x <- matrix(1 : 36, nrow = 3)
-x <- zoomly(x, year = 1991 : 1993)
-y <- x + 1
-zml <- zoomlyList(x, y)
-melt(zml, variable.name = 'var', value.name = 'val')
-melt(zml, ret = 'zoo')
 }
 
