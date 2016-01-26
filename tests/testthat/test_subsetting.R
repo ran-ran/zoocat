@@ -19,23 +19,6 @@ test_that('Subsetting of zoocat object', {
 )
 
 
-test_that('Subsetting of zoomly object', {
-    x <- matrix(1 : 6, nrow = 3)
-    zm <- zoomly(x, year = 1991 : 1993, month = c(2, 3))
-    expect_is(zm[, 1], 'zoo')
-    expect_identical(index(zm[, 1]), as.numeric(1991 : 1993))
-    expect_identical(is.vector(zm[2, ]), TRUE)
-    expect_identical(names(zm[2, ]), c('Feb', 'Mar'))
-    expect_is(zm[1:2, 1:2], 'zoomly')
-    expect_identical(coredata(zm[1:2, 1:2]), 
-                     coredata(zm)[1:2, 1:2])
-    expect_is(zm[, 'Feb'], 'zoo')
-    expect_identical(zm[, 'Feb'], zm[, 1])
-    expect_identical(zm[, 'Mar'], zm[, 2])
-}
-)
-
-
 test_that("Drop of zoocat object", {
     x <- matrix(1 : 20, nrow = 5)
     colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
@@ -49,12 +32,4 @@ test_that("Drop of zoocat object", {
 })
 
 
-test_that('Subsetting of a zoomlyList object.', {
-    x <- matrix(1 : 20, nrow = 5)
-    x <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-    y <- x + 1
-    zl <- zoomlyList(list(md1 = x, md2 = y))
-    expect_identical(class(zl[1]), 'zoomlyList')
-    expect_identical(class(zl[2]), 'zoomlyList')
-}
-)
+
