@@ -2,13 +2,10 @@
 % Please edit documentation in R/as.zoomly.R
 \name{as.zoomly}
 \alias{as.zoomly}
-\alias{as.zoomly.zoo}
 \alias{as.zoomly.zoocat}
 \title{Coercion Objects to Class \code{zoomly}}
 \usage{
 as.zoomly(x, ...)
-
-\method{as.zoomly}{zoo}(x, month, ...)
 
 \method{as.zoomly}{zoocat}(x, ...)
 }
@@ -16,16 +13,12 @@ as.zoomly(x, ...)
 \item{x}{an object.}
 
 \item{...}{further arguments passed to methods.}
-
-\item{month}{a vector of month, must have same length as ncol of x.}
 }
 \value{
 A zoomly object.
 }
 \description{
 Coercion objects to class \code{zoomly}.
-
-
 }
 \examples{
 x <-  matrix(1 : 36, nrow = 3)
@@ -35,5 +28,8 @@ as.zoomly(zobj, month = 1 : 12)
 zc <- zoocat(x, order.by = 1991 : 1993,
              colattr = data.frame(month = 1 : 12))
 as.zoomly(zc)
+x <- matrix(1 : 20, nrow = 5)
+colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
+zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 }
 

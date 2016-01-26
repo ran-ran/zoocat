@@ -23,29 +23,25 @@
 #' @param ... further arguments passed to methods.
 as.zoomly <- function(x, ...) { UseMethod('as.zoomly') }
 
-#'
-#' @export
-#' @rdname as.zoomly
-#' @param month a vector of month, must have same length as ncol of x.
-as.zoomly.zoo <- function(x, month, ...) {
-    year <- index(x)
-    x <- coredata(x)
-    zm <- zoomly(x, year = year, month = month)
-    return(zm)
-}
 
 
 #' @export
 #' @rdname as.zoomly
+#' @examples 
+#' x <- matrix(1 : 20, nrow = 5)
+#' colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xx', 3), 'yy'))
+#' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
+#' as.zoomly(zc)
+#' 
 as.zoomly.zoocat <- function (x, ...) {
     if (inherits(x, 'zoomly')) {
         return(x)
     }
-    colAttr <- cattr(x)
-    if (ncol(colAttr) != 1 || colnames(colAttr) != 'month') {
-        stop('Can not transform to zoomly object.')
-    }
-    class(x) <- c('zoomly', class(x))
+    stopifnot('month' %in% colnames(cattr(x)))
+    stopifnot(all(index(x) == round(index(x))))
+    attr(x, 'index.name') <- 'year'
+    cattr(x)$month <- gmon(cattr(x)$month)
+    class(x) <- c('zoomly', 'zoocat', 'zooreg', 'zoo')
     return(x)
 }
 
