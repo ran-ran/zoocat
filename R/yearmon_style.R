@@ -41,11 +41,14 @@ melt_month <- function (x) {
 cast_month <- function (x) {
     df <- melt(x, value.name = 'value', index.name = 'index')
     ind <- as.Date(df$index)
-    df$year <- format(ind, "%Y")
-    df$month <- format(ind, "%m")
+    df$year <- as.numeric(format(ind, "%Y"))
+    df$month <- as.numeric(format(ind, "%m"))
     df$index <- NULL
-    ret <- cast2zoocat(df, index.var = 'year', value.var = 'value')
-    return(ret)
+    zc <- cast2zoomly(df, index.var = 'year', value.var = 'value')
+    ina <- which(apply(coredata(zc), 2, 
+                       FUN = function (x) {any(is.na(x))}))
+    zc <- zc[, -ina]
+    return(zc)
 }
 
 
