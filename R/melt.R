@@ -1,9 +1,8 @@
 
-#' Melt a \code{zoocat} or \code{zoomly} Object
+#' Melt a \code{zoocat} Object
 #' 
-#' Melt a \code{zoocat} object or \code{zoomly} to a data frame of the long table style,
+#' Melt a \code{zoocat} to a data frame of the long table style,
 #' which is similar as in package \code{reshape2}.
-#' For \code{zoomly}, a \code{zoo} object can be returned.
 #' 
 #' @return A data frame or a \code{zoo} object.
 #' 
@@ -14,19 +13,8 @@
 #' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 #' melt(zc)
 #' 
-#' x <- matrix(1 : 24, nrow = 3, byrow = TRUE)
-#' zm <- zoomly(x, year = 1991 : 1993, month = 2 : 9)
-#' zm2 <- zm + 1
+#' zm <- as.zoomly(zc)
 #' melt(zm)
-#' melt(zm, ret = 'zoo')
-#' melt(zm, zm2, ret = 'zoo')
-#' 
-#' x <- matrix(1 : 36, nrow = 3)
-#' x <- zoomly(x, year = 1991 : 1993)
-#' y <- x + 1
-#' zml <- zoomlyList(x, y)
-#' melt(zml, variable.name = 'var', value.name = 'val')
-#' melt(zml, ret = 'zoo')
 #' 
 #' @name melt
 #' @rdname melt
@@ -60,88 +48,6 @@ melt.zoocat <- function (data, value.name = 'value', index.name = NULL,
     df.melt[, index.name] <- coerceFunc(df.melt[, index.name])
     df.melt <- df.melt[, c(index.name, idvars, value.name)]
     return(df.melt)
-}
-
-
-
-#' @export
-#' @rdname melt
-#' 
-melt.zoomly <- function(..., value.name = 'value', variable.name = 'variable',
-                         ret = 'data.frame', 
-                         na.rm = FALSE) {
-    stopifnot(ret %in% c('data.frame', 'zoo'))
-    arg <- list(...)
-    if (length(arg) > 1) {
-        for (i in 2 : length(arg)) {
-            if (!inherits(arg[[i]], 'zoomly')) {
-                stop('Some argument is not zoomly objects.')
-            }
-        }
-    }
-    if (length(arg) == 1) {
-        if (ret == 'zoo') {
-            x <- arg[[1]]
-            year <- index(x)
-            month <- mon(x)
-            yy <- rep(year, each = length(month))
-            mm <- rep(month, length(year))
-            yymm <- yearmon(yy + (mm - 1) / 12)
-            mat <- coredata(x)
-            vec <- as.vector(t(mat))
-            ret <- zoo(vec, order.by = yymm)
-        } else {
-            x <- as.zoocat(arg[[1]], addname = FALSE)
-            ret <- melt(x, index.name = 'year', value.name = value.name, 
-                        na.rm = na.rm)
-            ret <- plyr::arrange(ret, year, month)
-        }
-    } else {
-        if (is.null(names(arg))) {
-            callobj <- sys.call()
-            callList <- as.list(callobj)[-1]
-            idxNoName <- which(nchar(names(callList)) == 0)
-            argnames <- callList[idxNoName]
-            names(arg) <- argnames
-        }
-        arg <- zoomlyList(arg)
-        ret <- melt(arg, value.name = value.name, 
-                    variable.name = variable.name, ret = ret, na.rm = na.rm)
-    }
-    return(ret)
-}
-
-
-#' @export
-#' @rdname melt
-melt.zoomlyList <- function (data, value.name = 'value', variable.name = 'variable',
-                              ret = 'data.frame',
-                              na.rm = FALSE, ...) {
-    stopifnot(ret %in% c('data.frame', 'zoo'))
-    if (ret == 'data.frame') {
-        dfmelt <- data.frame()
-        varnames <- names(data)
-        for (i in 1 : length(data)) {
-            dfnow <- melt(data[[i]], value.name = value.name, ret = 'data.frame',
-                          na.rm = na.rm)
-            dfnow <- cbind(name = varnames[i], dfnow)
-            colnames(dfnow)[1] <- variable.name
-            dfmelt <- rbind(dfmelt, dfnow)
-        }
-        return(dfmelt)
-    } else {
-        zooret <- melt(data[[1]], value.name = value.name, ret = 'zoo',
-                       na.rm = na.rm)
-        if (length(data) > 1) {
-            for (i in 2 : length(data)) {
-                zoonow <- melt(data[[i]], value.name = value.name, ret = 'zoo',
-                               na.rm = na.rm)
-                zooret <- cbind(zooret, zoonow)
-            }
-        }
-        colnames(zooret) <- names(data)
-        return(zooret)
-    }
 }
 
 
