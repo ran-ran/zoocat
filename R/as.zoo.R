@@ -23,7 +23,12 @@
 #' @param ... further arguments.
 as.zoo.zoocat <- function (x, add.colname = TRUE, ...) {
     if (length(x) == 0){
-        return(zoo())
+        if (!is.null(attr(x, 'frequency'))) {
+            class(x) <- c('zooreg', 'zoo')
+        } else {
+            class(x) <- 'zoo'
+        }
+        return(x)
     } else {
         if (add.colname == TRUE) {
             colnames(x) <- cattr2str(attr(x, 'cattr'))

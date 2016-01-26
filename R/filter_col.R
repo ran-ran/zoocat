@@ -39,11 +39,11 @@ filter_col_q.zoocat <- function (x, cond) {
 #' mat <- matrix(1:48, ncol = 12)
 #' ctable <- data.frame(month = rep(1 : 12))
 #' zm <- zoomly(mat, order.by = 1991 : 1994, colattr = ctable)
-#' filter_col_q(zm, gmonth = 1 : 3)
-#' filter_col_q(zm, gmonth = c(-9 : 8))
-#' filter_col_q(zm, gmonth = c(-24 : 3))
-filter_col_q.zoomly <- function (x, cond = NULL, gmonth = NULL, ...) {
-    if (is.null(gmonth)) {
+#' filter_col_q(zm, month = 1 : 3)
+#' filter_col_q(zm, month = c(-9 : 8))
+#' filter_col_q(zm, month = c(-24 : 3))
+filter_col_q.zoomly <- function (x, cond = NULL, month = NULL, ...) {
+    if (is.null(month)) {
         if (is.null(cond)) {
             return(x)
         } else {
@@ -51,25 +51,36 @@ filter_col_q.zoomly <- function (x, cond = NULL, gmonth = NULL, ...) {
         }
     }
     
-    #stopifnot(all((gmonth %% 1) == 0))
     if (!all(cattr(x)$month %in% (1 : 12))) {
-        stop('When using gmonth, all month values in x must be in 1 : 12.')
+        stop('When using argument month, all month values in x must be in 1 : 12.')
     }
     
     if (!is.null(cond)) {
         x <- filter_col_q.zoocat(x, cond)
     }
-    
-    gmonth <- gmon(gmonth)
-    mon.true <- true_month(gmonth)
-    yr.rela <- rela_year(gmonth)
+    ret <- extract_by_month(x, month = month)
+    return(ret)
+
+}
+
+
+#' @examples
+#' mat <- matrix(1:48, ncol = 12)
+#' ctable <- data.frame(month = rep(1 : 12))
+#' zm <- zoomly(mat, order.by = 1991 : 1994, colattr = ctable)
+#' extract_by_month(zm, month = -11:2)
+#' extract_by_month(zm, month = -24:3)
+extract_by_month <- function (x, month) {
+    month <- gmon(month)
+    mon.true <- true_month(month)
+    yr.rela <- rela_year(month)
     yr.rela.u <- unique(yr.rela)
-         
+    
     zm.ret <- zoomly()
     for (i in 1 : length(yr.rela.u)) {
         mon.true.now <- mon.true[yr.rela == yr.rela.u[i]]
-        ret.now <- filter_col_q(x, cond = substitute(month %in% mon.true.now))
-        if (ncol(ret.now) > 0) {
+        ret.now <- x[, cattr(x)$month %in% mon.true.now]
+        if (length(ret.now) > 0) {
             index(ret.now) <- index(ret.now) - yr.rela.u[i]
             cattr(ret.now)$month <- 
                 gmon(cattr(ret.now)$month + 12 * yr.rela.u[i])
@@ -78,9 +89,6 @@ filter_col_q.zoomly <- function (x, cond = NULL, gmonth = NULL, ...) {
     }
     
     return(zm.ret)
-    
 }
-
-
 
 
