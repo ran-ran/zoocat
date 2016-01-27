@@ -1,15 +1,12 @@
 context('Test coercion between classes')
 
-test_that('as.zoo for zoomly and zoocat', {
+test_that('as.zoo for zoocat', {
     x <- matrix(1 : 20, nrow = 5)
-    md <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-    zo <- as.zoo(md)
-    expect_equal(class(zo), c('zooreg', 'zoo'))
-    zo <- as.zoo(md, add.colname = FALSE)
-    expect_equal(colnames(zo), NULL)
-    zc <- as.zoocat(md)
+    colAttr <- data.frame(month = c(2, 3, 5, 6), name = c('a','a','b','b'))
+    zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
     zo <- as.zoo(zc)
-    expect_equal(class(zo), c('zooreg', 'zoo'))
+    expect_equal(class(zo), 'zoo')
+    expect_equal(colnames(zo), c('2_a', '3_a', '5_b', '6_b'))
     zo <- as.zoo(zc, add.colname = FALSE)
     expect_equal(colnames(zo), NULL)
 }

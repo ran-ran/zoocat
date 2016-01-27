@@ -1,4 +1,4 @@
-fout <- 'E:/Codes/zoocat/R/z_other_methods.R'
+fout <- 'E:/HeranWorks/myPackages/zoocat/R/zoocat_other_methods.R'
 
 if (file.exists(fout)) {
     file.remove(fout)
@@ -17,6 +17,7 @@ methodNames_1 <- matrix(
                  'cumsum', 'x',
                  'diff', 'x',
                  'head', 'x',
+                 'lag', 'x',
                  'na.aggregate', 'object',
                  'na.approx', 'object',
                  'na.contiguous', 'object',

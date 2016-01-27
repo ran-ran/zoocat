@@ -90,6 +90,21 @@
         
 
 #' @export 
+'lag.zoocat' <- function (x, ...) {
+    class0 <- class(x)
+    colAttr <- cattr(x)
+    indexName <- index.name(x)
+    x <- as.zoo(x, add.colname = FALSE)
+    ret <- 'lag'(x, ...)
+    colnames(ret) <- NULL
+    attr(ret, 'cattr') <- colAttr
+    attr(ret, 'index.name') <- indexName
+    class(ret) <- class0
+    return(ret)
+}
+        
+
+#' @export 
 'na.aggregate.zoocat' <- function (object, ...) {
     class0 <- class(object)
     colAttr <- cattr(object)
