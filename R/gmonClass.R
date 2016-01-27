@@ -8,6 +8,7 @@
 #' names(x) <- mvec
 #' print(x)
 #' 
+#' @param x a vector of integers.
 gmon <- function (x) {
     ret <- x
     class(ret) <- 'gmon'
@@ -56,6 +57,8 @@ as.data.frame.gmon <- function (x, row.names = NULL, optional = FALSE, ...)  {
 #' ry <- rela_year(gm)
 #' df <- data.frame(num.mon, ry, as.character(gm))
 #' print(df)
+#' 
+#' @param x a \code{gmon} object.
 rela_year <- function (x) {
     stopifnot(inherits(x, 'gmon'))
     class(x) <- NULL
@@ -67,6 +70,7 @@ rela_year <- function (x) {
 
 #' Get the true month of a \code{gmon} object.
 #' @export
+#' @param x a \code{gmon} object.
 #' @examples
 #' num.mon <- -25 : 15
 #' gm <- gmon(num.mon)

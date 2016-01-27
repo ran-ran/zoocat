@@ -39,7 +39,7 @@ as.zoocat.zoomly <- function (x, ...) {
 #' @export
 #' @rdname as.zoocat
 #' @param colattr a data frame the column attribute table for x.
-#' @param index.name. the name of the index variable.
+#' @param index.name the name of the index variable.
 as.zoocat.zoo <- function (x, colattr = NULL, variable.name = 'variable', 
                            index.name = 'index', ...) {
     stopifnot(length(dim(x))== 2)
