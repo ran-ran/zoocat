@@ -15,7 +15,6 @@ gmon <- function (x) {
 }
 
 
-#' @export
 print.gmon <- function (x, ...) { 
     print(as.character(x))
 }
@@ -27,8 +26,6 @@ as.character.gmon <- function (x, ...) {
     return(str)
 }
 
-
-#' @export
 as.data.frame.gmon <- function (x, row.names = NULL, optional = FALSE, ...)  {
     nrows <- length(x)
     nm <- paste(deparse(substitute(x), width.cutoff = 500), collapse = " ")
@@ -50,7 +47,8 @@ as.data.frame.gmon <- function (x, row.names = NULL, optional = FALSE, ...)  {
     value
 }
 
-
+#' Get the relative years for a \code{gmon} object
+#' 
 #' @export
 #' @examples 
 #' num.mon <- -12 : 3
@@ -67,7 +65,7 @@ rela_year <- function (x) {
 }
 
 
-
+#' Get the true month of a \code{gmon} object.
 #' @export
 #' @examples
 #' num.mon <- -25 : 15

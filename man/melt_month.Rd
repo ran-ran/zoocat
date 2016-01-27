@@ -2,7 +2,7 @@
 % Please edit documentation in R/yearmon_style.R
 \name{melt_month}
 \alias{melt_month}
-\title{Translate zoomly objects to yearmon format}
+\title{Translate \code{zoomly} objects to yearmon format}
 \usage{
 melt_month(x)
 }
@@ -10,7 +10,7 @@ melt_month(x)
 \item{x}{a zoomly object.}
 }
 \description{
-Translate zoomly objects to yearmon format
+Translate \code{zoomly} objects to yearmon format
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)

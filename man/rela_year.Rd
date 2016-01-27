@@ -2,8 +2,12 @@
 % Please edit documentation in R/gmonClass.R
 \name{rela_year}
 \alias{rela_year}
+\title{Get the relative years for a \code{gmon} object}
 \usage{
 rela_year(x)
+}
+\description{
+Get the relative years for a \code{gmon} object
 }
 \examples{
 num.mon <- -12 : 3

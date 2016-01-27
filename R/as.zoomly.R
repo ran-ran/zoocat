@@ -6,11 +6,7 @@
 #' 
 #' @return A zoomly object.
 #' @examples
-#'
 #' x <-  matrix(1 : 36, nrow = 3)
-#' zobj <- zoo(x, order.by = 1991 : 1993)
-#' as.zoomly(zobj, month = 1 : 12)
-#' 
 #' zc <- zoocat(x, order.by = 1991 : 1993, 
 #'              colattr = data.frame(month = 1 : 12))
 #' as.zoomly(zc)

@@ -2,8 +2,12 @@
 % Please edit documentation in R/gmonClass.R
 \name{true_month}
 \alias{true_month}
+\title{Get the true month of a \code{gmon} object.}
 \usage{
 true_month(x)
+}
+\description{
+Get the true month of a \code{gmon} object.
 }
 \examples{
 num.mon <- -25 : 15

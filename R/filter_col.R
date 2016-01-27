@@ -41,7 +41,7 @@ filter_col <- function (x, ...) {
 
 #' @rdname filter_col
 #' @export
-filter_col_q.zoocat <- function (x, cond) {
+filter_col_q.zoocat <- function (x, cond, ...) {
     colAttr <- cattr(x) 
     iFilt <- eval(cond, colAttr, parent.frame())
     ret <- x[, iFilt, drop = FALSE]
@@ -51,7 +51,7 @@ filter_col_q.zoocat <- function (x, cond) {
 
 #' @export
 #' @rdname filter_col
-filter_col.zoocat <- function (x, cond) {
+filter_col.zoocat <- function (x, cond, ...) {
     cond_call <- substitute(cond)
     return(filter_col_q(x, cond_call))
 } 
@@ -88,12 +88,12 @@ filter_col.zoomly <- function (x, cond = NULL, month = NULL, ...) {
 }
 
 
-#' @examples
-#' mat <- matrix(1:48, ncol = 12)
-#' ctable <- data.frame(month = rep(1 : 12))
-#' zm <- zoomly(mat, order.by = 1991 : 1994, colattr = ctable)
-#' extract_by_month(zm, month = -11:2)
-#' extract_by_month(zm, month = -24:3)
+# @examples
+# mat <- matrix(1:48, ncol = 12)
+# ctable <- data.frame(month = rep(1 : 12))
+# zm <- zoomly(mat, order.by = 1991 : 1994, colattr = ctable)
+# extract_by_month(zm, month = -11:2)
+# extract_by_month(zm, month = -24:3)
 extract_by_month <- function (x, month) {
     month <- gmon(month)
     mon.true <- true_month(month)

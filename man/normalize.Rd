@@ -32,12 +32,5 @@ x <- matrix(rnorm(36, 10, 4), nrow = 3)
 normalize(x)
 normalize(x, method = 'perc')
 normalize(x, method = 'sd1')
-
-zm <- zoomly(x, year = 1991 : 1993, month = 1 : 12)
-normalize(zm)
-normalize(zm, method = 'perc')
-normalize(zm, method = 'sd1')
-normalize(as.zoocat(zm), method = 'sd1')
-normalize(as.zoocat(zm), method = 'sd1', base.period = 1991 : 1992)
 }
 

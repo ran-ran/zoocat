@@ -4,14 +4,11 @@
 \alias{as.zoocat}
 \alias{as.zoocat.zoo}
 \alias{as.zoocat.zoomly}
-\alias{as.zoocat.zoomlyList}
 \title{Coercing Objects to Class \code{zoocat}}
 \usage{
 as.zoocat(x, ...)
 
-\method{as.zoocat}{zoomly}(..., addname = TRUE, variable.name = "variable")
-
-\method{as.zoocat}{zoomlyList}(x, variable.name = "variable", ...)
+\method{as.zoocat}{zoomly}(x, ...)
 
 \method{as.zoocat}{zoo}(x, colattr = NULL, variable.name = "variable",
   index.name. = "index.name", ...)
@@ -21,15 +18,15 @@ as.zoocat(x, ...)
 
 \item{...}{other arguments passed to methods.}
 
-\item{addname}{logical. If TRUE, a field of \code{cattr} "name" will be add.}
+\item{colattr}{a data frame the column attribute table for x.}
 
 \item{variable.name}{the name of the field in the \code{cattr} of
 the output \code{zoocat} object to store the variable name.
 Only valid when \code{addname} is TRUE.}
 
-\item{colattr}{a data frame the column attribute table for x.}
-
 \item{index.name.}{the name of the index variable.}
+
+\item{addname}{logical. If TRUE, a field of \code{cattr} "name" will be add.}
 }
 \value{
 A \code{zoocat} object.
@@ -38,23 +35,11 @@ A \code{zoocat} object.
 Coercing objects to class \code{zoocat}.
 
 
-
-
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
-zm <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-zm2 <- zm + 100
+zm <- zoomly(x, order.by = 1991 : 1995, colattr = data.frame(month = c(2, 3, 5, 6)))
 as.zoocat(zm)
-as.zoocat(zm, addname = FALSE)
-as.zoocat(x = zm)
-as.zoocat(x = zm, y = zm2)
-as.zoocat(zm, zm2)
-
-x <- zoomly(x, year = 1991 : 1995, month = c(2, 3, 5, 6))
-y <- x + 100
-zmList <- zoomlyList(list(x = x, y = y))
-as.zoocat(zmList)
 
 zobj <- zoo(matrix(1:10, nrow = 5), order.by = 11:15)
 colnames(zobj) <- c('a', 'b')

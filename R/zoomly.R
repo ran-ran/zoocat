@@ -13,9 +13,6 @@
 #' zm <- zoomly(x, order.by = 1991 : 1995, 
 #'              colattr = data.frame(month = c(2, 3, 5, 6)))
 #' 
-#' x <-  matrix(1 : 36, nrow = 3)
-#' zm <- zoomly(x, year = 1991 : 1993)
-#' 
 #' @name zoomly
 #' @rdname zoomly
 #' @export

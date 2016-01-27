@@ -38,17 +38,7 @@ col_apply <- function (x, ...) {
 #' }
 #' retdf <- col_apply(zc, fun = fuse, col.as = 'zoo')
 #' xyplot(sd~month|variable, data = retdf, type = 'o')
-#'
 #'  
-#' md <- cast2zoomly(sst, year.var = 'year', value.var = 'nino12',
-#'                    month.var = 'month')
-#' fuse <- function(x) {
-#'     xwd <- window(x, start = 1980, end = 2010)
-#'     c(mean = mean(xwd), max = max(xwd), min = min(xwd))
-#' }
-#' col_apply(md, fun = fuse, col.as = 'zoo')
-#' 
-#' 
 #' @export
 #' @rdname col_apply
 #' @param fun The function apply for each column.
@@ -89,15 +79,6 @@ col_apply.zoocat <- function (x, fun, col.as = 'vector', ...) {
     return(ret)
 }
 
-
-
-
-
-#' @export
-#' @rdname col_apply
-col_apply.zoomlyList <- function (x, ...) {
-    return(col_apply(as.zoocat(x), ...))    
-}
 
 
 

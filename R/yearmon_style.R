@@ -1,5 +1,7 @@
-#' Translate zoomly objects to yearmon format
+#' Translate \code{zoomly} objects to yearmon format
+#' 
 #' @param x a zoomly object.
+#' @export
 #' @examples 
 #' x <- matrix(1 : 20, nrow = 5)
 #' zm <- zoomly(x, order.by = 1991 : 1995, 
@@ -21,7 +23,7 @@ melt_month <- function (x) {
     df.ym <- data.frame(yrmon = ym, df)
     
     if (ncol(df.ym) == 2) {
-        ret <- zoo(df.ym[, 2], order.by = df.ym$ym)
+        ret <- zoo(df.ym[, 2], order.by = df.ym$yrmon)
     } else {
         ret <- cast2zoocat(df.ym, index.var = 'yrmon', 
                            value.var = 'value')
@@ -30,14 +32,17 @@ melt_month <- function (x) {
 }
 
 
-#' Cast month of a zoocat object
+#' Cast month of a \code{zoomly} object
 #' 
+#' @param x a zoocat object.
 #' @examples
 #' x <- matrix(1 : 20, nrow = 5)
 #' colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 #' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 #' zmelt <- melt_month(as.zoomly(zc))
 #' cast_month(zmelt)
+#' 
+#' @export
 cast_month <- function (x) {
     df <- melt(x, value.name = 'value', index.name = 'index')
     ind <- as.Date(df$index)
