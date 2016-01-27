@@ -11,7 +11,7 @@ as.zoocat(x, ...)
 \method{as.zoocat}{zoomly}(x, ...)
 
 \method{as.zoocat}{zoo}(x, colattr = NULL, variable.name = "variable",
-  index.name. = "index.name", ...)
+  index.name = "index", ...)
 }
 \arguments{
 \item{x}{the object.}
@@ -24,9 +24,9 @@ as.zoocat(x, ...)
 the output \code{zoocat} object to store the variable name.
 Only valid when \code{addname} is TRUE.}
 
-\item{index.name.}{the name of the index variable.}
-
 \item{addname}{logical. If TRUE, a field of \code{cattr} "name" will be add.}
+
+\item{index.name.}{the name of the index variable.}
 }
 \value{
 A \code{zoocat} object.

@@ -43,7 +43,7 @@ zoomly <- function(x = NULL, order.by, colattr) {
     colattr$month <- gmon(colattr$month)
     
     zm <- zoocat(x, order.by = order.by, colattr = colattr, 
-                 index.name. = 'year', frequency = 1)
+                 index.name = 'year', frequency = 1)
     class(zm) <- c('zoomly', class(zm))
     return(zm)
 }
@@ -63,11 +63,11 @@ print.zoomly <- function (x, ...) {
                 cat(', ')
             }
         }
-        cat('\n- [index variable]: ', attr(x, 'index.name'), sep = '')
+        cat('\n- [index variable]: ', attr(x, 'indname'), sep = '')
         cat('\n- [data]:\n')
         class(x) <- 'zoo'
         attr(x, 'cattr') <- NULL
-        attr(x, 'index.name') <- NULL
+        attr(x, 'indname') <- NULL
         print(x)
     }
 }

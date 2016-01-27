@@ -34,7 +34,7 @@ as.zoo.zoocat <- function (x, add.colname = TRUE, ...) {
             colnames(x) <- cattr2str(attr(x, 'cattr'))
         }
         attr(x, 'cattr') <- NULL
-        attr(x, 'index.name') <- NULL
+        attr(x, 'indname') <- NULL
         iclass <- which(class(x) == 'zoocat') + 1
         class(x) <- class(x)[iclass : length(class(x))]
         return(x)

@@ -5,7 +5,7 @@
 \title{zoocat Class}
 \usage{
 zoocat(x = NULL, order.by = index(x), colattr = NULL,
-  index.name. = "index", ...)
+  index.name = "index", ...)
 }
 \arguments{
 \item{x}{a matrix. If \code{x} is a data frame, it will be converted to a matrix.}
@@ -15,9 +15,9 @@ in x are ordered.}
 
 \item{colattr}{the column attributes. Must be a data frame with column names.}
 
-\item{index.name.}{the name of the index variable.}
-
 \item{...}{other arguments for \code{zoo}.}
+
+\item{index.name.}{the name of the index variable.}
 }
 \value{
 A \code{zoocat} object.

@@ -64,12 +64,12 @@ for (i in 1 : nrow(methodNames_1)) {
 '", mtd, ".zoocat' <- function (", obj, ", ...) {
     class0 <- class(", obj, ")
     colAttr <- cattr(", obj, ")
-    indexName <- index.name(", obj, ")
+    indexName <- indname(", obj, ")
     ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
     ret <- '", mtd, "'(", obj, ", ...)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    attr(ret, 'index.name') <- indexName
+    attr(ret, 'indname') <- indexName
     class(ret) <- class0
     return(ret)
 }

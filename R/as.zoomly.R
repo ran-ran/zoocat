@@ -35,7 +35,7 @@ as.zoomly.zoocat <- function (x, ...) {
     }
     stopifnot('month' %in% colnames(cattr(x)))
     stopifnot(all(index(x) == round(index(x))))
-    attr(x, 'index.name') <- 'year'
+    attr(x, 'indname') <- 'year'
     cattr(x)$month <- gmon(cattr(x)$month)
     class(x) <- c('zoomly', 'zoocat', 'zooreg', 'zoo')
     return(x)

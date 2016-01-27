@@ -5,8 +5,8 @@
 \alias{melt.zoocat}
 \title{Melt a \code{zoocat} Object}
 \usage{
-\method{melt}{zoocat}(data, value.name = "value", index.name = NULL,
-  na.rm = FALSE, ...)
+\method{melt}{zoocat}(data, value.name = "value",
+  index.name = indname(data), na.rm = FALSE, ...)
 }
 \arguments{
 \item{data}{object to melt.}

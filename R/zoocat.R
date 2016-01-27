@@ -48,7 +48,7 @@
 #' @export
 #' @rdname zoocat
 zoocat <- function (x = NULL, order.by = index(x), colattr = NULL, 
-                    index.name. = 'index', ...) {
+                    index.name = 'index', ...) {
     if (is.null(x)) {
         z <- zoo(x, ...)
         class(z) <- c('zoocat', class(z))
@@ -63,7 +63,7 @@ zoocat <- function (x = NULL, order.by = index(x), colattr = NULL,
     z <- zoo(x, order.by = order.by, ...)
     rownames(colattr) <- NULL
     attr(z, 'cattr') <- colattr
-    attr(z, 'index.name') <- index.name.
+    attr(z, 'indname') <- index.name
     class(z) <- c('zoocat', class(z))
     return(z)
 }
@@ -76,18 +76,18 @@ print.zoocat <- function (x, ...) {
     } else {
         attrName <- colnames(cattr(x))
         colnames(x) <- cattr2str(attr(x, 'cattr'))
-        cat('A zoocat object with:\n- [column attributes]: ')
+        cat('A zoocat object with:\n- [column attribute fields]: ')
         for (i in 1 : length(attrName)) {
             cat(attrName[i])
             if (i < length(attrName)) {
                 cat(', ')
             }
         }
-        cat('\n- [index variable]: ', attr(x, 'index.name'), sep = '')
+        cat('\n- [index variable]: ', attr(x, 'indname'), sep = '')
         cat('\n- [data]:\n')
         class(x) <- 'zoo'
         attr(x, 'cattr') <- NULL
-        attr(x, 'index.name') <- NULL
+        attr(x, 'indname') <- NULL
         print(x)
     }
 }
@@ -106,7 +106,7 @@ print.zoocat <- function (x, ...) {
     }
     class0 <- class(x)
     colAttr <- attr(x, 'cattr')
-    indexName <- attr(x, 'index.name')
+    indexName <- attr(x, 'indname')
     
     if (is.character(j)) {
         cattrStr <- cattr2str(colAttr)
@@ -128,7 +128,7 @@ print.zoocat <- function (x, ...) {
         }
     } else if (drop == FALSE | (length(i) > 1 & length(j) > 1)) { 
         attr(x, 'cattr') <- colAttr
-        attr(x, 'index.name') <- indexName
+        attr(x, 'indname') <- indexName
         class(x) <- class0
     }
     

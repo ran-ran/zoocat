@@ -13,9 +13,9 @@ filter_col_q(x, ...)
 
 filter_col(x, ...)
 
-\method{filter_col_q}{zoocat}(x, cond)
+\method{filter_col_q}{zoocat}(x, cond, ...)
 
-\method{filter_col}{zoocat}(x, cond)
+\method{filter_col}{zoocat}(x, cond, ...)
 
 \method{filter_col_q}{zoomly}(x, cond = NULL, month = NULL, ...)
 
