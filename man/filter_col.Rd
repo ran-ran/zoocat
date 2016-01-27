@@ -2,13 +2,24 @@
 % Please edit documentation in R/filter_col.R
 \name{filter_col}
 \alias{filter_col}
+\alias{filter_col.zoocat}
+\alias{filter_col.zoomly}
 \alias{filter_col_q}
 \alias{filter_col_q.zoocat}
+\alias{filter_col_q.zoomly}
 \title{Return columns with matching conditions}
 \usage{
 filter_col_q(x, ...)
 
+filter_col(x, ...)
+
 \method{filter_col_q}{zoocat}(x, cond)
+
+\method{filter_col}{zoocat}(x, cond)
+
+\method{filter_col_q}{zoomly}(x, cond = NULL, month = NULL, ...)
+
+\method{filter_col}{zoomly}(x, cond = NULL, month = NULL, ...)
 }
 \arguments{
 \item{x}{the object.}
@@ -17,6 +28,8 @@ filter_col_q(x, ...)
 
 \item{cond}{logical predicates of conditions. Multiple conditions are
 combined with &.}
+
+\item{month}{the month to extract from the \code{zoomly} object. See details.}
 }
 \description{
 Return columns with matching conditions for the column attributes
@@ -26,9 +39,17 @@ table.
 x <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
-filter_col_q(zc, quote(month > 2))
+filter_col(zc, month > 2)
+filter_col(zc, month > 2)
 temp <- 2
-filter_col_q(zc, quote(month == temp))
-filter_col_q(zc, quote(month > temp & name == 'yyy'))
+filter_col(zc, month == temp)
+filter_col(zc, month > temp & name == 'yyy')
+
+mat <- matrix(1:48, ncol = 12)
+colAttr <- data.frame(month = rep(1 : 12))
+zm <- zoomly(mat, order.by = 1991 : 1994, colattr = colAttr)
+filter_col(zm, month = 1 : 3)
+filter_col(zm, month = c(-9 : 8))
+filter_col(zm, cond = month \%in\% 1 : 3, month = c(-24 : 3))
 }
 

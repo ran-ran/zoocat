@@ -8,25 +8,39 @@
 #' @name filter_col
 #' @export
 #' @param x the object.
-#' @param ... other arguments.
-filter_col_q <- function (x, ...) {
-    UseMethod('filter_col_q')
-} 
-
-
-#' @rdname filter_col
-#' @export
 #' @param cond logical predicates of conditions. Multiple conditions are 
 #' combined with &.
+#' @param month the month to extract from the \code{zoomly} object. See details. 
+#' @param ... other arguments.
 #' @examples 
 #' x <- matrix(1 : 20, nrow = 5)
 #' colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 #' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
-#' filter_col_q(zc, quote(month > 2))
+#' filter_col(zc, month > 2)
+#' filter_col(zc, month > 2)
 #' temp <- 2
-#' filter_col_q(zc, quote(month == temp))
-#' filter_col_q(zc, quote(month > temp & name == 'yyy'))
+#' filter_col(zc, month == temp)
+#' filter_col(zc, month > temp & name == 'yyy')
 #' 
+#' mat <- matrix(1:48, ncol = 12)
+#' colAttr <- data.frame(month = rep(1 : 12))
+#' zm <- zoomly(mat, order.by = 1991 : 1994, colattr = colAttr)
+#' filter_col(zm, month = 1 : 3)
+#' filter_col(zm, month = c(-9 : 8))
+#' filter_col(zm, cond = month %in% 1 : 3, month = c(-24 : 3))
+#' 
+filter_col_q <- function (x, ...) {
+    UseMethod('filter_col_q')
+} 
+
+#' @rdname filter_col
+#' @export
+filter_col <- function (x, ...) {
+    UseMethod('filter_col')
+} 
+
+#' @rdname filter_col
+#' @export
 filter_col_q.zoocat <- function (x, cond) {
     colAttr <- cattr(x) 
     iFilt <- eval(cond, colAttr, parent.frame())
@@ -34,14 +48,17 @@ filter_col_q.zoocat <- function (x, cond) {
     return(ret)
 } 
 
+
 #' @export
-#' @examples 
-#' mat <- matrix(1:48, ncol = 12)
-#' ctable <- data.frame(month = rep(1 : 12))
-#' zm <- zoomly(mat, order.by = 1991 : 1994, colattr = ctable)
-#' filter_col_q(zm, month = 1 : 3)
-#' filter_col_q(zm, month = c(-9 : 8))
-#' filter_col_q(zm, month = c(-24 : 3))
+#' @rdname filter_col
+filter_col.zoocat <- function (x, cond) {
+    cond_call <- substitute(cond)
+    return(filter_col_q(x, cond_call))
+} 
+
+
+#' @export
+#' @rdname filter_col
 filter_col_q.zoomly <- function (x, cond = NULL, month = NULL, ...) {
     if (is.null(month)) {
         if (is.null(cond)) {
@@ -60,7 +77,14 @@ filter_col_q.zoomly <- function (x, cond = NULL, month = NULL, ...) {
     }
     ret <- extract_by_month(x, month = month)
     return(ret)
+}
 
+
+#' @export
+#' @rdname filter_col
+filter_col.zoomly <- function (x, cond = NULL, month = NULL, ...) {
+    cond_call <- substitute(cond)
+    return(filter_col_q(x, cond_call, month = month))
 }
 
 
@@ -79,7 +103,7 @@ extract_by_month <- function (x, month) {
     zm.ret <- zoomly()
     for (i in 1 : length(yr.rela.u)) {
         mon.true.now <- mon.true[yr.rela == yr.rela.u[i]]
-        ret.now <- x[, cattr(x)$month %in% mon.true.now]
+        ret.now <- x[, cattr(x)$month %in% mon.true.now, drop = FALSE]
         if (length(ret.now) > 0) {
             index(ret.now) <- index(ret.now) - yr.rela.u[i]
             cattr(ret.now)$month <- 
