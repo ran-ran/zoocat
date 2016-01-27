@@ -6,6 +6,9 @@
 \usage{
 gmon(x)
 }
+\arguments{
+\item{x}{a vector of integers.}
+}
 \description{
 A class for generalized month index
 }

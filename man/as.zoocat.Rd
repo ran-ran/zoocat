@@ -24,9 +24,9 @@ as.zoocat(x, ...)
 the output \code{zoocat} object to store the variable name.
 Only valid when \code{addname} is TRUE.}
 
-\item{addname}{logical. If TRUE, a field of \code{cattr} "name" will be add.}
+\item{index.name}{the name of the index variable.}
 
-\item{index.name.}{the name of the index variable.}
+\item{addname}{logical. If TRUE, a field of \code{cattr} "name" will be add.}
 }
 \value{
 A \code{zoocat} object.

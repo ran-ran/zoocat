@@ -19,12 +19,6 @@ a data frame is returned.}
 \item{na.rm}{as \code{melt} in reshape2. Should NA values be removed from the data set?}
 
 \item{...}{further arguments.}
-
-\item{ret}{character string. Can be \code{data.frame} or \code{zoo}}
-
-\item{variable.name}{name of the column used to store variable names.
-Only valid when a data frame is returned. For \code{melt.zoomly}, it is only
-valid when there are several input \code{zoomly} objects.}
 }
 \value{
 A data frame or a \code{zoo} object.

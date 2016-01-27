@@ -6,6 +6,9 @@
 \usage{
 rela_year(x)
 }
+\arguments{
+\item{x}{a \code{gmon} object.}
+}
 \description{
 Get the relative years for a \code{gmon} object
 }

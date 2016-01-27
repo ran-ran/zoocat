@@ -15,9 +15,9 @@ in x are ordered.}
 
 \item{colattr}{the column attributes. Must be a data frame with column names.}
 
-\item{...}{other arguments for \code{zoo}.}
+\item{index.name}{the name of the index variable.}
 
-\item{index.name.}{the name of the index variable.}
+\item{...}{other arguments for \code{zoo}.}
 }
 \value{
 A \code{zoocat} object.

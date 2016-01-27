@@ -35,6 +35,7 @@ merge.zoocat <- function (..., all = TRUE, fill = NA, suffixes = NULL,
                           drop = TRUE) {
     listin <- list(...)
     class0 <- class(listin[[1]])
+    indexName <- attr(listin[[1]], 'indname')
     numZoo <- length(listin)
     cattrList <- list()
     for (i in 1 : numZoo) {
@@ -51,6 +52,7 @@ merge.zoocat <- function (..., all = TRUE, fill = NA, suffixes = NULL,
                                             drop = TRUE))) 
     colnames(zooTotal) <- NULL
     attr(zooTotal, 'cattr') <- cattrTotal
+    attr(zooTotal, 'indname') <- indexName
     class(zooTotal) <- class0
     return(zooTotal)
 }
