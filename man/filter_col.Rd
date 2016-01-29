@@ -17,9 +17,9 @@ filter_col(x, ...)
 
 \method{filter_col}{zoocat}(x, cond, ...)
 
-\method{filter_col_q}{zoomly}(x, cond = NULL, month = NULL, ...)
+\method{filter_col_q}{zoomly}(x, cond = NULL, mon.repro = NULL, ...)
 
-\method{filter_col}{zoomly}(x, cond = NULL, month = NULL, ...)
+\method{filter_col}{zoomly}(x, cond = NULL, mon.repro = NULL, ...)
 }
 \arguments{
 \item{x}{the object.}
@@ -29,7 +29,8 @@ filter_col(x, ...)
 \item{cond}{logical predicates of conditions. Multiple conditions are
 combined with &.}
 
-\item{month}{the month to extract from the \code{zoomly} object. See details.}
+\item{mon.repro}{the month to extract from
+the \code{zoomly} object for reprocessing month. See details.}
 }
 \description{
 Return columns with matching conditions for the column attributes
@@ -48,8 +49,8 @@ filter_col(zc, month > temp & name == 'yyy')
 mat <- matrix(1:48, ncol = 12)
 colAttr <- data.frame(month = rep(1 : 12))
 zm <- zoomly(mat, order.by = 1991 : 1994, colattr = colAttr)
-filter_col(zm, month = 1 : 3)
-filter_col(zm, month = c(-9 : 8))
-filter_col(zm, cond = month \%in\% 1 : 3, month = c(-24 : 3))
+filter_col(zm, mon.repro = 1 : 3)
+filter_col(zm, mon.repro = c(-9 : 8))
+filter_col(zm, cond = month \%in\% 1 : 3, mon.repro = c(-24 : 3))
 }
 

@@ -10,7 +10,8 @@
 #' @param x the object.
 #' @param cond logical predicates of conditions. Multiple conditions are 
 #' combined with &.
-#' @param month the month to extract from the \code{zoomly} object. See details. 
+#' @param mon.repro the month to extract from 
+#' the \code{zoomly} object for reprocessing month. See details. 
 #' @param ... other arguments.
 #' @examples 
 #' x <- matrix(1 : 20, nrow = 5)
@@ -25,9 +26,9 @@
 #' mat <- matrix(1:48, ncol = 12)
 #' colAttr <- data.frame(month = rep(1 : 12))
 #' zm <- zoomly(mat, order.by = 1991 : 1994, colattr = colAttr)
-#' filter_col(zm, month = 1 : 3)
-#' filter_col(zm, month = c(-9 : 8))
-#' filter_col(zm, cond = month %in% 1 : 3, month = c(-24 : 3))
+#' filter_col(zm, mon.repro = 1 : 3)
+#' filter_col(zm, mon.repro = c(-9 : 8))
+#' filter_col(zm, cond = month %in% 1 : 3, mon.repro = c(-24 : 3))
 #' 
 filter_col_q <- function (x, ...) {
     UseMethod('filter_col_q')
@@ -59,8 +60,8 @@ filter_col.zoocat <- function (x, cond, ...) {
 
 #' @export
 #' @rdname filter_col
-filter_col_q.zoomly <- function (x, cond = NULL, month = NULL, ...) {
-    if (is.null(month)) {
+filter_col_q.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
+    if (is.null(mon.repro)) {
         if (is.null(cond)) {
             return(x)
         } else {
@@ -69,22 +70,22 @@ filter_col_q.zoomly <- function (x, cond = NULL, month = NULL, ...) {
     }
     
     if (!all(cattr(x)$month %in% (1 : 12))) {
-        stop('When using argument month, all month values in x must be in 1 : 12.')
+        stop('When using argument mon.repro, all month values in x must be in 1 : 12.')
     }
     
     if (!is.null(cond)) {
         x <- filter_col_q.zoocat(x, cond)
     }
-    ret <- extract_by_month(x, month = month)
+    ret <- extract_by_month(x, month = mon.repro)
     return(ret)
 }
 
 
 #' @export
 #' @rdname filter_col
-filter_col.zoomly <- function (x, cond = NULL, month = NULL, ...) {
+filter_col.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
     cond_call <- substitute(cond)
-    return(filter_col_q(x, cond_call, month = month))
+    return(filter_col_q(x, cond_call, mon.repro = mon.repro))
 }
 
 
