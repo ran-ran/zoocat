@@ -28,7 +28,6 @@ as.character.gmon <- function (x, ...) {
     return(str)
 }
 
-#' @export
 as.data.frame.gmon <- function (x, row.names = NULL, optional = FALSE, ...)  {
     nrows <- length(x)
     nm <- paste(deparse(substitute(x), width.cutoff = 500), collapse = " ")
@@ -48,6 +47,10 @@ as.data.frame.gmon <- function (x, row.names = NULL, optional = FALSE, ...)  {
     attr(value, "row.names") <- row.names
     class(value) <- "data.frame"
     value
+}
+
+format.gmon <- function (x, ...) {
+    return(format(as.character(x), ...))
 }
 
 #' Get the relative years for a \code{gmon} object
