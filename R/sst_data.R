@@ -1,11 +1,22 @@
 
-#' SST Data of East Pacific
+#' ENSO indices
 #' 
 #' @examples
 #' 
-#' data(sst)
-#' head(sst)
+#' data(nino)
+#' head(nino)
 #' 
-#' @name sst
+#' @name nino
+
+NULL
+
+#' SST Data of Tropical Pacific
+#' 
+#' @examples
+#' 
+#' data(tropSST)
+#' head(tropSST)
+#' 
+#' @name tropSST
 
 NULL

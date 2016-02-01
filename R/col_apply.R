@@ -18,9 +18,9 @@ col_apply <- function (x, ...) {
 #' @examples
 #' library(lattice)
 #' 
-#' data(sst)
-#' sstmelt <- melt(sst, id.var = c('year', 'month'))
-#' zc <- cast2zoocat(sstmelt, index.var = 'year', value.var = 'value')
+#' data(nino)
+#' ninomelt <- melt(nino, id.var = c('year', 'month'))
+#' zc <- cast2zoocat(ninomelt, index.var = 'year', value.var = 'value')
 #' col_apply(zc, fun = function(x) {mean(x, na.rm = TRUE)}, col.as = 'vector')
 #' 
 #' fuse <- function (x) {

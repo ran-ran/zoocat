@@ -4,9 +4,9 @@
 #'
 #' @export
 #' @examples 
-#' data(sst)
-#' sstmelt <- melt(sst, id.vars = c('year', 'month'))
-#' zc <- cast2zoocat(sstmelt, index.var = 'year', value.var = 'value') 
+#' data(nino)
+#' nino.melt <- melt(nino, id.vars = c('year', 'month'))
+#' zc <- cast2zoocat(nino.melt, index.var = 'year', value.var = 'value') 
 #' zc.agg1 <- aggregate_col(zc, by = 'month')
 #' zc.agg2 <- aggregate_col(zc, by = 'variable')
 #' 
