@@ -117,16 +117,18 @@ print.zoocat <- function (x, ...) {
     }
     colAttr <- colAttr[j, , drop = FALSE]
     class(x) <- class(x)[class(x) %in% c('zooreg', 'zoo')]
-    x <- x[i, j, drop = drop]
+    x <- x[i, j, drop = FALSE]
     
-    if (drop == TRUE & length(i) == 1) {
-        x <- as.vector(x)
-        if (class0[1] == 'zoomly') {
-            names(x) <- fun_cattr2str(colAttr)
-        } else {
+    if (drop == TRUE & min(dim(x)) == 1) {
+        if (nrow(x) == 1 & ncol(x) > 1) {
+            x <- as.vector(x)
             names(x) <- cattr2str(colAttr)
+        } else if (nrow(x) > 1 & ncol(x) == 1) {
+            x <- zoo(as.vector(x), order.by = index(x))
+        } else {
+            x <- as.vector(x)
         }
-    } else if (drop == FALSE | (length(i) > 1 & length(j) > 1)) { 
+    } else { 
         attr(x, 'cattr') <- colAttr
         attr(x, 'indname') <- indexName
         class(x) <- class0

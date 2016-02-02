@@ -1,4 +1,5 @@
-fout <- 'E:/HeranWorks/myPackages/zoocat/R/zoocat_other_methods.R'
+#fout <- 'E:/HeranWorks/myPackages/zoocat/R/zoocat_other_methods.R'
+fout <- 'E:/workopen/myPkg/zoocat/R/zoocat_other_methods.R'
 
 if (file.exists(fout)) {
     file.remove(fout)
@@ -109,12 +110,13 @@ for (i in 1 : nrow(methodNames_3)) {
 "
 #' @export 
 '", mtd, ".zoocat' <- function (", obj, ", value) {
+    class0 <- class(", obj, ")
     colAttr <- cattr(", obj, ")
     ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
     ret <- '", mtd, "'(", obj, ", value)
     colnames(ret) <- NULL
     attr(ret, 'cattr') <- colAttr
-    class(ret) <- c('zoocat', class(ret))
+    class(ret) <- class0
     return(ret)
 }
         
