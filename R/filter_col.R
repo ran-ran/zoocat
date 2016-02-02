@@ -77,6 +77,7 @@ filter_col_q.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
         x <- filter_col_q.zoocat(x, cond)
     }
     ret <- extract_by_month(x, month = mon.repro)
+    ret <- order_col(ret)
     return(ret)
 }
 
