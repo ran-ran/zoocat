@@ -42,9 +42,7 @@ colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 filter_col(zc, month > 2)
 filter_col(zc, month > 2)
-temp <- 2
-filter_col(zc, month == temp)
-filter_col(zc, month > temp & name == 'yyy')
+filter_col(zc, month > 2 & name == 'yyy')
 
 mat <- matrix(1:48, ncol = 12)
 colAttr <- data.frame(month = rep(1 : 12))

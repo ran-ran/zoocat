@@ -34,6 +34,13 @@ merge.zoocat <- function (..., all = TRUE, fill = NA, suffixes = NULL,
                           check.names = FALSE, retclass = 'zoocat',
                           drop = TRUE) {
     listin <- list(...)
+    iempty <- c()
+    for (i in 1 : length(listin)) {
+        if (length(listin[[i]]) == 0) iempty <- c(iempty, i)
+    }
+    if (length(iempty) > 0) {
+        listin <- listin[-iempty]
+    }
     class0 <- class(listin[[1]])
     indexName <- attr(listin[[1]], 'indname')
     numZoo <- length(listin)
