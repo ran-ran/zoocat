@@ -53,6 +53,15 @@ format.gmon <- function (x, ...) {
     return(format(as.character(x), ...))
 }
 
+"[.gmon" <- function (x, ..., drop = TRUE) 
+{
+    cl <- oldClass(x)
+    class(x) <- NULL
+    ret <- NextMethod("[")
+    class(ret) <- cl
+    return(ret)
+}
+
 #' Get the relative years for a \code{gmon} object
 #' 
 #' @export
