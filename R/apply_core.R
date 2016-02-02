@@ -5,14 +5,14 @@
 #' Apply a function over the core matrix of the \code{zoocat} object,
 #' and bind the return data with \code{cattr} or \code{index}.
 #' @export
-#' @name core_apply
-#' @rdname core_apply
-core_apply <- function (x, ...) {
-    UseMethod('core_apply')
+#' @name apply_core
+#' @rdname apply_core
+apply_core <- function (x, ...) {
+    UseMethod('apply_core')
 }
 
 #' @export
-#' @rdname core_apply
+#' @rdname apply_core
 #' @param x the object.
 #' @param fun the function to apply. The \code{fun} must return a matrix or 
 #' a vector.
@@ -27,22 +27,22 @@ core_apply <- function (x, ...) {
 #' colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 #' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 #' 
-#' core_apply(zc, fun = colMeans, bind = 'cattr')
-#' core_apply(zc, fun = rowMeans, bind = 'index')
-#' core_apply(zc, fun = function (x) {x*2}, bind = c('index', 'cattr'))
-#' core_apply(zc, fun = function (x) {t(x*2)}, bind = c('cattr', 'index'))
-#' core_apply(zc, fun = function (x) {x*2}, bind = c('index', NA))
-#' core_apply(zc, fun = function (x) {x[3:4, ]}, bind = c(NA, 'cattr'))
-#' core_apply(zc, fun = function (x) 
+#' apply_core(zc, fun = colMeans, bind = 'cattr')
+#' apply_core(zc, fun = rowMeans, bind = 'index')
+#' apply_core(zc, fun = function (x) {x*2}, bind = c('index', 'cattr'))
+#' apply_core(zc, fun = function (x) {t(x*2)}, bind = c('cattr', 'index'))
+#' apply_core(zc, fun = function (x) {x*2}, bind = c('index', NA))
+#' apply_core(zc, fun = function (x) {x[3:4, ]}, bind = c(NA, 'cattr'))
+#' apply_core(zc, fun = function (x) 
 #'                       {r <- x[3:4, ]
 #'                       rownames(r) <- c('a', 'b')
 #'                       return(r)}, 
 #'                       bind = c(NA, 'cattr'))
 #' 
 #' vec <- as.vector(zc[, 1])
-#' core_apply(zc, fun = function (x) {cor(x, vec)}, bind = 'cattr')
+#' apply_core(zc, fun = function (x) {cor(x, vec)}, bind = 'cattr')
 #' 
-core_apply.zoocat <- function (x, fun, bind, ...) {
+apply_core.zoocat <- function (x, fun, bind, ...) {
     stopifnot(length(bind) %in% c(1, 2))
     stopifnot(all(bind %in% c('cattr', 'index', NA)))
     

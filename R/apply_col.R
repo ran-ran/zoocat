@@ -5,13 +5,13 @@
 #' Apply a function over each column of the \code{zoocat} object
 #' and return a data frame.
 #'
-#' @name col_apply
-#' @rdname col_apply
+#' @name apply_col
+#' @rdname apply_col
 #' @export
 #' @param x A object.
 #' @param ... Additional arguments to be passed to or from methods.
-col_apply <- function (x, ...) {
-    UseMethod('col_apply')
+apply_col <- function (x, ...) {
+    UseMethod('apply_col')
 }
 
 
@@ -21,12 +21,12 @@ col_apply <- function (x, ...) {
 #' data(nino)
 #' ninomelt <- melt(nino, id.var = c('year', 'month'))
 #' zc <- cast2zoocat(ninomelt, index.var = 'year', value.var = 'value')
-#' col_apply(zc, fun = function(x) {mean(x, na.rm = TRUE)}, col.as = 'vector')
+#' apply_col(zc, fun = function(x) {mean(x, na.rm = TRUE)}, col.as = 'vector')
 #' 
 #' fuse <- function (x) {
 #'     mean(window(x, start = 1995, end = 2000))
 #' }
-#' retdf <- col_apply(zc, fun = fuse, col.as = 'zoo')
+#' retdf <- apply_col(zc, fun = fuse, col.as = 'zoo')
 #' xyplot(output~month|variable, data = retdf, type = 'o')
 #' 
 #' 
@@ -36,15 +36,15 @@ col_apply <- function (x, ...) {
 #'     names(ret) <- c('max', 'min', 'mean', 'median', 'sd')
 #'     return(ret)
 #' }
-#' retdf <- col_apply(zc, fun = fuse, col.as = 'zoo')
+#' retdf <- apply_col(zc, fun = fuse, col.as = 'zoo')
 #' xyplot(sd~month|variable, data = retdf, type = 'o')
 #'  
 #' @export
-#' @rdname col_apply
+#' @rdname apply_col
 #' @param fun The function apply for each column.
 #' @param col.as If vector, each column will be treated as a vector. If 
 #' zoo, each column will be treated as a zoo object.
-col_apply.zoocat <- function (x, fun, col.as = 'vector', ...) {
+apply_col.zoocat <- function (x, fun, col.as = 'vector', ...) {
     stopifnot(col.as %in% c('vector', 'zoo'))
     colAttr <- cattr(x)
     if (col.as == 'vector') {

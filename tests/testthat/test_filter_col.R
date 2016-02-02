@@ -42,6 +42,7 @@ test_that('test filter_col_q.zoomly and filter_col.zoomly',  {
     expect_equal(index(col.f), index(zm) + 1)
     
     col.f <- filter_col_q(zm, mon.repro = -11 : 0)
+    expect_is(col.f, 'zoomly')
     expect_equal(as.vector(col.f), as.vector(zm))
     expect_equal(dim(col.f), dim(zm))
     expect_equal(index(col.f), index(zm) + 1)

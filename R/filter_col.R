@@ -76,8 +76,7 @@ filter_col_q.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
     if (!is.null(cond)) {
         x <- filter_col_q.zoocat(x, cond)
     }
-    ret <- extract_by_month(x, month = mon.repro)
-    ret <- order_col(ret)
+    ret <- reprocess_month(x, month = mon.repro)
     return(ret)
 }
 
@@ -90,13 +89,14 @@ filter_col.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
 }
 
 
-# @examples
-# mat <- matrix(1:48, ncol = 12)
-# ctable <- data.frame(month = rep(1 : 12))
-# zm <- zoomly(mat, order.by = 1991 : 1994, colattr = ctable)
-# extract_by_month(zm, month = -11:2)
-# extract_by_month(zm, month = -24:3)
-extract_by_month <- function (x, month) {
+#' Reprocess month of zoomly
+#' @examples
+#' mat <- matrix(1:48, ncol = 12)
+#' ctable <- data.frame(month = rep(1 : 12))
+#' zm <- zoomly(mat, order.by = 1991 : 1994, colattr = ctable)
+#' reprocess_month(zm, month = -11:2)
+#' reprocess_month(zm, month = -24:3)
+reprocess_month <- function (x, month) {
     month <- gmon(month)
     mon.true <- true_month(month)
     yr.rela <- rela_year(month)
@@ -113,7 +113,8 @@ extract_by_month <- function (x, month) {
             zm.ret <- merge(zm.ret, ret.now)
         }
     }
-    
+    attr(zm.ret, 'indname') <- attr(x, 'indname')
+    zm.ret <- order_col(zm.ret)
     return(zm.ret)
 }
 

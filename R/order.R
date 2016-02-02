@@ -16,6 +16,6 @@ order_col <- function (x) {
         colAttr <- as.data.frame(colAttr)
     }
     iod <- do.call(order, args = colAttr)
-    x <- x[, iod]
+    x <- x[, iod, drop = FALSE]
     return(x)
 }
