@@ -12,7 +12,7 @@ test_that('as.zoo for zoocat', {
 }
 )
 
-test_that('retain class attribute', {
+test_that('test test unexpected changes of class attribute', {
     x <- matrix(1 : 20, nrow = 5)
     colAttr <- data.frame(month = c(2, 3, 5, 6), name = c('a','a','b','b'))
     zm <- zoomly(x, order.by = 1991 : 1995, colattr = colAttr)
