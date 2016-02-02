@@ -51,8 +51,8 @@ cast_month <- function (x) {
     df$index <- NULL
     zc <- cast2zoomly(df, index.var = 'year', value.var = 'value')
     ina <- which(apply(coredata(zc), 2, 
-                       FUN = function (x) {any(is.na(x))}))
-    zc <- zc[, -ina]
+                       FUN = function (x) {all(is.na(x))}))
+    if (length(ina) > 0)  {zc <- zc[, -ina]}
     return(zc)
 }
 
