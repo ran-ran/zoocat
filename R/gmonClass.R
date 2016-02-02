@@ -28,6 +28,7 @@ as.character.gmon <- function (x, ...) {
     return(str)
 }
 
+#' @export
 as.data.frame.gmon <- function (x, row.names = NULL, optional = FALSE, ...)  {
     nrows <- length(x)
     nm <- paste(deparse(substitute(x), width.cutoff = 500), collapse = " ")
@@ -49,10 +50,12 @@ as.data.frame.gmon <- function (x, row.names = NULL, optional = FALSE, ...)  {
     value
 }
 
+#' @export
 format.gmon <- function (x, ...) {
     return(format(as.character(x), ...))
 }
 
+#' @export
 "[.gmon" <- function (x, ..., drop = TRUE) 
 {
     cl <- oldClass(x)
