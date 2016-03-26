@@ -65,6 +65,7 @@ normalize.zoo <- function(x, method = 'sd1', base.period = NULL, ...) {
     if (is.null(base.period)) {
         base.period <- index(x)
     }
+    stopifnot(length(base.period) >= 30)
     stopifnot(all(base.period %in% index(x)))
     stopifnot(length(method) == 1)
     stopifnot(any(method == c('anomaly', 'perc', 'sd1')))
