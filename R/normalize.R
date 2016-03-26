@@ -60,12 +60,15 @@ normalize.default <- function(x, method = 'sd1', ...) {
 
 #' @rdname normalize
 #' @export
-#' @param base.period a vector. If NULL, base period is the all index range.
+#' @param base.period a vector indicating the index or range of the base period.
+#'  If NULL, base period is the all index range.
 normalize.zoo <- function(x, method = 'sd1', base.period = NULL, ...) {
     if (is.null(base.period)) {
         base.period <- index(x)
     }
-    stopifnot(length(base.period) >= 30)
+    if (length(base.period) == 2) {
+        base.period <- index(x)[index(x) <= base.period[2] & index(x) >= base.period[1]]
+    }
     stopifnot(all(base.period %in% index(x)))
     stopifnot(length(method) == 1)
     stopifnot(any(method == c('anomaly', 'perc', 'sd1')))

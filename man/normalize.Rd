@@ -22,7 +22,8 @@ normalize(x, ...)
 "anomaly" means anomaly (departure);
 "perc" means percentage of anomaly.}
 
-\item{base.period}{a vector. If NULL, base period is the all index range.}
+\item{base.period}{a vector indicating the index or range of the base period.
+If NULL, base period is the all index range.}
 }
 \description{
 Normalize data or calculate anomaly or anomaly percentage.
