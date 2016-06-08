@@ -37,11 +37,21 @@
 cast2zoocat <- function (x, index.var, value.var, attr.var = NULL, fun.aggregate = NULL,
                          del.unique.cattr = TRUE) {
 
-    stopifnot(is.data.frame(x))
-    stopifnot(!is.null(colnames(x)))
-    stopifnot(length(index.var) == 1)
-    stopifnot(length(value.var) == 1)
-    stopifnot(index.var != value.var)
+    if (!is.data.frame(x)) {
+        stop('x must ba a data frame.')
+    }
+    if (is.null(colnames(x))) {
+        stop('x must have column names.')
+    }
+    if (length(index.var) > 1) {
+        stop('There must be only one index variable.')
+    }
+    if (length(value.var) > 1) {
+        stop('There must be only one value variable.')
+    }
+    if (index.var == value.var) {
+        stop('index.var and value.var can not be the same.')
+    }
     varnames <- colnames(x)
     if (!index.var %in% varnames) {
         stop('index.var does not exist in x.')

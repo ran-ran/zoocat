@@ -1,4 +1,3 @@
-
 #' Coercing Objects to Class \code{zoocat}
 #' 
 #' Coercing objects to class \code{zoocat}.

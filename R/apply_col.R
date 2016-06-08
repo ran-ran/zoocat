@@ -45,7 +45,9 @@ apply_col <- function (x, ...) {
 #' @param col.as If vector, each column will be treated as a vector. If 
 #' zoo, each column will be treated as a zoo object.
 apply_col.zoocat <- function (x, fun, col.as = 'vector', ...) {
-    stopifnot(col.as %in% c('vector', 'zoo'))
+    if (! (col.as %in% c('vector', 'zoo'))) {
+        stop('col.as must be \'vector\' or \'zoo\'.')
+    }
     colAttr <- cattr(x)
     if (col.as == 'vector') {
         x <- as.matrix(x)

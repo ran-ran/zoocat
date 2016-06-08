@@ -1,11 +1,12 @@
-Package: zoocat 
+Package: zoocat
 Type: Package
 Title: zoo with Column Attributes
 Version: 2.0
 Date: 2015-09-06
 Author: Ranran He
 Maintainer: Ranran He <heran198311@163.com>
-Description: Provide extended functions for managing informations of each column of the zoo object.
+Description: Provide extended functions for managing informations of each column
+    of the zoo object.
 Depends:
     R (>= 3.1.1),
     zoo,
@@ -16,10 +17,11 @@ Imports:
     stats,
     plyr,
     sp
-Suggests: 
+Suggests:
     knitr,
     lattice,
     testthat
 License: GPL
 URL: https://github.com/vivihe/zoocat
 VignetteBuilder: knitr
+RoxygenNote: 5.0.1

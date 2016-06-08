@@ -15,7 +15,9 @@
 #' @param FUN a function to be applied to all data subsets.
 #' @param ... additional arguments to be passed to methods.
 aggregate_col <- function (x, by, FUN = mean, ...) {
-    stopifnot(inherits(x, 'zoocat'))
+    if (!inherits(x, 'zoocat')) {
+        stop('x must be a zoocat object.')
+    }
     df.melt <- melt(x, value.name = 'value', index.name = 'index')
     str <- paste(by, collapse = '+')
     str <- paste(str, '+', 'index', sep = '')
