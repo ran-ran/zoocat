@@ -43,6 +43,7 @@
     stopifnot(!is.null(colnames(value)))
     rownames(value) <- NULL
     attr(x, 'cattr') <- value
+    attr(x, 'indname') <- 'index'
     class(x) <- c('zoocat', class(x))
     return(x)
 } 
