@@ -1,30 +1,9 @@
-**zoocat** package is a extension of the **zoo** package. The aim of the
-**zoocat** package is to provide a better manament method for
-multidimensional time series. In **zoo** package, you can create a
-2-dimension zoo object, in which each column stores a time series. You
-can use column names to store the information of each column. The
-**zoocat** package give a another method to store the attributes of each
-column.
+For using package, first load it:
 
     library(zoocat)
 
-    ## Loading required package: zoo
-
-    ## 
-    ## Attaching package: 'zoo'
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     as.Date, as.Date.numeric
-
-    ## Loading required package: reshape2
-
-    ## 
-    ## Attaching package: 'zoocat'
-
-    ## The following object is masked from 'package:stats':
-    ## 
-    ##     cor
+Construct a  object
+==================
 
     mat <- matrix(round(rnorm(24), 2), ncol = 4)
     ctable <- data.frame(treatment = factor(rep(c('a', 'b'), 2), levels = c('a', 'b')), 
@@ -36,11 +15,14 @@ column.
     ## - [column attribute fields]: treatment, site
     ## - [index variable]: year
     ## - [data]:
-    ##       a_s1  b_s1 a_s2  b_s2
-    ## 2011  0.10 -0.92 0.56  1.26
-    ## 2012 -1.79  0.94 0.20 -0.37
-    ## 2013  0.48 -0.49 0.28 -0.20
-    ## 2014  1.95  0.61 1.27  1.87
+    ##       a_s1  b_s1  a_s2  b_s2
+    ## 2011  1.68  0.23 -1.78 -0.78
+    ## 2012 -0.73 -1.17 -1.80  0.61
+    ## 2013  0.90  2.51  1.70  0.43
+    ## 2014  0.46  0.71  0.17 -0.88
+
+Set and get the  table
+=====================
 
     cattr(zc)
 
@@ -59,19 +41,13 @@ column.
     ## - [index variable]: year
     ## - [data]:
     ##      a_s1_Jack b_s1_Jack a_s2_Jack b_s2_Jack
-    ## 2011      0.10     -0.92      0.56      1.26
-    ## 2012     -1.79      0.94      0.20     -0.37
-    ## 2013      0.48     -0.49      0.28     -0.20
-    ## 2014      1.95      0.61      1.27      1.87
+    ## 2011      1.68      0.23     -1.78     -0.78
+    ## 2012     -0.73     -1.17     -1.80      0.61
+    ## 2013      0.90      2.51      1.70      0.43
+    ## 2014      0.46      0.71      0.17     -0.88
 
-    indname(zc2)
-
-    ## [1] "year"
-
-    indname(zc2) <- 'time'
-    indname(zc2)
-
-    ## [1] "time"
+Merge by columns
+================
 
     zc2 <- zc + 10
     cattr(zc2) <- data.frame(site = 's3', added = rep(TRUE, 4))
@@ -88,16 +64,19 @@ column.
     ## 7      <NA>   s3  TRUE
     ## 8      <NA>   s3  TRUE
 
+Melt and cast
+=============
+
     df.melt <- melt(zc)
     head(df.melt)
 
     ##   year treatment site value
-    ## 1 2011         a   s1  0.10
-    ## 2 2011         b   s1 -0.92
-    ## 3 2011         a   s2  0.56
-    ## 4 2011         b   s2  1.26
-    ## 5 2012         a   s1 -1.79
-    ## 6 2012         b   s1  0.94
+    ## 1 2011         a   s1  1.68
+    ## 2 2011         b   s1  0.23
+    ## 3 2011         a   s2 -1.78
+    ## 4 2011         b   s2 -0.78
+    ## 5 2012         a   s1 -0.73
+    ## 6 2012         b   s1 -1.17
 
     cast2zoocat(df.melt, index.var = 'year', value.var = 'value')
 
@@ -105,11 +84,14 @@ column.
     ## - [column attribute fields]: treatment, site
     ## - [index variable]: year
     ## - [data]:
-    ##       a_s1 a_s2  b_s1  b_s2
-    ## 2011  0.10 0.56 -0.92  1.26
-    ## 2012 -1.79 0.20  0.94 -0.37
-    ## 2013  0.48 0.28 -0.49 -0.20
-    ## 2014  1.95 1.27  0.61  1.87
+    ##       a_s1  a_s2  b_s1  b_s2
+    ## 2011  1.68 -1.78  0.23 -0.78
+    ## 2012 -0.73 -1.80 -1.17  0.61
+    ## 2013  0.90  1.70  2.51  0.43
+    ## 2014  0.46  0.17  0.71 -0.88
+
+Reset the index variable
+========================
 
     reset_index_var(zc, index.var = 'treatment')
 
@@ -118,5 +100,5 @@ column.
     ## - [index variable]: treatment
     ## - [data]:
     ##   2011_s1 2011_s2 2012_s1 2012_s2 2013_s1 2013_s2 2014_s1 2014_s2
-    ## a    0.10    0.56   -1.79    0.20    0.48    0.28    1.95    1.27
-    ## b   -0.92    1.26    0.94   -0.37   -0.49   -0.20    0.61    1.87
+    ## a    1.68   -1.78   -0.73   -1.80    0.90    1.70    0.46    0.17
+    ## b    0.23   -0.78   -1.17    0.61    2.51    0.43    0.71   -0.88
