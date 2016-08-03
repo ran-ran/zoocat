@@ -5,6 +5,11 @@ variant: markdown_github
 ---
 
 
+**zoocat** package is an extension package of the **zoo** package. The aim of this package is:
+
+* Manipulate multivariate time serie conveniently.
+* Convert between **zoocat** object and data frame.
+* Represent multi-dimensional data by two-dimensional format.
 
 For using **zoocat** package, first load it:
 
@@ -12,8 +17,9 @@ For using **zoocat** package, first load it:
 library(zoocat)
 ```
 
-
 # Construct a **zoocat** object
+
+Using following codes to construct a **zoocat** object.
 
 ```{r, highlight=TRUE}
 mat <- matrix(round(rnorm(24), 2), ncol = 4)
@@ -22,6 +28,8 @@ ctable <- data.frame(treatment = factor(rep(c('a', 'b'), 2), levels = c('a', 'b'
 zc <- zoocat(mat, order.by = 2011 : 2014, colattr = ctable, index.name = 'year')
 print(zc)
 ```
+
+Note that all information of each column of the **zoocat** object is stored in a data frame, which is as the argument "colattr" for function "zoocat". This data frame is called column attribute table (**cattr** table).
 
 # Set and get the **cattr** table
 
@@ -39,17 +47,19 @@ print(zc2)
 zc2 <- zc + 10
 cattr(zc2) <- data.frame(site = 's3', added = rep(TRUE, 4))
 zc.merge <- cbind(zc, zc2)
+print(zc.merge)
 cattr(zc.merge)
 ```
 
 
 # Melt and cast
 
+Similar with package **reshape2**, you can melt and cast between data frame and **zoocat**.
+
 ```{r, highlight=TRUE}
 df.melt <- melt(zc)
 head(df.melt)
 ```
-
 
 ```{r, highlight=TRUE}
 cast2zoocat(df.melt, index.var = 'year', value.var = 'value')
