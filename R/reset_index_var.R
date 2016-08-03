@@ -11,13 +11,20 @@
 #' reset_index_var(zc, 'month')
 #' reset_index_var(zc, 'name')
 #' 
+#' @param x the object.
+#' @param ... other arguments.
+#' @name reset_index_var
+#' @rdname reset_index_var
 reset_index_var <- function (x, ...) {
     UseMethod('reset_index_var')
 }
 
 
 #' @export
-reset_index_var.zoocat <- function (x, index.var) {
+#' @rdname reset_index_var
+#' @param index.var the name of the variable to be set as the index. 
+#' Must be one of the \code{cattr} field.
+reset_index_var.zoocat <- function (x, index.var, ...) {
     if (index.var == attr(x, 'indname')) {
         return(x)
     } else {

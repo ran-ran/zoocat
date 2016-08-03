@@ -9,6 +9,7 @@
 #' order_col(zm)
 #' 
 #' @export
+#' @param x the object.
 order_col <- function (x) {
     stopifnot(inherits(x, 'zoocat'))
     colAttr <- cattr(x)

@@ -6,6 +6,9 @@
 \usage{
 order_col(x)
 }
+\arguments{
+\item{x}{the object.}
+}
 \description{
 Order by column
 }

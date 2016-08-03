@@ -23,7 +23,6 @@ as.zoocat <- function (x, ...) { UseMethod('as.zoocat') }
 #'
 #' @export
 #' @rdname as.zoocat
-#' @param addname logical. If TRUE, a field of \code{cattr} "name" will be add.
 #' @param variable.name the name of the field in the \code{cattr} of 
 #' the output \code{zoocat} object to store the variable name.
 #' Only valid when \code{addname} is TRUE.

@@ -94,6 +94,8 @@ filter_col.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
 #' zm <- zoomly(mat, order.by = 1991 : 1994, colattr = ctable)
 #' reprocess_month(zm, month = -11:2)
 #' reprocess_month(zm, month = -24:3)
+#' @param x a \code{zoomly} object.
+#' @param month new setting month vector.
 reprocess_month <- function (x, month) {
     month <- gmon(month)
     mon.true <- true_month(month)

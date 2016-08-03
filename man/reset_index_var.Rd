@@ -2,9 +2,20 @@
 % Please edit documentation in R/reset_index_var.R
 \name{reset_index_var}
 \alias{reset_index_var}
+\alias{reset_index_var.zoocat}
 \title{Reset index variable of a \code{zoocat} object}
 \usage{
 reset_index_var(x, ...)
+
+\method{reset_index_var}{zoocat}(x, index.var, ...)
+}
+\arguments{
+\item{x}{the object.}
+
+\item{...}{other arguments.}
+
+\item{index.var}{the name of the variable to be set as the index. 
+Must be one of the \code{cattr} field.}
 }
 \description{
 Reset index variable of a \code{zoocat} object

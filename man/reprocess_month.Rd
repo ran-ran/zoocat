@@ -6,6 +6,11 @@
 \usage{
 reprocess_month(x, month)
 }
+\arguments{
+\item{x}{a \code{zoomly} object.}
+
+\item{month}{new setting month vector.}
+}
 \description{
 Reprocess month of zoomly
 }
