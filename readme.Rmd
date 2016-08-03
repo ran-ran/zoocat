@@ -6,14 +6,14 @@ variant: markdown_github
 
 
 
-For using \code{zoocat} package, first load it:
+For using **zoocat** package, first load it:
 
 ```{r, message=FALSE, highlight=TRUE}
 library(zoocat)
 ```
 
 
-# Construct a \code{zoocat} object
+# Construct a **zoocat** object
 
 ```{r, highlight=TRUE}
 mat <- matrix(round(rnorm(24), 2), ncol = 4)
@@ -23,7 +23,7 @@ zc <- zoocat(mat, order.by = 2011 : 2014, colattr = ctable, index.name = 'year')
 print(zc)
 ```
 
-# Set and get the \code{cattr} table
+# Set and get the **cattr** table
 
 ```{r, highlight=TRUE}
 cattr(zc)
