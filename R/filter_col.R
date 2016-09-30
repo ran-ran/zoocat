@@ -88,6 +88,7 @@ filter_col.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
 
 
 #' Reprocess month of zoomly
+#' 
 #' @examples
 #' mat <- matrix(1:48, ncol = 12)
 #' ctable <- data.frame(month = rep(1 : 12))
@@ -96,7 +97,11 @@ filter_col.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
 #' reprocess_month(zm, month = -24:3)
 #' @param x a \code{zoomly} object.
 #' @param month new setting month vector.
+#' @export
 reprocess_month <- function (x, month) {
+    if (!inherits(x, 'zoomly')) {
+        stop('x must a zoomly object.')
+    }
     month <- gmon(month)
     mon.true <- true_month(month)
     yr.rela <- rela_year(month)

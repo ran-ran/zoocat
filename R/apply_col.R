@@ -16,28 +16,12 @@ apply_col <- function (x, ...) {
 
 
 #' @examples
-#' library(lattice)
+#' x <- matrix(1 : 20, nrow = 5)
+#' colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
+#' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
+#' apply_col(zc, fun = mean, col.as = 'vector')
+#' apply_col(zc, fun = max, col.as = 'vector')
 #' 
-#' data(nino)
-#' ninomelt <- melt(nino, id.var = c('year', 'month'))
-#' zc <- cast2zoocat(ninomelt, index.var = 'year', value.var = 'value')
-#' apply_col(zc, fun = function(x) {mean(x, na.rm = TRUE)}, col.as = 'vector')
-#' 
-#' fuse <- function (x) {
-#'     mean(window(x, start = 1995, end = 2000))
-#' }
-#' retdf <- apply_col(zc, fun = fuse, col.as = 'zoo')
-#' xyplot(output~month|variable, data = retdf, type = 'o')
-#' 
-#' 
-#' fuse <- function (x) {
-#'     x <- window(x, start = 1980, end = 2014)
-#'     ret <- c(max(x), min(x), mean(x), median(x), sd(x))
-#'     names(ret) <- c('max', 'min', 'mean', 'median', 'sd')
-#'     return(ret)
-#' }
-#' retdf <- apply_col(zc, fun = fuse, col.as = 'zoo')
-#' xyplot(sd~month|variable, data = retdf, type = 'o')
 #'  
 #' @export
 #' @rdname apply_col

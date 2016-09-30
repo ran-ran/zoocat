@@ -1,3 +1,4 @@
+
 #' Coercing Objects to Class \code{zoocat}
 #' 
 #' Coercing objects to class \code{zoocat}.
@@ -20,7 +21,6 @@
 #' @param ... other arguments passed to methods.
 as.zoocat <- function (x, ...) { UseMethod('as.zoocat') }
 
-#'
 #' @export
 #' @rdname as.zoocat
 #' @param variable.name the name of the field in the \code{cattr} of 
