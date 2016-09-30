@@ -3,18 +3,18 @@
 \name{apply_col}
 \alias{apply_col}
 \alias{apply_col.zoocat}
-\title{Apply Functions Over Each Column}
+\title{Apply functions over each column}
 \usage{
 apply_col(x, ...)
 
-\method{apply_col}{zoocat}(x, fun, col.as = "vector", ...)
+\method{apply_col}{zoocat}(x, FUN, col.as = "vector", ...)
 }
 \arguments{
 \item{x}{A object.}
 
 \item{...}{Additional arguments to be passed to or from methods.}
 
-\item{fun}{The function apply for each column.}
+\item{FUN}{The function apply for each column.}
 
 \item{col.as}{If vector, each column will be treated as a vector. If 
 zoo, each column will be treated as a zoo object.}
@@ -27,8 +27,8 @@ and return a data frame.
 x <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
-apply_col(zc, fun = mean, col.as = 'vector')
-apply_col(zc, fun = max, col.as = 'vector')
+apply_col(zc, FUN = mean, col.as = 'vector')
+apply_col(zc, FUN = max, col.as = 'vector')
 
  
 }

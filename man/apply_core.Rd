@@ -7,20 +7,20 @@
 \usage{
 apply_core(x, ...)
 
-\method{apply_core}{zoocat}(x, fun, bind, ...)
+\method{apply_core}{zoocat}(x, FUN, bind, ...)
 }
 \arguments{
 \item{x}{the object.}
 
-\item{...}{other arguments for \code{fun}.}
+\item{...}{other arguments for \code{FUN}.}
 
-\item{fun}{the function to apply. The \code{fun} must return a matrix or 
+\item{FUN}{the function to apply. The \code{FUN} must return a matrix or 
 a vector.}
 
 \item{bind}{a vector of length 1 or 2 with element values to be
  'cattr' or 'index' or NA to describe how to bind the return
-data with \code{cattr} or \code{index}. If \code{fun} return a vector, set
-\code{bind} to be a scalar. If \code{fun} return a matrix, set
+data with \code{cattr} or \code{index}. If \code{FUN} return a vector, set
+\code{bind} to be a scalar. If \code{FUN} return a matrix, set
 \code{bind} to be a vector of length 2. See details.}
 }
 \description{
@@ -32,20 +32,20 @@ x <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 
-apply_core(zc, fun = colMeans, bind = 'cattr')
-apply_core(zc, fun = rowMeans, bind = 'index')
-apply_core(zc, fun = function (x) {x*2}, bind = c('index', 'cattr'))
-apply_core(zc, fun = function (x) {t(x*2)}, bind = c('cattr', 'index'))
-apply_core(zc, fun = function (x) {x*2}, bind = c('index', NA))
-apply_core(zc, fun = function (x) {x[3:4, ]}, bind = c(NA, 'cattr'))
-apply_core(zc, fun = function (x) 
+apply_core(zc, FUN = colMeans, bind = 'cattr')
+apply_core(zc, FUN = rowMeans, bind = 'index')
+apply_core(zc, FUN = function (x) {x*2}, bind = c('index', 'cattr'))
+apply_core(zc, FUN = function (x) {t(x*2)}, bind = c('cattr', 'index'))
+apply_core(zc, FUN = function (x) {x*2}, bind = c('index', NA))
+apply_core(zc, FUN = function (x) {x[3:4, ]}, bind = c(NA, 'cattr'))
+apply_core(zc, FUN = function (x) 
                       {r <- x[3:4, ]
                       rownames(r) <- c('a', 'b')
                       return(r)}, 
                       bind = c(NA, 'cattr'))
 
 vec <- as.vector(zc[, 1])
-apply_core(zc, fun = function (x) {cor(x, vec)}, bind = 'cattr')
+apply_core(zc, FUN = function (x) {cor(x, vec)}, bind = 'cattr')
 
 }
 
