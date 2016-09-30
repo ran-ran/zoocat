@@ -4,11 +4,11 @@
 #'
 #' @export
 #' @examples 
-#' data(nino)
-#' nino.melt <- melt(nino, id.vars = c('year', 'month'))
-#' zc <- cast2zoocat(nino.melt, index.var = 'year', value.var = 'value') 
-#' zc.agg1 <- aggregate_col(zc, by = 'month')
-#' zc.agg2 <- aggregate_col(zc, by = 'variable')
+#' This is the air quality example from package reshape2
+#' names(airquality) <- tolower(names(airquality))
+#' aqm <- melt(airquality, id = c("month", "day"), na.rm=TRUE) 
+#' zc <- cast2zoocat(aqm, index.var = 'month', value.var = 'value', fun.aggregate = mean) 
+#' zc.aggr <- aggregate_col(zc, by = 'variable', FUN = max)
 #' 
 #' @param x a \code{zoocat} object.
 #' @param by a character string indicates the field of column attributes.
