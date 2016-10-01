@@ -8,22 +8,26 @@
 #' names(airquality) <- tolower(names(airquality))
 #' aqm <- melt(airquality, id = c("month", "day"), na.rm=TRUE) 
 #' zc <- cast2zoocat(aqm, index.var = 'month', value.var = 'value', fun.aggregate = mean) 
-#' zc.aggr <- aggregate_col(zc, by = 'variable', FUN = max)
+#' aggregate_col(zc, by = 'variable', FUN = max)
+#' aggregate_col(zc, by = 'variable', FUN = max, na.rm = TRUE)
+#' 
 #' 
 #' @param x a \code{zoocat} object.
 #' @param by a character string indicates the field of column attributes.
 #' @param FUN a function to be applied to all data subsets.
 #' @param ... additional arguments to be passed to methods.
-aggregate_col <- function (x, by, FUN = mean, ...) {
+aggregate_col <- function (x, by = colnames(cattr(x)), FUN = mean, ...) {
     if (!inherits(x, 'zoocat')) {
         stop('x must be a zoocat object.')
     }
-    df.melt <- melt(x, value.name = 'value', index.name = 'index')
+    index.name <- indname(x)
+    df.melt <- melt(x, value.name = 'value')
     str <- paste(by, collapse = '+')
-    str <- paste(str, '+', 'index', sep = '')
+    str <- paste(str, '+', index.name, sep = '')
     str <- paste('value ~', str, sep = '')
     fml <- as.formula(str)
-    df.aggr <- aggregate(fml, df.melt, FUN = FUN, ...)
-    zcast <- cast2zoocat(df.aggr, index.var = 'index', value.var = 'value')
+    df.aggr <- aggregate(fml, df.melt, FUN = FUN, 
+                         na.action = na.pass, ...)
+    zcast <- cast2zoocat(df.aggr, index.var = index.name, value.var = 'value')
     return(zcast)
 }
