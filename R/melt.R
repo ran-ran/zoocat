@@ -30,6 +30,7 @@ melt.zoocat <- function (data, value.name = 'value', index.name = indname(data),
     colattr <- cattr(data)
     idvars <- colnames(colattr)
     xcore <- t(as.matrix(data))
+    rownames(xcore) <- NULL
     ind <- index(data)
     ind.class <- class(ind)
     dframe <- data.frame(colattr, xcore)
