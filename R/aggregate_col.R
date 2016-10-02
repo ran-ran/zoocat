@@ -29,5 +29,8 @@ aggregate_col <- function (x, by = colnames(cattr(x)), FUN = mean, ...) {
     df.aggr <- aggregate(fml, df.melt, FUN = FUN, 
                          na.action = na.pass, ...)
     zcast <- cast2zoocat(df.aggr, index.var = index.name, value.var = 'value')
+    if (inherits(x, 'zoomly') & 'month' %in% colnames(cattr(zcast))) {
+        class(zcast) <- c('zoomly', class(zcast))
+    }
     return(zcast)
 }

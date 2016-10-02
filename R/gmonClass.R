@@ -56,6 +56,11 @@ format.gmon <- function (x, ...) {
 }
 
 #' @export
+unique.gmon <- function (x, ...) {
+    return(gmon(unique.default(x, ...)))
+}
+
+#' @export
 "[.gmon" <- function (x, ..., drop = TRUE) 
 {
     cl <- oldClass(x)
