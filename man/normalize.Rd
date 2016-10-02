@@ -8,9 +8,9 @@
 \usage{
 normalize(x, ...)
 
-\method{normalize}{default}(x, method = "sd1", ...)
+\method{normalize}{default}(x, method = "sd1", base.period = 1:nrow(x), ...)
 
-\method{normalize}{zoo}(x, method = "sd1", base.period = NULL, ...)
+\method{normalize}{zoo}(x, method = "sd1", base.period = index(x), ...)
 }
 \arguments{
 \item{x}{a vector, matrix, data frame or \code{zoo} object.}
@@ -23,17 +23,28 @@ normalize(x, ...)
 "perc" means percentage of anomaly.}
 
 \item{base.period}{a vector indicating the index or range of the base period.
-If NULL, base period is the all index range.}
+If NULL, base period is the all index range. For matrix, base.period means
+the row numbers.}
 }
 \description{
 Normalize data or calculate anomaly or anomaly percentage.
 }
 \examples{
 
-x <- matrix(rnorm(36, 10, 4), nrow = 3)
-normalize(x)
+x <- matrix(1 : 20, nrow = 10)
+colnames(x) <- c('a', 'b')
+rownames(x) <- 1 : 10
+normalize(x, method = 'anomaly')
 normalize(x, method = 'perc')
 normalize(x, method = 'sd1')
+
+z <- zoo(x, order.by = 1991 : 2010)
+normalize(z)
+
+x <- matrix(1 : 20, nrow = 5)
+colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
+zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
+normalize(zc)
 
 }
 

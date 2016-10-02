@@ -4,7 +4,7 @@
 \alias{aggregate_col}
 \title{Aggregate \code{zoocat} object by column attributes}
 \usage{
-aggregate_col(x, by, FUN = mean, ...)
+aggregate_col(x, by = colnames(cattr(x)), FUN = mean, ...)
 }
 \arguments{
 \item{x}{a \code{zoocat} object.}
@@ -23,7 +23,9 @@ Aggregate columns of \code{zoocat} object by given column attributes fields.
 names(airquality) <- tolower(names(airquality))
 aqm <- melt(airquality, id = c("month", "day"), na.rm=TRUE) 
 zc <- cast2zoocat(aqm, index.var = 'month', value.var = 'value', fun.aggregate = mean) 
-zc.aggr <- aggregate_col(zc, by = 'variable', FUN = max)
+aggregate_col(zc, by = 'variable', FUN = max)
+aggregate_col(zc, by = 'variable', FUN = max, na.rm = TRUE)
+
 
 }
 

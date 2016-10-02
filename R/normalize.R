@@ -4,10 +4,20 @@
 #' 
 #' @examples
 #' 
-#' x <- matrix(rnorm(36, 10, 4), nrow = 3)
-#' normalize(x)
+#' x <- matrix(1 : 20, nrow = 10)
+#' colnames(x) <- c('a', 'b')
+#' rownames(x) <- 1 : 10
+#' normalize(x, method = 'anomaly')
 #' normalize(x, method = 'perc')
 #' normalize(x, method = 'sd1')
+#' 
+#' z <- zoo(x, order.by = 1991 : 2010)
+#' normalize(z)
+#' 
+#' x <- matrix(1 : 20, nrow = 5)
+#' colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
+#' zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
+#' normalize(zc)
 #' 
 #' @name normalize
 #' @rdname normalize
@@ -24,48 +34,67 @@ normalize <- function (x, ...) {
 #' "sd1" (default) means making stardard deviation to be one; 
 #' "anomaly" means anomaly (departure);
 #' "perc" means percentage of anomaly.
-normalize.default <- function(x, method = 'sd1', ...) {
+#' @param base.period a vector indicating the index or range of the base period.
+#'  If NULL, base period is the all index range. For matrix, base.period means
+#'  the row numbers.
+normalize.default <- function(x, method = 'sd1', base.period = 1 : nrow(x), ...) {
+    if (!(is.vector(x) | is.matrix(x) | is.data.frame(x))) {
+        stop('x must be a matrix of a data frame.')
+    }
+    x.attr <- attributes(x)
+    if (is.vector(x)) {
+        x.class <- 'vector' 
+        x <- matrix(x, ncol = 1)
+    } else if (is.data.frame(x)) {
+        x.class <- 'data.frame'
+        x <- as.matrix(x)
+    } else if (is.matrix(x)) {
+        x.class <- 'matrix'
+    } else {
+        stop('unexpected class of x.')
+    }
     stopifnot(length(method) == 1)
     stopifnot(any(method == c('anomaly', 'perc', 'sd1')))
-
-    like.vec <- FALSE
-    if (is.null(dim(x))) {
-        x <- matrix(x, ncol = 1)
-        like.vec <- TRUE
+    if (length(base.period) == 2) {
+        base.period <- base.period[1] : base.period[2]
     }
-    xa <- x
+    if (!all(base.period %in% 1 : nrow(x))){
+        stop('base.period is out of range.')
+    }
+
+    xbase <- x[base.period, , drop = FALSE]
+    mval <- colMeans(xbase)
+    sdval <- apply(xbase, 2, FUN = sd)
+    stopifnot(length(sdval) == ncol(x))
+    
+    vec.0 <- as.vector(t(x))
     if (method == 'anomaly') {
-        for(i in 1 : ncol(x)) {
-            xa[, i] <- x[, i] - mean(x[, i], na.rm = TRUE)
-        }
+        vec.norm <- vec.0 - mval
     }
     if (method == 'perc') {
-        for (i in 1 : ncol(x)) {
-            xa[, i] <- 100 * (x[, i] - mean(x[, i], na.rm = TRUE)) / mean(x[, i], na.rm = TRUE)
-        }
+        vec.norm <- 100 * (vec.0 - mval) / mval
     }
     if (method == 'sd1') {
-        for (i in 1 : ncol(x)) {
-            xa[, i] <- (x[, i] - mean(x[, i], na.rm = TRUE)) / sd(x[, i], na.rm = TRUE)
-        }
+        vec.norm <- (vec.0 - mval) / sdval
     }
-    if (like.vec == TRUE) {
-        dim(xa) <- NULL
+    
+    if (x.class == 'vector') {
+        ret <- vec.norm
+    } else if (x.class == 'matrix') {
+        ret <- matrix(vec.norm, nrow = nrow(x), byrow = TRUE)
+    } else if (x.class == 'data.frame') {
+        ret <- matrix(vec.norm, nrow = nrow(x), byrow = TRUE)
+        ret <- as.data.frame(ret)
     }
-
-    return(xa)
+    attributes(ret) <- x.attr
+    return(ret)
 }
 
 
 
 #' @rdname normalize
 #' @export
-#' @param base.period a vector indicating the index or range of the base period.
-#'  If NULL, base period is the all index range.
-normalize.zoo <- function(x, method = 'sd1', base.period = NULL, ...) {
-    if (is.null(base.period)) {
-        base.period <- index(x)
-    }
+normalize.zoo <- function(x, method = 'sd1', base.period = index(x), ...) {
     if (length(base.period) == 2) {
         base.period <- index(x)[index(x) <= base.period[2] & index(x) >= base.period[1]]
     }
@@ -73,33 +102,11 @@ normalize.zoo <- function(x, method = 'sd1', base.period = NULL, ...) {
     stopifnot(length(method) == 1)
     stopifnot(any(method == c('anomaly', 'perc', 'sd1')))
     
-    like.vec <- FALSE
-    if (is.null(dim(x))) {
-        x <- zoo(matrix(coredata(x), ncol = 1), order.by = index(x))
-        like.vec <- TRUE
-    }
-    xa <- x
-    if (method == 'anomaly') {
-        for(i in 1 : ncol(x)) {
-            sbase <- window(x, index. = base.period)[, i]
-            xa[, i] <- x[, i] - mean(sbase, na.rm = TRUE)
-        }
-    }
-    if (method == 'perc') {
-        for (i in 1 : ncol(x)) {
-            sbase <- window(x, index. = base.period)[, i]
-            xa[, i] <- 100 * (x[, i] - mean(sbase, na.rm = TRUE)) / mean(sbase, na.rm = TRUE)
-        }
-    }
-    if (method == 'sd1') {
-        for (i in 1 : ncol(x)) {
-            sbase <- window(x, index. = base.period)[, i]
-            xa[, i] <- (x[, i] - mean(sbase, na.rm = TRUE)) / sd(sbase, na.rm = TRUE)
-        }
-    }
-    if (like.vec == TRUE) {
-        dim(xa) <- NULL
-    }
-
-    return(xa)
+    x.attr <- attributes(x)
+    ind <- index(x)
+    base.period.row <- sapply(base.period, 
+                              FUN = function (i) {which(i == ind)})
+    ret <- normalize(coredata(x), method = method, base.period = base.period.row)
+    attributes(ret) <- x.attr
+    return(ret)
 }
