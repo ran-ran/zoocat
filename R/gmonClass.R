@@ -9,11 +9,26 @@
 #' print(x)
 #' 
 #' @param x a vector of integers.
+#' @rdname gmon
 gmon <- function (x) {
-    ret <- x
+    ret <- round(x)
     class(ret) <- 'gmon'
     return(ret)
 }
+
+
+#' Coercion from and to \code{gmon}
+#' @export
+#' @param x an numeric vector.
+as.gmon <- function (x, ...) {
+    UseMethod('as.gmon')
+}
+
+#' @export
+as.gmon.default <- function (x, ...) {
+    gmon(as.numeric(x))
+}
+
 
 #' @export
 print.gmon <- function (x, ...) { 
@@ -60,6 +75,8 @@ unique.gmon <- function (x, ...) {
     return(gmon(unique.default(x, ...)))
 }
 
+
+
 #' @export
 "[.gmon" <- function (x, ..., drop = TRUE) 
 {
@@ -69,6 +86,15 @@ unique.gmon <- function (x, ...) {
     class(ret) <- cl
     return(ret)
 }
+
+
+#' @export
+as.numeric.gmon <- function (x, ...) {
+    unclass(x)
+} 
+
+
+
 
 #' Get the relative years for a \code{gmon} object
 #' 
