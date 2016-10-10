@@ -15,7 +15,7 @@
 #' @param x a \code{zoocat} object.
 #' @param by a character string indicates the field of column attributes.
 #' @param FUN a function to be applied to all data subsets.
-#' @param ... additional arguments to be passed to methods.
+#' @param ... additional arguments to be passed to the method.
 aggregate_col <- function (x, by = colnames(cattr(x)), FUN = mean, ...) {
     if (!inherits(x, 'zoocat')) {
         stop('x must be a zoocat object.')
@@ -29,8 +29,10 @@ aggregate_col <- function (x, by = colnames(cattr(x)), FUN = mean, ...) {
     df.aggr <- aggregate(fml, df.melt, FUN = FUN, 
                          na.action = na.pass, ...)
     zcast <- cast2zoocat(df.aggr, index.var = index.name, value.var = 'value')
-    if (inherits(x, 'zoomly') & 'month' %in% colnames(cattr(zcast))) {
-        class(zcast) <- c('zoomly', class(zcast))
+    if (inherits(zcast, 'zoocat')) {
+        if (inherits(x, 'zoomly') & 'month' %in% colnames(cattr(zcast))) {
+            class(zcast) <- c('zoomly', class(zcast))
+        }
     }
     return(zcast)
 }

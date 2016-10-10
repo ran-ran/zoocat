@@ -23,9 +23,6 @@ as.zoocat <- function (x, ...) { UseMethod('as.zoocat') }
 
 #' @export
 #' @rdname as.zoocat
-#' @param variable.name the name of the field in the \code{cattr} of 
-#' the output \code{zoocat} object to store the variable name.
-#' Only valid when \code{addname} is TRUE.
 as.zoocat.zoomly <- function (x, ...) {
     class(x) <- c('zoocat', 'zooreg', 'zoo')
     return(x)
@@ -37,6 +34,8 @@ as.zoocat.zoomly <- function (x, ...) {
 #' @export
 #' @rdname as.zoocat
 #' @param colattr a data frame the column attribute table for x.
+#' @param variable.name the name of the field in the \code{cattr} of 
+#' the output \code{zoocat} object to store the variable name.
 #' @param index.name the name of the index variable.
 as.zoocat.zoo <- function (x, colattr = NULL, variable.name = 'variable', 
                            index.name = 'index', ...) {

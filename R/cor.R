@@ -1,7 +1,10 @@
 
-#' Correlation Computing for \code{zoo} or \code{zoocat} Objects
+#' Correlation computing for \code{zoo} or \code{zoocat} objects
 #' 
-#' Compute corelations for \code{zoo} or \code{zoocat} objects.
+#' This function is based on the function \code{stats::cor}.
+#' For \code{cor.zoo} object, the equality of the \code{index} of x and y will be checked.
+#' For \code{cor.zoocat}, if the result is one column, it will be binded with the 
+#' \code{cattr} table and a data frame will be returned.
 #' 
 #' @examples
 #' 
@@ -22,7 +25,7 @@
 #' @name cor
 #' @param x A \code{zoo} or \code{zoocat} object.
 #' @param y NULL or a \code{zoo} or \code{zoocat} object. If NULL, x will be used.
-#' @param ... Other arguments for function \code{cor}.
+#' @param ... Other arguments for function \code{stats::cor}.
 cor <- function (x, y = NULL, ...) {
     UseMethod('cor')
 }
@@ -38,8 +41,9 @@ cor.default <- function (x, y = NULL, ...) {
 cor.zoo <- function (x, y = NULL, ...) {
     stopifnot(is.null(y) | is.zoo(y))
     if (!is.null(y)) {
-        stopifnot(length(index(x)) == length(index(y)))
-        stopifnot(all(index(x) == index(y)))
+        if (!isTRUE(all.equal(index(x), index(y)))) {
+            stop('the index of x and y must be the same.')
+        }
         if (is.null(dim(y))) {
             y <- as.vector(y)
         } else {
@@ -59,10 +63,15 @@ cor.zoo <- function (x, y = NULL, ...) {
 #' @rdname cor
 #' @export
 cor.zoocat <- function (x, y = NULL, ...) {
-    stopifnot(is.null(y) | is.zoo(y))
     if (!is.null(y)) {
-        stopifnot(length(index(x)) == length(index(y)))
-        stopifnot(all(index(x) == index(y)))
+        if (!is.zoo(y)) {
+            stop('if y is not NULL, y must be a zoo object.')
+        }
+    }
+    if (!is.null(y)) {
+        if (!isTRUE(all.equal(index(x), index(y)))) {
+            stop('the index of x and y must be the same.')
+        }
         if (is.null(dim(y))) {
             y <- as.vector(y)
         } else {

@@ -13,7 +13,7 @@ aggregate_col(x, by = colnames(cattr(x)), FUN = mean, ...)
 
 \item{FUN}{a function to be applied to all data subsets.}
 
-\item{...}{additional arguments to be passed to methods.}
+\item{...}{additional arguments to be passed to the method.}
 }
 \description{
 Aggregate columns of \code{zoocat} object by given column attributes fields.

@@ -21,8 +21,7 @@ as.zoocat(x, ...)
 \item{colattr}{a data frame the column attribute table for x.}
 
 \item{variable.name}{the name of the field in the \code{cattr} of 
-the output \code{zoocat} object to store the variable name.
-Only valid when \code{addname} is TRUE.}
+the output \code{zoocat} object to store the variable name.}
 
 \item{index.name}{the name of the index variable.}
 }

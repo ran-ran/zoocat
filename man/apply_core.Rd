@@ -3,7 +3,7 @@
 \name{apply_core}
 \alias{apply_core}
 \alias{apply_core.zoocat}
-\title{Apply a function over the core matrix}
+\title{Apply a function over the core data matrix}
 \usage{
 apply_core(x, ...)
 
@@ -24,7 +24,7 @@ data with \code{cattr} or \code{index}. If \code{FUN} return a vector, set
 \code{bind} to be a vector of length 2. See details.}
 }
 \description{
-Apply a function over the core matrix of the \code{zoocat} object,
+Apply a function over the core data matrix of the \code{zoocat} object,
 and bind the return data with \code{cattr} or \code{index}.
 }
 \examples{

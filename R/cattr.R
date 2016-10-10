@@ -1,8 +1,8 @@
 
 
-#' Getting or Setting the Column Attributes of a \code{zoocat} Object.
+#' Getting or setting the column attributes table of a \code{zoocat} object.
 #' 
-#' Getting or setting the column attributes of a \code{zoocat} object. Using \code{cattr(x) <- value} 
+#' Getting or setting the column attributes table of a \code{zoocat} object. Using \code{cattr(x) <- value} 
 #' can translate a \code{zoo} object to a \code{zoocat} object.
 #' 
 #' @examples

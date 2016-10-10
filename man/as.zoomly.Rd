@@ -18,7 +18,7 @@ as.zoomly(x, ...)
 A zoomly object.
 }
 \description{
-Coercion objects to class \code{zoomly}.
+Coercion objects to class \code{zoomly}. The index name of the object will be set to "year".
 }
 \examples{
 x <-  matrix(1 : 36, nrow = 3)

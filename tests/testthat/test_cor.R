@@ -31,3 +31,12 @@ test_that('Test cor.zoo for two matrix style zoo objects', {
 })
 
 
+test_that('Test cor.zoocat to return a data frame', {
+    x <- matrix(rnorm(20), nrow = 5)
+    colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
+    zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
+    y <- zoo(rnorm(5), order.by = 1991 : 1995)
+    df.cor <- cor(zc, y)
+    expect_true(all(df.cor$cor.value == cor(as.matrix(zc), as.vector(y))))
+})
+

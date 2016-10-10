@@ -1,7 +1,7 @@
 
 #' Coercion Objects to Class \code{zoomly}
 #' 
-#' Coercion objects to class \code{zoomly}.
+#' Coercion objects to class \code{zoomly}. The index name of the object will be set to "year".
 #' 
 #' 
 #' @return A zoomly object.
@@ -33,8 +33,12 @@ as.zoomly.zoocat <- function (x, ...) {
     if (inherits(x, 'zoomly')) {
         return(x)
     }
-    stopifnot('month' %in% colnames(cattr(x)))
-    stopifnot(all(index(x) == round(index(x))))
+    if (! 'month' %in% colnames(cattr(x))) {
+        stop('month must be one of cattr fields.')
+    }
+    if (any(index(x) != round(index(x)))) {
+        stop('index must be integers.')
+    }
     attr(x, 'indname') <- 'year'
     cattr(x)$month <- gmon(cattr(x)$month)
     class(x) <- c('zoomly', 'zoocat', 'zooreg', 'zoo')

@@ -1,8 +1,8 @@
 
 
-#' Apply a function over the core matrix
+#' Apply a function over the core data matrix
 #' 
-#' Apply a function over the core matrix of the \code{zoocat} object,
+#' Apply a function over the core data matrix of the \code{zoocat} object,
 #' and bind the return data with \code{cattr} or \code{index}.
 #' @export
 #' @name apply_core
