@@ -28,12 +28,17 @@ the row numbers.}
 Normalize data or calculate anomaly or anomaly percentage.
 }
 \details{
-Three methods for normalization can be used.
-When method is "anomaly", each column is normalized by \eqn{x - M}, 
-where \eqn{M} is the mean value based on the \code{base.period}.
-When method is "perc", each column is normalized by \eqn{(x - M) / M}.
-When method is "sd1", each column is normalized by \eqn{(x - M) / S}, 
-where \eqn{S} is the standard deviation based on the \code{base.period}.
+Three methods for normalization can be used:
+\enumerate{
+\item "anomaly": Each column is normalized by \eqn{x - \mu}, 
+where \eqn{\mu} is the mean value based on the \code{base.period}.
+\item "perc": Each column is normalized by \eqn{100 (x - \mu) / \mu}.
+This is often called anomaly percentage.
+\item "sd1": Each column is normalized by \eqn{(x - \mu) / \sigma}, 
+where \eqn{\sigma} is the standard deviation based on the \code{base.period}.
+The standard deviation will be 1 if the \code{base.period} is set to be the whole 
+time range.  
+}
 }
 \examples{
 
