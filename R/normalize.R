@@ -1,6 +1,14 @@
-#' Normalize Data
+#' Normalize data
 #' 
 #' Normalize data or calculate anomaly or anomaly percentage.
+#' 
+#' 
+#' Three methods for normalization can be used.
+#' When method is "anomaly", each column is normalized by \eqn{x - M}, 
+#' where \eqn{M} is the mean value based on the \code{base.period}.
+#' When method is "perc", each column is normalized by \eqn{(x - M) / M}.
+#' When method is "sd1", each column is normalized by \eqn{(x - M) / S}, 
+#' where \eqn{S} is the standard deviation based on the \code{base.period}.
 #' 
 #' @examples
 #' 
@@ -30,10 +38,8 @@ normalize <- function (x, ...) {
 
 #' @rdname normalize
 #' @export
-#' @param method a character string indicating which method to use.
-#' "sd1" (default) means making stardard deviation to be one; 
-#' "anomaly" means anomaly (departure);
-#' "perc" means percentage of anomaly.
+#' @param method a character string indicating which method to use. 
+#' Must be 'sd1'(default), 'anomaly' or 'perc'. See details.
 #' @param base.period a vector indicating the index or range of the base period.
 #'  If NULL, base period is the all index range. For matrix, base.period means
 #'  the row numbers.
