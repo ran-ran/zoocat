@@ -8,6 +8,8 @@ as.gmon(x, ...)
 }
 \arguments{
 \item{x}{an numeric vector.}
+
+\item{...}{unused.}
 }
 \description{
 Coercion from and to \code{gmon}

@@ -12,6 +12,11 @@ scale_x_gmon(..., n = 5)
 
 scale_y_gmon(..., n = 5)
 }
+\arguments{
+\item{n}{approximate number of axis ticks.}
+
+\item{...}{arguments for \code{ggplot2::scale_x_continuous}.}
+}
 \description{
 Tools for plottin \code{zoocat} objects with ggplot2
 }

@@ -11,6 +11,7 @@
 #'     
 #' @export
 #' @rdname ggplot.zoocat
+#' @param n	approximate number of axis ticks.
 gmon_trans <- function (n = 5) 
 {
     breaks. <- function(x) as.yearmon(scales::pretty_breaks(n)(x))
@@ -20,16 +21,17 @@ gmon_trans <- function (n = 5)
 } 
 
 
+#' @param ... arguments for \code{ggplot2::scale_x_continuous}.
 #' @export
 #' @rdname ggplot.zoocat
 scale_x_gmon <- function (..., n = 5) {
-    scale_x_continuous(..., trans = gmon_trans(n))
+    ggplot2::scale_x_continuous(..., trans = gmon_trans(n))
 }
 
 
 #' @export
 #' @rdname ggplot.zoocat
 scale_y_gmon <- function (..., n = 5) {
-    scale_y_continuous(..., trans = gmon_trans(n))
+    ggplot2::scale_y_continuous(..., trans = gmon_trans(n))
 }
 

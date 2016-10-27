@@ -20,6 +20,7 @@ gmon <- function (x) {
 #' Coercion from and to \code{gmon}
 #' @export
 #' @param x an numeric vector.
+#' @param ... unused.
 as.gmon <- function (x, ...) {
     UseMethod('as.gmon')
 }

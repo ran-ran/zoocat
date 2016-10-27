@@ -1,2 +1,7 @@
 ^.*\.Rproj$
 ^\.Rproj\.user$
+^readme\.md$
+^readme\.Rmd$
+^readme\.html$
+^LICENSE\.md$
+^others$
