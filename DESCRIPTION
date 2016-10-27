@@ -1,12 +1,11 @@
 Package: zoocat
 Type: Package
-Title: zoo with Column Attributes
+Title: zoo Objects with Column Attributes
 Version: 2.0
-Date: 2015-09-06
-Author: Ranran He
-Maintainer: Ranran He <heran198311@163.com>
-Description: Provide extended functions for managing informations of each column
-    of the zoo object.
+Date: 2016-10-06
+Author: Ran-Ran He
+Maintainer: Ran-Ran He <heranran2006@163.com>
+Description: Tools for manipulating multivariate time series data by extending zoo class. 
 Depends:
     R (>= 3.1.1),
     zoo,
@@ -18,10 +17,8 @@ Imports:
     plyr,
     sp
 Suggests:
-    knitr,
-    lattice,
-    testthat
+    ggplot2
 License: GPL
-URL: https://github.com/vivihe/zoocat
+URL: https://github.com/ran-ran/zoocat
 VignetteBuilder: knitr
 RoxygenNote: 5.0.1
