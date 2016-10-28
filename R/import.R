@@ -7,4 +7,5 @@
 #' @import stats
 #' @import utils 
 #' @import plyr
+#' @import grDevices
 NULL
