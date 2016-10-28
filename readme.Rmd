@@ -4,6 +4,13 @@ output: md_document
 variant: markdown_github
 ---
 
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
 
 **zoocat** package is an extension package of the **zoo** package. The aim of this package is:
 
