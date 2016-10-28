@@ -20,7 +20,7 @@ apply_col(x, ...)
 zoo, each column will be treated as a zoo object.}
 }
 \description{
-Apply a function over each column of the \code{zoocat} object
+Apply a function over each column of a "\code{zoocat}" object
 and return a data frame.
 }
 \examples{

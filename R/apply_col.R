@@ -2,7 +2,7 @@
 
 #' Apply functions over each column
 #' 
-#' Apply a function over each column of the \code{zoocat} object
+#' Apply a function over each column of a "\code{zoocat}" object
 #' and return a data frame.
 #'
 #' @name apply_col

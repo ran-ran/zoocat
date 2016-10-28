@@ -1,6 +1,6 @@
-#' Aggregate \code{zoocat} object by column attributes
+#' Aggregate "\code{zoocat}" object by column attributes
 #' 
-#' Aggregate columns of \code{zoocat} object by given column attributes fields. 
+#' Aggregate columns of a "\code{zoocat}" object by given column attributes fields. 
 #'
 #' @export
 #' @examples 

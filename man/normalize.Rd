@@ -25,7 +25,7 @@ If NULL, base period is the all index range. For matrix, base.period means
 the row numbers.}
 }
 \description{
-Normalize data or calculate anomaly or anomaly percentage.
+Normalize each column of the object using different methods. See details.
 }
 \details{
 Three methods for normalization can be used:
@@ -36,8 +36,8 @@ where \eqn{\mu} is the mean value based on the \code{base.period}.
 This is often called anomaly percentage.
 \item "sd1": Each column is normalized by \eqn{(x - \mu) / \sigma}, 
 where \eqn{\sigma} is the standard deviation based on the \code{base.period}.
-The standard deviation will be 1 if the \code{base.period} is set to be the whole 
-time range.  
+The standard deviations of the results will be 1 if the \code{base.period} 
+is set to be the whole time range.  
 }
 }
 \examples{

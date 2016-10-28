@@ -1,6 +1,7 @@
-#' Grading Series
+#' Grading data by element numbers of each grade
 #' 
-#' Grading series by order of each element.
+#' Grading data by element numbers of each grade. The data must be a vector or 
+#' a \code{zoo} object with the vector format.
 #' 
 #' 
 #' @return If boundary.ret = TRUE, a list will be returned. The first element

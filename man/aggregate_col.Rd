@@ -2,7 +2,7 @@
 % Please edit documentation in R/aggregate_col.R
 \name{aggregate_col}
 \alias{aggregate_col}
-\title{Aggregate \code{zoocat} object by column attributes}
+\title{Aggregate "\code{zoocat}" object by column attributes}
 \usage{
 aggregate_col(x, by = colnames(cattr(x)), FUN = mean, ...)
 }
@@ -16,7 +16,7 @@ aggregate_col(x, by = colnames(cattr(x)), FUN = mean, ...)
 \item{...}{additional arguments to be passed to the method.}
 }
 \description{
-Aggregate columns of \code{zoocat} object by given column attributes fields.
+Aggregate columns of a "\code{zoocat}" object by given column attributes fields.
 }
 \examples{
 # This is the air quality example from package reshape2

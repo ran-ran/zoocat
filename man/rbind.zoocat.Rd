@@ -2,7 +2,7 @@
 % Please edit documentation in R/rbind.R
 \name{rbind.zoocat}
 \alias{rbind.zoocat}
-\title{Merge Two or More zoo Objects by rows}
+\title{Merge two or more \code{zoocat} objects by rows}
 \usage{
 rbind.zoocat(..., deparse.levels = 1)
 }
@@ -12,7 +12,8 @@ rbind.zoocat(..., deparse.levels = 1)
 \item{deparse.levels}{Not used.}
 }
 \description{
-Merge Two or More zoo Objects by rows
+Merge two or more \code{zoocat} objects by rows. Note that all the \code{cattr} tables
+must be the same.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)

@@ -1,4 +1,9 @@
-#' Calculate the Rolling Window Correlation
+#' Calculate the rolling window correlations
+#' 
+#' Calculate the rolling window correlations.
+#' 
+#' @return \code{rollcor.default} return a vector, and \code{rollcor.zoo}
+#' return a "\code{zoo}" object.
 #' 
 #' @examples
 #' 

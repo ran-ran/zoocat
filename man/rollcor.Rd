@@ -4,7 +4,7 @@
 \alias{rollcor}
 \alias{rollcor.default}
 \alias{rollcor.zoo}
-\title{Calculate the Rolling Window Correlation}
+\title{Calculate the rolling window correlations}
 \usage{
 rollcor(x, y, ...)
 
@@ -22,8 +22,12 @@ ranges is different, intersection will be used.}
 
 \item{show}{If TRUE, the result will be plotted.}
 }
+\value{
+\code{rollcor.default} return a vector, and \code{rollcor.zoo}
+return a "\code{zoo}" object.
+}
 \description{
-Calculate the Rolling Window Correlation
+Calculate the rolling window correlations.
 }
 \examples{
 

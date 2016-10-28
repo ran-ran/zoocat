@@ -1,5 +1,8 @@
 
-#' Reset index variable of a \code{zoocat} object
+#' Reset index variable of a "\code{zoocat}" object
+#' 
+#' Reset the index variable of a "\code{zoocat}" object to be one of the fields in 
+#' the \bold{cattr} table.
 #' 
 #' @export
 #' @examples 

@@ -1,5 +1,8 @@
 #' Translate \code{zoomly} objects to yearmon format
 #' 
+#' Melt the month information of a \code{zoomly} object into the index, 
+#' and return a "\code{zoo}" object with the index of "\code{yearmon}" class.
+#' 
 #' @param x a zoomly object.
 #' @export
 #' @examples 

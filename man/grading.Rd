@@ -4,7 +4,7 @@
 \alias{grading}
 \alias{grading.default}
 \alias{grading.zoo}
-\title{Grading Series}
+\title{Grading data by element numbers of each grade}
 \usage{
 grading(x, ...)
 
@@ -33,7 +33,8 @@ is the grades of each element in x. The second is the boundaries between
 grades. If boundary.ret = FALSE, only grades will be returned.
 }
 \description{
-Grading series by order of each element.
+Grading data by element numbers of each grade. The data must be a vector or 
+a \code{zoo} object with the vector format.
 }
 \examples{
 

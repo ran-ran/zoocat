@@ -1,25 +1,27 @@
 #'
-#' zoocat Class
+#' "\code{zoocat}" Class
 #' 
-#' A class designed for \code{zoo} with column attributes.
+#' A class designed for "\code{zoo}" class with a column attribute (\bold{cattr}) table.
 #' 
-#' \code{zoocat} is a class based on the \code{zoo} class, which means
-#' \code{zoo} with column(C) attributes(AT). An attribute named "cattr" is
-#' added in the object, so there are two important attributes in the object:
-#' \code{index} and \code{cattr}. \code{index} is inherited from \code{zoo}
-#' class, which keeps the row's index. \code{cattr}, which is a data.frame of
-#' matrix, keeps the attribute informations of columns. The row number of
-#' \code{cattr} must be the same with the number of columns of the data matrix,
-#' and each row of \code{cattr} is correspondent to each column of the data
-#' matrix. \code{cattr} must have column names, and each column of \code{cattr}
-#' means an attribute field of the columns.\cr
-#' In summary, zoocat class can manage the informations of each column more 
+#' "\code{zoocat}" is a class based on the "\code{zoo}" class, which means
+#' "\code{zoo}" with column(C) attributes(AT). An attribute named "\bold{cattr}" is
+#' added in the object, so there are two important attributes in a "\code{zoocat}"
+#' object: "\code{index}" and "\code{cattr}". "\code{index}" is inherited from 
+#' the "\code{zoo}" class, which keeps the row's index, while "\code{cattr}", 
+#' which is a data.frame, keeps the attribute informations of columns. 
+#' The row number of the "\code{cattr}" must be the same with the number of 
+#' columns of the data matrix, and each row of "\code{cattr}" is correspondent to 
+#' each column of the data matrix. The "\code{cattr}" must have column names, 
+#' and each column of "\code{cattr}" means an attribute field of the columns of the 
+#' core data.\cr
+#' In summary, "\code{zoocat}" class can manage the information of each column more 
 #' conveniently than only using column names.
-#' \cr When printing object, column names will be
-#' added automatically.\cr \code{coredata} can be used to extract the core data
-#' matrix or data frame from the object.\cr \code{as.matrix} returns a matrix
-#' with column and row names. The row names is the index of the \code{zoocat}
-#' object, and the column names is based on the \code{cattr}.
+#' \cr When printing object, column names will be added automatically.\cr 
+#' As for "\code{zoo}" object, \code{coredata} can be used to extract the core data
+#' matrix or data frame from the object.\cr 
+#' \code{as.matrix} returns a matrix with column and row names. The row names is 
+#' the index of the "\code{zoocat}" object, and the column names is based on 
+#' the "\code{cattr}".
 #' 
 #' @param x a matrix. If \code{x} is a data frame, it will be converted to a matrix.
 #' @param order.by an index vector with unique entries by which the observations

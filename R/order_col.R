@@ -1,4 +1,6 @@
-#' Order by column
+#' Order a \code{zoocat} object by column
+#' 
+#' Order a \code{zoocat} object by column based on the values in the \code{cattr} table.
 #' 
 #' @examples 
 #' x <- matrix(1 : 20, nrow = 5)

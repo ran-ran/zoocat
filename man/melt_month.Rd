@@ -10,7 +10,8 @@ melt_month(x)
 \item{x}{a zoomly object.}
 }
 \description{
-Translate \code{zoomly} objects to yearmon format
+Melt the month information of a \code{zoomly} object into the index, 
+and return a "\code{zoo}" object with the index of "\code{yearmon}" class.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)

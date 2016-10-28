@@ -2,7 +2,7 @@
 % Please edit documentation in R/cast2zoocat.R
 \name{cast2zoocat}
 \alias{cast2zoocat}
-\title{Cast a Data Frame as a zoocat Object}
+\title{Cast a data frame to a \code{zoocat} object}
 \usage{
 cast2zoocat(x, index.var, value.var, attr.var = NULL, fun.aggregate = NULL,
   del.unique.cattr = TRUE)
@@ -11,7 +11,7 @@ cast2zoocat(x, index.var, value.var, attr.var = NULL, fun.aggregate = NULL,
 \item{x}{a data frame.}
 
 \item{index.var}{the name of the column to be treated as the index of the
-zoocat object.}
+\code{zoocat} object.}
 
 \item{value.var}{the name of the column which stored the values.}
 
@@ -30,8 +30,8 @@ be deleted.}
 A \code{zoocat} object.
 }
 \description{
-Cast a data frame into a zoocat object. The data frame should be the style
-of the molten data frame in package reshape2.
+Cast a data frame to a \code{zoocat} object. The data frame should be 
+a long format data frame (for example, melted by \code{reshape2::melt}).
 }
 \examples{
 

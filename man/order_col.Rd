@@ -2,7 +2,7 @@
 % Please edit documentation in R/order_col.R
 \name{order_col}
 \alias{order_col}
-\title{Order by column}
+\title{Order a \code{zoocat} object by column}
 \usage{
 order_col(x)
 }
@@ -10,7 +10,7 @@ order_col(x)
 \item{x}{the object.}
 }
 \description{
-Order by column
+Order a \code{zoocat} object by column based on the values in the \code{cattr} table.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)

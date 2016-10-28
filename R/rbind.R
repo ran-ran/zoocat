@@ -1,5 +1,9 @@
 
-#' Merge Two or More zoo Objects by rows
+#' Merge two or more \code{zoocat} objects by rows
+#' 
+#' Merge two or more \code{zoocat} objects by rows. Note that all the \code{cattr} tables
+#' must be the same.
+#' 
 #' @examples 
 #' x <- matrix(1 : 20, nrow = 5)
 #' colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))

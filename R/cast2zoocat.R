@@ -1,12 +1,12 @@
-#' Cast a Data Frame as a zoocat Object
+#' Cast a data frame to a \code{zoocat} object
 #' 
-#' Cast a data frame into a zoocat object. The data frame should be the style
-#' of the molten data frame in package reshape2.
+#' Cast a data frame to a \code{zoocat} object. The data frame should be 
+#' a long format data frame (for example, melted by \code{reshape2::melt}).
 #' 
 #' 
 #' @param x a data frame.
 #' @param index.var the name of the column to be treated as the index of the
-#' zoocat object.
+#' \code{zoocat} object.
 #' @param value.var the name of the column which stored the values.
 #' @param attr.var the name of the column which will be used as column attributes of 
 #' the \code{zoocat} object. If NULL, all columns except \code{value.var} and \code{index.var}

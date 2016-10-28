@@ -1,10 +1,8 @@
 
 #' \code{zoomly} Class
 #' 
-#' A class designed for monthly data.
-#' 
-#' \code{zoomly} class inherits \code{zoocat} class. There is one field "month"
-#' in the column attributes table. 
+#' A class designed for monthly data. "\code{zoomly}" class inherits "\code{zoocat}"
+#' class, and there is one field "month" in the column attribute (\bold{cattr}) table. 
 #' 
 #' @return \code{zoomly} returns a \code{zoomly} object.
 #' @examples
