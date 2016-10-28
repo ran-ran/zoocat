@@ -6,3 +6,4 @@
 ^LICENSE\.md$
 ^others$
 ^\.travis\.yml$
+^cran_comments\.md$
