@@ -53,7 +53,7 @@ print(zc2)
 
 # Merge by columns
 
-Merging by columns is similar with \code{"zoo"} object.
+Merging by columns is similar with "`zoo`" object.
 
 ```{r, highlight=TRUE}
 zc2 <- zc + 10
