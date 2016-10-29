@@ -36,9 +36,12 @@ zc <- zoocat(mat, order.by = 2011 : 2014, colattr = ctable, index.name = 'year')
 print(zc)
 ```
 
-Note that all information of each column of the **zoocat** object is stored in a data frame, which is as the argument "colattr" for function "zoocat". This data frame is called column attribute table (**cattr** table).
+Note that all information of each column of the **zoocat** object is stored in a data frame, which is as the argument "colattr" for function "zoocat". 
+This data frame is called column attribute table (**cattr** table).
 
 # Set and get the **cattr** table
+
+Using following codes to get and set **cattr** table.
 
 ```{r, highlight=TRUE}
 cattr(zc)
@@ -49,6 +52,8 @@ print(zc2)
 
 
 # Merge by columns
+
+Merging by columns is similar with \code{"zoo"} object.
 
 ```{r, highlight=TRUE}
 zc2 <- zc + 10

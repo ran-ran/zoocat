@@ -38,15 +38,18 @@ print(zc)
 #> - [index variable]: year
 #> - [data]:
 #>       a_s1  b_s1  a_s2  b_s2
-#> 2011 -1.42 -0.12 -0.59 -0.17
-#> 2012  0.18 -0.92 -1.27  1.70
-#> 2013 -0.53  2.29  0.23 -1.19
-#> 2014  1.50 -2.36 -0.94 -0.09
+#> 2011 -0.02 -0.67  0.83 -0.22
+#> 2012 -0.41 -2.52 -1.36 -1.03
+#> 2013  0.70  1.61 -1.83 -0.18
+#> 2014 -1.60 -0.98 -0.13 -0.07
 ```
 
-Note that all information of each column of the **zoocat** object is stored in a data frame, which is as the argument "colattr" for function "zoocat". This data frame is called column attribute table (**cattr** table).
+Note that all information of each column of the **zoocat** object is stored in a data frame, which is as the argument "colattr" for function "zoocat". 
+This data frame is called column attribute table (**cattr** table).
 
 # Set and get the **cattr** table
+
+Using following codes to get and set **cattr** table.
 
 
 ```r
@@ -73,14 +76,16 @@ print(zc2)
 #> - [index variable]: year
 #> - [data]:
 #>      a_s1_Jack b_s1_Jack a_s2_Jack b_s2_Jack
-#> 2011     -1.42     -0.12     -0.59     -0.17
-#> 2012      0.18     -0.92     -1.27      1.70
-#> 2013     -0.53      2.29      0.23     -1.19
-#> 2014      1.50     -2.36     -0.94     -0.09
+#> 2011     -0.02     -0.67      0.83     -0.22
+#> 2012     -0.41     -2.52     -1.36     -1.03
+#> 2013      0.70      1.61     -1.83     -0.18
+#> 2014     -1.60     -0.98     -0.13     -0.07
 ```
 
 
 # Merge by columns
+
+Merging by columns is similar with \code{"zoo"} object.
 
 
 ```r
@@ -96,15 +101,15 @@ print(zc.merge)
 #> - [index variable]: year
 #> - [data]:
 #>      a_s1_NA b_s1_NA a_s2_NA b_s2_NA NA_s3_TRUE NA_s3_TRUE NA_s3_TRUE
-#> 2011   -1.42   -0.12   -0.59   -0.17       8.58       9.88       9.41
-#> 2012    0.18   -0.92   -1.27    1.70      10.18       9.08       8.73
-#> 2013   -0.53    2.29    0.23   -1.19       9.47      12.29      10.23
-#> 2014    1.50   -2.36   -0.94   -0.09      11.50       7.64       9.06
+#> 2011   -0.02   -0.67    0.83   -0.22       9.98       9.33      10.83
+#> 2012   -0.41   -2.52   -1.36   -1.03       9.59       7.48       8.64
+#> 2013    0.70    1.61   -1.83   -0.18      10.70      11.61       8.17
+#> 2014   -1.60   -0.98   -0.13   -0.07       8.40       9.02       9.87
 #>      NA_s3_TRUE
-#> 2011       9.83
-#> 2012      11.70
-#> 2013       8.81
-#> 2014       9.91
+#> 2011       9.78
+#> 2012       8.97
+#> 2013       9.82
+#> 2014       9.93
 ```
 
 ```r
@@ -136,12 +141,12 @@ head(df.melt)
 
 ```
 #>   year treatment site value
-#> 1 2011         a   s1 -1.42
-#> 2 2011         b   s1 -0.12
-#> 3 2011         a   s2 -0.59
-#> 4 2011         b   s2 -0.17
-#> 5 2012         a   s1  0.18
-#> 6 2012         b   s1 -0.92
+#> 1 2011         a   s1 -0.02
+#> 2 2011         b   s1 -0.67
+#> 3 2011         a   s2  0.83
+#> 4 2011         b   s2 -0.22
+#> 5 2012         a   s1 -0.41
+#> 6 2012         b   s1 -2.52
 ```
 
 
@@ -155,10 +160,10 @@ cast2zoocat(df.melt, index.var = 'year', value.var = 'value')
 #> - [index variable]: year
 #> - [data]:
 #>       a_s1  a_s2  b_s1  b_s2
-#> 2011 -1.42 -0.59 -0.12 -0.17
-#> 2012  0.18 -1.27 -0.92  1.70
-#> 2013 -0.53  0.23  2.29 -1.19
-#> 2014  1.50 -0.94 -2.36 -0.09
+#> 2011 -0.02  0.83 -0.67 -0.22
+#> 2012 -0.41 -1.36 -2.52 -1.03
+#> 2013  0.70 -1.83  1.61 -0.18
+#> 2014 -1.60 -0.13 -0.98 -0.07
 ```
 
 
@@ -175,7 +180,7 @@ reset_index_var(zc, index.var = 'treatment')
 #> - [index variable]: treatment
 #> - [data]:
 #>   2011_s1 2011_s2 2012_s1 2012_s2 2013_s1 2013_s2 2014_s1 2014_s2
-#> a   -1.42   -0.59    0.18   -1.27   -0.53    0.23    1.50   -0.94
-#> b   -0.12   -0.17   -0.92    1.70    2.29   -1.19   -2.36   -0.09
+#> a   -0.02    0.83   -0.41   -1.36    0.70   -1.83   -1.60   -0.13
+#> b   -0.67   -0.22   -2.52   -1.03    1.61   -0.18   -0.98   -0.07
 ```
 
