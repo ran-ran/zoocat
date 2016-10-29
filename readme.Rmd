@@ -2,14 +2,13 @@
 title: "zoocat"
 output: md_document
 variant: markdown_github
-toc: true
 ---
 
 ```{r, echo = FALSE}
 knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
+    collapse = FALSE,
+    comment = "#>",
+    fig.path = "README-"
 )
 ```
 
@@ -29,7 +28,7 @@ library(zoocat)
 
 Using following codes to construct a **zoocat** object.
 
-```{r, highlight=TRUE}
+```{r}
 mat <- matrix(round(rnorm(24), 2), ncol = 4)
 ctable <- data.frame(treatment = factor(rep(c('a', 'b'), 2), levels = c('a', 'b')), 
                      site = factor(rep(c('s1', 's2'), each = 2), levels = c('s1', 's2')))
