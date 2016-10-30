@@ -10,7 +10,19 @@ gmon(x)
 \item{x}{a vector of integers.}
 }
 \description{
-A class for generalized month index
+In the "\code{gmon}" class, a integer number is used to indicate the month.
+The number from 1 to 12 is used to indicate Jan to Dec of the 
+reference year. The number from -11 to 0 is used to indicate 
+Jan to Dec of the previous year, and the number from 
+13 to 24 corresponds to the next year, and so on.
+}
+\details{
+When print a "\code{gmon}" object, the suffix ".0" means the 
+current year, ".1" means the next year and ".-1" means 
+the previous year, and so on. 
+For example, Feb of the next year is printed as "Feb.1".
+The methods \code{scale_x_gmon} and \code{scale_y_gmon} are 
+provided to show "\code{gmon}" objects properly based on \code{ggplot}.
 }
 \examples{
 mvec <- gmon(-20:25)
