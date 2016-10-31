@@ -1,0 +1,133 @@
+
+---
+title: "zoocat package"
+author: "Ran-Ran He"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+    collapse = FALSE,
+    comment = "#>",
+    fig.path = "README-"
+)
+```
+
+**zoocat** package is an extension package of the **zoo** package. The aim of this package is:
+
+* Manipulate multivariate time serie conveniently.
+* Convert between time series data and data frame.
+* Represent multi-dimensional data by two-dimensional format, so we can focus on one dimension.
+
+For using **zoocat** package, first load it:
+
+```{r, message=FALSE, highlight=TRUE}
+library(zoocat)
+```
+
+# Construct a **zoocat** object
+
+Although column names can be used to identify columns, for "`zoocat`" class, a data frame is used to store information of columns, we call it column attribute table (**cattr** table).
+In the **cattr** table, each row represents a column of the core data in the object, and each column represents a column attribute. 
+Using following codes to construct a **zoocat** object based on a matrix.
+
+```{r}
+mat <- matrix(round(rnorm(24), 2), ncol = 4)
+ctable <- data.frame(treatment = factor(rep(c('a', 'b'), 2), levels = c('a', 'b')), 
+                     site = factor(rep(c('s1', 's2'), each = 2), levels = c('s1', 's2')))
+zc <- zoocat(mat, order.by = 2011 : 2014, colattr = ctable, index.name = 'year')
+print(zc)
+```
+
+It can be seen that there are two column attributes: "treatment" and "site", and the index means "year".
+So, each data value corresponds to three underlying variables, i.e., treatment, site and year.
+
+# Set and get the **cattr** table
+
+Using following codes to get and set **cattr** table.
+
+```{r, highlight=TRUE}
+cattr(zc)
+zc2 <- zc
+cattr(zc2) <- data.frame(cattr(zc), observer = 'Jack')
+print(zc2)
+```
+
+
+# Merge by columns
+
+Merging by columns is similar with "`zoo`" object except that the **cattr** tables need to be merged by rows.
+Note that NA is added if it is needed.
+
+```{r, highlight=TRUE}
+zc2 <- zc + 10
+cattr(zc2) <- data.frame(site = 's3', added = rep(TRUE, 4))
+zc.merge <- cbind(zc, zc2)
+print(zc.merge)
+cattr(zc.merge)
+```
+
+
+# Melt and cast
+
+Similar with package **reshape2**, you can melt and cast between data frame and **zoocat**.
+
+```{r, highlight=TRUE}
+df.melt <- melt(zc)
+head(df.melt)
+```
+
+```{r, highlight=TRUE}
+cast2zoocat(df.melt, index.var = 'year', value.var = 'value')
+```
+
+Note that casting from a data frame is a convenient method to build a "`zoocat`" object.
+
+
+# Reset the index variable
+
+The index variable can be reset to be a variable in the **cattr** table.
+
+```{r, highlight=TRUE}
+reset_index_var(zc, index.var = 'treatment')
+```
+
+# apply series functions
+
+Functions can be applied for each column of the "`zoocat`" object, and the results will be binded with the **cattr** table.
+
+```{r}
+apply_col(zc, FUN = mean)
+apply_col(zc, FUN = function (x) {c(mean = mean(x), sd = sd(x))})
+```
+
+Another method is to apply a function for the whole core data, and the results can be binded with the **cattr** table or index.
+
+```{r}
+apply_core(zc, FUN = colMeans, bind = 'cattr')
+apply_core(zc, FUN = rowMeans, bind = 'index')
+apply_core(zc, FUN = function (x) {t(x*2)}, bind = c('cattr', 'index'))
+```
+
+
+# Filter columns
+
+Function `filter_col` can be used to extract columns by specified conditions on the **cattr** table:
+
+```{r}
+filter_col(zc, cond = treatment == 'a' & site == 's2')
+```
+
+
+
+# Others
+
+For "`zoocat`" class, all methods for the "`zoo`" class can be used.
+Addtionally, class "`zoomly`", based on "`zoocat`", is designed to manipulate monthly data.
+ 
