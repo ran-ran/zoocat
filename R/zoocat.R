@@ -49,8 +49,7 @@
 #' @name zoocat
 #' @export
 #' @rdname zoocat
-zoocat <- function (x = NULL, order.by = index(x), colattr = NULL, 
-                    index.name = 'index', ...) {
+zoocat <- function (x = NULL, order.by = index(x), colattr = NULL, index.name = 'index', ...) {
     if (is.null(x)) {
         z <- zoo(x, ...)
         class(z) <- c('zoocat', class(z))
