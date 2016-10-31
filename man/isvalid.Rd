@@ -3,7 +3,7 @@
 \name{isvalid}
 \alias{isvalid}
 \alias{isvalid.zoocat}
-\title{Determine the Validity of a \code{zoocat} Object}
+\title{Determine the validity of a "\code{zoocat}" Object}
 \usage{
 isvalid(x)
 
@@ -16,7 +16,7 @@ isvalid(x)
 A logic variable.
 }
 \description{
-Determine the validity of a \code{zoocat} object.
+Determine the validity of a "\code{zoocat}" object.
 }
 \examples{
 

@@ -1,6 +1,6 @@
-#' Determine the Validity of a \code{zoocat} Object
+#' Determine the validity of a "\code{zoocat}" Object
 #' 
-#' Determine the validity of a \code{zoocat} object.
+#' Determine the validity of a "\code{zoocat}" object.
 #' 
 #' @usage isvalid(x)
 #' @param x A \code{zoocat} object.

@@ -2,17 +2,24 @@
 % Please edit documentation in R/filter_col.R
 \name{reprocess_month}
 \alias{reprocess_month}
-\title{Reprocess month of zoomly}
+\title{Reprocess month of "\code{zoomly}" objects}
 \usage{
 reprocess_month(x, month)
 }
 \arguments{
 \item{x}{a \code{zoomly} object.}
 
-\item{month}{new setting month vector.}
+\item{month}{new setting month vector. Can be integers larger than 12 or less than 1.}
 }
 \description{
-Reprocess month of zoomly
+Reprocess month of "\code{zoomly}" objects, make the objects contain the data 
+corresponding to months of previous years and following years.
+}
+\details{
+For example, if there is a data value corresponding to year of 1990 and month of Jan, 
+the argument \code{month} for \code{reprocess_month} can be set to be 13, and we get 
+data of "Jan.1" (means Jan of the following year, see \link{gmon}), and the year of 
+that data value will be 1991.
 }
 \examples{
 mat <- matrix(1:48, ncol = 12)
