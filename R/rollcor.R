@@ -56,7 +56,7 @@ rollcor.default <- function (x, y, width, show = TRUE, ...) {
         cc[i] <- cor(coredata(x)[start : end], coredata(y)[start : end], ...)
     }
     if (show == TRUE) {
-        dev.new()
+        grDevices::dev.new()
         plot(cc, type = 'o', main = 'Sliding Correlations', xlab = 'Time', ylab = '')
         return(invisible(cc))
     } else {
@@ -95,7 +95,7 @@ rollcor.zoo <- function (x, y, width, show = TRUE, ...) {
     cc <- rollcor(xcore, ycore, width = width, show = FALSE, ...)
     cc <- zoo(cc, order.by = index(x)[halfWidth + 1] : index(x)[len - halfWidth])
     if (show == TRUE) {
-        dev.new()
+        grDevices::dev.new()
         plot(cc, type = 'o', main = 'Sliding Correlations', xlab = 'Time', ylab = '')
         return(invisible(cc))
     } else {
