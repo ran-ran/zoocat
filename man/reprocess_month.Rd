@@ -4,12 +4,12 @@
 \alias{reprocess_month}
 \title{Reprocess month of "\code{zoomly}" objects}
 \usage{
-reprocess_month(x, month)
+reprocess_month(x, mon.repro)
 }
 \arguments{
 \item{x}{a \code{zoomly} object.}
 
-\item{month}{new setting month vector. Can be integers larger than 12 or less than 1.}
+\item{mon.repro}{new setting month vector. Can be integers larger than 12 or less than 1.}
 }
 \description{
 Reprocess month of "\code{zoomly}" objects, make the objects contain the data 
@@ -25,7 +25,7 @@ that data value will be 1991.
 mat <- matrix(1:48, ncol = 12)
 ctable <- data.frame(month = rep(1 : 12))
 zm <- zoomly(mat, order.by = 1991 : 1994, colattr = ctable)
-reprocess_month(zm, month = -11:2)
-reprocess_month(zm, month = -24:3)
+reprocess_month(zm, mon.repro = -11:2)
+reprocess_month(zm, mon.repro = -24:3)
 }
 

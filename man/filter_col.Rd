@@ -27,14 +27,19 @@ filter_col(x, ...)
 \item{...}{other arguments.}
 
 \item{cond}{logical predicates of conditions. Multiple conditions are 
-combined with &.}
+combined with \code{&}. 
+For \code{filter_col}, \code{cond} must be an expression, 
+while for \code{filter_col_q}, \code{cond} must be a quoted expression.}
 
-\item{mon.repro}{the month to extract from 
-the \code{zoomly} object for reprocessing month. See details.}
+\item{mon.repro}{the reprocessing month vector, which is used for \code{\link{reprocess_month}}. 
+See details.}
 }
 \description{
-Return columns with matching conditions for the column attributes
-table.
+Return columns with matching conditions for the column attributes (\bold{cattr}) table.
+}
+\details{
+For \code{filter_col}, when the argument \code{mon.repro} is not \code{NULL}, \code{reprocess_month}
+will be called in the last step.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)

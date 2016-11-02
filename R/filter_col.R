@@ -1,17 +1,23 @@
 
 #' Return columns with matching conditions
 #' 
-#' Return columns with matching conditions for the column attributes
-#' table.
+#' Return columns with matching conditions for the column attributes (\bold{cattr}) table.
+#' 
+#' For \code{filter_col}, when the argument \code{mon.repro} is not \code{NULL}, \code{reprocess_month}
+#' will be called in the last step.
 #' 
 #' @rdname filter_col
 #' @name filter_col
 #' @export
 #' @param x the object.
 #' @param cond logical predicates of conditions. Multiple conditions are 
-#' combined with &.
-#' @param mon.repro the month to extract from 
-#' the \code{zoomly} object for reprocessing month. See details. 
+#' combined with \code{&}. 
+#' For \code{filter_col}, \code{cond} must be an expression, 
+#' while for \code{filter_col_q}, \code{cond} must be a quoted expression.
+#' @param mon.repro the reprocessing month vector, which is used for \code{\link{reprocess_month}}. 
+#' See details.
+#' 
+#' 
 #' @param ... other arguments.
 #' @examples 
 #' x <- matrix(1 : 20, nrow = 5)
@@ -74,7 +80,7 @@ filter_col_q.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
     if (!is.null(cond)) {
         x <- filter_col_q.zoocat(x, cond)
     }
-    ret <- reprocess_month(x, month = mon.repro)
+    ret <- reprocess_month(x, mon.repro = mon.repro)
     return(ret)
 }
 
@@ -101,18 +107,18 @@ filter_col.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
 #' mat <- matrix(1:48, ncol = 12)
 #' ctable <- data.frame(month = rep(1 : 12))
 #' zm <- zoomly(mat, order.by = 1991 : 1994, colattr = ctable)
-#' reprocess_month(zm, month = -11:2)
-#' reprocess_month(zm, month = -24:3)
+#' reprocess_month(zm, mon.repro = -11:2)
+#' reprocess_month(zm, mon.repro = -24:3)
 #' @param x a \code{zoomly} object.
-#' @param month new setting month vector. Can be integers larger than 12 or less than 1.
+#' @param mon.repro new setting month vector. Can be integers larger than 12 or less than 1.
 #' @export
-reprocess_month <- function (x, month) {
+reprocess_month <- function (x, mon.repro) {
     if (!inherits(x, 'zoomly')) {
         stop('x must a zoomly object.')
     }
-    month <- gmon(month)
-    mon.true <- true_month(month)
-    yr.rela <- rela_year(month)
+    mon.repro <- gmon(mon.repro)
+    mon.true <- true_month(mon.repro)
+    yr.rela <- rela_year(mon.repro)
     yr.rela.u <- unique(yr.rela)
     
     zm.ret <- zoomly()
