@@ -26,25 +26,50 @@ A \code{zoocat} object.
 A class designed for "\code{zoo}" class with a column attribute (\bold{cattr}) table.
 }
 \details{
-"\code{zoocat}" is a class based on the "\code{zoo}" class, which means
-"\code{zoo}" with column(C) attributes(AT). An attribute named "\bold{cattr}" is
-added in the object, so there are two important attributes in a "\code{zoocat}"
-object: "\code{index}" and "\code{cattr}". "\code{index}" is inherited from 
-the "\code{zoo}" class, which keeps the row's index, while "\code{cattr}", 
-which is a data.frame, keeps the attribute informations of columns. 
-The row number of the "\code{cattr}" must be the same with the number of 
-columns of the data matrix, and each row of "\code{cattr}" is correspondent to 
-each column of the data matrix. The "\code{cattr}" must have column names, 
-and each column of "\code{cattr}" means an attribute field of the columns of the 
-core data.\cr
-In summary, "\code{zoocat}" class can manage the information of each column more 
-conveniently than only using column names.
-\cr When printing object, column names will be added automatically.\cr 
-As for "\code{zoo}" object, \code{coredata} can be used to extract the core data
-matrix or data frame from the object.\cr 
-\code{as.matrix} returns a matrix with column and row names. The row names is 
-the index of the "\code{zoocat}" object, and the column names is based on 
-the "\code{cattr}".
+"\code{zoocat}" is a S3 class based on the "\code{zoo}" class, which means
+"\code{zoo}" with column(C) attributes(AT). 
+It is known that a "\code{zoo}" object is a vector or matrix with a index attribute.
+In a "\code{zoocat}" object, another attribute named "\bold{cattr}" 
+(a data frame with column names) 
+is added to keeps the underlying attribute information of each column.
+So there are two attributes in a "\code{zoocat}" object: "\code{index}" 
+and "\code{cattr}".
+The number of rows of the "\code{cattr}" table must be the same with \code{ncol(x)},
+where \code{x} is the core data.
+Each row in the "\code{cattr}" table is correspondent to each column of the 
+core data matrix.
+
+In summary, "\code{zoocat}" class can manage the underlying information 
+of each column more conveniently than only using column names.
+It can be used to store time series data each column of which is corresponding to 
+several underlying variables.
+
+Two methods can be used to build a "\code{zoocat}" object.
+The first is to use function \code{zoocat}, the "\code{cattr}" table is specified
+by argument \code{colattr}.
+The second method is to use \code{\link{cast2zoocat}} to get the object from a 
+data frame.
+
+When printing "\code{zoocat}" objects, column names will be added automatically, 
+but it should be noted that the column names do not exist. 
+As "\code{zoo}" object, \code{\link[zoo]{coredata}} can be used to 
+extract the core data matrix from the object.
+
+Many methods have been defined for the "\code{zoocat}" object.
+\code{\link{filter_col}} can be used to get columns which satisfy some conditions.
+\code{\link{melt}} can be used to melt the object, like what 
+\code{\link[reshape2]{melt}} in the \pkg{reshape2} do.
+\code{\link{normalize}} can be used to normalized data using several methods.
+\code{\link{apply_col}} can be used to apply a function to each column and bind the 
+results with the "\code{cattr}" table.
+\code{\link{apply_core}} can apply a function to the whole core data matrix, and bind
+the results with the "\code{index}" or "\code{cattr}" table.
+
+It should be noted that all methods for "\code{zoo}" objects can be used for 
+"\code{zoocat}" objects, such as \code{na.omit}, 
+\code{\link[zoo]{na.approx}}, \code{\link[zoo]{na.fill}}, 
+\code{\link[zoo]{na.trim}}, \code{lag}.
+See the help page of \code{\link[zoo]{zoo}}.
 }
 \examples{
 
