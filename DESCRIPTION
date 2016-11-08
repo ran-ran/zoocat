@@ -5,6 +5,8 @@ Version: 0.2.0
 Date: 2016-10-06
 Authors@R: person("Ran-Ran", "He", email = "heranran2006@163.com",
   role = c("aut", "cre"))
+Author: Ran-Ran He [aut, cre]
+Maintainer: Ran-Ran He <heranran2006@163.com>
 Description: Tools for manipulating multivariate time series data by extending
     zoo class.
 Depends: R(>= 3.1.1), zoo, reshape2
