@@ -2,8 +2,8 @@
 
 #' Getting or setting the column attributes table of a \code{zoocat} object.
 #' 
-#' Getting or setting the column attributes table of a \code{zoocat} object. Using \code{cattr(x) <- value} 
-#' can translate a \code{zoo} object to a \code{zoocat} object.
+#' Getting or setting the column attributes table of a "\code{zoocat}" object. Using \code{cattr(x) <- value} 
+#' can translate a "\code{zoo}" object to a "\code{zoocat}" object.
 #' 
 #' @examples
 #' 
@@ -18,6 +18,7 @@
 #' @name cattr
 #' @rdname cattr
 #' @export
+#' @return "\code{cattr(x)}" return a data frame.
 #' @param x A \code{zoocat} or \code{zoo} object.
 #' @param value The new value.
 'cattr<-' <- function (x, value) {

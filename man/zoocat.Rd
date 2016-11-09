@@ -20,7 +20,7 @@ in x are ordered.}
 \item{...}{other arguments for \code{zoo}.}
 }
 \value{
-A \code{zoocat} object.
+A "\code{zoocat}" object.
 }
 \description{
 A class designed for "\code{zoo}" class with a column attribute (\bold{cattr}) table.

@@ -1,9 +1,9 @@
 
-#' Coercing Objects to Class \code{zoocat}
+#' Coercing objects to Class \code{zoocat}
 #' 
 #' Coercing objects to class \code{zoocat}.
 #' 
-#' @return A \code{zoocat} object.
+#' @return a "\code{zoocat}" object.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)

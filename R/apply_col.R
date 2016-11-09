@@ -24,6 +24,7 @@ apply_col <- function (x, ...) {
 #' 
 #'  
 #' @export
+#' @return a data frame.
 #' @rdname apply_col
 #' @param FUN The function apply for each column.
 #' @param col.as If vector, each column will be treated as a vector. If 

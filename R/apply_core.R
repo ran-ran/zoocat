@@ -12,6 +12,7 @@ apply_core <- function (x, ...) {
 }
 
 #' @export
+#' @return a data frame, a "\code{zoo}" object, or a "\code{zoocat}" object. 
 #' @rdname apply_core
 #' @param x the object.
 #' @param FUN the function to apply. The \code{FUN} must return a matrix or 

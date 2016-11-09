@@ -27,10 +27,10 @@ See \code{\link{dcast}}.}
 be deleted.}
 }
 \value{
-A \code{zoocat} object.
+a "\code{zoocat}" object.
 }
 \description{
-Cast a data frame to a \code{zoocat} object. The data frame should be 
+Cast a data frame to a "\code{zoocat}" object. The data frame should be 
 a long format data frame (for example, melted by \code{reshape2::melt}).
 }
 \examples{

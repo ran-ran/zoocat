@@ -9,6 +9,9 @@ true_month(x)
 \arguments{
 \item{x}{a \code{gmon} object.}
 }
+\value{
+a vector.
+}
 \description{
 Get the true month of a \code{gmon} object.
 }

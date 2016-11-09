@@ -10,7 +10,7 @@ order_col(x)
 \item{x}{the object.}
 }
 \description{
-Order a \code{zoocat} object by column based on the values in the \code{cattr} table.
+Order a "\code{zoocat}" object by column based on the values in the \code{cattr} table.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)

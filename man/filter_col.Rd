@@ -34,6 +34,9 @@ while for \code{filter_col_q}, \code{cond} must be a quoted expression.}
 \item{mon.repro}{the reprocessing month vector, which is used for \code{\link{reprocess_month}}. 
 See details.}
 }
+\value{
+a "\code{zoocat}" or "\code{zoomly}" object.
+}
 \description{
 Return columns with matching conditions for the column attributes (\bold{cattr}) table.
 }

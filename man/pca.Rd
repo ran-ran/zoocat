@@ -18,10 +18,10 @@ a list with following elements: \code{prcomp.obj} (the object returned by \code{
 \code{z} (the \code{zoo} object containing the rotated data).
 }
 \description{
-Principal components analysis of a \code{zoocat} object. This function is a 
+Principal components analysis of a "\code{zoocat}" object. This function is a 
 wrap of the \code{stats::prcomp}. The \code{rotation} returned by \code{stats::prcomp}
 is binded with the \code{cattr} table to be a data frame, and the \code{x} returned 
-by \code{stats::prcomp} is binded with the \code{index} to be a \code{zoo} object.
+by \code{stats::prcomp} is binded with the \code{index} to be a "\code{zoo}" object.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)

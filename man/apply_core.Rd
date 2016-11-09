@@ -23,6 +23,9 @@ data with \code{cattr} or \code{index}. If \code{FUN} return a vector, set
 \code{bind} to be a scalar. If \code{FUN} return a matrix, set
 \code{bind} to be a vector of length 2. See details.}
 }
+\value{
+a data frame, a "\code{zoo}" object, or a "\code{zoocat}" object.
+}
 \description{
 Apply a function over the core data matrix of the \code{zoocat} object,
 and bind the return data with \code{cattr} or \code{index}.

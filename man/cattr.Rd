@@ -23,9 +23,12 @@ cattr(x)
 
 \item{value}{The new value.}
 }
+\value{
+"\code{cattr(x)}" return a data frame.
+}
 \description{
-Getting or setting the column attributes table of a \code{zoocat} object. Using \code{cattr(x) <- value} 
-can translate a \code{zoo} object to a \code{zoocat} object.
+Getting or setting the column attributes table of a "\code{zoocat}" object. Using \code{cattr(x) <- value} 
+can translate a "\code{zoo}" object to a "\code{zoocat}" object.
 }
 \examples{
 

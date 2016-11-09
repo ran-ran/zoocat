@@ -3,7 +3,7 @@
 \name{reset_index_var}
 \alias{reset_index_var}
 \alias{reset_index_var.zoocat}
-\title{Reset index variable of a "\code{zoocat}" object}
+\title{Reset index variable of a \code{zoocat} object}
 \usage{
 reset_index_var(x, ...)
 
@@ -16,6 +16,9 @@ reset_index_var(x, ...)
 
 \item{index.var}{the name of the variable to be set as the index. 
 Must be one of the \code{cattr} field.}
+}
+\value{
+a "\code{zoocat}" object.
 }
 \description{
 Reset the index variable of a "\code{zoocat}" object to be one of the fields in 

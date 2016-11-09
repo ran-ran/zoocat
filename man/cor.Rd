@@ -4,7 +4,7 @@
 \alias{cor}
 \alias{cor.zoo}
 \alias{cor.zoocat}
-\title{Correlation computing for "\code{zoo}" or "\code{zoocat}" objects}
+\title{Correlation computing for \code{zoo} or \code{zoocat} objects}
 \usage{
 cor(x, y = NULL, ...)
 
@@ -19,10 +19,13 @@ cor(x, y = NULL, ...)
 
 \item{...}{Other arguments for function \code{stats::cor}.}
 }
+\value{
+a vector, matrix or data frame.
+}
 \description{
 This function is based on the function \code{stats::cor}.
-For \code{cor.zoo} and \code{zoocat}, the equality of the \code{index} of x and y 
-will be checked (if y is not \code{NULL}).
+For \code{cor.zoo} and \code{cor.zoocat}, the equality of the \code{index} of \code{x} and \code{y} 
+will be checked (if \code{y} is not \code{NULL}).
 For \code{cor.zoocat}, if \code{y} has one column, the result will be binded with the 
 \bold{cattr} table and a data frame will be returned.
 }

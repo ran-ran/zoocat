@@ -2,7 +2,7 @@
 % Please edit documentation in R/gmonClass.R
 \name{as.gmon}
 \alias{as.gmon}
-\title{Coercion from and to \code{gmon}}
+\title{Coercion from and to \code{gmon} class}
 \usage{
 as.gmon(x, ...)
 }
@@ -11,7 +11,10 @@ as.gmon(x, ...)
 
 \item{...}{unused.}
 }
+\value{
+a "\code{gmon}" object.
+}
 \description{
-Coercion from and to \code{gmon}
+Coercion from and to \code{gmon} class
 }
 

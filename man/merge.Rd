@@ -17,11 +17,11 @@ cbind.zoocat(...)
 \item{all, fill, suffixes, check.names, retclass, drop}{See details.}
 }
 \value{
-\code{merge.zoocat} will return a \code{zoocat} object.
- \code{merge.zoomly} will return a \code{zoomly} object.
+\code{merge.zoocat} will return a "\code{zoocat}" object.
+ \code{merge.zoomly} will return a "\code{zoomly}" object.
 }
 \description{
-Combine \code{zoocat} or \code{zoomly} objects by columns.
+Combine "\code{zoocat}" or "\code{zoomly}" objects by columns.
 }
 \details{
 \code{merge.zoocat} and \code{merge.zoomly} are the extensions of \code{merge.zoo}.

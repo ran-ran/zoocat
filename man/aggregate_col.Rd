@@ -2,18 +2,21 @@
 % Please edit documentation in R/aggregate_col.R
 \name{aggregate_col}
 \alias{aggregate_col}
-\title{Aggregate "\code{zoocat}" object by column attributes}
+\title{Aggregate \code{zoocat} objects by column attributes}
 \usage{
 aggregate_col(x, by = colnames(cattr(x)), FUN = mean, ...)
 }
 \arguments{
-\item{x}{a \code{zoocat} object.}
+\item{x}{a "\code{zoocat}" object.}
 
 \item{by}{a character string indicates the field of column attributes.}
 
 \item{FUN}{a function to be applied to all data subsets.}
 
 \item{...}{additional arguments to be passed to the method.}
+}
+\value{
+a "\code{zoocat}" object.
 }
 \description{
 Aggregate columns of a "\code{zoocat}" object by given column attributes fields.
@@ -25,7 +28,6 @@ aqm <- melt(airquality, id = c("month", "day"), na.rm=TRUE)
 zc <- cast2zoocat(aqm, index.var = 'month', value.var = 'value', fun.aggregate = mean) 
 aggregate_col(zc, by = 'variable', FUN = max)
 aggregate_col(zc, by = 'variable', FUN = max, na.rm = TRUE)
-
 
 }
 

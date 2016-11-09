@@ -57,7 +57,7 @@
 #' @param colattr the column attributes. Must be a data frame with column names.
 #' @param index.name the name of the index variable.
 #' @param ... other arguments for \code{zoo}.
-#' @return A \code{zoocat} object.
+#' @return A "\code{zoocat}" object.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)

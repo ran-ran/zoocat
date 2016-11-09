@@ -1,10 +1,10 @@
 
 #' Principal components analysis of a \code{zoocat} object
 #' 
-#' Principal components analysis of a \code{zoocat} object. This function is a 
+#' Principal components analysis of a "\code{zoocat}" object. This function is a 
 #' wrap of the \code{stats::prcomp}. The \code{rotation} returned by \code{stats::prcomp}
 #' is binded with the \code{cattr} table to be a data frame, and the \code{x} returned 
-#' by \code{stats::prcomp} is binded with the \code{index} to be a \code{zoo} object.
+#' by \code{stats::prcomp} is binded with the \code{index} to be a "\code{zoo}" object.
 #' 
 #' @return a list with following elements: \code{prcomp.obj} (the object returned by \code{stats::prcomp}),
 #' \code{rotation} (the data frame containing information of the variable loadings),

@@ -11,6 +11,9 @@ reprocess_month(x, mon.repro)
 
 \item{mon.repro}{new setting month vector. Can be integers larger than 12 or less than 1.}
 }
+\value{
+a "\code{zoomly}" object.
+}
 \description{
 Reprocess month of "\code{zoomly}" objects, make the objects contain the data 
 corresponding to months of previous years and following years.

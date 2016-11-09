@@ -4,7 +4,7 @@
 #' Melt a \code{zoocat} to a data frame of the long table style,
 #' which is similar as in package \code{reshape2}.
 #' 
-#' @return A data frame or a \code{zoo} object.
+#' @return a data frame.
 #' 
 #' @examples
 #' 

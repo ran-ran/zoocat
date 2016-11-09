@@ -2,17 +2,20 @@
 % Please edit documentation in R/cast2zoocat.R
 \name{cast2zoomly}
 \alias{cast2zoomly}
-\title{Cast a data frame as a zoomly object}
+\title{Cast a data frame to a \code{zoomly} object}
 \usage{
 cast2zoomly(x, ...)
 }
 \arguments{
-\item{x}{a data frame}
+\item{x}{a data frame containing a column named "month".}
 
-\item{...}{other arguments for cast2zoocat}
+\item{...}{other arguments for cast2zoocat.}
+}
+\value{
+a "\code{zoomly}" object.
 }
 \description{
-Cast a data frame as a zoomly object
+Cast a data frame to a "\code{zoomly}" object.
 }
 \examples{
 df <- data.frame(year = rep(1991 : 1995, each = 24), month = rep(1 : 12, 10),

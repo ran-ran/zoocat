@@ -3,7 +3,7 @@
 \name{as.zoo}
 \alias{as.zoo}
 \alias{as.zoo.zoocat}
-\title{Coercion Objects to Class \code{zoo}}
+\title{Coercion objects to class \code{zoo}}
 \usage{
 \method{as.zoo}{zoocat}(x, add.colname = TRUE, ...)
 }

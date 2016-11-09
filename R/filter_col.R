@@ -9,6 +9,7 @@
 #' @rdname filter_col
 #' @name filter_col
 #' @export
+#' @return a "\code{zoocat}" or "\code{zoomly}" object.
 #' @param x the object.
 #' @param cond logical predicates of conditions. Multiple conditions are 
 #' combined with \code{&}. 
@@ -112,6 +113,7 @@ filter_col.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
 #' @param x a \code{zoomly} object.
 #' @param mon.repro new setting month vector. Can be integers larger than 12 or less than 1.
 #' @export
+#' @return a "\code{zoomly}" object.
 reprocess_month <- function (x, mon.repro) {
     if (!inherits(x, 'zoomly')) {
         stop('x must a zoomly object.')

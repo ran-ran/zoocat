@@ -1,5 +1,5 @@
 
-#' Coercion Objects to Class \code{zoo}
+#' Coercion objects to class \code{zoo}
 #' 
 #' Coercing objects to class \code{zoo}.
 #' 

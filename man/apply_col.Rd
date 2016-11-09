@@ -19,6 +19,9 @@ apply_col(x, ...)
 \item{col.as}{If vector, each column will be treated as a vector. If 
 zoo, each column will be treated as a zoo object.}
 }
+\value{
+a data frame.
+}
 \description{
 Apply a function over each column of a "\code{zoocat}" object
 and return a data frame.

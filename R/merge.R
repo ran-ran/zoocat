@@ -1,7 +1,7 @@
 
 #' Combine \code{zoocat} or \code{zoomly} Objects by Columns
 #' 
-#' Combine \code{zoocat} or \code{zoomly} objects by columns.
+#' Combine "\code{zoocat}" or "\code{zoomly}" objects by columns.
 #' 
 #' \code{merge.zoocat} and \code{merge.zoomly} are the extensions of \code{merge.zoo}.
 #' For \code{merge.zoocat}, when combining \code{cattr}, some NA will be filled in if it is
@@ -12,8 +12,8 @@
 #'
 #' @param ...  \code{zoocat} or \code{zoomly} objects.
 #' @param all,fill,suffixes,check.names,retclass,drop See details.
-#' @return \code{merge.zoocat} will return a \code{zoocat} object.
-#'  \code{merge.zoomly} will return a \code{zoomly} object.
+#' @return \code{merge.zoocat} will return a "\code{zoocat}" object.
+#'  \code{merge.zoomly} will return a "\code{zoomly}" object.
 #' @examples
 #' 
 #' x1 <- matrix(1 : 20, nrow = 5)

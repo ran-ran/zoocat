@@ -21,7 +21,7 @@ a data frame is returned.}
 \item{...}{further arguments.}
 }
 \value{
-A data frame or a \code{zoo} object.
+a data frame.
 }
 \description{
 Melt a \code{zoocat} to a data frame of the long table style,

@@ -4,7 +4,7 @@
 \alias{as.zoocat}
 \alias{as.zoocat.zoo}
 \alias{as.zoocat.zoomly}
-\title{Coercing Objects to Class \code{zoocat}}
+\title{Coercing objects to Class \code{zoocat}}
 \usage{
 as.zoocat(x, ...)
 
@@ -26,7 +26,7 @@ the output \code{zoocat} object to store the variable name.}
 \item{index.name}{the name of the index variable.}
 }
 \value{
-A \code{zoocat} object.
+a "\code{zoocat}" object.
 }
 \description{
 Coercing objects to class \code{zoocat}.

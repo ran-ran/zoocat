@@ -3,7 +3,7 @@
 \name{as.zoomly}
 \alias{as.zoomly}
 \alias{as.zoomly.zoocat}
-\title{Coercion Objects to Class \code{zoomly}}
+\title{Coercion objects to class \code{zoomly}}
 \usage{
 as.zoomly(x, ...)
 
@@ -15,10 +15,10 @@ as.zoomly(x, ...)
 \item{...}{further arguments passed to methods.}
 }
 \value{
-A zoomly object.
+A "\code{zoomly}" object.
 }
 \description{
-Coercion objects to class \code{zoomly}. The index name of the object will be set to "year".
+Coercion objects to class "\code{zoomly}". The index name of the object will be set to "year".
 }
 \examples{
 x <-  matrix(1 : 36, nrow = 3)

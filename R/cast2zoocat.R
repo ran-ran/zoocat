@@ -1,6 +1,6 @@
 #' Cast a data frame to a \code{zoocat} object
 #' 
-#' Cast a data frame to a \code{zoocat} object. The data frame should be 
+#' Cast a data frame to a "\code{zoocat}" object. The data frame should be 
 #' a long format data frame (for example, melted by \code{reshape2::melt}).
 #' 
 #' 
@@ -16,7 +16,7 @@
 #' See \code{\link{dcast}}.
 #' @param del.unique.cattr logical. If TRUE, the column attibutes with unique value will
 #' be deleted.
-#' @return A \code{zoocat} object.
+#' @return a "\code{zoocat}" object.
 #' @examples
 #' 
 #' df <- data.frame(year = rep(1991 : 1995, each = 24), month = rep(1 : 12, 10),
@@ -118,10 +118,15 @@ cast2zoocat <- function (x, index.var, value.var, attr.var = NULL, fun.aggregate
 
 
 
-#' Cast a data frame as a zoomly object
+#' Cast a data frame to a \code{zoomly} object
+#' 
+#' Cast a data frame to a "\code{zoomly}" object.
+#' 
+#' @return a "\code{zoomly}" object.
+#' 
 #' @export
-#' @param x a data frame
-#' @param ... other arguments for cast2zoocat
+#' @param x a data frame containing a column named "month".
+#' @param ... other arguments for cast2zoocat.
 #' @examples
 #' df <- data.frame(year = rep(1991 : 1995, each = 24), month = rep(1 : 12, 10),
 #'                  varname = rep(c('a', 'b'), each = 12), city = rep(1 : 3, each = 40),

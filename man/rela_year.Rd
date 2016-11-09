@@ -9,8 +9,11 @@ rela_year(x)
 \arguments{
 \item{x}{a \code{gmon} object.}
 }
+\value{
+a vector.
+}
 \description{
-Get the relative years for a \code{gmon} object
+Get the relative years for a "\code{gmon}" object.
 }
 \examples{
 num.mon <- -12 : 3

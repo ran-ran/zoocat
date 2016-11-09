@@ -30,8 +30,9 @@ gmon <- function (x) {
 }
 
 
-#' Coercion from and to \code{gmon}
+#' Coercion from and to \code{gmon} class
 #' @export
+#' @return a "\code{gmon}" object.
 #' @param x an numeric vector.
 #' @param ... unused.
 as.gmon <- function (x, ...) {
@@ -112,7 +113,10 @@ as.numeric.gmon <- function (x, ...) {
 
 #' Get the relative years for a \code{gmon} object
 #' 
+#' Get the relative years for a "\code{gmon}" object.
+#' 
 #' @export
+#' @return a vector.
 #' @examples 
 #' num.mon <- -12 : 3
 #' gm <- gmon(num.mon)
@@ -132,6 +136,7 @@ rela_year <- function (x) {
 
 #' Get the true month of a \code{gmon} object.
 #' @export
+#' @return a vector.
 #' @param x a \code{gmon} object.
 #' @examples
 #' num.mon <- -25 : 15

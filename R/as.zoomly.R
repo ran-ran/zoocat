@@ -1,10 +1,10 @@
 
-#' Coercion Objects to Class \code{zoomly}
+#' Coercion objects to class \code{zoomly}
 #' 
-#' Coercion objects to class \code{zoomly}. The index name of the object will be set to "year".
+#' Coercion objects to class "\code{zoomly}". The index name of the object will be set to "year".
 #' 
 #' 
-#' @return A zoomly object.
+#' @return A "\code{zoomly}" object.
 #' @examples
 #' x <-  matrix(1 : 36, nrow = 3)
 #' zc <- zoocat(x, order.by = 1991 : 1993, 
