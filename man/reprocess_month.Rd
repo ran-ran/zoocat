@@ -2,7 +2,7 @@
 % Please edit documentation in R/filter_col.R
 \name{reprocess_month}
 \alias{reprocess_month}
-\title{Reprocess month of "\code{zoomly}" objects}
+\title{Reprocess month of \code{zoomly} objects}
 \usage{
 reprocess_month(x, mon.repro)
 }

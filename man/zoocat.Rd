@@ -2,7 +2,7 @@
 % Please edit documentation in R/zoocat.R
 \name{zoocat}
 \alias{zoocat}
-\title{"\code{zoocat}" Class}
+\title{\code{zoocat} class}
 \usage{
 zoocat(x = NULL, order.by = index(x), colattr = NULL,
   index.name = "index", ...)

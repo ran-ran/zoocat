@@ -1,5 +1,5 @@
 #'
-#' "\code{zoocat}" Class
+#' \code{zoocat} class
 #' 
 #' A class designed for "\code{zoo}" class with a column attribute (\bold{cattr}) table.
 #' 

@@ -3,17 +3,17 @@
 \name{isvalid}
 \alias{isvalid}
 \alias{isvalid.zoocat}
-\title{Determine the validity of a "\code{zoocat}" Object}
+\title{Determine the validity of a \code{zoocat} Object}
 \usage{
 isvalid(x)
 
 \method{isvalid}{zoocat}(x)
 }
 \arguments{
-\item{x}{A \code{zoocat} object.}
+\item{x}{a \code{zoocat} object.}
 }
 \value{
-A logic variable.
+a logic variable.
 }
 \description{
 Determine the validity of a "\code{zoocat}" object.

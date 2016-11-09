@@ -94,7 +94,7 @@ filter_col.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
 }
 
 
-#' Reprocess month of "\code{zoomly}" objects
+#' Reprocess month of \code{zoomly} objects
 #' 
 #' Reprocess month of "\code{zoomly}" objects, make the objects contain the data 
 #' corresponding to months of previous years and following years.

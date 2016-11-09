@@ -1,10 +1,10 @@
-#' Determine the validity of a "\code{zoocat}" Object
+#' Determine the validity of a \code{zoocat} Object
 #' 
 #' Determine the validity of a "\code{zoocat}" object.
 #' 
 #' @usage isvalid(x)
-#' @param x A \code{zoocat} object.
-#' @return A logic variable.
+#' @param x a \code{zoocat} object.
+#' @return a logic variable.
 #' @examples
 #' 
 #' x <- matrix(1 : 20, nrow = 5)
