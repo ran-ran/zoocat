@@ -3,7 +3,7 @@
 \name{index_detach}
 \alias{index_detach}
 \alias{index_detach.zoo}
-\title{Detach index of \code{zoo} object}
+\title{Detach index of a \code{zoo} object}
 \usage{
 index_detach(x, ...)
 

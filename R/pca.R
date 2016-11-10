@@ -11,7 +11,6 @@
 #' \code{z} (the \code{zoo} object containing the rotated data).
 #' 
 #' @rdname pca
-#' @name pca
 #' @export
 #' @param x the zoocat object.
 #' @param ... other argument.

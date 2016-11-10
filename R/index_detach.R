@@ -1,5 +1,5 @@
 
-#' Detach index of \code{zoo} object
+#' Detach index of a \code{zoo} object
 #' 
 #' Detach the index of a \code{zoo} object to be seperated values of
 #' year/month/day/hour/minute/second, and return a data frame containing
