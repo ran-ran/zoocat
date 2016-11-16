@@ -1,7 +1,7 @@
 Package: zoocat
 Type: Package
 Title: 'zoo' Objects with Column Attributes
-Version: 0.2.0
+Version: 0.2.0.9001
 Date: 2016-11-10
 Authors@R: person("Ran-Ran", "He", email = "heranran2006@163.com",
   role = c("aut", "cre"))
