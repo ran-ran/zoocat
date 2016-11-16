@@ -45,6 +45,7 @@
     rownames(value) <- NULL
     attr(x, 'cattr') <- value
     attr(x, 'indname') <- 'index'
+    dimnames(x) <- NULL
     class(x) <- c('zoocat', class(x))
     return(x)
 } 
