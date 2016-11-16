@@ -14,9 +14,9 @@
 #' @param n	approximate number of axis ticks.
 gmon_trans <- function (n = 5) 
 {
-    breaks. <- function(x) as.yearmon(scales::pretty_breaks(n)(x))
+    breaks. <- function(x) as.gmon(scales::pretty_breaks(n)(x))
     format. <- function(x) format(x)
-    scales::trans_new("yearmon", transform = as.numeric, inverse = as.gmon, 
+    scales::trans_new("gmon", transform = as.numeric, inverse = as.gmon, 
                       breaks = breaks., format = format.)
 } 
 
