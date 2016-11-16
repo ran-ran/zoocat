@@ -7,7 +7,7 @@
 \usage{
 apply_core(x, ...)
 
-\method{apply_core}{zoocat}(x, FUN, bind, ...)
+\method{apply_core}{zoocat}(x, FUN, bind = NULL, ...)
 }
 \arguments{
 \item{x}{the object.}
@@ -18,7 +18,7 @@ apply_core(x, ...)
 a vector.}
 
 \item{bind}{a vector of length 1 or 2 with element values to be
- 'cattr' or 'index' or NA to describe how to bind the return
+ 'cattr' or 'index' or NA to describe how to bind the returned
 data with \code{cattr} or \code{index}. If \code{FUN} return a vector, set
 \code{bind} to be a scalar. If \code{FUN} return a matrix, set
 \code{bind} to be a vector of length 2. See details.}
@@ -27,16 +27,51 @@ data with \code{cattr} or \code{index}. If \code{FUN} return a vector, set
 a data frame, a "\code{zoo}" object, or a "\code{zoocat}" object.
 }
 \description{
-Apply a function over the core data matrix of the \code{zoocat} object,
-and bind the return data with \code{cattr} or \code{index}.
+Apply a function over the core data matrix of the "\code{zoocat}" object,
+and bind the returned data with \code{cattr} or \code{index}.
+}
+\details{
+If \code{FUN} return a vector, \code{bind} can be one of:
+\enumerate{
+\item "cattr": In this case, the vector will be combined with the \code{cattr} 
+to return a data frame.
+\item "index": In this case, the vector will be combined with the \code{index} 
+to return a "\code{zoo}" object.
+}
+
+If \code{FUN} return a matrix named \code{x.ret}, \code{bind} can be one of: 
+\enumerate{
+\item c("index", "cattr"): In this case, the rows of \code{x.ret}
+will be conbined with the \code{index}, and the columns of \code{x.ret} will be combined 
+with the \code{cattr}. So a "\code{zoocat}" object will be returned.
+\item c("cattr", "index"): In this case, the rows of \code{x.ret} will be combined 
+with the \code{cattr}, and the columns of \code{x.ret} will be combined with the \code{index}.
+So a "\code{zoocat}" object will be returned, but the core data in the "\code{zoocat}" object will 
+be \code{t(x.ret)}.
+\item c("cattr", NA): In this case, the rows of \code{x.ret} will be combined 
+with the \code{cattr} to return a data frame.
+\item c(NA, "cattr"): In this case, the columns of \code{x.ret} will be combined 
+with the \code{cattr} to return a data frame.
+\item c("index", NA): In this case, the rows of \code{x.ret} will be combined 
+with the \code{index} to return a "\code{zoo}" object.
+\item c(NA, "index"): In this case, the columns of \code{x.ret} will be combined 
+with the \code{index} to return a "\code{zoo}" object.
+}
+
+Note that if \code{bind} is \code{NULL} (default), the original returned value of \code{FUN} will be returned.
 }
 \examples{
 x <- matrix(1 : 20, nrow = 5)
 colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
 zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
 
+apply_core(zc, FUN = colMeans)
 apply_core(zc, FUN = colMeans, bind = 'cattr')
+
+apply_core(zc, FUN = rowMeans)
 apply_core(zc, FUN = rowMeans, bind = 'index')
+
+apply_core(zc, FUN = function (x) {x*2})
 apply_core(zc, FUN = function (x) {x*2}, bind = c('index', 'cattr'))
 apply_core(zc, FUN = function (x) {t(x*2)}, bind = c('cattr', 'index'))
 apply_core(zc, FUN = function (x) {x*2}, bind = c('index', NA))
@@ -48,7 +83,7 @@ apply_core(zc, FUN = function (x)
                       bind = c(NA, 'cattr'))
 
 vec <- as.vector(zc[, 1])
-apply_core(zc, FUN = function (x) {cor(x, vec)}, bind = 'cattr')
+apply_core(zc, FUN = function (x) {as.vector(cor(x, vec))}, bind = 'cattr')
 
 }
 

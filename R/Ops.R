@@ -29,8 +29,9 @@ Ops.zoocat <- function (e1, e2) {
     } else {
         out <- e
     }
-    cattr(e) <- colAttr
-    return(e)
+    attributes(out)$dimnames <- NULL
+    cattr(out) <- colAttr
+    return(out)
 }
 
 

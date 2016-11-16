@@ -31,7 +31,8 @@ test_that('cast2zoocat, the index is Date class', {
     # expect_identical(zc, zc2) # should be noted
     expect_identical(cattr(zc), cattr(zc2))
     expect_identical(index(zc), index(zc2))
-    expect_identical(coredata(zc), coredata(zc2))
+    # expect_identical(coredata(zc), coredata(zc2)) # note
+    expect_identical(as.matrix(zc), as.matrix(zc2))
 })
 
 

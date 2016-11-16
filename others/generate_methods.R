@@ -1,5 +1,4 @@
-#fout <- 'E:/HeranWorks/myPackages/zoocat/R/zoocat_other_methods.R'
-fout <- 'E:/workopen/myPkg/zoocat/R/zoocat_other_methods.R'
+fout <- 'D:/HeranFiles/worknow/MyPkgs/zoocat/R/zoocat_other_methods.R'
 
 if (file.exists(fout)) {
     file.remove(fout)
@@ -42,7 +41,6 @@ methodNames_2 <- matrix(
                 c(
                     'as.matrix', 'x',
                     'as.data.frame', 'x',
-                    'coredata', 'x',
                     'plot', 'x',
                     'barplot', 'height'
                    ),

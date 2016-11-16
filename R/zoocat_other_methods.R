@@ -331,14 +331,6 @@
         
 
 #' @export 
-'coredata.zoocat' <- function (x, ...) {
-    x <- as.zoo(x)
-    ret <- 'coredata'(x, ...)
-    return(ret)
-}
-        
-
-#' @export 
 'plot.zoocat' <- function (x, ...) {
     x <- as.zoo(x)
     ret <- 'plot'(x, ...)

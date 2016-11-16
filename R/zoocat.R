@@ -167,5 +167,12 @@ print.zoocat <- function (x, ...) {
 }
 
 
-
+coredata.zoocat <- function (x, ...) {
+    attr(x, "class") <- NULL
+    attr(x, "cattr") <- NULL
+    attr(x, "indname") <- NULL
+    attr(x, "index") <- NULL
+    attr(x, "frequency") <- NULL
+    return(x) 
+}
 
