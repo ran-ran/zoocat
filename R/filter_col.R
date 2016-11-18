@@ -102,7 +102,7 @@ filter_col.zoomly <- function (x, cond = NULL, mon.repro = NULL, ...) {
 #' For example, if there is a data value corresponding to year of 1990 and month of Jan, 
 #' the argument \code{month} for \code{reprocess_month} can be set to be 13, and we get 
 #' data of "Jan.1" (means Jan of the following year, see \link{gmon}), and the year of 
-#' that data value will be 1991.
+#' that data value will be 1989.
 #' 
 #' @examples
 #' mat <- matrix(1:48, ncol = 12)
