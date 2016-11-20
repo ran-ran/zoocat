@@ -83,10 +83,22 @@ zoocat <- function (x = NULL, order.by = index(x), colattr = NULL, index.name = 
         class(z) <- c('zoocat', class(z))
         return(z)
     }
-    stopifnot(is.matrix(x) | is.data.frame(x))
-    stopifnot(class(colattr) == 'data.frame')
-    stopifnot(nrow(colattr) == ncol(x))
-    stopifnot(!is.null(colnames(colattr)))
+    if (is.data.frame(x)) {
+        x <- as.matrix(x)
+    }
+    if (!is.matrix(x)) {
+        stop('x must be a matrix.')
+    }
+    if (!is.data.frame(colattr)) {
+        stop('colattr must be a data frame.')
+    }
+    if (nrow(colattr) != ncol(x)) {
+        stop('nrow(colattr) and ncol(x) must be the same.')
+    }
+    if (is.null(colnames(colattr))) {
+        stop('colattr must have column names.')
+    }
+    
     colnames(x) <- NULL
     rownames(x) <- NULL
     z <- zoo(x, order.by = order.by, ...)
