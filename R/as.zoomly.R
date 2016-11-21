@@ -39,8 +39,10 @@ as.zoomly.zoocat <- function (x, ...) {
     if (any(index(x) != round(index(x)))) {
         stop('index must be integers.')
     }
+    attr(x,'frequency') <- 1
     attr(x, 'indname') <- 'year'
     cattr(x)$month <- gmon(cattr(x)$month)
+    index(x) <- as.numeric(index(x))
     class(x) <- c('zoomly', 'zoocat', 'zooreg', 'zoo')
     return(x)
 }
