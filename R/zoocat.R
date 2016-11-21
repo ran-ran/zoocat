@@ -188,3 +188,17 @@ coredata.zoocat <- function (x, ...) {
     return(x) 
 }
 
+
+#' @export 
+'index<-.zoocat' <- function (x, value) {
+    if (length(index(x)) != length(value)) {
+        stop("length of index vectors does not match.")
+    }
+    if (is.unsorted(ORDER(value))) {
+        stop("new index needs to be sorted.")
+    }
+    attr(x, 'index') <- value
+    return(x)
+}
+
+

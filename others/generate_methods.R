@@ -47,12 +47,13 @@ methodNames_2 <- matrix(
                  ncol = 2, byrow = TRUE)
 
 # Replace methods.
-methodNames_3 <- matrix(
-                c(
-                 'index<-', 'x'
-                 ),
-                 ncol = 2, byrow = TRUE)
+methodNames_3 <- matrix(nrow = 0, ncol = 2, byrow = TRUE)
                 
+
+
+##############################################
+# methods definition
+##############################################
 
 for (i in 1 : nrow(methodNames_1)) {
     mtd <- methodNames_1[i, 1]
@@ -101,27 +102,29 @@ for (i in 1 : nrow(methodNames_2)) {
 }
 
 
-for (i in 1 : nrow(methodNames_3)) {
-    mtd <- methodNames_3[i, 1]
-    obj <- methodNames_3[i, 2]
-    cat(
-"
-#' @export 
-'", mtd, ".zoocat' <- function (", obj, ", value) {
-    class0 <- class(", obj, ")
-    colAttr <- cattr(", obj, ")
-    ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
-    ret <- '", mtd, "'(", obj, ", value)
-    colnames(ret) <- NULL
-    attr(ret, 'cattr') <- colAttr
-    class(ret) <- class0
-    return(ret)
-}
-        
-",
-
-        sep = '',
-        file = fcon)
+if (nrow(methodNames_3) > 0) {
+    for (i in 1 : nrow(methodNames_3)) {
+        mtd <- methodNames_3[i, 1]
+        obj <- methodNames_3[i, 2]
+        cat(
+    "
+    #' @export 
+    '", mtd, ".zoocat' <- function (", obj, ", value) {
+        class0 <- class(", obj, ")
+        colAttr <- cattr(", obj, ")
+        ", obj, " <- as.zoo(", obj, ", add.colname = FALSE)
+        ret <- '", mtd, "'(", obj, ", value)
+        colnames(ret) <- NULL
+        attr(ret, 'cattr') <- colAttr
+        class(ret) <- class0
+        return(ret)
+    }
+            
+    ",
+    
+            sep = '',
+            file = fcon)
+    }
 }
 
 

@@ -345,16 +345,3 @@
     return(ret)
 }
         
-
-#' @export 
-'index<-.zoocat' <- function (x, value) {
-    class0 <- class(x)
-    colAttr <- cattr(x)
-    x <- as.zoo(x, add.colname = FALSE)
-    ret <- 'index<-'(x, value)
-    colnames(ret) <- NULL
-    attr(ret, 'cattr') <- colAttr
-    class(ret) <- class0
-    return(ret)
-}
-        

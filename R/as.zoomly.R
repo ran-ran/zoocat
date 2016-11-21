@@ -40,8 +40,6 @@ as.zoomly.zoocat <- function (x, ...) {
         stop('index must be integers.')
     }
     
-    # Be careful about this line
-    # for it remove the attr(x, 'indname')
     index(x) <- as.numeric(index(x))
     
     attr(x,'frequency') <- 1
