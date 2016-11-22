@@ -41,3 +41,56 @@ test_that("Test when i and j is negative number", {
     expect_equal(zc[, 2:3], zc[, -c(1,4)])
 })
 
+
+test_that("Test replace parts", {
+    x <- matrix(1 : 20, nrow = 5)
+    colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
+    zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
+    
+    fcompare <- function () {
+        expect_is(zc, 'zoocat')
+        expect_equal(cattr(zc2), cattr(zc))
+        expect_equal(index(zc2), index(zc))
+        attr(zc, 'dimnames') <- NULL
+        attr(zc2, 'dimnames') <- NULL
+        expect_equal(attributes(zc2), attributes(zc))
+        expect_equal(coredata(zc2), x, check.attributes = FALSE)
+        is.null(colnames(zc2))
+    }
+    
+    zc2 <- zc
+    zc2[, 1] <- 101 : 105
+    x[, 1] <- 101 : 105
+    fcompare()
+    
+    zc2[4, 2] <- 1005
+    x[4, 2] <- 1005
+    fcompare()
+    
+    zc2[c('1993', '1995'), ] <- 1033
+    x[c(3, 5), ] <- 1033
+    fcompare()
+    
+    zc2[c('1993', '1995'), c('2_xxx', '5_xxx')] <- 1039
+    x[c(3, 5), c(1, 3)] <- 1039
+    fcompare()
+    
+    zc2[, c('2_xxx')] <- 1039
+    x[, c(1)] <- 1039
+    fcompare()
+    
+    zc2[c('1993', '1995'), c(T, F, F, T)] <- 11039
+    x[c(3, 5), c(1, 4)] <- 11039
+    fcompare()
+    
+    
+    x <- matrix(1 : 20, nrow = 5)
+    colAttr <- data.frame(month = c(2, 3, 5, 6), name = c(rep('xxx', 3), 'yyy'))
+    zc <- zoomly(x, order.by = 1991 : 1995, colattr = colAttr)
+    zc2 <- zc
+    zc2[4, 2] <- 11005
+    x[4, 2] <- 11005
+    fcompare()
+    
+})
+
