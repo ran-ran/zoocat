@@ -134,7 +134,7 @@ print.zoocat <- function (x, ...) {
 }
 
 
-
+#' @export
 coredata.zoocat <- function (x, ...) {
     attr(x, "class") <- NULL
     attr(x, "cattr") <- NULL
