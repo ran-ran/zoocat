@@ -17,9 +17,9 @@ filter_col(x, ...)
 
 \method{filter_col}{zoocat}(x, cond, ...)
 
-\method{filter_col_q}{zoomly}(x, cond = NULL, mon.repro = NULL, ...)
+\method{filter_col_q}{zoomly}(x, cond, mon.repro = NULL, ...)
 
-\method{filter_col}{zoomly}(x, cond = NULL, mon.repro = NULL, ...)
+\method{filter_col}{zoomly}(x, cond, mon.repro = NULL, ...)
 }
 \arguments{
 \item{x}{the object.}
