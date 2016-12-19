@@ -12,6 +12,12 @@ test_that('test filter_col_q.zoocat and filter_col.zoocat',  {
     
     expect_equal(filter_col(zc, month %in% 3:6 & site == 'b'),  zc[, 3 : 4])
     expect_equal(filter_col(zc, site == 'a'), zc[, 1 : 2])
+    
+    fsub <- function () {
+        i <- 3
+        filter_col(zc, month > i)
+    }
+    expect_equal(filter_col_q(zc, quote(month > 3)), fsub())
 }
 )
 
@@ -47,6 +53,18 @@ test_that('test filter_col_q.zoomly and filter_col.zoomly',  {
     expect_equal(dim(col.f), dim(zm))
     expect_equal(index(col.f), index(zm) + 1)
     expect_equal(cattr(col.f)$month + 12, cattr(zm)$month)
+    
+    x <- matrix(1 : 20, nrow = 5)
+    colAttr <- data.frame(month = c(2, 3, 5, 6), 
+                          site = c('a', 'a', 'b', 'b'))
+    zc <- zoocat(x, order.by = 1991 : 1995, colattr = colAttr)
+    zm <- as.zoomly(zc)
+    fsub <- function () {
+        i <- 3:6
+        filter_col(zm, month %in% i & site == 'b')
+    }
+    i <- 3:6
+    expect_equal(filter_col_q(zm, quote(month %in% i & site == 'b')), fsub())
 }
 )
 
