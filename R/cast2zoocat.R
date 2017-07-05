@@ -40,6 +40,7 @@ cast2zoocat <- function (x, index.var, value.var, attr.var = NULL, fun.aggregate
     if (!is.data.frame(x)) {
         stop('x must ba a data frame.')
     }
+    x <- as.data.frame(x)
     if (is.null(colnames(x))) {
         stop('x must have column names.')
     }

@@ -33,6 +33,10 @@ test_that('cast2zoocat, the index is Date class', {
     expect_identical(index(zc), index(zc2))
     # expect_identical(coredata(zc), coredata(zc2)) # note
     expect_identical(as.matrix(zc), as.matrix(zc2))
+
+    # test when data frame is dplyr tbl
+    zc <- cast2zoocat(dplyr::as.tbl(df.melt), index.var = 'index', value.var = 'value')
+
 })
 
 
